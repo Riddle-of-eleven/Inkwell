@@ -1,0 +1,138 @@
+.book-preview {
+    /*width: 100%;*/
+    display: flex; flex-direction: row;
+}
+
+.book-preview-sidebar {
+    display: flex; flex-direction: column; gap: 20px;
+    padding: 30px 12px;
+}
+.side-buttons {
+    display: flex; flex-direction: column; gap: 18px;
+}
+.side-menu .side-buttons {
+    gap: 10px;
+}
+.book-preview-sidebar > .line {
+    width: calc(100% + 12px + 12px) !important;
+    margin-left: -12px; margin-right: -12px;
+}
+
+.book-preview-content {
+    display: flex; flex-direction: column; gap: 16px;
+    width: 100%;
+    padding: 14px 50px 30px 35px;
+}
+.book-preview-main-meta {
+    display: flex; justify-content: space-between; align-items: center;
+}
+.book-preview-main-meta > div {
+    display: flex;
+}
+
+.book-preview-content .line {
+    width: calc(100% + 50px + 35px) !important;
+    margin-left: -35px;
+    margin-right: -50px;
+    background-color: var(--color-border);
+}
+
+
+.creators {
+    display: flex; gap: 22px;
+}
+.creator {
+    display: flex; gap: 8px;
+}
+.creator * {
+    font-size: 12px;
+}
+.creator-title {
+    color: var(--color-tip);
+}
+.creator-name {
+    color: var(--color-accent);
+}
+
+.accent-metas {
+    display: flex; gap: 6px;
+}
+.accent-meta {
+    padding: 2px 10px;
+    border: var(--border-width) solid var(--color-accent);
+    background-color: var(--accent10);
+    border-radius: 6px;
+}
+
+
+.info-pairs {
+    display: flex; flex-direction: column; gap: 10px;
+}
+.info-pair {
+    display: flex; gap: 6px;
+}
+.info-key {
+    font-weight: 600;
+}
+
+.info-cover {
+    display: flex;
+}
+
+
+
+.book-preview-info-cover {
+    display: flex; justify-content: space-between; gap: 60px;
+}
+.book-preview-info {
+    width: 100%;
+    display: flex; flex-direction: column; gap: 12px;
+}
+
+.book-preview-title {
+    margin: 10px 0;
+}
+
+.book-preview-cover > img {
+    max-height: 250px;
+    border-radius: 14px;
+    aspect-ratio: 6 / 9;
+}
+
+
+
+.publication-stats {
+    display: flex; justify-content: space-between;
+}
+.publication-stats > * {
+    display: flex; flex-direction: row; gap: 11px;
+}
+
+.tip-key {
+    color: var(--color-tip)
+}
+.tip-value {
+    display: flex; gap: 11px;
+}
+
+.book-card .statistics {
+    display: flex; gap: 24px;
+}
+
+.stats-pair {
+    display: flex; gap: 6px;
+}
+.stats-pair * {
+    color: var(--color-tip);
+}
+.stats-pair .icon {
+    fill: var(--color-tip) !important;
+}
+
+
+.book-evaluation {
+    display: flex; gap: 40px;
+}
+.evaluation-pair {
+    display: flex; align-items: center; gap: 10px;
+}

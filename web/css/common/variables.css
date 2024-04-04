@@ -1,0 +1,67 @@
+/* ЦВЕТА */
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --color-background: #F3F3FD;
+        --color-foreground: #FBFBFE;
+        --color-graphics: #2F2F40;
+        --color-accent: #FB784A;
+        --color-tip: #BABAD6;
+        --color-outline: #D5D5EA;
+        --color-border: #F3F3FC;
+        --color-line: #E9E9F1;
+        --color-dark-fil: #F7F7FD;
+        --color-danger-accent: #E25C4A;
+        --color-inactive-background: #FBFBFF;
+        --color-lighter-line: #DFDFE9;
+        --color-light-graphics: #FBFBFE;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-background: #1E1E1F;
+        --color-foreground: #272727;
+        --color-graphics: #EAEAEE;
+        --color-accent: #FB784A;
+        --color-tip: #BABAD6;
+        --color-outline: #424248;
+        --color-border: #3C3C41;
+        --color-line: #3F3F48;
+        --color-dark-fil: #272727;
+        --color-danger-accent: #E25C4A;
+
+        /* хз */
+        --color-inactive-background: #343436;
+        --color-lighter-line: #424249;
+        --color-light-graphics: #EAEAEE;
+    }
+}
+
+:root {
+    --accent5: #FB784A05;
+    --accent10: #FB784A10;
+    --danger-accent10: #E25C4A10;
+
+    /*
+    --accent5: #FBF4F5;
+    --accent10: #FBEEEC;
+    --danger-accent10: #F9EBEC;
+    */
+
+}
+
+
+/* РАЗМЕРЫ ТЕКСТА*/
+:root {
+    --h1: 22px;
+    --h2: 20px;
+}
+
+
+
+/* ПАРАМЕТРЫ ОФОРМЛЕНИЯ */
+:root {
+    --border-width: 0.5px;
+    --border-radius-block: 10px;
+}

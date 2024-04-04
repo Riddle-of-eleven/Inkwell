@@ -1,0 +1,184 @@
+* {
+    font-family: 'Nunito';
+    transition: .2s;
+    color: var(--color-graphics);
+    caret-color: var(--color-accent);
+    font-size: 14px;
+    /*font-weight: 500;*/
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 0; margin: 0;
+}
+
+body {
+    width: 100%; height: 100%;
+    background-color: var(--color-background);
+    display: flex; flex-direction: column; align-items: center;
+    gap: 20px;
+    padding: 25px 0 40px 0;
+}
+
+body > * {
+    width: 95%;
+    max-width: 1100px;
+}
+
+
+
+input {
+    padding: 0;
+}
+input[type=checkbox] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+input[type=checkbox]+label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+input[type=checkbox]+label::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid var(--color-outline);
+    border-radius: 4px;
+    margin-right: 11px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 70% 70%;
+}
+input[type=checkbox]:checked+label::before {
+    border-color: var(--color-accent);
+    background-color: var(--accent10);
+    background-image: url("data:image/svg+xml,%3csvg width='8' height='7' viewBox='0 0 8 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M2.68947 6.21228C2.7082 6.23114 2.73367 6.24176 2.76024 6.2418C2.78682 6.24184 2.81232 6.2313 2.83112 6.21251L7.56172 1.48191C7.60039 1.44324 7.60082 1.38067 7.56268 1.34147L7.04105 0.80527C7.02241 0.78611 6.99688 0.77521 6.97015 0.775003C6.94342 0.774796 6.91772 0.785298 6.89879 0.804167L2.76023 4.92838L1.10101 3.28316C1.06191 3.24439 0.99883 3.24452 0.959894 3.28346L0.438262 3.80507C0.399298 3.84404 0.399196 3.90718 0.438034 3.94627L2.68947 6.21228Z' fill='%23FB784A' stroke='%23FB784A' stroke-width='0.2' stroke-linejoin='round'/%3e%3c/svg%3e");
+}
+
+
+
+a:not(.ui) {
+    color: var(--color-accent);
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 10px 0;
+}
+
+
+
+/* цвет выделения в основных браузерах */
+::selection {
+    background-color: var(--color-accent);
+    color: var(--color-light-graphics);
+}
+::-moz-selection {
+    background-color: var(--color-accent);
+    color: var(--color-light-graphics);
+}
+
+
+.header1 {
+    font-weight: 500;
+    font-size: 22px;
+}
+.header2 {
+    font-size: 20px;
+    font-weight: 500;
+}
+.tip {
+    font-size: 12px;
+    color: var(--color-tip);
+}
+
+
+.icon {
+    fill: var(--color-graphics);
+}
+
+.block {
+    background-color: var(--color-foreground);
+    border: var(--border-width) solid var(--color-outline);
+    border-radius: 14px;
+}
+
+.line {
+    width: 100% !important; max-width: none !important;
+    height: 0.5px;
+    background-color: var(--color-line);
+}
+.inner-line {
+    width: 100%;
+    height: 0.5px;
+    background-color: var(--color-border);
+}
+.small-inner-line {
+    width: 100%;
+    height: 0.5px;
+    background-color: var(--color-border);
+}
+.vertical-line {
+    width: 0.5px;
+    background-color: var(--color-border);
+}
+body > .line, body > .inner-line {
+    background-color: var(--color-lighter-line);
+}
+body > .inner-line {
+    margin: 12px 0;
+}
+
+.line-centered-text {
+    width: 100%;
+    position: relative;
+}
+.line-text {
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    padding: 0 40px;
+    background-color: var(--color-background);
+}
+
+
+
+.space-between {
+    display: flex; justify-content: space-between;
+}
+.center-container {
+    height: 100%;
+    display: flex; justify-content: center; align-items: center;
+}
+
+
+
+
+.side-menu {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%; width: fit-content !important;
+    border-radius: 0;
+    padding: 25px 8px;
+    display: flex; flex-direction: column; justify-content: space-between;
+}
+.side-menu > div {
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+}
+.side-menu .line {
+    width: calc(100% + 8px + 8px) !important;
+    margin-left: -8px; margin-right: -8px;
+}
+
+.small-profile-picture > img {
+    border-radius: 50%;
+    width: 40px; height: 40px;
+}

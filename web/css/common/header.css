@@ -1,0 +1,20 @@
+header {
+    display: flex; flex-direction: row; justify-content: space-between;
+}
+
+header .main-logo, header .main-logo * {
+    font-size: 24px;
+    font-weight: bold;
+    user-select: none;
+}
+
+.left-header {
+    display: flex;
+    gap: 34px;
+    width: fit-content;
+}
+
+.right-header {
+    display: flex;
+    gap: 6px;
+}

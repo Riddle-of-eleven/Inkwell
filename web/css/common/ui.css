@@ -1,0 +1,130 @@
+/* общий класс на элементы интерфейса */
+.ui {
+    background-color: var(--color-foreground);
+    border: var(--border-width) solid var(--color-outline);
+    border-radius: 10px;
+    display: flex;
+}
+
+/* ПОЛЯ */
+/* обычное поле */
+.field {
+    box-sizing: border-box;
+    gap: 16px;
+    padding: 7px 24px 6px 16px;
+    min-width: 370px;
+}
+
+.field > input[type=text] {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+}
+.field > input[type=text]:focus {
+    outline: none;
+}
+.field > input[type=text]::placeholder {
+    color: var(--color-tip);
+    user-select: none;
+}
+
+
+/* поле поиска */
+.search-field {
+    box-sizing: border-box;
+    gap: 16px;
+    padding: 7px 24px 6px 16px;
+    min-width: 370px;
+}
+
+.search-field > input[type=text] {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+}
+.search-field > input[type=text]:focus {
+    outline: none;
+}
+.search-field > input[type=text]::placeholder {
+    color: var(--color-tip);
+    user-select: none;
+}
+
+
+
+/* КНОПКИ */
+.button {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.icon-button {
+    flex-direction: row;
+    padding: 7px 20px 6px 14px;
+    gap: 7px;
+    width: fit-content;
+}
+
+.small-button {
+    padding: 7px 6px 6px 7px;
+    width: fit-content;
+}
+.very-small-button {
+    padding: 5px;
+    width: fit-content;
+    border-radius: 7px;
+    justify-content: center; align-items: center;
+}
+
+.button-left-align {
+    flex-direction: row;
+    padding: 7px 20px 6px 14px;
+    gap: 7px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.button-center-align {
+    flex-direction: row; justify-content: center;
+    padding: 7px 20px 6px;
+}
+
+
+.colored-button {
+    display: flex; justify-content: center;
+    background-color: var(--color-accent) !important;
+    border: none;
+    padding: 7px 50px 6px;
+    color: var(--color-light-graphics);
+}
+
+
+.filled-button {
+    /*background-color: var(--foreground);*/
+    background: var(--accent10);
+    border-color: var(--color-accent);
+}
+.inactive-button {
+    background-color: var(--color-inactive-background);
+    border-color: var(--color-outline);
+    color: var(--color-tip);
+}
+.inactive-button > svg {
+    fill: var(--color-tip);
+}
+.danger-button {
+    color: var(--color-danger-accent);
+}
+.danger-button > svg {
+    fill: var(--color-danger-accent);
+}
+
+
+
+.password-toggle-button {
+    display: flex; align-items: center; gap: 12px;
+    margin: -7px -8px -6px 0px;
+}
+.password-toggle-button .vertical-line {
+    background-color: var(--color-outline);
+    height: 100%;
+}
