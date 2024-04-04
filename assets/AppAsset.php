@@ -20,6 +20,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+        'fonts/font.css',
         'css/common/common.css',
         'css/common/header.css',
         'css/common/main.css',
@@ -30,6 +31,6 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap5\BootstrapAsset'
+        //'yii\bootstrap5\BootstrapAsset'
     ];
 }
