@@ -1,9 +1,14 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $data array*/
+/* @var $data _BookData*/
 
+use app\models\_BookData;
 use yii\helpers\Html;
+use yii\helpers\VarDumper;
+use yii\i18n\Formatter;
+
+
 
 ?>
 
@@ -28,7 +33,7 @@ use yii\helpers\Html;
             <div class="creators">
                 <div class="creator">
                     <div class="creator-title">Автор:</div>
-                    <div class="creator-name">Mesmerizing Cat</div>
+                    <div class="creator-name"><?= Html::encode($data->author->login)?></div>
                 </div>
                 <div class="creator">
                     <div class="creator-title">Редакторы:</div>
@@ -46,7 +51,7 @@ use yii\helpers\Html;
 
         <div class="book-preview-info-cover">
             <div class="book-preview-info">
-                <div class="book-preview-title header1">Dreaming Wide Awake</div>
+                <div class="book-preview-title header1"><?= Html::encode($data->title)?></div>
                 <div class="small-inner-line"></div>
                 <div class="info-pairs">
                     <div class="info-pair">
@@ -79,13 +84,13 @@ use yii\helpers\Html;
                 </div>
             </div>
             <div class="book-preview-cover">
-                <img src="images/covers/cover2.jpg" alt="">
+                <img src="<?= Html::encode($data->cover) ?>" alt="">
             </div>
         </div>
 
         <div class="line"></div>
 
-        <div class="book-preview-description">Описание какое-то, потому что надо что-то написать. Эта история о литературе и чём-то там ещё, Петербурге и бла-бла-бла. Реки, там, филфак, всякое такое, ну вы поняли типа короче, ага. Ну вот ещё одно-два предложения о том, что здесь будет, потому что это, в конце концов, описание, значит оно должно что-то описывать.</div>
+        <div class="book-preview-description"><?= Html::encode($data->description)?></div>
 
         <div class="line"></div>
 
@@ -105,7 +110,11 @@ use yii\helpers\Html;
             </div>
             <div class="book-date">
                 <div class="tip-key">Дата публикации:</div>
-                <div class="tip-value">26 марта 2024</div>
+                <div class="tip-value">
+                    <?  $formatter = new Formatter();
+                        echo $formatter->asDate($data->created_at, 'dd.MM.yyyy');
+                    ?>
+                </div>
             </div>
 
 

@@ -6,7 +6,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     // моё
     'name' => 'Inkwell',
-    'language' => 'ru',
+    'language' => 'ru-Ru',
     'layout' => 'common',
 
     'id' => 'basic',
@@ -17,6 +17,9 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'formatter' => [
+            'locale' => 'ru-RU',
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'CmR2OcaKKqtX1blQg5lieuFU6T42Sehi',

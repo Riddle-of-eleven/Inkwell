@@ -54,13 +54,14 @@ class Genre extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[BookGenres]].
+     * Gets query for [[Genres]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getBookGenres()
+    public function getBooks()
     {
-        return $this->hasMany(BookGenre::class, ['genre_id' => 'id']);
+        return $this->hasMany(Genre::class, ['id' => 'genre_id'])
+                            ->viaTable('book_genre', ['book_id', 'id']);
     }
 
     /**
