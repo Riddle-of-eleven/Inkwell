@@ -1,8 +1,12 @@
 <?php
 
-/** @var yii\web\View $this */
-$this->title = Yii::$app->name;
+/* @var $this yii\web\View */
+/* @var $data array*/
+
+use yii\helpers\Html;
+
 ?>
+
 
 <div class="block book-preview">
     <div class="book-preview-sidebar">

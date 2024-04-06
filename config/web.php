@@ -4,11 +4,12 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'basic',
-
+    // моё
+    'name' => 'Inkwell',
     'language' => 'ru',
     'layout' => 'common',
 
+    'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [

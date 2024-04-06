@@ -4,11 +4,9 @@
 /** @var string $content */
 
 use app\assets\AppAsset;
-use app\widgets\Alert;
-use yii\bootstrap5\Breadcrumbs;
-use yii\bootstrap5\Html;
-use yii\bootstrap5\Nav;
-use yii\bootstrap5\NavBar;
+use yii\helpers\Html;
+use yii\helpers\Url;
+
 
 AppAsset::register($this);
 
@@ -22,14 +20,40 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <?php $this->beginPage() ?>
 <!doctype html>
-<html lang="<?= Yii::$app->language ?>" class="h-100">
+<html lang="<?= Yii::$app->language ?>">
 <head>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <?= Html::csrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
+
+<header>
+    <div class="left-header">
+        <?= Html::a('<div class="main-logo">Ink.<span style="color: var(--color-accent)">well</span></div>', Url::to(['site/index']), ['class' => 'no-underline']); ?>
+        <div class="ui search-field">
+            <?= search_icon ?>
+            <input type="text" placeholder="Ищите книги, фэндомы, авторов...">
+        </div>
+    </div>
+    <div class="right-header">
+        <a href="" class="ui button icon-button">
+            <?= mystery_icon ?>
+            Поиск по вкусу
+        </a>
+        <a href="" class="ui button icon-button">
+            <?= shuffle_icon ?>
+            Случайная книга
+        </a>
+        <a href="" class="ui button small-button">
+            <?= menu_icon ?>
+        </a>
+    </div>
+</header>
+
+<div class="line"></div>
 
 <?= $content ?>
 
