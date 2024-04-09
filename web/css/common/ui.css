@@ -11,11 +11,13 @@
 .field {
     box-sizing: border-box;
     gap: 16px;
-    padding: 7px 24px 6px 16px;
+    padding: 7px 10px 6px 16px;
     min-width: 370px;
+    position: relative;
 }
 
-.field > input[type=text] {
+.field > input[type=text],
+.field > input[type=password] {
     background-color: transparent;
     border: none;
     width: 100%;
@@ -26,6 +28,10 @@
 .field > input[type=text]::placeholder {
     color: var(--color-tip);
     user-select: none;
+}
+
+.field-with-hint {
+    margin-bottom: 15px;
 }
 
 
@@ -125,6 +131,15 @@
     margin: -7px -8px -6px 0px;
 }
 .password-toggle-button .vertical-line {
-    background-color: var(--color-outline);
+    background-color: var(--color-border);
     height: 100%;
+}
+
+
+
+.hint {
+    position: absolute;
+    top: 38px;
+    color: var(--color-tip);
+    font-size: 12px;
 }

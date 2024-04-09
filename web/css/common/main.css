@@ -9,13 +9,13 @@
 }
 
 html {
-    min-height: 100%;
+    min-height: 100vh;
     display: flex; flex-direction: column; align-items: center;
     padding: 0; margin: 0;
 }
 
 body {
-    width: 100%; min-height: 100%;
+    width: 100%; min-height: 90vh;
     background-color: var(--color-background);
     display: flex; flex-direction: column; align-items: center;
     gap: 20px;
@@ -125,7 +125,7 @@ h1 {
 
 .line {
     width: 100% !important; max-width: none !important;
-    height: 0.5px;
+    height: 1px !important;
     background-color: var(--color-line);
 }
 .inner-line {
@@ -139,7 +139,7 @@ h1 {
     background-color: var(--color-border);
 }
 .vertical-line {
-    width: 0.5px;
+    width: var(--border-width);
     background-color: var(--color-border);
 }
 body > .line, body > .inner-line {

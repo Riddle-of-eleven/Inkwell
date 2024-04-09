@@ -2,13 +2,17 @@
 
 namespace app\controllers;
 
+use app\models\FormSignup;
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+use app\models\FormLogin;
+use yii\db\Expression;
+
 
 class SiteController extends Controller
 {
@@ -75,10 +79,16 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
+        $model = new FormLogin();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->goHome();
         }
+
+        /*if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            VarDumper::dump(Yii::$app->request->post(), 10, true);
+            VarDumper::dump($model->attributes, 10, true);
+            die;
+        }*/
 
         $model->password = '';
         return $this->render('login', [
@@ -98,31 +108,24 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
+    public function actionSignup()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
         }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
+        $model = new FormSignup();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $user = new User();
+            $user->login = $model->login;
+            //$user->password = Yii::$app->security->generatePasswordHash($model->password);
+            $user->password = $model->password;
+            $user->email = $model->email;
+            $user->registered_at = new Expression('NOW()');
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
+            if ($user->save()) return $this->goHome();
+        }
+        return $this->render('signup', [
+            'model' => $model
+        ]);
     }
 }

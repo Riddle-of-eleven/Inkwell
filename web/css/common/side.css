@@ -23,7 +23,7 @@
 .side-menu {
     position: fixed;
     top: 0; left: 0;
-    height: 100%; width: fit-content;
+    height: 100%; width: fit-content; min-width: 53px;
     border-radius: 0;
     padding: 70px 8px 25px 8px;
     display: flex; flex-direction: column; justify-content: space-between; gap: 100px;
@@ -49,12 +49,13 @@
     display: flex; flex-direction: column;
 }
 .side-buttons > * {
-    display: flex; justify-content: left; gap: 14px;
+    display: flex; justify-content: center; gap: 14px;
 }
 
 .small-profile-picture {
     display: flex; align-items: center; gap: 14px;
     margin-top: 10px;
+    margin-bottom: 20px;
 }
 .small-profile-picture * {
     font-size: 16px;
@@ -63,6 +64,10 @@
 .small-profile-picture > img {
     border-radius: 50%;
     width: 36px; height: 36px;
+}
+
+.side-menu .side-buttons {
+    width: 100%;
 }
 
 
@@ -101,6 +106,13 @@
 .active .small-profile-picture {
     margin-left: 35px;
     margin-top: -2px;
+}
+.active .side-buttons>* {
+    justify-content: left;
+}
+
+.guest-menu, .active.guest-menu {
+    padding-top: 100px !important;
 }
 
 

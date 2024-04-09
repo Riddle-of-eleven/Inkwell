@@ -24,8 +24,8 @@ header .main-logo, header .main-logo * {
     position: relative;
 }
 
-.logout {
-    color: var(--color-danger-accent);
+.logout * {
+    color: var(--color-danger-accent) !important;
 }
 .logout .icon {
     fill: var(--color-danger-accent) !important;

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "user".
@@ -12,6 +13,7 @@ use Yii;
  * @property string|null $password
  * @property string|null $salt
  * @property string|null $email
+ * @property string|null $avatar
  * @property string|null $registered_at
  * @property int|null $is_banned
  * @property string|null $banned_until
@@ -59,8 +61,9 @@ use Yii;
  * @property Visits[] $visits
  * @property Visits[] $visits0
  */
-class User extends \yii\db\ActiveRecord
+class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
+    public $auth_key = 'some key';
     /**
      * {@inheritdoc}
      */
@@ -81,9 +84,12 @@ class User extends \yii\db\ActiveRecord
             [['password'], 'string', 'max' => 100],
             [['salt'], 'string', 'max' => 10],
             [['email'], 'string', 'max' => 340],
+            [['avatar'], 'string', 'max' => 400],
             [['about'], 'string', 'max' => 2500],
             [['url'], 'string', 'max' => 60],
             [['official_website'], 'string', 'max' => 255],
+
+            ['login', 'unique', 'targetClass' => User::class,  'message' => 'Этот логин уже занят'],
         ];
     }
 
@@ -98,6 +104,7 @@ class User extends \yii\db\ActiveRecord
             'password' => 'Password',
             'salt' => 'Salt',
             'email' => 'Email',
+            'avatar' => 'Avatar',
             'registered_at' => 'Registered At',
             'is_banned' => 'Is Banned',
             'banned_until' => 'Banned Until',
@@ -109,6 +116,41 @@ class User extends \yii\db\ActiveRecord
             'is_moderator' => 'Is Moderator',
         ];
     }
+
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return static::findOne(['access_token' => $token]);
+    }
+
+
+    public static function findByUsername($login)
+    {
+        return static::findOne(['login' => $login]);
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        return $this->getAuthKey() === $authKey;
+    }
+
+
+
+
 
     /**
      * Gets query for [[AccessLevels]].

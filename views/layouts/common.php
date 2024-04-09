@@ -37,16 +37,31 @@ $this->registerJs(<<<js
     let menu_button = document.querySelector('#menu-button');
     let sidebar = document.querySelector('.side-menu');
     let body = document.body;
+    
+    let login = document.querySelector('#link-login');
+    let register = document.querySelector('#link-register');
 
     let is_open = localStorage.getItem('is_open') == 'true';
     if (is_open) {
         sidebar.classList.add('active');
         body.classList.add('active-body');
+        
+        if (login) login.classList.add('button-left-align');
+        if (register) register.classList.add('button-left-align');
+        
+        if (login) login.classList.remove('small-button');
+        if (register) register.classList.remove('small-button');
     }
 
     menu_button.onclick = function () {
         sidebar.classList.toggle('active');
         body.classList.toggle('active-body');
+        
+        if (login) login.classList.toggle('small-button');
+        if (register) register.classList.toggle('small-button');
+        
+        if (login) login.classList.toggle('button-left-align');
+        if (register) register.classList.toggle('button-left-align');
        
         localStorage.setItem('is_open', !is_open);
     }
@@ -62,9 +77,27 @@ $this->registerJs(<<<js
              menu_content.classList.add('hidden');
          }
     })
+    
+    
 js, View::POS_END);
 ?>
 
+
+<? if (Yii::$app->user->isGuest) : ?>
+<div class="side-menu guest-menu block">
+    <div class="sub-side-menu">
+        <div class="ui button very-small-button" id="menu-button">
+            <?= keyboard_double_arrow_left_icon ?>
+        </div>
+
+        <div class="side-buttons">
+            <?= Html::a(person_icon . '<span class="menu-item hidden">Вход</span>', Url::to(['site/login']), ['class'=> 'ui button small-button', 'id' => 'link-login']) ?>
+            <?= Html::a(key_vertical_icon . '<span class="menu-item hidden">Регистрация</span>', Url::to(['site/signup']), ['class'=> 'ui button small-button', 'id' => 'link-register']) ?>
+        </div>
+    </div>
+</div>
+
+<? else :?>
 <div class="side-menu block">
     <div class="sub-side-menu">
         <div class="ui button very-small-button" id="menu-button">
@@ -74,8 +107,6 @@ js, View::POS_END);
             <?= Html::img('@web/images/avatar/mesmerizing_cat.jpg') ?>
             <span class="menu-item hidden">Mesmerizing Cat</span>
         </div>
-
-        <div class="line"></div>
 
         <div class="side-buttons icon-accent">
             <a href=""><?= new_book_icon ?><span class="menu-item hidden">Новая книга</span></a>
@@ -120,6 +151,7 @@ js, View::POS_END);
                 <div class="side-buttons">
                     <a href=""><?= bookmark_icon ?><span class="menu-item hidden">Библиотека</span></a>
                     <a href=""><?= list_alt_icon ?><span class="menu-item hidden">Подборки</span></a>
+                    <a href=""><?= switch_account_icon ?><span class="menu-item hidden">Подписки</span></a>
                     <a href=""><?= device_reset_icon ?><span class="menu-item hidden">История просмотра</span></a>
                 </div>
             </details>
@@ -151,15 +183,14 @@ js, View::POS_END);
         </div>
     </div>
 
-
     <div class="sub-side-menu">
         <div class="line"></div>
         <div class="side-buttons logout">
             <a href=""><?= logout_icon ?><span class="menu-item hidden">Выйти</span></a>
         </div>
     </div>
-
 </div>
+<? endif; ?>
 
 
 <header>
