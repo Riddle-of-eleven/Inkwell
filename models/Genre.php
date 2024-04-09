@@ -13,8 +13,7 @@ use Yii;
  * @property int $genre_type_id
  *
  * @property BookGenre[] $bookGenres
- * @property Genre $genreType
- * @property Genre[] $genres
+ * @property GenreType $genreType
  */
 class Genre extends \yii\db\ActiveRecord
 {
@@ -36,7 +35,7 @@ class Genre extends \yii\db\ActiveRecord
             [['genre_type_id'], 'integer'],
             [['title'], 'string', 'max' => 500],
             [['description'], 'string', 'max' => 2500],
-            [['genre_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Genre::class, 'targetAttribute' => ['genre_type_id' => 'id']],
+            [['genre_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => GenreType::class, 'targetAttribute' => ['genre_type_id' => 'id']],
         ];
     }
 
@@ -54,14 +53,13 @@ class Genre extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Genres]].
+     * Gets query for [[BookGenres]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getBooks()
+    public function getBookGenres()
     {
-        return $this->hasMany(Genre::class, ['id' => 'genre_id'])
-                            ->viaTable('book_genre', ['book_id', 'id']);
+        return $this->hasMany(BookGenre::class, ['genre_id' => 'id']);
     }
 
     /**
@@ -71,16 +69,6 @@ class Genre extends \yii\db\ActiveRecord
      */
     public function getGenreType()
     {
-        return $this->hasOne(Genre::class, ['id' => 'genre_type_id']);
-    }
-
-    /**
-     * Gets query for [[Genres]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getGenres()
-    {
-        return $this->hasMany(Genre::class, ['genre_type_id' => 'id']);
+        return $this->hasOne(GenreType::class, ['id' => 'genre_type_id']);
     }
 }

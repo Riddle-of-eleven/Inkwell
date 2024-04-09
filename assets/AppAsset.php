@@ -26,6 +26,7 @@ class AppAsset extends AssetBundle
         'css/common/main.css',
         'css/common/ui.css',
         'css/common/variables.css',
+        'css/common/side.css',
     ];
     public $js = [
     ];

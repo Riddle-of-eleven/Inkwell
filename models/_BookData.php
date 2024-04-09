@@ -2,8 +2,8 @@
 
 namespace app\models;
 
-use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
+use yii\helpers\VarDumper;
 use yii\i18n\Formatter;
 
 class _BookData extends ActiveRecord
@@ -24,14 +24,19 @@ class _BookData extends ActiveRecord
 
     public array $fandoms;
     public array $origins;
+    public array $characters;
 
 
     public User $author;
 
+    public Rating $rating;
+    public Relation $relation;
+    public Completeness $completeness;
 
-    /**
-     * @throws InvalidConfigException
-     */
+    public array $genres;
+    public array $tags;
+
+
     public function __construct($id)
     {
         $formatter = new Formatter();
@@ -47,17 +52,29 @@ class _BookData extends ActiveRecord
         $this->cover = is_null($book->cover) ? '' : $book->cover;
         $this->description = $book->description;
         $this->remark = $book->remark;
-        $this->dedication = $book->dedication;
-        $this->disclaimer = $book->disclaimer;
-        $this->is_published = $book->is_published;
+        $this->dedication = is_null($book->dedication) ? '' : $book->dedication;
+        $this->disclaimer = is_null($book->disclaimer) ? '' : $book->disclaimer;
+        $this->is_published = is_null($book->is_published) ? '' : $book->is_published;
 
-        $this->type = !($book->type == 1); // true, если фанфик
-//        if ($this->type) {
-//            // здесь надо описать запись в массив данных о фэндомах и первоисточниках
-//            $this->fandoms['id'] = $book->
-//        }
+        $this->type = !($book->type->id == 1); // true, если фанфик
 
+        if ($this->type) {
+            $this->fandoms = $book->fandoms;
+            $this->origins = $book->origins;
+        }
         $this->author = User::findOne($book->user_id);
+
+        $this->characters = $book->characters;
+
+        /*VarDumper::dump($book->characters, 10, true);
+        die;*/
+
+        $this->rating = $book->rating;
+        $this->relation = $book->relation0;
+        $this->completeness = $book->completeness;
+
+        $this->genres = $book->genres;
+        $this->tags = $book->tags;
 
 
 

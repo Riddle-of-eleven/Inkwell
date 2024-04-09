@@ -1,0 +1,36 @@
+.profile-header {
+    display: flex; flex-direction: column; gap: 9px;
+}
+
+.author-header {
+    display: flex; gap: 24px; align-items: center;
+    padding: 30px 30px 27px;
+}
+.profile-picture {
+    width: 57px; height: 57px;
+    background-image: url(../../images/avatar/cat_leaf.jpg);
+    background-size: 100%;
+    background-position: center;
+    border-radius: 50%;
+}
+.profile-info {
+    display: flex; flex-direction: column; gap: 4px;
+}
+
+.author-actions {
+    display: flex; justify-content: space-between;
+}
+.author-actions > div {
+    display: flex; gap: 6px;
+}
+
+
+.author-about {
+    display: flex; flex-direction: column; gap: 18px;
+    padding: 22px 40px 26px 30px;
+}
+
+.about-title {
+    font-weight: 500;
+    font-size: 16px;
+}

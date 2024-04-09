@@ -9,6 +9,7 @@ use yii\helpers\VarDumper;
 use yii\i18n\Formatter;
 use yii\web\Controller;
 use Yii;
+use yii\helpers\Url;
 
 
 // класс для главных страниц по определённым категориям, например, книгам, фэндомам, etc
@@ -27,14 +28,42 @@ class MainController extends Controller
         }*/
 
 
-        $book = new _BookData(1);
+        $book = new _BookData(2);
         //VarDumper::dump($book, 10, true);
 
 
 
         //die;
         return $this->render('books', [
-            'book' => $book
+            'book' => $book,
         ]);
     }
+
+
+
+    public function actionRandBook()
+    {
+        $ids = Book::find()->select('id')->column();
+        $id = array_rand($ids);
+        $url = Url::toRoute(['book', 'id' => $ids[$id]]);
+        Yii::$app->getResponse()->redirect($url);
+    }
+
+    public function actionBook()
+    {
+        $request = Yii::$app->request;
+        $id = $request->get('id');
+        $book = new _BookData($id);
+        return $this->render('book', [
+            'book' => $book,
+        ]);
+    }
+
+    public function actionAuthor()
+    {
+        $request = Yii::$app->request;
+        $id = $request->get('id');
+    }
 }
+
+

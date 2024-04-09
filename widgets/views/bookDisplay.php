@@ -41,9 +41,9 @@ use yii\i18n\Formatter;
                 </div>
             </div>
             <div class="accent-metas">
-                <div class="accent-meta">Джен</div>
-                <div class="accent-meta">PG-13</div>
-                <div class="accent-meta">Завершено</div>
+                <div class="accent-meta"><?= Html::encode($data->relation->title) ?></div>
+                <div class="accent-meta"><?= Html::encode($data->rating->title) ?></div>
+                <div class="accent-meta"><?= Html::encode($data->completeness->title) ?></div>
             </div>
         </div>
         <div class="line"></div>
@@ -56,15 +56,30 @@ use yii\i18n\Formatter;
                 <div class="info-pairs">
                     <div class="info-pair">
                         <div class="info-key">Фэндом:</div>
-                        <div class="info-value">Sounds of Yesterday</div>
+                        <? if (isset($data->fandoms)) :
+                        foreach ($data->fandoms as $fandom) {
+                            echo '<div class="info-value">' . $fandom->title . '</div>';
+                        }
+                        endif; ?>
                     </div>
                     <div class="info-pair">
                         <div class="info-key">Первоисточник:</div>
-                        <div class="info-value">They don't care about us</div>
+                        <? if (isset($data->origins)) :
+                            foreach ($data->origins as $origin) {
+                                echo '<div class="info-value">' . $origin->title . ' (' . $origin->release_date .')'. '</div>';
+                            }
+                        endif; ?>
                     </div>
                     <div class="info-pair">
                         <div class="info-key">Персонажи:</div>
-                        <div class="info-value">Ада, Михаил</div>
+                        <? if (isset($data->characters)) :
+                            $first = true;
+                            foreach ($data->characters as $character) {
+                                if ($first) $first= false;
+                                else echo ', ';
+                                echo '<div class="info-value">' . $character->full_name . '</div>';
+                            }
+                        endif; ?>
                     </div>
                     <div class="info-pair">
                         <div class="info-key">Пейринг:</div>
@@ -75,11 +90,19 @@ use yii\i18n\Formatter;
                 <div class="info-pairs">
                     <div class="info-pair">
                         <div class="info-key">Жанры:</div>
-                        <div class="info-value">романтика</div>
+                        <? if (isset($data->genres)) :
+                            foreach ($data->genres as $genre) {
+                                echo '<div class="info-value">' . $genre->title . '</div>';
+                            }
+                        endif; ?>
                     </div>
                     <div class="info-pair">
                         <div class="info-key">Теги:</div>
-                        <div class="info-value">hurt/comfort, повседневность</div>
+                        <? if (isset($data->tags)) :
+                            foreach ($data->tags as $tag) {
+                                echo '<div class="info-value">' . $tag->title . '</div>';
+                            }
+                        endif; ?>
                     </div>
                 </div>
             </div>

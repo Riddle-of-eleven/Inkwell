@@ -53,6 +53,9 @@ use Yii;
  *
  * @property Genre[] $genres
  * @property Tag[] $tags
+ * @property Fandom[] $fandoms
+ * @property Origin[] $origins
+ * @property Character[] $characters
  */
 class Book extends \yii\db\ActiveRecord
 {
@@ -163,10 +166,10 @@ class Book extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getBookFandoms()
+    public function getFandoms()
     {
         return $this->hasMany(Fandom::class, ['id' => 'fandom_id'])
-                        ->viaTable('book_fandom', ['book_id', 'id']);
+                        ->viaTable('book_fandom', ['book_id' => 'id']);
     }
 
     /**
@@ -182,11 +185,11 @@ class Book extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[BookOrigins]].
+     * Gets query for [[Origins]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getBookOrigins()
+    public function getOrigins()
     {
         return $this->hasMany(Origin::class, ['id' => 'origin_id'])
                         ->viaTable('book_origin', ['book_id' => 'id']);
@@ -202,6 +205,16 @@ class Book extends \yii\db\ActiveRecord
         return $this->hasMany(Tag::class, ['id' => 'tag_id'])
                         ->viaTable('book_tag', ['book_id' => 'id']);
     }
+
+    public function getCharacters()
+    {
+        return $this->hasMany(Character::class, ['id' => 'character_id'])
+                        ->viaTable('book_character', ['book_id' => 'id']);
+    }
+
+
+
+
 
     /**
      * Gets query for [[Chapters]].

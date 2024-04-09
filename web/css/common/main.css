@@ -9,17 +9,17 @@
 }
 
 html {
-    height: 100%;
+    min-height: 100%;
     display: flex; flex-direction: column; align-items: center;
     padding: 0; margin: 0;
 }
 
 body {
-    width: 100%; height: 100%;
+    width: 100%; min-height: 100%;
     background-color: var(--color-background);
     display: flex; flex-direction: column; align-items: center;
     gap: 20px;
-    padding: 25px 0 40px 0;
+    padding: 15px 0 40px 0;
 }
 
 body > * {
@@ -64,9 +64,11 @@ input[type=checkbox]:checked+label::before {
 
 
 
+a {
+    text-decoration: none;
+}
 a:not(.ui) {
     color: var(--color-accent);
-    text-decoration: underline;
 }
 
 h1 {
@@ -110,6 +112,10 @@ h1 {
 .icon {
     fill: var(--color-graphics);
 }
+.icon-accent .icon {
+    fill: var(--color-accent);
+}
+
 
 .block {
     background-color: var(--color-foreground);
@@ -166,25 +172,6 @@ body > .inner-line {
 
 
 
-
-.side-menu {
-    position: absolute;
-    top: 0; left: 0;
-    height: 100%; width: fit-content !important;
-    border-radius: 0;
-    padding: 25px 8px;
-    display: flex; flex-direction: column; justify-content: space-between;
+details > summary {
+    list-style: none;
 }
-.side-menu > div {
-    display: flex; flex-direction: column; align-items: center; gap: 20px;
-}
-.side-menu .line {
-    width: calc(100% + 8px + 8px) !important;
-    margin-left: -8px; margin-right: -8px;
-}
-
-.small-profile-picture > img {
-    border-radius: 50%;
-    width: 40px; height: 40px;
-}
-
