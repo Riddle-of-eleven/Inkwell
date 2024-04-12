@@ -24,7 +24,7 @@ $this->registerCssFile("@web/css/site/login.css");
 
     <div class="enter-form-header">
         <div class="header1">Регистрация</div>
-        <div class="">Уже есть аккаунт? <?= Html::a('Войти', Url::to('site/login')) ?></div>
+        <div class="">Уже есть аккаунт? <?= Html::a('Войти', Url::to(['site/login'])) ?></div>
     </div>
 
     <div class="enter-form-fields">

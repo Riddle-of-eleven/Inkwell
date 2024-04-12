@@ -12,6 +12,7 @@ use Yii;
  * @property string|null $created_at
  * @property string|null $title
  * @property int|null $is_draft
+ * @property int|null $is_section
  * @property int|null $parent_id
  * @property int|null $order
  * @property string|null $content
@@ -39,7 +40,7 @@ class Chapter extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['book_id', 'is_draft', 'parent_id', 'order'], 'integer'],
+            [['book_id', 'is_draft', 'parent_id', 'is_section', 'order'], 'integer'],
             [['created_at'], 'safe'],
             [['content'], 'string'],
             [['title'], 'string', 'max' => 500],
@@ -59,6 +60,7 @@ class Chapter extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'title' => 'Title',
             'is_draft' => 'Is Draft',
+            'is_section' => 'Is Section',
             'parent_id' => 'Parent ID',
             'order' => 'Order',
             'content' => 'Content',

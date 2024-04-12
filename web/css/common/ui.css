@@ -35,6 +35,22 @@
 }
 
 
+textarea {
+    width: 100%;
+    resize: vertical;
+    border: var(--border-width) solid var(--color-outline);
+    border-radius: 10px;
+    background-color: var(--color-foreground);
+}
+.symbol-count {
+    color: var(--color-tip);
+}
+.field-header-words {
+    display: flex; justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+
 /* поле поиска */
 .search-field {
     box-sizing: border-box;
@@ -62,6 +78,7 @@
 .button {
     text-decoration: none;
     cursor: pointer;
+    user-select: none;
 }
 
 .icon-button {
@@ -102,11 +119,25 @@
     padding: 7px 50px 6px;
     color: var(--color-light-graphics);
 }
+.accent-button {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+.accent-button .icon {
+    fill: var(--color-accent);
+}
+
+.danger-accent-button {
+    color: var(--color-danger-accent);
+}
+.danger-accent-button svg {
+    fill: var(--color-danger-accent);
+}
 
 
 .filled-button {
     /*background-color: var(--foreground);*/
-    background: var(--accent10);
+    background: var(--color-accent10);
     border-color: var(--color-accent);
 }
 .inactive-button {
@@ -142,4 +173,107 @@
     top: 38px;
     color: var(--color-tip);
     font-size: 12px;
+}
+
+
+
+
+/* ВКЛАДКИ */
+.tab-header {
+    display: flex; gap: 20px;
+    border-bottom: var(--border-width) solid var(--color-outline);
+    margin: 10px 0;
+}
+.tab {
+    display: flex; gap: 6px;
+    padding: 0 11px 7px 7px;
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+    border-bottom: var(--border-width) solid transparent;
+}
+.tab.active-tab {
+    border-color: var(--color-accent);
+}
+
+
+.tab-contents {
+    width: 100%;
+}
+.tab-content {
+    width: 100%;
+    display: none;
+}
+.tab-content.active-tab {
+    display: block;
+}
+
+.tab-number {
+    color: var(--color-tip);
+    padding: 1px 6px;
+    border: var(--border-width) solid var(--color-tip);
+    border-radius: 7px;
+    font-size: 12px; font-weight: 500;
+    background-color: var(--color-tip20);
+}
+
+.tab.active-tab .tab-number {
+    color: var(--color-accent);
+    background-color: var(--color-accent20);
+    border-color: var(--color-accent);
+}
+
+
+
+/* ЧЕКБОКС И РАДИОКНОПКА */
+input[type=checkbox], input[type=radio] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+input[type=checkbox]+label, input[type=radio]+label {
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+input[type=checkbox]+label::before {
+    content: '';
+    display: inline-block;
+    width: 14px; height: 14px;
+    flex-shrink: 0; flex-grow: 0;
+    border: 1px solid var(--color-outline);
+    border-radius: 4px;
+    margin-right: 11px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 70% 70%;
+}
+input[type=checkbox]:checked+label::before {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent10);
+    background-image: url("data:image/svg+xml,%3csvg width='8' height='7' viewBox='0 0 8 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M2.68947 6.21228C2.7082 6.23114 2.73367 6.24176 2.76024 6.2418C2.78682 6.24184 2.81232 6.2313 2.83112 6.21251L7.56172 1.48191C7.60039 1.44324 7.60082 1.38067 7.56268 1.34147L7.04105 0.80527C7.02241 0.78611 6.99688 0.77521 6.97015 0.775003C6.94342 0.774796 6.91772 0.785298 6.89879 0.804167L2.76023 4.92838L1.10101 3.28316C1.06191 3.24439 0.99883 3.24452 0.959894 3.28346L0.438262 3.80507C0.399298 3.84404 0.399196 3.90718 0.438034 3.94627L2.68947 6.21228Z' fill='%23FB784A' stroke='%23FB784A' stroke-width='0.2' stroke-linejoin='round'/%3e%3c/svg%3e");
+}
+
+input[type=radio]+label::before {
+    content: '';
+    display: inline-block;
+    width: 14px; height: 14px;
+    flex-shrink: 0; flex-grow: 0;
+    border: 1px solid var(--color-outline);
+    border-radius: 50%;
+    margin-right: 11px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+}
+input[type=radio]:checked+label::before {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent10);
+    background-image: url("data:image/svg+xml,%3Csvg width='8' height='9' viewBox='0 0 8 9' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.26' y='0.76' width='7.48' height='7.48' rx='3.74' fill='%23FB784A' fill-opacity='0.5' stroke='%23FB784A' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+
+.choice-input-block {
+    padding: 8px 17px;
+    width: 100%;
 }

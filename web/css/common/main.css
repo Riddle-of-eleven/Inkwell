@@ -32,35 +32,6 @@ body > * {
 input {
     padding: 0;
 }
-input[type=checkbox] {
-    position: absolute;
-    z-index: -1;
-    opacity: 0;
-}
-input[type=checkbox]+label {
-    display: inline-flex;
-    align-items: center;
-    user-select: none;
-}
-input[type=checkbox]+label::before {
-    content: '';
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0;
-    flex-grow: 0;
-    border: 1px solid var(--color-outline);
-    border-radius: 4px;
-    margin-right: 11px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 70% 70%;
-}
-input[type=checkbox]:checked+label::before {
-    border-color: var(--color-accent);
-    background-color: var(--accent10);
-    background-image: url("data:image/svg+xml,%3csvg width='8' height='7' viewBox='0 0 8 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M2.68947 6.21228C2.7082 6.23114 2.73367 6.24176 2.76024 6.2418C2.78682 6.24184 2.81232 6.2313 2.83112 6.21251L7.56172 1.48191C7.60039 1.44324 7.60082 1.38067 7.56268 1.34147L7.04105 0.80527C7.02241 0.78611 6.99688 0.77521 6.97015 0.775003C6.94342 0.774796 6.91772 0.785298 6.89879 0.804167L2.76023 4.92838L1.10101 3.28316C1.06191 3.24439 0.99883 3.24452 0.959894 3.28346L0.438262 3.80507C0.399298 3.84404 0.399196 3.90718 0.438034 3.94627L2.68947 6.21228Z' fill='%23FB784A' stroke='%23FB784A' stroke-width='0.2' stroke-linejoin='round'/%3e%3c/svg%3e");
-}
 
 
 
@@ -75,6 +46,14 @@ h1 {
     font-size: 24px;
     font-weight: 500;
     margin: 10px 0;
+}
+
+
+section.active-tab {
+    display: flex !important;
+}
+section, .active-tab section {
+    display: flex; flex-direction: column; gap: 20px;
 }
 
 
@@ -103,6 +82,10 @@ h1 {
     font-size: 20px;
     font-weight: 500;
 }
+.header3 {
+    font-weight: 600;
+}
+
 .tip {
     font-size: 12px;
     color: var(--color-tip);
@@ -139,7 +122,7 @@ h1 {
     background-color: var(--color-border);
 }
 .vertical-line {
-    width: var(--border-width);
+    width: var(--border-width) !important;
     background-color: var(--color-border);
 }
 body > .line, body > .inner-line {

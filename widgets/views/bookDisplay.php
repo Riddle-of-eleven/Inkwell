@@ -107,7 +107,7 @@ use yii\i18n\Formatter;
                 </div>
             </div>
             <div class="book-preview-cover">
-                <img src="<?= Html::encode($data->cover) ?>" alt="">
+                <?= Html::img($data->cover) ?>
             </div>
         </div>
 

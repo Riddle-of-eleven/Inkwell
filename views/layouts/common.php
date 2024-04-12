@@ -7,6 +7,7 @@ use app\assets\AppAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
+use yii\widgets\Breadcrumbs;
 
 
 AppAsset::register($this);
@@ -32,57 +33,6 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <?php $this->beginBody() ?>
 
 
-<?
-$this->registerJs(<<<js
-    let menu_button = document.querySelector('#menu-button');
-    let sidebar = document.querySelector('.side-menu');
-    let body = document.body;
-    
-    let login = document.querySelector('#link-login');
-    let register = document.querySelector('#link-register');
-
-    let is_open = localStorage.getItem('is_open') == 'true';
-    if (is_open) {
-        sidebar.classList.add('active');
-        body.classList.add('active-body');
-        
-        if (login) login.classList.add('button-left-align');
-        if (register) register.classList.add('button-left-align');
-        
-        if (login) login.classList.remove('small-button');
-        if (register) register.classList.remove('small-button');
-    }
-
-    menu_button.onclick = function () {
-        sidebar.classList.toggle('active');
-        body.classList.toggle('active-body');
-        
-        if (login) login.classList.toggle('small-button');
-        if (register) register.classList.toggle('small-button');
-        
-        if (login) login.classList.toggle('button-left-align');
-        if (register) register.classList.toggle('button-left-align');
-       
-        localStorage.setItem('is_open', !is_open);
-    }
-    
-    
-    let menu_content = document.querySelector('.main-menu-content');
-    let menu_container = document.querySelector('.main-menu-container');
-    function toggle_menu() {
-        menu_content.classList.toggle("hidden");
-    }
-    document.addEventListener('click', function(event) {
-         if (!menu_container.contains(event.target)) {
-             menu_content.classList.add('hidden');
-         }
-    })
-    
-    
-js, View::POS_END);
-?>
-
-
 <? if (Yii::$app->user->isGuest) : ?>
 <div class="side-menu guest-menu block">
     <div class="sub-side-menu">
@@ -105,7 +55,7 @@ js, View::POS_END);
         </div>
         <div class="small-profile-picture">
             <?= Html::img('@web/images/avatar/mesmerizing_cat.jpg') ?>
-            <span class="menu-item hidden">Mesmerizing Cat</span>
+            <span class="menu-item hidden"><?= Yii::$app->user->identity->login ?></:></span>
         </div>
 
         <div class="side-buttons icon-accent">
@@ -132,7 +82,7 @@ js, View::POS_END);
                     <div class="expand-icon"><?= expand_more_icon ?></div>
                 </summary>
                 <div class="side-buttons">
-                    <a href=""><?= book_2_icon ?><span class="menu-item hidden">Книги</span></a>
+                    <?= Html::a(book_2_icon . '<span class="menu-item hidden">Книги</span>', Url::to(['author-panel/book-dashboard'])) ?>
                     <a href=""><?= shelves_icon ?><span class="menu-item hidden">Фэндомы</span></a>
                     <a href=""><?= deployed_code_icon ?><span class="menu-item hidden">Проекты</span></a>
                     <a href=""><?= bar_chart_icon ?><span class="menu-item hidden">Аналитика</span></a>
@@ -186,12 +136,11 @@ js, View::POS_END);
     <div class="sub-side-menu">
         <div class="line"></div>
         <div class="side-buttons logout">
-            <a href=""><?= logout_icon ?><span class="menu-item hidden">Выйти</span></a>
+            <?= Html::a(logout_icon . '<span class="menu-item hidden">Выйти</span>', Url::to(['site/logout'], ['data' => ['method' => 'post']])) ?>
         </div>
     </div>
 </div>
 <? endif; ?>
-
 
 <header>
     <div class="left-header">
@@ -232,6 +181,18 @@ js, View::POS_END);
 </header>
 
 <div class="line"></div>
+
+
+<? if (!Yii::$app->user->isGuest) {
+    echo Breadcrumbs::widget([
+        'homeLink' => [
+            'label' => Yii::t('yii', Yii::$app->user->identity->login),
+            'url' => Yii::$app->homeUrl,
+        ],
+        'links' => $this->params['breadcrumbs'] ?? [],
+    ]);
+} ?>
+
 
 <?= $content ?>
 

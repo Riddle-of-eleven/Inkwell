@@ -1,0 +1,49 @@
+.book-preview-title .header1 {
+    font-size: 20px;
+}
+
+.book-preview-content {
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding-bottom: 18px !important;
+    padding-top: 18px !important;
+}
+
+
+.book-preview-cover-actions {
+    display: flex; flex-direction: column; align-items: center; gap: 15px;
+    padding: 18px;
+}
+
+.side-cover {
+    width: 150px;
+    border-radius: 10px;
+}
+
+.cover-actions {
+    display: flex; gap: 10px;
+}
+
+.book-preview-actions {
+    display: flex; gap: 14px;
+}
+
+.publication-stats {
+    margin: 10px 0 !important;
+    justify-content: start;
+}
+.publication-stat {
+    display: flex; gap: 4px !important;
+    color: var(--color-tip);
+}
+.publication-stat svg {
+    fill: var(--color-tip);
+}
+.publication-stat * {
+    color: var(--color-tip);
+}
+
+
+
+.book-preview-content-container {
+    display: flex; flex-direction: column; gap: 20px;
+}

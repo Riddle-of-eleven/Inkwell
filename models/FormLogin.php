@@ -28,6 +28,7 @@ class FormLogin extends Model
     public function login()
     {
         if ($this->validate()) {
+            if ($this->getUser())
             return Yii::$app->user->login($this->getUser(), $this->remember_me ? 3600*24*30 : 0);
         }
         return false;

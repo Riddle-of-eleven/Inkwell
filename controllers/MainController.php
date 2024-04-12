@@ -3,7 +3,9 @@
 namespace app\controllers;
 
 use app\models\_BookData;
+use app\models\_ContentData;
 use app\models\Book;
+use app\models\Chapter;
 use app\models\Tag;
 use yii\helpers\VarDumper;
 use yii\i18n\Formatter;
@@ -54,8 +56,11 @@ class MainController extends Controller
         $request = Yii::$app->request;
         $id = $request->get('id');
         $book = new _BookData($id);
+        $content = new _ContentData($id);
+
         return $this->render('book', [
             'book' => $book,
+            'content' => $content,
         ]);
     }
 

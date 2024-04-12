@@ -29,6 +29,7 @@ class AppAsset extends AssetBundle
         'css/common/side.css',
     ];
     public $js = [
+        'js/common/menu.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

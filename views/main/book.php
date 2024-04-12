@@ -1,7 +1,8 @@
 <?php
 $this->title = Yii::$app->name.' – все книги';
 
-/* @var $book */
+/* @var \app\models\_BookData $book */
+/* @var \app\models\_ContentData $content */
 
 use yii\helpers\Html;
 use yii\helpers\VarDumper;
@@ -9,6 +10,8 @@ use yii\helpers\Url;
 use yii\i18n\Formatter;
 
 $this->registerCssFile("@web/css/parts/book/book.css");
+
+$formatter = new Formatter();
 
 ?>
 
@@ -119,9 +122,7 @@ $this->registerCssFile("@web/css/parts/book/book.css");
                 <div class="book-date">
                     <div class="tip-key">Дата публикации:</div>
                     <div class="tip-value">
-                        <?  $formatter = new Formatter();
-                            echo $formatter->asDate($book->created_at, 'd MMMM yyyy');
-                        ?>
+                        <?= $formatter->asDate($book->created_at, 'd MMMM yyyy'); ?>
                     </div>
                 </div>
             </div>
@@ -221,158 +222,48 @@ $this->registerCssFile("@web/css/parts/book/book.css");
 </div>
 
 <div class="book-toc">
+    <? foreach ($content->root as $r) {
+        if ($r->is_section) :
+    ?>
     <details class="toc-section" open>
         <summary class="block toc-section-title">
             <div class="expand-icon"><?= expand_more_icon ?></div>
-            <div class="">Часть 1. Название первого раздела</div>
+            <div class=""><?= $r->title ?></div>
         </summary>
+        <? if (array_key_exists($r->id, $content->offspring)) : ?>
         <div class="toc-chapters">
-            <div class="block toc-chapter">
-                <div class="chapter-title">Часть 1. Ржится рожь</div>
-                <div class="chapter-meta">
-                    <div class="chapter-stats">
-                        <div class="stats-pair">
-                            <?= visibility_icon ?>
-                            <div>Просмотры</div>
-                            <div>261</div>
+            <? foreach ($content->offspring[$r->id] as $o) { ?>
+                <div class="block toc-chapter">
+                    <div class="chapter-title"><?= $o->title ?></div>
+                    <div class="chapter-meta">
+                        <div class="chapter-stats">
+                            <div class="stats-pair"><?= visibility_icon ?><div>Просмотры</div><div>261</div></div>
+                            <div class="stats-pair"><?= chat_bubble_icon ?><div>Комментарии</div><div>1</div></div>
                         </div>
-                        <div class="stats-pair">
-                            <?= chat_bubble_icon ?>
-                            <div>Комментарии</div>
-                            <div>1</div>
-                        </div>
-                    </div>
-                    <div class="chapter-date">
-                        <div class="stats-pair">
-                            <div>Дата публикации:</div>
-                            <div>26 марта 2024</div>
+                        <div class="chapter-date">
+                            <div class="stats-pair"><div>Дата публикации:</div><div><?= $formatter->asDate($o->created_at, 'd MMMM yyyy'); ?></div></div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="block toc-chapter">
-                <div class="chapter-title">Часть 2. Овёс овсится</div>
-                <div class="chapter-meta">
-                    <div class="chapter-stats">
-                        <div class="stats-pair">
-                            <?= visibility_icon ?>
-                            <div>Просмотры</div>
-                            <div>261</div>
-                        </div>
-                        <div class="stats-pair">
-                            <?= chat_bubble_icon ?>
-                            <div>Комментарии</div>
-                            <div>1</div>
-                        </div>
-                    </div>
-                    <div class="chapter-date">
-                        <div class="stats-pair">
-                            <div>Дата публикации:</div>
-                            <div>26 марта 2024</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="block toc-chapter">
-                <div class="chapter-title">Часть 3. Чечевица чечевится</div>
-                <div class="chapter-meta">
-                    <div class="chapter-stats">
-                        <div class="stats-pair">
-                            <?= visibility_icon ?>
-                            <div>Просмотры</div>
-                            <div>261</div>
-                        </div>
-                        <div class="stats-pair">
-                            <?= chat_bubble_icon ?>
-                            <div>Комментарии</div>
-                            <div>1</div>
-                        </div>
-                    </div>
-                    <div class="chapter-date">
-                        <div class="stats-pair">
-                            <div>Дата публикации:</div>
-                            <div>26 марта 2024</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <? } ?>
         </div>
+            <? endif; ?>
     </details>
-    <details class="toc-section" open>
-        <summary class="block toc-section-title">
-            <?= expand_more_icon ?>
-            <div class="">Часть 2. Название второго раздела</div>
-        </summary>
-        <div class="toc-chapters">
+
+    <? else : ?>
             <div class="block toc-chapter">
-                <div class="chapter-title">Часть 1. Ржится рожь</div>
+                <div class="chapter-title"><?= $r->title ?></div>
                 <div class="chapter-meta">
                     <div class="chapter-stats">
-                        <div class="stats-pair">
-                            <?= visibility_icon ?>
-                            <div>Просмотры</div>
-                            <div>261</div>
-                        </div>
-                        <div class="stats-pair">
-                            <?= chat_bubble_icon ?>
-                            <div>Комментарии</div>
-                            <div>1</div>
-                        </div>
+                        <div class="stats-pair"><?= visibility_icon ?><div>Просмотры</div><div>261</div></div>
+                        <div class="stats-pair"><?= chat_bubble_icon ?><div>Комментарии</div><div>1</div></div>
                     </div>
                     <div class="chapter-date">
-                        <div class="stats-pair">
-                            <div>Дата публикации:</div>
-                            <div>26 марта 2024</div>
-                        </div>
+                        <div class="stats-pair"><div>Дата публикации:</div><div><?= $formatter->asDate($r->created_at, 'd MMMM yyyy'); ?></div></div>
                     </div>
                 </div>
             </div>
-            <div class="block toc-chapter">
-                <div class="chapter-title">Часть 2. Овёс овсится</div>
-                <div class="chapter-meta">
-                    <div class="chapter-stats">
-                        <div class="stats-pair">
-                            <?= visibility_icon ?>
-                            <div>Просмотры</div>
-                            <div>261</div>
-                        </div>
-                        <div class="stats-pair">
-                            <?= chat_bubble_icon ?>
-                            <div>Комментарии</div>
-                            <div>1</div>
-                        </div>
-                    </div>
-                    <div class="chapter-date">
-                        <div class="stats-pair">
-                            <div>Дата публикации:</div>
-                            <div>26 марта 2024</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="block toc-chapter">
-                <div class="chapter-title">Часть 3. Чечевица чечевится</div>
-                <div class="chapter-meta">
-                    <div class="chapter-stats">
-                        <div class="stats-pair">
-                            <?= visibility_icon ?>
-                            <div>Просмотры</div>
-                            <div>261</div>
-                        </div>
-                        <div class="stats-pair">
-                            <?= chat_bubble_icon ?>
-                            <div>Комментарии</div>
-                            <div>1</div>
-                        </div>
-                    </div>
-                    <div class="chapter-date">
-                        <div class="stats-pair">
-                            <div>Дата публикации:</div>
-                            <div>26 марта 2024</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </details>
+    <? endif;
+    } ?>
+
 </div>
