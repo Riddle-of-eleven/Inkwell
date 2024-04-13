@@ -3,15 +3,34 @@ $this->title = Yii::$app->name.' – все книги';
 
 /* @var \app\models\_BookData $book */
 /* @var \app\models\_ContentData $content */
+/* @var $like */
+/* @var $read */
 
 use yii\helpers\Html;
 use yii\helpers\VarDumper;
 use yii\helpers\Url;
 use yii\i18n\Formatter;
+use yii\web\View;
 
 $this->registerCssFile("@web/css/parts/book/book.css");
+$this->registerJsFile('@web/js/ajax/interaction.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 $formatter = new Formatter();
+
+
+// взаимодействия
+if (!Yii::$app->user->isGuest) {
+    $like_class = $like ? 'filled-button' : '';
+    $read_class = $read ? 'filled-button' : '';
+
+    if ($read) {
+        $read_later_disabled = 'disabled';
+        $read_later_disabled_class = 'inactive-button';
+    } else {
+        $read_later_disabled = '';
+        $read_later_disabled_class = '';
+    }
+}
 
 ?>
 
@@ -159,55 +178,49 @@ $formatter = new Formatter();
     </div>
 
     <div class="book-sidebar">
-
         <? if ($book->cover): ?>
             <div class="book-cover">
                 <?= Html::img('@web/images/covers/' . $book->cover, ['alt' => 'обложка']) ?>
             </div>
         <? endif; ?>
+
+        <? if (!Yii::$app->user->isGuest) : ?>
         <div class="block book-actions">
             <div>
-                <a href="" class="ui button button-left-align filled-button">
-                    <?= favorite_icon ?>
-                    Нравится
-                </a>
-                <a href="" class="ui button button-left-align filled-button">
-                    <?= priority_icon ?>
-                    Прочитано
-                </a>
-                <a href="" class="ui button button-left-align inactive-button">
-                    <?= hourglass_icon ?>
-                    Прочитать позже
-                </a>
+                <button class="ui button button-left-align <?=@$like_class?>" id="like-interaction"><?= favorite_icon ?>Нравится</button>
+                <button class="ui button button-left-align <?=@$read_class?>" id="read-interaction"><?= priority_icon ?>Прочитано</button>
+                <button class="ui button button-left-align <?=@$read_later_disabled_class?>" id="read-later-interaction" <?=$read_later_disabled?>><?= hourglass_icon ?>Прочитать позже</button>
+                <button class="ui button button-left-align" id="favorite-book-interaction"><?= bookmarks_icon ?>Добавить в избранное</button>
             </div>
 
             <div class="inner-line"></div>
 
             <div>
-                <a href="" class="ui button button-left-align">
-                    <?= download_icon ?>
-                    Скачать работу
-                </a>
-                <a href="" class="ui button button-left-align">
-                    <?= list_alt_icon ?>
-                    Добавить в подборку
-                </a>
+                <a href="" class="ui button button-left-align"><?= download_icon ?>Скачать работу</a>
+                <a href="" class="ui button button-left-align"><?= list_alt_icon ?>Добавить в подборку</a>
                 <div class="tip">Работа уже добавлена в 3 подборки.</div>
             </div>
 
             <div class="inner-line"></div>
 
             <div>
-                <a href="" class="ui button button-left-align danger-button">
-                    <?= visibility_off_icon ?>
-                    Скрыть из ленты
-                </a>
-                <a href="" class="ui button button-left-align danger-button">
-                    <?= flag_icon ?>
-                    Пожаловаться
-                </a>
+                <a href="" class="ui button button-left-align danger-button"><?= visibility_off_icon ?>Скрыть из ленты</a>
+                <a href="" class="ui button button-left-align danger-button"><?= flag_icon ?>Пожаловаться</a>
             </div>
         </div>
+        <? else : ?>
+        <div class="block book-actions">
+            <div>
+                <a href="" class="ui button button-left-align"><?= download_icon ?>Скачать работу</a>
+            </div>
+
+            <div class="inner-line"></div>
+
+            <div>
+                <a href="" class="ui button button-left-align danger-button"><?= flag_icon ?>Пожаловаться</a>
+            </div>
+        </div>
+        <? endif; ?>
 
     </div>
 </div>

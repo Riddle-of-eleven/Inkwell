@@ -175,12 +175,32 @@ use yii\helpers\Url;
                 <div class="header3">Первоисточники</div>
                 <div class="ui field"></div>
                 <details>
-                    <summary class="select-header">
-                        <div class="expand-icon"><?= expand_more_icon ?></div>
-                        Властелин колец
+                    <summary class="select-header block">
+                        <div class="select-header-expand">
+                            <div class="expand-icon"><?= expand_more_icon ?></div>
+                            Властелин колец
+                        </div>
                         <div class="ui button small-button danger-accent-button"><?= delete_icon ?></div>
                     </summary>
-                    3wrtyjgh
+                    <div class="select-content">
+                        <div class="select-column-title">Название</div>
+                        <div class="select-column-title">Тип медиа</div>
+                        <div class="select-column-title">Год создания</div>
+                        <div class="select-column-title">Создатель</div>
+                        <div><input type="checkbox" name="" id="hobbit"><label for="hobbit">Хоббит</label></div>
+                        <div>Мультфильм</div>
+                        <div>1997</div>
+                        <div>Джулз Басс</div>
+                        <div><input type="checkbox" name="" id="fellowship"><label for="fellowship">Властелин колец: братство кольца</label></div>
+                        <div>Мультфильм</div>
+                        <div>1998</div>
+                        <div>Ральф Бакши</div>
+                        <div><input type="checkbox" name="" id="lord"><label for="lord">Властелин колец</label></div>
+                        <div>Фильм</div>
+                        <div>2001</div>
+                        <div>Питер Джексон</div>
+                    </div>
+
                 </details>
             </div>
 

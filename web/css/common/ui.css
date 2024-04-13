@@ -101,7 +101,7 @@ textarea {
 
 .button-left-align {
     flex-direction: row;
-    padding: 7px 20px 6px 14px;
+    padding: 7px 14px 6px 14px;
     gap: 7px;
     width: 100%;
     box-sizing: border-box;
@@ -276,4 +276,49 @@ input[type=radio]:checked+label::before {
 .choice-input-block {
     padding: 8px 17px;
     width: 100%;
+}
+
+
+
+/* ТИПА СЕЛЕКТЫ */
+.select-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 40px 11px 20px;
+}
+.select-header-expand {
+    display: flex; gap: 15px;
+    font-weight: 500;
+}
+.select-content {
+    padding: 12px 40px 20px 50px;
+    background-color: var(--color-dark-fill);
+    border: var(--border-width) solid var(--color-outline);
+    border-top: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    display: grid;
+    grid-template-columns: 50% auto auto auto;
+    column-gap: 10px;
+    row-gap: 20px;
+}
+.select-column-title {
+    font-size: 12px;
+    color: var(--color-tip);
+}
+.select-column-title:first-of-type {
+    margin-left: 45px;
+}
+details input[type=checkbox]+label::before, details input[type=radio]+label::before {
+    margin-right: 30px !important;
+}
+
+
+details[open] .select-header {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    transition: none;
+}
+details:not([open]) .select-header {
+    transition: none;
 }

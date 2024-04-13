@@ -10,7 +10,7 @@
         --color-outline: #D5D5EA;
         --color-border: #F3F3FC;
         --color-line: #E9E9F1;
-        --color-dark-fil: #F7F7FD;
+        --color-dark-fill: #F7F7FD;
         --color-danger-accent: #E25C4A;
         --color-inactive-background: #FBFBFF;
         --color-lighter-line: #DFDFE9;
@@ -30,7 +30,7 @@
         --color-outline: #424248;
         --color-border: #3C3C41;
         --color-line: #3F3F48;
-        --color-dark-fil: #272727;
+        --color-dark-fill: #272727;
         --color-danger-accent: #E25C4A;
 
         /* хз */

@@ -157,4 +157,6 @@ body > .inner-line {
 
 details > summary {
     list-style: none;
+    user-select: none;
+    cursor: pointer;
 }

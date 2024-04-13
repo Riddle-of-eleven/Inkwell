@@ -30,6 +30,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/common/menu.js',
+        'js/common/handlers.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
