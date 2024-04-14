@@ -167,13 +167,9 @@
 
 
 
-
 .vertical-line {
     height: 80%;
 }
-
-
-
 
 
 .expand-icon {
@@ -182,4 +178,19 @@
 details[open] .expand-icon {
     transform-origin: center center;
     transform: rotate(-180deg);
+}
+
+
+.to-collection.showed {
+    display: flex; flex-direction: column; align-items: center; gap: 30px;
+}
+.collections-container {
+    width: 100%;
+    max-width: 600px;
+    display: flex; flex-direction: column; gap: 10px;
+}
+.collection-item {
+    width: 100%;
+    display: flex; justify-content: space-between;
+    padding: 10px 20px;
 }

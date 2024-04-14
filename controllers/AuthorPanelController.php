@@ -11,7 +11,7 @@ class AuthorPanelController extends Controller
     public function actionBookDashboard() {
         if (Yii::$app->user->isGuest) return $this->goHome();
 
-        return $this->render('book_dashboard');
+        return $this->render('book-dashboard');
     }
 
     public function actionBook()

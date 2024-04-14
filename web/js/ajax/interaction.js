@@ -52,7 +52,11 @@ $(document).ready(function() {
             url: 'index.php?r=interaction/favorite-book',
             data: { book_id: book_id },
             success: function (response) {
-
+                if (response.success) {
+                    markButton(response.is_favorite, button, 'filled-button');
+                    if (response.is_favorite) button.find('.button-text').text('В избранном');
+                    else button.find('.button-text').text('Добавить в избранное');
+                }
             },
             error: function(error) {
                 console.log(error);

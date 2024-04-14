@@ -12,7 +12,7 @@ class DashboardAsset extends AssetBundle
         'css/dashboards/common.css',
     ];
     public $js = [
-        'js/ui/tabs.js',
+        //'js/ui/tabs.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -5,6 +5,8 @@ $this->title = Yii::$app->name.' – все книги';
 /* @var \app\models\_ContentData $content */
 /* @var $like */
 /* @var $read */
+/* @var $favorite
+ */
 
 use yii\helpers\Html;
 use yii\helpers\VarDumper;
@@ -30,9 +32,86 @@ if (!Yii::$app->user->isGuest) {
         $read_later_disabled = '';
         $read_later_disabled_class = '';
     }
+
+    $favorite_class = $favorite ? 'filled-button' : '';
+    $favorite_text = $favorite ? 'В избранном' : 'Добавить в избранное';
 }
 
 ?>
+
+<?
+$this->registerJs(<<<'js'
+$(document).ready(function() {
+    let modal = $('.to-collection');
+    let open = $('#collection-interaction');
+    let close = $('.close-button');
+    
+    open.click(function () { 
+        modal[0].showModal(); modal.addClass('showed')
+        $.ajax({
+            type: 'post',
+            url: 'index.php?r=interaction/get-collections',
+            success: function(response) {
+                if (response.data) {
+                    let content = '';
+                    response.data.forEach(function(element) {
+                        content += `<button class="ui button collection-item block" id="collection-${element.collection.id}" click="addHandler()">
+                                        <div>${element.collection.title}</div>
+                                        <div class="tip-color">${element.count}</div>
+                                    </button>`;
+                    });
+                    $('.collections-container').html(content);
+                }
+            },
+            error: function(error) {
+                
+            }
+        });
+    });
+    close.click(() => { modal[0].close(); modal.removeClass('showed') });
+    
+    $('.collections-container').on('click', '.collection-item', function() {
+        $.ajax({
+            type: 'post',
+            url: 'index.php?r=interaction/add-to-collection',
+            data: {
+                book_id: (new URL(document.location)).searchParams.get("id"),
+                collection_id: $(this).attr('id') 
+            },
+            success: function(response) {
+                if (response.success) {
+                    modal[0].close(); modal.removeClass('showed');
+                    if (response.is_already) showMessage('Книга уже добавлена в эту подборку', 'warning');
+                    else {
+                        if (response.is_added) showMessage('Книга успешно добавлена в подборку', 'success');
+                        else showMessage('Что-то пошло не так, кажется, книга не была добавлена в подборку', 'error');
+                    }
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
+js, View::POS_LOAD)
+
+
+?>
+
+
+<dialog class="to-collection block modal">
+    <div class="close-button"><?=close_icon?></div>
+    <div class="header3">Добавить в существующую подборку</div>
+    <div class="collections-container"></div>
+    <div class="line-centered-text">
+        <div class="line"></div>
+        <div class="line-text">или</div>
+        <div class="line"></div>
+    </div>
+    <button class="ui button icon-button"><?=list_alt_add_icon?>Создать новую подборку</button>
+</dialog>
+
 
 <div class="book-header">
     <div class="book-card">
@@ -190,15 +269,15 @@ if (!Yii::$app->user->isGuest) {
                 <button class="ui button button-left-align <?=@$like_class?>" id="like-interaction"><?= favorite_icon ?>Нравится</button>
                 <button class="ui button button-left-align <?=@$read_class?>" id="read-interaction"><?= priority_icon ?>Прочитано</button>
                 <button class="ui button button-left-align <?=@$read_later_disabled_class?>" id="read-later-interaction" <?=$read_later_disabled?>><?= hourglass_icon ?>Прочитать позже</button>
-                <button class="ui button button-left-align" id="favorite-book-interaction"><?= bookmarks_icon ?>Добавить в избранное</button>
+                <button class="ui button button-left-align <?=@$favorite_class?>" id="favorite-book-interaction"><?= bookmarks_icon ?><div class="button-text"><?=$favorite_text?></div></button>
             </div>
 
             <div class="inner-line"></div>
 
             <div>
                 <a href="" class="ui button button-left-align"><?= download_icon ?>Скачать работу</a>
-                <a href="" class="ui button button-left-align"><?= list_alt_icon ?>Добавить в подборку</a>
-                <div class="tip">Работа уже добавлена в 3 подборки.</div>
+                <button class="ui button button-left-align" id="collection-interaction"><?= list_alt_icon ?>Добавить в подборку</button>
+                <!--<div class="tip">Работа уже добавлена в 3 подборки.</div>-->
             </div>
 
             <div class="inner-line"></div>

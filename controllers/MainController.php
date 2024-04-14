@@ -6,6 +6,7 @@ use app\models\_BookData;
 use app\models\_ContentData;
 use app\models\Book;
 use app\models\Chapter;
+use app\models\FavoriteBook;
 use app\models\Like;
 use app\models\Read;
 use app\models\Tag;
@@ -60,11 +61,12 @@ class MainController extends Controller
         $book = new _BookData($id);
         $content = new _ContentData($id);
 
-        $like = false; $read = false; $read_later = false;
+        $like = false; $read = false; $read_later = false; $favorite = false;
         if (!Yii::$app->user->isGuest) {
             $user = Yii::$app->user->identity->id;
             $like = Like::find()->select(['id', 'liked_at'])->where(['book_id' => $id])->andWhere(['user_id' => $user])->one();
             $read = Read::find()->select(['id', 'read_at'])->where(['book_id' => $id])->andWhere(['user_id' => $user])->andWhere(['chapter_id' => null])->one();
+            $favorite = FavoriteBook::find()->select('id')->where(['book_id' => $id])->andWhere(['user_id' => $user])->one();
 
             // создаётся дефолтный сборник с соответствующим названием
             //$read_later =
@@ -75,6 +77,7 @@ class MainController extends Controller
             'content' => $content,
             'like' => $like,
             'read' => $read,
+            'favorite' => $favorite,
         ]);
     }
 

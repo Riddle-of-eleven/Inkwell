@@ -77,7 +77,7 @@ textarea {
 /* КНОПКИ */
 .button {
     text-decoration: none;
-    cursor: pointer;
+    cursor: pointer !important;
     user-select: none;
 }
 
@@ -321,4 +321,21 @@ details[open] .select-header {
 }
 details:not([open]) .select-header {
     transition: none;
+}
+
+
+
+
+/* МОДАЛЬНЫЕ ОКНА */
+.modal {
+    max-width: 700px;
+    position: relative;
+    padding: 50px 30px 30px;
+}
+.close-button {
+    position: absolute;
+    top: 20px; right: 30px;
+}
+dialog::backdrop {
+    background-color: var(--color-backdrop);
 }

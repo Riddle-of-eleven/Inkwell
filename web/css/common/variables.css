@@ -17,6 +17,15 @@
         --color-light-graphics: #FBFBFE;
 
         --color-selection: rgba(213, 213, 234, 0.1);
+
+        /* TODO: проверить на светлой теме */
+        --color-success: #CDFB4A;
+        --color-error: #E25C4A;
+        --color-warning: #FFD339;
+
+        --color-success30: #52602C;
+        --color-error30: #59312C;
+        --color-warning30: #615427;
     }
 }
 
@@ -39,6 +48,14 @@
         --color-light-graphics: #EAEAEE;
 
         --color-selection: rgba(213, 213, 234, 0.1);
+
+        --color-success: #CDFB4A;
+        --color-error: #E25C4A;
+        --color-warning: #FFD339;
+
+        --color-success30: #52602C;
+        --color-error30: #59312C;
+        --color-warning30: #615427;
     }
 }
 
@@ -50,6 +67,7 @@
     --color-danger-accent10: #E25C4A10;
 
     --color-tip20: #BABAD620;
+    --color-backdrop: rgba(23, 23, 33, 0.43);
 }
 
 

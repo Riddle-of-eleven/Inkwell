@@ -90,6 +90,9 @@ section, .active-tab section {
     font-size: 12px;
     color: var(--color-tip);
 }
+.tip-color {
+    color: var(--color-tip);
+}
 
 
 .icon {
@@ -134,13 +137,13 @@ body > .inner-line {
 
 .line-centered-text {
     width: 100%;
-    position: relative;
+    display: flex; align-items: center; gap: 40px;
 }
 .line-text {
-    position: absolute;
+    /*position: absolute;
     top: 50%; left: 50%; transform: translate(-50%, -50%);
     padding: 0 40px;
-    background-color: var(--color-background);
+    background-color: var(--color-background);*/
 }
 
 
@@ -159,4 +162,32 @@ details > summary {
     list-style: none;
     user-select: none;
     cursor: pointer;
+}
+
+
+
+.notification {
+    padding: 12px 60px;
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: var(--border-radius-block);
+    max-width: 600px;
+    text-align: center;
+}
+.notification-success {
+    border: var(--border-width) solid var(--color-success);
+    background-color: var(--color-success30);
+    color: var(--color-success);
+}
+.notification-error {
+    border: var(--border-width) solid var(--color-error);
+    background-color: var(--color-error30);
+    color: var(--color-error);
+}
+.notification-warning {
+    border: var(--border-width) solid var(--color-warning);
+    background-color: var(--color-warning30);
+    color: var(--color-warning);
 }
