@@ -6,7 +6,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     // моё
     'name' => 'Inkwell',
-    'language' => 'ru',
+    'language' => 'ru-Ru',
     'layout' => 'common',
 
     'id' => 'basic',
@@ -17,6 +17,9 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'formatter' => [
+            'locale' => 'ru-RU',
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'CmR2OcaKKqtX1blQg5lieuFU6T42Sehi',
@@ -72,7 +75,7 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1', '192.168.100.74'],
     ];
 }
 

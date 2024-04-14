@@ -8,11 +8,15 @@ use Yii;
  * This is the model class for table "collection".
  *
  * @property int $id
+ * @property int $user_id
  * @property string|null $title
  * @property string|null $description
  * @property int|null $is_private
+ * @property string $created_at
  *
- * @property BookCollection[] $bookCollections
+ * @property User $user
+ *
+ * @property Book[] $books
  */
 class Collection extends \yii\db\ActiveRecord
 {
@@ -30,9 +34,12 @@ class Collection extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['is_private'], 'integer'],
+            [['user_id', 'created_at'], 'required'],
+            [['user_id', 'is_private'], 'integer'],
+            [['created_at'], 'safe'],
             [['title'], 'string', 'max' => 500],
             [['description'], 'string', 'max' => 2500],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -43,19 +50,33 @@ class Collection extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'user_id' => 'User ID',
             'title' => 'Title',
             'description' => 'Description',
             'is_private' => 'Is Private',
+            'created_at' => 'Created At',
         ];
     }
 
+
     /**
-     * Gets query for [[BookCollections]].
+     * Gets query for [[User]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getBookCollections()
+    public function getUser()
     {
-        return $this->hasMany(BookCollection::class, ['collection_id' => 'id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    public function getBooks()
+    {
+        return $this->hasMany(Book::class, ['id' => 'book_id'])
+                        ->viaTable('book_collection', ['collection_id' => 'id']);
+    }
+
+    public function getBookCount()
+    {
+        return count($this->books);
     }
 }

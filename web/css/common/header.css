@@ -18,3 +18,36 @@ header .main-logo, header .main-logo * {
     display: flex;
     gap: 6px;
 }
+
+
+.main-menu-container {
+    position: relative;
+}
+
+.logout * {
+    color: var(--color-danger-accent) !important;
+}
+.logout .icon {
+    fill: var(--color-danger-accent) !important;
+}
+
+
+
+.main-menu-container {
+    display: flex; flex-direction: column; align-items: center;
+}
+.main-menu-content {
+    position: absolute; top: 45px;
+    padding: 20px 25px;
+    display: flex; flex-direction: column; gap: 14px;
+    width: max-content;
+}
+.main-menu-content a {
+    display: flex; gap: 14px;
+    text-decoration: none;
+    color: var(--color-graphics) !important;
+}
+.main-menu-content .line {
+    width: calc(100% + 25px + 25px) !important;
+    margin-left: -25px; margin-right: -25px;
+}

@@ -1,55 +1,60 @@
 <?php
+$this->title = Yii::$app->name.' – вход';
 
-/** @var yii\web\View $this */
-/** @var yii\bootstrap5\ActiveForm $form */
+/* @var $model */
 
-/** @var app\models\LoginForm $model */
+use yii\widgets\ActiveForm;
+use yii\helpers\Url;
+use yii\helpers\Html;
 
-use yii\bootstrap5\ActiveForm;
-use yii\bootstrap5\Html;
+$this->registerCssFile("@web/css/site/login.css");
 
-$this->title = 'Login';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+<div class="center-container">
+    <? $f = ActiveForm::begin([
+            'method' => 'post',
+            'id' => 'form-login',
+            'fieldConfig' => [
+                'template' => "{input}\n{error}"
+            ],
+            'options' => ['class' => 'enter-form'],
+        ])
+    ?>
 
-    <div class="row">
-        <div class="col-lg-5">
+    <div class="enter-form-header">
+        <div class="header1">Вход</div>
+        <div class="">Ещё нет аккаунта? <?= Html::a('Зарегистрироваться', Url::to(['site/signup']))?></div>
+    </div>
 
-            <?php $form = ActiveForm::begin([
-                'id' => 'login-form',
-                'fieldConfig' => [
-                    'template' => "{label}\n{input}\n{error}",
-                    'labelOptions' => ['class' => 'col-lg-1 col-form-label mr-lg-3'],
-                    'inputOptions' => ['class' => 'col-lg-3 form-control'],
-                    'errorOptions' => ['class' => 'col-lg-7 invalid-feedback'],
-                ],
-            ]); ?>
+    <div class="enter-form-fields">
+        <?= $f->field($model, 'login', [
+            'options' => ['class' => 'ui field field-with-hint'],
+            'inputOptions' => ['class' => ''],
+            'template' => "{input}\n{hint}{error}",
+        ])->textInput(['autofocus' => false, 'placeholder' => 'Имя пользователя'])->label(false); ?>
 
-            <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+        <?=$f->field($model, 'password', [
+            'options' => ['class' => 'ui field password-field field-with-hint'],
+            'inputOptions' => ['class' => ''],
+            'template' => "{input}\n<div class=\"password-toggle-button\"><div class=\"vertical-line\"></div>" . visibility_icon . "</div>\n{hint}{error}",
+        ])->passwordInput(['placeholder' => 'Пароль'])->label(false); ?>
 
-            <?= $form->field($model, 'password')->passwordInput() ?>
+        <div class="space-between">
 
-            <?= $form->field($model, 'rememberMe')->checkbox([
-                'template' => "<div class=\"custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
+            <?= $f->field($model, 'remember_me', [
+                'options' => ['tag' => false],
+                'template' => '{input}',
+            ])->checkbox([
+                'id' => 'remember_me',
+                'label' => false,
             ]) ?>
+            <label for="remember_me">Запомнить меня</label>
 
-            <div class="form-group">
-                <div>
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-            </div>
-
-            <?php ActiveForm::end(); ?>
-
-            <div style="color:#999;">
-                You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
-                To modify the username/password, please check out the code <code>app\models\User::$users</code>.
-            </div>
-
+            <a href="">Забыли пароль?</a>
         </div>
     </div>
+
+    <?= Html::submitButton('Войти', ['class' => 'ui button colored-button', 'name' => 'login-submit']) ?>
+    <? ActiveForm::end() ?>
 </div>

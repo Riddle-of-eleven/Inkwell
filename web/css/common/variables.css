@@ -10,11 +10,22 @@
         --color-outline: #D5D5EA;
         --color-border: #F3F3FC;
         --color-line: #E9E9F1;
-        --color-dark-fil: #F7F7FD;
+        --color-dark-fill: #F7F7FD;
         --color-danger-accent: #E25C4A;
         --color-inactive-background: #FBFBFF;
         --color-lighter-line: #DFDFE9;
         --color-light-graphics: #FBFBFE;
+
+        --color-selection: rgba(213, 213, 234, 0.1);
+
+        /* TODO: проверить на светлой теме */
+        --color-success: #CDFB4A;
+        --color-error: #E25C4A;
+        --color-warning: #FFD339;
+
+        --color-success30: #52602C;
+        --color-error30: #59312C;
+        --color-warning30: #615427;
     }
 }
 
@@ -28,28 +39,38 @@
         --color-outline: #424248;
         --color-border: #3C3C41;
         --color-line: #3F3F48;
-        --color-dark-fil: #272727;
+        --color-dark-fill: #272727;
         --color-danger-accent: #E25C4A;
 
         /* хз */
         --color-inactive-background: #343436;
         --color-lighter-line: #424249;
         --color-light-graphics: #EAEAEE;
+
+        --color-selection: rgba(213, 213, 234, 0.1);
+
+        --color-success: #CDFB4A;
+        --color-error: #E25C4A;
+        --color-warning: #FFD339;
+
+        --color-success30: #52602C;
+        --color-error30: #59312C;
+        --color-warning30: #615427;
     }
 }
 
 :root {
-    --accent5: #FB784A05;
-    --accent10: #FB784A10;
-    --danger-accent10: #E25C4A10;
+    --color-accent5: #FB784A05;
+    --color-accent10: #FB784A10;
+    --color-accent20: #FB784A20;
 
-    /*
-    --accent5: #FBF4F5;
-    --accent10: #FBEEEC;
-    --danger-accent10: #F9EBEC;
-    */
+    --color-danger-accent10: #E25C4A10;
 
+    --color-tip20: #BABAD620;
+    --color-backdrop: rgba(23, 23, 33, 0.43);
 }
+
+
 
 
 /* РАЗМЕРЫ ТЕКСТА*/
@@ -62,6 +83,6 @@
 
 /* ПАРАМЕТРЫ ОФОРМЛЕНИЯ */
 :root {
-    --border-width: 0.5px;
+    --border-width: 1px;
     --border-radius-block: 10px;
 }

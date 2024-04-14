@@ -8,14 +8,15 @@
     padding: 30px 12px;
 }
 .side-buttons {
-    display: flex; flex-direction: column; gap: 18px;
+    display: flex; flex-direction: column; gap: 14px;
 }
 .side-menu .side-buttons {
-    gap: 10px;
+    gap: 14px;
 }
 .book-preview-sidebar > .line {
     width: calc(100% + 12px + 12px) !important;
     margin-left: -12px; margin-right: -12px;
+    background-color: var(--color-border);
 }
 
 .book-preview-content {
@@ -60,7 +61,7 @@
 .accent-meta {
     padding: 2px 10px;
     border: var(--border-width) solid var(--color-accent);
-    background-color: var(--accent10);
+    background-color: var(--color-accent10);
     border-radius: 6px;
 }
 
