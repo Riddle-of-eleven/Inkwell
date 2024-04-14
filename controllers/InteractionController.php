@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\BookCollection;
 use app\models\Collection;
 use app\models\FavoriteBook;
+use app\models\ReadLater;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -60,8 +61,38 @@ class InteractionController extends Controller
                 $new_read->chapter_id = null;
                 $new_read->read_at = new Expression('NOW()');
 
+                $read_later = ReadLater::find()->where(['book_id' => $book])->andWhere(['user_id' => $user])->one();
+                if ($read_later) $read_later->delete();
+
                 if ($new_read->save()) return ['success' => true, 'is_read' => true];
                 else return ['success' => false, 'is_read' => false];
+            }
+        }
+        return ['success' => false];
+    }
+
+    public function actionReadLater() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!Yii::$app->user->isGuest) {
+            $book = Yii::$app->request->post('book_id');
+            $user = Yii::$app->user->identity->id;
+
+            $read_later = ReadLater::find()->where(['book_id' => $book])->andWhere(['user_id' => $user])->one();
+            if ($read_later) {
+                $read_later->delete();
+                return ['success' => true, 'is_read_later' => false];
+            }
+            else {
+                $new_read_later = new ReadLater();
+                $new_read_later->book_id = $book;
+                $new_read_later->user_id = $user;
+                $new_read_later->added_at = new Expression('NOW()');
+
+                $read = Read::find()->where(['book_id' => $book])->andWhere(['user_id' => $user])->andWhere(['chapter_id' => null])->one();
+                if ($read) $read->delete();
+
+                if ($new_read_later->save()) return ['success' => true, 'is_read_later' => true];
+                else return ['success' => true, 'is_read_later' => false];
             }
         }
         return ['success' => false];

@@ -5,6 +5,7 @@ $this->title = Yii::$app->name.' – все книги';
 /* @var \app\models\_ContentData $content */
 /* @var $like */
 /* @var $read */
+/* @var $read_later */
 /* @var $favorite
  */
 
@@ -24,6 +25,7 @@ $formatter = new Formatter();
 if (!Yii::$app->user->isGuest) {
     $like_class = $like ? 'filled-button' : '';
     $read_class = $read ? 'filled-button' : '';
+    $read_later_class = $read_later ? 'filled-button' : '';
 
     if ($read) {
         $read_later_disabled = 'disabled';
@@ -31,6 +33,14 @@ if (!Yii::$app->user->isGuest) {
     } else {
         $read_later_disabled = '';
         $read_later_disabled_class = '';
+    }
+
+    if ($read_later) {
+        $read_disabled = 'disabled';
+        $read_disabled_class = 'inactive-button';
+    } else {
+        $read_disabled = '';
+        $read_disabled_class = '';
     }
 
     $favorite_class = $favorite ? 'filled-button' : '';
@@ -267,8 +277,8 @@ js, View::POS_LOAD)
         <div class="block book-actions">
             <div>
                 <button class="ui button button-left-align <?=@$like_class?>" id="like-interaction"><?= favorite_icon ?>Нравится</button>
-                <button class="ui button button-left-align <?=@$read_class?>" id="read-interaction"><?= priority_icon ?>Прочитано</button>
-                <button class="ui button button-left-align <?=@$read_later_disabled_class?>" id="read-later-interaction" <?=$read_later_disabled?>><?= hourglass_icon ?>Прочитать позже</button>
+                <button class="ui button button-left-align <?=@$read_class?> <?=@$read_disabled_class?>" id="read-interaction" <?=$read_disabled?>><?= priority_icon ?>Прочитано</button>
+                <button class="ui button button-left-align <?=@$read_later_class?> <?=@$read_later_disabled_class?>" id="read-later-interaction" <?=$read_later_disabled?>><?= hourglass_icon ?>Прочитать позже</button>
                 <button class="ui button button-left-align <?=@$favorite_class?>" id="favorite-book-interaction"><?= bookmarks_icon ?><div class="button-text"><?=$favorite_text?></div></button>
             </div>
 

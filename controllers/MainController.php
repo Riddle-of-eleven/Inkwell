@@ -9,6 +9,7 @@ use app\models\Chapter;
 use app\models\FavoriteBook;
 use app\models\Like;
 use app\models\Read;
+use app\models\ReadLater;
 use app\models\Tag;
 use yii\helpers\VarDumper;
 use yii\i18n\Formatter;
@@ -66,6 +67,7 @@ class MainController extends Controller
             $user = Yii::$app->user->identity->id;
             $like = Like::find()->select(['id', 'liked_at'])->where(['book_id' => $id])->andWhere(['user_id' => $user])->one();
             $read = Read::find()->select(['id', 'read_at'])->where(['book_id' => $id])->andWhere(['user_id' => $user])->andWhere(['chapter_id' => null])->one();
+            $read_later = ReadLater::find()->select(['id', 'added_at'])->where(['book_id' => $id])->andWhere(['user_id' => $user])->one();
             $favorite = FavoriteBook::find()->select('id')->where(['book_id' => $id])->andWhere(['user_id' => $user])->one();
 
             // создаётся дефолтный сборник с соответствующим названием
@@ -77,6 +79,7 @@ class MainController extends Controller
             'content' => $content,
             'like' => $like,
             'read' => $read,
+            'read_later' => $read_later,
             'favorite' => $favorite,
         ]);
     }

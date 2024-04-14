@@ -41,6 +41,7 @@ use Yii;
  * @property User $publisher
  * @property Rating $rating
  * @property Read[] $reads
+ * @property ReadLater[] $readsLater
  * @property Size $realSize
  * @property RecycleBin[] $recycleBins
  * @property Relation $relation0
@@ -158,7 +159,7 @@ class Book extends \yii\db\ActiveRecord
     public function getCollections()
     {
         return $this->hasMany(Collection::class, ['id' => 'collection_id'])
-                        ->viaTable('book_collection', ['book_id' => 'id']);
+            ->viaTable('book_collection', ['book_id' => 'id']);
     }
 
     /**
@@ -169,7 +170,7 @@ class Book extends \yii\db\ActiveRecord
     public function getFandoms()
     {
         return $this->hasMany(Fandom::class, ['id' => 'fandom_id'])
-                        ->viaTable('book_fandom', ['book_id' => 'id']);
+            ->viaTable('book_fandom', ['book_id' => 'id']);
     }
 
     /**
@@ -181,7 +182,7 @@ class Book extends \yii\db\ActiveRecord
     public function getGenres()
     {
         return $this->hasMany(Genre::class, ['id' => 'genre_id'])
-                        ->viaTable('book_genre', ['book_id' => 'id']);
+            ->viaTable('book_genre', ['book_id' => 'id']);
     }
 
     /**
@@ -192,7 +193,7 @@ class Book extends \yii\db\ActiveRecord
     public function getOrigins()
     {
         return $this->hasMany(Origin::class, ['id' => 'origin_id'])
-                        ->viaTable('book_origin', ['book_id' => 'id']);
+            ->viaTable('book_origin', ['book_id' => 'id']);
     }
 
     /**
@@ -203,17 +204,14 @@ class Book extends \yii\db\ActiveRecord
     public function getTags()
     {
         return $this->hasMany(Tag::class, ['id' => 'tag_id'])
-                        ->viaTable('book_tag', ['book_id' => 'id']);
+            ->viaTable('book_tag', ['book_id' => 'id']);
     }
 
     public function getCharacters()
     {
         return $this->hasMany(Character::class, ['id' => 'character_id'])
-                        ->viaTable('book_character', ['book_id' => 'id']);
+            ->viaTable('book_character', ['book_id' => 'id']);
     }
-
-
-
 
 
     /**
@@ -314,6 +312,11 @@ class Book extends \yii\db\ActiveRecord
     public function getReads()
     {
         return $this->hasMany(Read::class, ['book_id' => 'id']);
+    }
+
+    public function getReadsLater()
+    {
+        return $this->hasMany(ReadLater::class, ['book_id' => 'id']);
     }
 
     /**

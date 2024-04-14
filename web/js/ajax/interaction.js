@@ -22,7 +22,7 @@ $(document).ready(function() {
     });
 
     // прочитано
-    $('#read-interaction').click(function () {
+    $('#read-interaction').click(function() {
         let button = $(this);
         $.ajax({
             type: 'post',
@@ -36,6 +36,29 @@ $(document).ready(function() {
 
                     if (response.is_read) read_later.prop('disabled', true);
                     else read_later.prop('disabled', false);
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+
+    // прочитать позже
+    $('#read-later-interaction').click(function(){
+        let button = $(this);
+        $.ajax({
+            type: 'post',
+            url: 'index.php?r=interaction/read-later',
+            data: { book_id: book_id },
+            success: function (response) {
+                if (response.success) {
+                    let read = $('#read-interaction');
+                    markButton(response.is_read_later, button, 'filled-button');
+                    markButton(response.is_read_later, read, 'inactive-button');
+
+                    if (response.is_read_later) read.prop('disabled', true);
+                    else read.prop('disabled', false);
                 }
             },
             error: function (error) {
