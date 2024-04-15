@@ -28,24 +28,14 @@ class MainController extends Controller
 //        $tags = $book->tags;
 
         /*$books = Book::find()->all();
-
         foreach ($books as $book) {
             VarDumper::dump($book->tags, 10, true);
         }*/
-
-
         $book = new _BookData(2);
-        //VarDumper::dump($book, 10, true);
-
-
-
-        //die;
         return $this->render('books', [
             'book' => $book,
         ]);
     }
-
-
 
     public function actionRandBook()
     {
@@ -82,6 +72,10 @@ class MainController extends Controller
             'read_later' => $read_later,
             'favorite' => $favorite,
         ]);
+    }
+
+    public function actionReadBook() {
+        return $this->render('read-book');
     }
 
     public function actionAuthor()

@@ -320,13 +320,13 @@ js, View::POS_LOAD)
         <? else : ?>
         <div class="block book-actions">
             <div>
-                <a href="" class="ui button button-left-align"><?= download_icon ?>Скачать работу</a>
+                <a href="" class="ui button button-left-align"><?=download_icon?>Скачать работу</a>
             </div>
 
             <div class="inner-line"></div>
 
             <div>
-                <a href="" class="ui button button-left-align danger-button"><?= flag_icon ?>Пожаловаться</a>
+                <a href="" class="ui button button-left-align danger-button"><?=flag_icon?>Пожаловаться</a>
             </div>
         </div>
         <? endif; ?>
@@ -337,10 +337,7 @@ js, View::POS_LOAD)
 <div class="inner-line"></div>
 <div class="interface-header header-with-element">
     <div class="header2">Оглавление</div>
-    <a class="ui button icon-button">
-        <?= resume_icon ?>
-        Продолжить читать
-    </a>
+    <?= Html::a(resume_icon . 'Продолжить читать', Url::to(['main/read-book', 'id' => $book->id]), ['class' => 'ui button icon-button'])?>
 </div>
 
 <div class="book-toc">
