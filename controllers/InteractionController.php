@@ -165,14 +165,41 @@ class InteractionController extends Controller
         return ['success' => false];
     }
 
-    public function  actionRenderCreateCollection() {
+    /*public function  actionRenderCreateCollection() {
         $model = new FormCreateCollection();
         return $this->renderAjax('//partial/_create_collection', [
             'model' => $model,
         ]);
-    }
+    }*/
 
     public function actionCreateCollectionAndAdd() {
-        //Yii::$app->response->format = Response::FORMAT_JSON;
+        $model = new FormCreateCollection();
+
+        //if ($model->book_id) $model->book_id = Yii::$app->request->post('book_id');
+        $book_id =  Yii::$app->request->post('book_id');
+        //VarDumper::dump($model, 10, true);
+        if (!Yii::$app->user->isGuest) {
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                VarDumper::dump(Yii::$app->request->post(), 10, true);
+                die;
+                $collection = new Collection();
+                $collection->user_id = Yii::$app->user->identity->id;
+                $collection->title = $model->title;
+                $collection->is_private = $model->is_private;
+                $collection->created_at = new Expression('NOW()');
+
+                if ($collection->save()) {
+                    $add = new BookCollection();
+                    $add->book_id = Yii::$app->request->post('book_id');
+                    $add->collection_id = $collection->id;
+                    if ($add->save()) return $this->goHome();
+                }
+            }
+            return $this->renderAjax('//partial/_create_collection', [
+                'model' => $model,
+                'book_id' => $book_id,
+            ]);
+        }
+        return $this->goHome();
     }
 }

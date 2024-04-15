@@ -111,7 +111,10 @@ $('.collection-create').click(function(e) {
     e.preventDefault();
     $.ajax({
         type: 'post',
-        url: 'index.php?r=interaction/render-create-collection',
+        url: 'index.php?r=interaction/create-collection-and-add',
+        data: {
+            book_id: (new URL(document.location)).searchParams.get("id"),
+        },
         success: function(response) {
             $('#regular-modal').addClass('hidden');
             add.removeClass('hidden');
