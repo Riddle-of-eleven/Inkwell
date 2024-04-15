@@ -52,3 +52,30 @@ $this->registerCssFile("@web/css/parts/book/reader.css");
 
     <div class="line"></div>
 </div>
+
+<div class="header2">Комментарии</div>
+
+<div class="comment-form">
+    <div class="author-avatar"></div>
+    <div class="add-comment">
+        <textarea name="" id="" rows="3"></textarea>
+        <div class="under-comment">
+            <div class="tip">Здесь вы можете похвалить автора или высказать критику. Помните, что некорректные комментарии могут быть удалены.</div>
+            <div class="ui button icon-button"><?=send_icon?>Отправить</div>
+            <div class="symbol-count">2000</div>
+        </div>
+    </div>
+</div>
+
+<div class="comments">
+    <div class="comment">
+        
+    </div>
+    <details>
+        <summary class="block">
+            <div class="expand-icon"><?= expand_more_icon ?></div>
+            <div class="">Ответы</div>
+        </summary>
+        <div class="comment"></div>
+    </details>
+</div>
