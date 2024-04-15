@@ -5,6 +5,7 @@
 
 use app\models\_BookData;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\helpers\VarDumper;
 use yii\i18n\Formatter;
 
@@ -51,7 +52,7 @@ use yii\i18n\Formatter;
 
         <div class="book-preview-info-cover">
             <div class="book-preview-info">
-                <div class="book-preview-title header1"><?= Html::encode($data->title)?></div>
+                <div class="book-preview-title header1"><?=Html::a($data->title, Url::to(['main/book', 'id' => $data->id]))?></div>
                 <div class="small-inner-line"></div>
                 <div class="info-pairs">
                     <div class="info-pair">

@@ -11,7 +11,6 @@ class FormLogin extends Model
     public $login;
     public $password;
     public $remember_me = true;
-    public $aaa;
 
     public $_user;
 

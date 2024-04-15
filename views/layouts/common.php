@@ -101,6 +101,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 <div class="side-buttons">
                     <?= Html::a(bookmark_icon . '<span class="menu-item hidden">Библиотека</span>', Url::to(['reader-panel/library'])) ?>
                     <a href=""><?= list_alt_icon ?><span class="menu-item hidden">Подборки</span></a>
+                    <a href=""><?= chat_icon ?><span class="menu-item hidden">Комментарии и рецензии</span></a>
                     <a href=""><?= switch_account_icon ?><span class="menu-item hidden">Подписки</span></a>
                     <a href=""><?= device_reset_icon ?><span class="menu-item hidden">История просмотра</span></a>
                 </div>

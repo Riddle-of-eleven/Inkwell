@@ -181,7 +181,9 @@ details[open] .expand-icon {
 }
 
 
-.to-collection.showed {
+
+
+.to-collection .modal-container {
     display: flex; flex-direction: column; align-items: center; gap: 30px;
 }
 .collections-container {
@@ -193,4 +195,8 @@ details[open] .expand-icon {
     width: 100%;
     display: flex; justify-content: space-between;
     padding: 10px 20px;
+}
+
+.new-collection {
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
 }

@@ -38,9 +38,6 @@ input {
 a {
     text-decoration: none;
 }
-a:not(.ui) {
-    color: var(--color-accent);
-}
 
 h1 {
     font-size: 24px;
@@ -74,7 +71,7 @@ section, .active-tab section {
     text-decoration: none !important;
 }
 
-.header1 {
+.header1, .header1 * {
     font-weight: 500;
     font-size: 22px;
 }

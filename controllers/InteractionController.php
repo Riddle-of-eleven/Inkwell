@@ -5,7 +5,9 @@ namespace app\controllers;
 use app\models\BookCollection;
 use app\models\Collection;
 use app\models\FavoriteBook;
+use app\models\FormCreateCollection;
 use app\models\ReadLater;
+use app\models\User;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -161,5 +163,16 @@ class InteractionController extends Controller
             }
         }
         return ['success' => false];
+    }
+
+    public function  actionRenderCreateCollection() {
+        $model = new FormCreateCollection();
+        return $this->renderAjax('//partial/_create_collection', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionCreateCollectionAndAdd() {
+        //Yii::$app->response->format = Response::FORMAT_JSON;
     }
 }

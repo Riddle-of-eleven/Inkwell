@@ -1,9 +1,18 @@
 <?php
 
 /** @var yii\web\View $this */
+/** @var $books */
 $this->title = Yii::$app->name;
+
+use app\widgets\BookDisplay;
+
+if ($books) foreach ($books as $book) {
+    echo BookDisplay::widget(['data' => $book]);
+}
 ?>
 
+
+<!--
 <div class="block book-preview">
     <div class="book-preview-sidebar">
         <div class="side-buttons">
@@ -113,3 +122,4 @@ $this->title = Yii::$app->name;
 
     </div>
 </div>
+-->

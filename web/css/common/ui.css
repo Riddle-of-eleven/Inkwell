@@ -223,6 +223,10 @@ textarea {
     border-color: var(--color-accent);
 }
 
+.tab.active-tab svg {
+    fill: var(--color-accent);
+}
+
 
 
 /* ЧЕКБОКС И РАДИОКНОПКА */

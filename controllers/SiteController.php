@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Book;
 use app\models\FormSignup;
 use app\models\User;
 use Yii;
@@ -12,6 +13,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\FormLogin;
 use yii\db\Expression;
+use app\models\_BookData;
 
 
 class SiteController extends Controller
@@ -65,7 +67,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $ids = Book::find()->select('id')->all();
+        $books = [];
+        foreach ($ids as $id) {
+            $books[$id->id] = new _BookData($id->id);
+        }
+        return $this->render('index', [
+            'books' => $books
+        ]);
     }
 
     /**
