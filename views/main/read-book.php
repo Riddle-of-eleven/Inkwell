@@ -1,9 +1,28 @@
 <?php
 $this->title = Yii::$app->name.' – книга';
 
+/* @var Chapter $chapters */
+/* @var $pages */
+/* @var Book $book */
+
 $this->registerCssFile("@web/css/parts/book/reader.css");
 
+use app\models\Chapter;
+use app\models\Book;
+use yii\widgets\LinkPager;
+use yii\helpers\VarDumper;
+use yii\i18n\Formatter;
+use yii\helpers\Html;
+use yii\helpers\Url;
+
+$formatter = new Formatter();
+
+echo LinkPager::widget(['pagination' => $pages]);
+
 ?>
+
+<? foreach ($chapters as $chapter) { ?>
+
 
 <div class="center-container reader">
     <div class="reading-progress">
@@ -14,7 +33,7 @@ $this->registerCssFile("@web/css/parts/book/reader.css");
     <div class="reader-header block">
         <div class="reader-header-left">
             <button class="ui button small-button"><?=keyboard_double_arrow_left_icon?></button>
-            <div class="header2">Хорей</div>
+            <div class="header2"><?=$book->title?></div>
         </div>
         <div class="reader-header-right">
             <div class="action-buttons">
@@ -23,7 +42,7 @@ $this->registerCssFile("@web/css/parts/book/reader.css");
                 <button class="ui button small-button"><?=palette_icon?></button>
             </div>
             <div class="vertical-line"></div>
-            <a href="" class="ui button icon-button danger-accent-button"><?=cancel_icon?>Выйти из читалки</a>
+            <?=Html::a(cancel_icon . 'Выйти из читалки', Url::to(['main/book', 'id' => $book->id]), ['class' => 'ui button icon-button danger-accent-button'])?>
         </div>
     </div>
 
@@ -35,12 +54,12 @@ $this->registerCssFile("@web/css/parts/book/reader.css");
 
     <div class="reader-content block">
         <div class="reader-book-header">
-            <div class="header2">Still Loving You</div>
-            <div class="tip">26 марта 2024, 23.41</div>
+            <div class="header2"><?=$chapter->title?></div>
+            <div class="tip"><?=$formatter->asDatetime($chapter->created_at, "d MMMM yyyy, H.i");?></div>
         </div>
 
         <div class="reader-book-text">
-            Вот он, настоящий пельмень. Внутри много-много мяса, мало-мало теста.
+            <?=$chapter->content?>
         </div>
     </div>
 
@@ -79,3 +98,6 @@ $this->registerCssFile("@web/css/parts/book/reader.css");
         <div class="comment"></div>
     </details>
 </div>
+
+
+<? } ?>

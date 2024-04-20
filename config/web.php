@@ -8,6 +8,7 @@ $config = [
     'name' => 'Inkwell',
     'language' => 'ru-Ru',
     'layout' => 'common',
+    'timeZone' => 'Europe/Minsk',
 
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
@@ -20,6 +21,7 @@ $config = [
         'formatter' => [
             'locale' => 'ru-RU',
         ],
+
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'CmR2OcaKKqtX1blQg5lieuFU6T42Sehi',

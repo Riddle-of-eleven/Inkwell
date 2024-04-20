@@ -11,6 +11,7 @@ use app\models\Like;
 use app\models\Read;
 use app\models\ReadLater;
 use app\models\Tag;
+use yii\data\Pagination;
 use yii\helpers\VarDumper;
 use yii\i18n\Formatter;
 use yii\web\Controller;
@@ -75,7 +76,20 @@ class MainController extends Controller
     }
 
     public function actionReadBook() {
-        return $this->render('read-book');
+        $id = Yii::$app->request->get('id');
+        $query = Chapter::find()->where(['book_id' => $id])->andWhere(['<>', 'is_section', true]);
+        $pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 1]);
+        $chapters = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        $book = Book::find()->where(['id' => $id])->one();
+
+        return $this->render('read-book', [
+            'chapters' => $chapters,
+            'pages' => $pages,
+            'book' => $book,
+        ]);
     }
 
     public function actionAuthor()

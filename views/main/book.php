@@ -337,7 +337,7 @@ js, View::POS_LOAD)
 <div class="inner-line"></div>
 <div class="interface-header header-with-element">
     <div class="header2">Оглавление</div>
-    <?= Html::a(resume_icon . 'Продолжить читать', Url::to(['main/read-book', 'id' => $book->id]), ['class' => 'ui button icon-button'])?>
+    <?= Html::a(resume_icon . 'Читать', Url::to(['main/read-book', 'id' => $book->id]), ['class' => 'ui button icon-button'])?>
 </div>
 
 <div class="book-toc">

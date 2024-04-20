@@ -14,7 +14,8 @@ use yii\helpers\Html;
         'options' => ['class' => 'ui field field-with-hint'],
         'inputOptions' => ['class' => ''],
         'template' => "{input}\n{hint}{error}",
-    ])->textInput(['autofocus' => true, 'placeholder' => 'Название подборки'])->label(false); ?>
+    ])->textInput(['autofocus' => true, 'placeholder' => 'Название подборки'])->label(false)
+        ->hint('Не менее 8 символов'); ?>
 
     <?= $f->field($model, 'is_private', [
         'options' => ['tag' => false],
