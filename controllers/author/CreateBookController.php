@@ -17,6 +17,7 @@ class CreateBookController extends Controller
     public function actionFindGenres() {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $input = Yii::$app->request->post('input');
+
         // экранировать потом это дело
         if ($input) {
             $genres = Genre::find()->where(['like', 'title', $input])->all();
@@ -46,6 +47,16 @@ class CreateBookController extends Controller
 
         /*if (Yii::$app->request->post()) {
             VarDumper::dump(Yii::$app->request->post(), 10, true);
+            die;
+        }*/
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            /*VarDumper::dump($model, 10, true);
+            die;*/
+
+        }
+        /*else {
+            VarDumper::dump($model, 10, true);
             die;
         }*/
 

@@ -7,6 +7,12 @@ use yii\base\Model;
 class FormCreateMain extends Model
 {
     public $title;
+    public $description;
+    public $remark;
+    public $disclaimer;
+    public $dedication;
+
+
     public $relation;
     public $rating;
     public $plan_size;
@@ -14,7 +20,11 @@ class FormCreateMain extends Model
 
      public function rules() {
         return [
-            [['relation', 'rating', 'plan_size', 'genres'], 'required'],
+            [['title', 'description', 'relation', 'rating', 'plan_size', 'genres'], 'required', 'message' => 'Это поле обязательно'],
+            [['remark', 'disclaimer', 'dedication'], 'string'],
+
+            // чё с этим делать и как?
+            ['genres', 'required'],
         ];
     }
 

@@ -40,8 +40,8 @@
 }
 .dropdown-list {
     position: absolute;
-    top: 40px;
-    width: 100%; max-height: 150px;
+    top: 30px;
+    width: 100%; max-height: 120px;
     overflow-y: scroll;
     padding: 10px 0;
     display: flex; flex-direction: column; gap: 10px;
@@ -80,6 +80,7 @@ textarea {
     border: var(--border-width) solid var(--color-outline);
     border-radius: 10px;
     background-color: var(--color-foreground);
+    padding: 7px 10px 6px 16px;
 }
 .symbol-count {
     color: var(--color-tip);

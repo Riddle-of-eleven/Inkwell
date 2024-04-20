@@ -48,7 +48,7 @@ css);
     'fieldConfig' => [
         'template' => "{input}\n{error}"
     ],
-    'options' => ['class' => 'enter-form'],
+    'options' => ['class' => ''],
 ])
 ?>
 
@@ -58,45 +58,34 @@ css);
     </div>
     <div class="header2">Основное</div>
     <div>
-        <div class="field-header-words">
-            <div class="header3">Название</div>
-            <div class="symbol-count">0 / 100</div>
-        </div>
-        <div class="ui field">Чёрные птицы</div>
+        <div class="field-header-words"><div class="header3">Название</div><!--<div class="symbol-count">0 / 100</div>--></div>
+        <?= $f->field($model, 'title', [
+            'options' => ['class' => 'ui field field-with-hint'],
+            'inputOptions' => ['class' => ''],
+            'template' => "{input}\n{hint}{error}",
+        ])->textInput(['autofocus' => true, 'placeholder' => 'Название книги'])->label(false);?>
     </div>
 
     <div>
-        <div class="field-header-words">
-            <div class="header3">Описание</div>
-            <div class="symbol-count">0 / 500</div>
-        </div>
-        <textarea></textarea>
+        <div class="field-header-words"><div class="header3">Описание</div><!--<div class="symbol-count">0 / 500</div>--></div>
+        <?= $f->field($model, 'description')->textarea(['rows' => '6', 'placeholder' => 'Расскажите, о чём эта книга']) ?>
     </div>
 
     <div>
-        <div class="field-header-words">
-            <div class="header3">Примечания</div>
-            <div class="symbol-count">0 / 1000</div>
-        </div>
-        <textarea></textarea>
+        <div class="field-header-words"><div class="header3">Примечания</div><!--<div class="symbol-count">0 / 1000</div>--></div>
+        <?= $f->field($model, 'remark')->textarea(['rows' => '8', 'placeholder' => 'Здесь вы можете написать что-нибудь интересное']) ?>
     </div>
 
 
     <div>
-        <div class="field-header-words">
-            <div class="header3">Дисклеймер</div>
-            <div class="symbol-count">0 / 300</div>
-        </div>
-        <textarea></textarea>
+        <div class="field-header-words"><div class="header3">Дисклеймер</div><!--<div class="symbol-count">0 / 300</div>--></div>
+        <?= $f->field($model, 'disclaimer')->textarea(['rows' => '4', 'placeholder' => 'Если в книге содержатся моменты, о которых вы хотите предупредить читателей, впишите это сюда']) ?>
     </div>
 
 
     <div>
-        <div class="field-header-words">
-            <div class="header3">Посвящение</div>
-            <div class="symbol-count">0 / 300</div>
-        </div>
-        <textarea></textarea>
+        <div class="field-header-words"><div class="header3">Посвящение</div><!--<div class="symbol-count">0 / 300</div>--></div>
+        <?= $f->field($model, 'dedication')->textarea(['rows' => '4', 'placeholder' => 'Если книга посвящена кому-либо или чему-либо, напишите об этом здесь']) ?>
     </div>
 </section>
 
@@ -157,10 +146,12 @@ css);
                 url: 'index.php?r=author/create-book/find-genres',
                 type: 'post',
                 success: function (response) {
-                    $('#genres-select').empty();
-                    $.each(response, function(key, value) {
-                        $('#genres-select').append(`<div class="dropdown-item" id="${key}">${value}</div>`);
-                    });
+                    if (response) {
+                        $('#genres-select').empty();
+                        $.each(response, function(key, value) {
+                            $('#genres-select').append(`<div class="dropdown-item" id="${key}">${value}</div>`);
+                        });
+                    }
                 },
                 error: function (error) {
                     console.log(error);
@@ -182,11 +173,11 @@ css);
         
         let hidden = $('<input>').attr({
                 type: 'hidden',
-                name: 'genres[]',
+                name: 'FormCreateMain[genres][]',
                 value: id
             });
         $('.selected-items').append(hidden);
-        let item = $('.selected-items').append(`<div class="selected-item">
+        let item = $('.selected-items').append(`<div class="selected-item" genre="${id}">
                 ${title}
                 <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" class="icon to-close" genre="${id}">
                     <path d="M291-253.847 253.847-291l189-189-189-189L291-706.153l189 189 189-189L706.153-669l-189 189 189 189L669-253.847l-189-189-189 189Z" />
@@ -194,7 +185,9 @@ css);
             </div>`);
     });
     $('.selected-items').on('click', '.to-close', function() {
-        console.log($(this).attr('genre'));
+        let id = $(this).attr('genre');
+        $(`input[type="hidden"][value="${id}"]`).remove();
+        $(`[genre=${id}]`).remove();
     });
 js, View::POS_END)?>
 
@@ -209,19 +202,22 @@ js, View::POS_END)?>
             <div class="ui field"><?=Html::textInput('genres-input', null, [
                     'id' => 'genres-input',
                     'placeholder' => 'Введите первые несколько символов...',
+                    'autocomplete' => 'off'
                 ])?></div>
             <div class="dropdown-list block hidden" id="genres-select"></div>
         </div>
     </div>
 
+    <!--
     <div>
         <div class="field-header-words">
             <div class="header3">Теги</div>
-           <!--<div class="symbol-count">0 / 40</div>-->
+           <!-<div class="symbol-count">0 / 40</div>->
         </div>
-        <!--<div class="tag-kinds"><div>Все</div><div>Предупреждения</div><div>Отношения</div><div>Формат</div><div>Место действия</div><div>Эпоха</div></div>-->
+        <!-<div class="tag-kinds"><div>Все</div><div>Предупреждения</div><div>Отношения</div><div>Формат</div><div>Место действия</div><div>Эпоха</div></div>->
         <div class="ui field"><input type="text" placeholder="Введите первые несколько символов"></div>
     </div>
+    -->
 
 
 

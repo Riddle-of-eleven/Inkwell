@@ -41,6 +41,7 @@ header .main-logo, header .main-logo * {
     padding: 20px 25px;
     display: flex; flex-direction: column; gap: 14px;
     width: max-content;
+    z-index: 999999;
 }
 .main-menu-content a {
     display: flex; gap: 14px;
