@@ -28,6 +28,8 @@ use Yii;
  * @property int|null $publisher_id
  * @property int|null $is_published
  * @property int|null $access_level_id
+ * @property int|null $is_process
+ * @property int|null $step
  *
  * @property AccessLevel $accessLevel
  * @property AccessToBook[] $accessToBooks
@@ -82,7 +84,7 @@ class Book extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'is_draft', 'is_perfect', 'is_editable', 'type_id', 'rating_id', 'completeness_id', 'relation_id', 'plan_size_id', 'real_size_id', 'publisher_id', 'is_published', 'access_level_id'], 'integer'],
+            [['user_id', 'is_draft', 'is_perfect', 'is_editable', 'type_id', 'rating_id', 'completeness_id', 'relation_id', 'plan_size_id', 'real_size_id', 'publisher_id', 'is_published', 'access_level_id', 'is_process', 'step'], 'integer'],
             [['created_at'], 'safe'],
             [['title'], 'string', 'max' => 500],
             [['cover'], 'string', 'max' => 400],
@@ -128,6 +130,8 @@ class Book extends \yii\db\ActiveRecord
             'publisher_id' => 'Publisher ID',
             'is_published' => 'Is Published',
             'access_level_id' => 'Access Level ID',
+            'is_process' => 'Is Process',
+            'step' => 'Step',
         ];
     }
 

@@ -11,11 +11,6 @@
 }
 
 
-
-.hidden {
-    display: none !important;
-}
-
 #menu-button {
     position: absolute;
     top: 25px; left: 12px;

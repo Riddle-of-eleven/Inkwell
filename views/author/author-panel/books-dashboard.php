@@ -5,6 +5,7 @@ $this->title = Yii::$app->name.' – книги';
 /* @var $books_complete*/
 /* @var $books_frozen*/
 /* @var $books_draft*/
+/* @var $books_process*/
 
 use app\widgets\BookDisplay;
 use yii\i18n\Formatter;
@@ -34,10 +35,11 @@ $this->registerCssFile('@web/css/dashboards/book.css');
 
 
 <div class="tab-header">
-    <div class="tab active-tab" data-tab="1"><div class="tab-number">4</div>В процессе</div>
-    <div class="tab" data-tab="2"><div class="tab-number">12</div>Завершённые</div>
-    <div class="tab" data-tab="3"><div class="tab-number">2</div>Замороженные</div>
-    <div class="tab" data-tab="4"><div class="tab-number">36</div>Черновики</div>
+    <div class="tab active-tab" data-tab="1"><div class="tab-number"><?=count($books_progress)?></div>В процессе</div>
+    <div class="tab" data-tab="2"><div class="tab-number"><?=count($books_complete)?></div>Завершённые</div>
+    <div class="tab" data-tab="3"><div class="tab-number"><?=count($books_frozen)?></div>Замороженные</div>
+    <div class="tab" data-tab="4"><div class="tab-number"><?=count($books_draft)?></div>Черновики</div>
+    <div class="tab" data-tab="5"><div class="tab-number"><?=count($books_process)?></div>В процессе добавления</div>
 </div>
 
 <div class="dashboard-search">
@@ -64,6 +66,11 @@ $this->registerCssFile('@web/css/dashboards/book.css');
     </section>
     <section class="tab-content" data-tab="4">
         <? foreach ($books_draft as $book) {
+            echo PanelBookDisplay::widget(['data' => $book]);
+        }?>
+    </section>
+    <section class="tab-content" data-tab="5">
+        <? foreach ($books_process as $book) {
             echo PanelBookDisplay::widget(['data' => $book]);
         }?>
     </section>

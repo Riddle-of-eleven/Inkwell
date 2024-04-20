@@ -224,3 +224,15 @@ details > summary {
 .active-step svg {
     fill: var(--color-accent);
 }
+
+.completed-step svg {
+    fill: var(--color-accent);
+}
+
+
+.hidden {
+    display: none !important;
+}
+.blocked {
+
+}
