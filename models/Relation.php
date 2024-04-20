@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "relation".
@@ -54,5 +55,10 @@ class Relation extends \yii\db\ActiveRecord
     public function getBooks()
     {
         return $this->hasMany(Book::class, ['relation_id' => 'id']);
+    }
+
+    public static function getRelationsList()
+    {
+        return ArrayHelper::map(self::find()->all(), 'id', 'title');
     }
 }

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "rating".
@@ -54,5 +55,10 @@ class Rating extends \yii\db\ActiveRecord
     public function getBooks()
     {
         return $this->hasMany(Book::class, ['rating_id' => 'id']);
+    }
+
+    public static function getRatingsList()
+    {
+        return ArrayHelper::map(self::find()->all(), 'id', 'title');
     }
 }
