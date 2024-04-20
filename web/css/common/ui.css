@@ -185,7 +185,7 @@ textarea {
     margin: 10px 0;
 }
 .tab {
-    display: flex; gap: 6px;
+    display: flex; align-items: baseline; gap: 6px;
     padding: 0 11px 7px 7px;
     cursor: pointer;
     user-select: none;

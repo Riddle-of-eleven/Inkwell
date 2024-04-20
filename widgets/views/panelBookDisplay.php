@@ -1,55 +1,20 @@
 <?php
-$this->title = Yii::$app->name.' – книги';
 
-use yii\i18n\Formatter;
-use yii\widgets\Breadcrumbs;
+/* @var $this yii\web\View */
+/* @var $data */
+
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\web\View;
+use yii\helpers\VarDumper;
 
-/*$this->params['breadcrumbs'][] = ['label' => 'Кабинет автора'];
-$this->params['breadcrumbs'][] = 'Книги';*/
-
-\app\assets\DashboardAsset::register($this);
-$this->registerCssFile('@web/css/dashboards/book.css');
 
 ?>
-
-<div class="dashboard-header">
-    <div>
-        <h1>Книги</h1>
-        <div class="tip-color">На этой странице отображаются все книги, автором которых вы являетесь.</div>
-    </div>
-    <?= Html::a(new_book_icon . 'Добавить книгу', Url::to(['main/rand-book']), ['class' => 'ui button icon-button accent-button']) ?>
-</div>
-
-
-
-<div class="tab-header">
-    <div class="tab active-tab" data-tab="1"><div class="tab-number">4</div>В процессе</div>
-    <div class="tab" data-tab="2"><div class="tab-number">12</div>Завершённые</div>
-    <div class="tab" data-tab="3"><div class="tab-number">2</div>Замороженные</div>
-    <div class="tab" data-tab="4"><div class="tab-number">36</div>Черновики</div>
-</div>
-
-<div class="dashboard-search">
-    <div class="ui search-field"><?= search_icon ?><input type="text" placeholder="Поиск"></div>
-    <a href="" class="ui button icon-button"><?= instant_mix_icon ?> Фильтры </a>
-
-</div>
-
-<div class="tab-contents">
-    <section class="tab-content active-tab" data-tab="1">В процессе</section>
-    <section class="tab-content" data-tab="2">Завершённые</section>
-    <section class="tab-content" data-tab="3">Замороженные</section>
-    <section class="tab-content" data-tab="4">Черновики</section>
-</div>
 
 
 <div class="block book-preview">
     <div class="book-preview-sidebar">
         <div class="side-buttons">
-            <?= Html::a(edit_icon, ['author-panel/book'], ['class' => 'ui button very-small-button']) ?>
+            <?= Html::a(edit_icon, Url::to(['author-panel/book']), ['class' => 'ui button very-small-button']) ?>
             <div class="ui button very-small-button"><?= new_chapter_icon ?></div>
             <div class="ui button very-small-button"><?= link_deployed_code_icon ?></div>
             <div class="ui button very-small-button"><?= branch_icon ?></div>
@@ -67,7 +32,7 @@ $this->registerCssFile('@web/css/dashboards/book.css');
                 <div class="creators">
                     <div class="creator">
                         <div class="creator-title">Автор:</div>
-                        <div class="creator-name">rjtkjhf</div>
+                        <div class="creator-name">afsgrdthfy</div>
                     </div>
                     <div class="creator">
                         <div class="creator-title">Редакторы:</div>
@@ -78,7 +43,7 @@ $this->registerCssFile('@web/css/dashboards/book.css');
 
             <div class="book-preview-info-cover">
                 <div class="book-preview-info">
-                    <?= Html::a('Самое красивое название', ['author-panel/book'], ['class' => 'book-preview-title header1']) ?>
+                    <?= Html::a('Самое красивое название', Url::to(['author-panel/book']), ['class' => 'book-preview-title header1']) ?>
                     <div class="info-pairs">
                         <div class="info-pair"><div class="info-key">Количество частей:</div>16</div>
                         <div class="info-pair"><div class="info-key">Последнее обновление:</div>11 апреля 2024</div>

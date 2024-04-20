@@ -59,7 +59,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         </div>
 
         <div class="side-buttons icon-accent">
-            <a href=""><?= new_book_icon ?><span class="menu-item hidden">Новая книга</span></a>
+            <?=Html::a(new_book_icon . '<span class="menu-item hidden">Новая книга</span>', Url::to(['author/create-book/create-main']))?>
             <a href=""><?= new_project_icon ?><span class="menu-item hidden">Новый проект</span></a>
         </div>
 
@@ -82,7 +82,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     <div class="expand-icon"><?= expand_more_icon ?></div>
                 </summary>
                 <div class="side-buttons">
-                    <?= Html::a(book_2_icon . '<span class="menu-item hidden">Книги</span>', Url::to(['author-panel/book-dashboard'])) ?>
+                    <?= Html::a(book_2_icon . '<span class="menu-item hidden">Книги</span>', Url::to(['author/author-panel/books-dashboard'])) ?>
                     <a href=""><?= shelves_icon ?><span class="menu-item hidden">Фэндомы</span></a>
                     <a href=""><?= deployed_code_icon ?><span class="menu-item hidden">Проекты</span></a>
                     <a href=""><?= bar_chart_icon ?><span class="menu-item hidden">Аналитика</span></a>

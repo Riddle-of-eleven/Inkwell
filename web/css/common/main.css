@@ -38,6 +38,10 @@ input {
 a {
     text-decoration: none;
 }
+.highlight-link {
+    color: var(--color-accent);
+    text-decoration: underline !important;
+}
 
 h1 {
     font-size: 24px;
@@ -187,4 +191,36 @@ details > summary {
     border: var(--border-width) solid var(--color-warning);
     background-color: var(--color-warning30);
     color: var(--color-warning);
+}
+
+
+.head-article {
+    padding-left: 16px;
+    border-left: 2px solid var(--color-accent);
+}
+
+
+.steps {
+    display: flex; justify-content: center; align-items: center; gap: 12px;
+    margin: 20px;
+}
+.step {
+    display: flex; align-items: center; gap: 10px;
+    width: fit-content;
+    padding: 4px 15px 3px;
+    border: var(--border-width) solid var(--color-outline);
+    border-radius: 10px;
+    color: var(--color-tip);
+}
+.step svg {
+    fill: var(--color-tip);
+}
+
+.active-step {
+    background-color: var(--color-accent10);
+    border-color: var(--color-accent);
+    color: var(--color-graphics);
+}
+.active-step svg {
+    fill: var(--color-accent);
 }

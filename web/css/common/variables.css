@@ -18,7 +18,7 @@
 
         --color-selection: rgba(213, 213, 234, 0.1);
 
-        /* TODO: проверить на светлой теме */
+        /* проверить на светлой теме */
         --color-success: #CDFB4A;
         --color-error: #E25C4A;
         --color-warning: #FFD339;
