@@ -12,6 +12,8 @@ use yii\helpers\ArrayHelper;
  * @property string|null $title
  * @property string|null $description
  * @property int $genre_type_id
+ * @property string|null $created_at
+ * @property int|null $moderator_id
  *
  * @property BookGenre[] $bookGenres
  * @property GenreType $genreType

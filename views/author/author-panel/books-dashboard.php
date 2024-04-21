@@ -1,5 +1,5 @@
 <?php
-$this->title = Yii::$app->name.' – книги';
+$this->title = 'Книги';
 
 /* @var $books_progress*/
 /* @var $books_complete*/
@@ -29,7 +29,7 @@ $this->registerCssFile('@web/css/dashboards/book.css');
         <h1>Книги</h1>
         <div class="tip-color">На этой странице отображаются все книги, автором которых вы являетесь.</div>
     </div>
-    <?= Html::a(new_book_icon . 'Добавить книгу', Url::to(['main/rand-book']), ['class' => 'ui button icon-button accent-button']) ?>
+    <?= Html::a(new_book_icon . 'Добавить книгу', Url::to(['author/create-book/create-main']), ['class' => 'ui button icon-button accent-button']) ?>
 </div>
 
 

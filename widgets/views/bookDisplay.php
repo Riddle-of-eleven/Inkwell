@@ -34,7 +34,7 @@ use yii\i18n\Formatter;
             <div class="creators">
                 <div class="creator">
                     <div class="creator-title">Автор:</div>
-                    <div class="creator-name"><?= Html::encode($data->author->login)?></div>
+                    <?= Html::a(Html::encode($data->author->login), Url::to(['main/author', 'id' => $data->author->id]), ['class' => 'creator-name'])?>
                 </div>
                 <div class="creator">
                     <div class="creator-title">Редакторы:</div>

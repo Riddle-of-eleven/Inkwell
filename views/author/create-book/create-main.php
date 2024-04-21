@@ -44,7 +44,6 @@ css);
 
 <? $f = ActiveForm::begin([
     'method' => 'post',
-    'id' => 'form-login',
     'fieldConfig' => [
         'template' => "{input}\n{error}"
     ],

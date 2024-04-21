@@ -1,0 +1,16 @@
+.view-history summary {
+    padding: 14px;
+}
+.view-history summary div {
+    font-weight: 500;
+}
+
+.contents {
+    margin-top: 20px; margin-left: 30px;
+    display: flex; flex-direction: column; gap: 10px;
+}
+
+.view-info {
+    padding: 10px 20px 8px;
+    border-radius: 10px !important;
+}

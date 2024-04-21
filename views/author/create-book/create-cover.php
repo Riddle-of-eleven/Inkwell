@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
     'fieldConfig' => [
         'template' => "{input}\n{error}"
     ],
-    'options' => ['class' => ''],
+    'options' => ['class' => '', 'enctype' => 'multipart/form-data'],
 ]) ?>
 
 <?=$f->field($model, 'cover')->fileInput();?>

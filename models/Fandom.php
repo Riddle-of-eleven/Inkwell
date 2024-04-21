@@ -12,6 +12,7 @@ use yii\helpers\ArrayHelper;
  * @property int|null $this_creator_id
  * @property string|null $title
  * @property string|null $description
+ * @property string|null $created_at
  *
  * @property BookFandom[] $bookFandoms
  * @property Character[] $characters

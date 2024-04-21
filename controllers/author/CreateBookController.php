@@ -20,6 +20,7 @@ use yii\db\Expression;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
+use yii\web\UploadedFile;
 
 class CreateBookController extends Controller
 {
@@ -148,15 +149,27 @@ class CreateBookController extends Controller
     {
         if (Yii::$app->user->isGuest) return $this->goHome();
         $model = new FormCreateCover();
+        $id = Yii::$app->request->get('id');
+
+        if (Yii::$app->request->isPost) {
+            $model->cover = UploadedFile::getInstance($model, 'cover');
+            if ($path = $model->upload()) {
+                $book = Book::findOne($id);
+                $book->cover = $path;
+                $book->save();
+
+                return $this->redirect(Url::to(['create-access', 'id' => $id]));
+            }
+        }
 
         return $this->render('create-cover', [
             'model' => $model,
         ]);
     }
 
-    public function actionCreateAccess()
+    /*public function actionCreateAccess()
     {
         if (Yii::$app->user->isGuest) return $this->goHome();
         return $this->render('create-access');
-    }
+    }*/
 }

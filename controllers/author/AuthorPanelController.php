@@ -3,7 +3,10 @@
 namespace app\controllers\author;
 
 use app\models\Book;
+use app\models\Fandom;
 use Yii;
+use yii\helpers\Url;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 
 class AuthorPanelController extends Controller
@@ -40,9 +43,32 @@ class AuthorPanelController extends Controller
         ]);
     }
 
-    public function actionBook()
-    {
+    public function actionBook() {
         if (Yii::$app->user->isGuest) return $this->goHome();
         return $this->render('book');
+    }
+
+    public function actionFandomsDashboard() {
+        if (Yii::$app->user->isGuest) return $this->goHome();
+        $fandoms = Fandom::find()->where(['this_creator_id' => Yii::$app->user->identity->id])->all();
+
+        return $this->render('fandoms-dashboard', [
+            'fandoms' => $fandoms,
+        ]);
+    }
+
+    public function actionChangeFandom() {
+        if (Yii::$app->user->isGuest) return $this->goHome();
+        $id = Yii::$app->request->get('id');
+        $fandom = Fandom::findOne($id);
+
+        if ($fandom->load(Yii::$app->request->post()) && $fandom->save()) {
+            //VarDumper::dump($fandom, 10, true);
+            return $this->redirect(Url::to(['author/author-panel/fandoms-dashboard']));
+        }
+
+        return $this->render('change-fandom',[
+            'fandom' => $fandom,
+        ]);
     }
 }

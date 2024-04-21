@@ -11,7 +11,8 @@ use Yii;
  * @property int|null $user_id
  * @property int|null $book_id
  * @property int|null $chapter_id
- * @property string|null $viewed_at
+ * @property string|null $view_date
+ * @property string|null $view_time
  * @property string|null $user_ip
  *
  * @property Book $book

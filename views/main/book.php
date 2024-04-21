@@ -57,7 +57,7 @@ let open = $('#collection-interaction');
 let close = $('.close-button');
     
 open.click(function () { 
-    modal[0].showModal(); 
+    modal[0].showModal();
     $('#add-modal').addClass('hidden');
     $('#regular-modal').removeClass('hidden');
     $.ajax({
@@ -151,7 +151,7 @@ js, View::POS_LOAD)
                 <div class="creators">
                     <div class="creator">
                         <div>Автор:</div>
-                        <?= Html::a(Html::encode($book->author->login), Url::to(['#']))?>
+                        <?= Html::a(Html::encode($book->author->login), Url::to(['main/author', 'id' => $book->author->id]))?>
                     </div>
                 </div>
                 <div class="metas">
@@ -289,7 +289,7 @@ js, View::POS_LOAD)
     <div class="book-sidebar">
         <? if ($book->cover): ?>
             <div class="book-cover">
-                <?= Html::img('@web/images/covers/' . $book->cover, ['alt' => 'обложка']) ?>
+                <?= Html::img('@web/' . $book->cover) ?>
             </div>
         <? endif; ?>
 

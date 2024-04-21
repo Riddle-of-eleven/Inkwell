@@ -87,4 +87,26 @@ $(document).ready(function() {
         });
     });
 
+
+    // подписаться на автора
+    $('#follow-interaction').click(function () {
+
+        let author_id = (new URL(document.location)).searchParams.get("id");
+        let button = $(this);
+        $.ajax({
+            type: 'post',
+            url: 'index.php?r=interaction/follow-author',
+            data: { author_id: author_id },
+            success: function (response) {
+                if (response.success) {
+                    markButton(response.is_followed, button, 'filled-button');
+                    if (response.is_followed) button.find('.button-text').text('Отписаться');
+                    else button.find('.button-text').text('Подписаться');
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    })
 });

@@ -43,7 +43,7 @@ use yii\helpers\VarDumper;
 
             <div class="book-preview-info-cover">
                 <div class="book-preview-info">
-                    <?= Html::a('Самое красивое название', Url::to(['author-panel/book']), ['class' => 'book-preview-title header1']) ?>
+                    <?= Html::a('Самое красивое название', Url::to(['author/author-panel/book']), ['class' => 'book-preview-title header1']) ?>
                     <div class="info-pairs">
                         <div class="info-pair"><div class="info-key">Количество частей:</div>16</div>
                         <div class="info-pair"><div class="info-key">Последнее обновление:</div>11 апреля 2024</div>

@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\BookCollection;
 use app\models\Collection;
 use app\models\FavoriteBook;
+use app\models\Followers;
 use app\models\FormCreateCollection;
 use app\models\ReadLater;
 use app\models\User;
@@ -106,7 +107,7 @@ class InteractionController extends Controller
             $book = Yii::$app->request->post('book_id');
             $user = Yii::$app->user->identity->id;
 
-            $favorite =FavoriteBook::find()->select('id')->where(['book_id' => $book])->andWhere(['user_id' => $user])->one();
+            $favorite = FavoriteBook::find()->select('id')->where(['book_id' => $book])->andWhere(['user_id' => $user])->one();
             if ($favorite) {
                 $favorite->delete();
                 return ['success' => true, 'is_favorite' => false];
@@ -115,12 +116,38 @@ class InteractionController extends Controller
                 $new_favorite = new FavoriteBook();
                 $new_favorite->book_id = $book;
                 $new_favorite->user_id = $user;
+                $new_favorite->added_at = new Expression('NOW()');
                 if ($new_favorite->save()) return ['success' => true, 'is_favorite' => true];
                 else return ['success' => false, 'is_favorite' => false];
             }
         }
         return ['success' => false];
     }
+
+    public function actionFollowAuthor() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!Yii::$app->user->isGuest) {
+            $author = Yii::$app->request->post('author_id');
+            $user = Yii::$app->user->identity->id;
+
+            $follow = Followers::find()->select(['id', 'followed_at'])->where(['user_id' => $author])->andWhere(['follower_id' => $user])->one();
+            if ($follow) {
+                $follow->delete();
+                return ['success' => true, 'is_followed' => false];
+            }
+            else {
+                $new_follow = new Followers();
+                $new_follow->user_id = $author;
+                $new_follow->follower_id = $user;
+                $new_follow->followed_at = new Expression('NOW()');
+                if ($new_follow->save()) return ['success' => true, 'is_followed' => true];
+                else return ['success' => false, 'is_followed' => false];
+            }
+        }
+        return ['success' => false];
+    }
+
+
 
     public function actionGetCollections() {
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -175,4 +202,6 @@ class InteractionController extends Controller
     public function actionCreateCollectionAndAdd() {
         //Yii::$app->response->format = Response::FORMAT_JSON;
     }
+
+
 }
