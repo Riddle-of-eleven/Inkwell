@@ -90,7 +90,6 @@ $(document).ready(function() {
 
     // подписаться на автора
     $('#follow-interaction').click(function () {
-
         let author_id = (new URL(document.location)).searchParams.get("id");
         let button = $(this);
         $.ajax({
@@ -106,6 +105,26 @@ $(document).ready(function() {
             },
             error: function (error) {
                 console.log(error);
+            }
+        });
+    });
+
+
+    // скачивание книги
+    $('#download-interaction').click(function () {
+        $.ajax({
+            type: 'post',
+            url: 'index.php?r=interaction/download-book',
+            data: {book_id: book_id},
+            success: function (response) {
+                if (response.file) {
+                    let link = document.createElement('a');
+                    link.href = response.file;
+                    //link.download = 'book.epub'; // Устанавливаем имя файла для скачивания
+
+                    // Эмулируем клик по ссылке для скачивания файла
+                    link.click();
+                }
             }
         });
     })

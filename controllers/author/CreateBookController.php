@@ -5,6 +5,8 @@ namespace app\controllers\author;
 use app\models\Book;
 use app\models\BookFandom;
 use app\models\BookGenre;
+use app\models\Chapter;
+use app\models\CreateBookForms\FormCreateChapter;
 use app\models\CreateBookForms\FormCreateCover;
 use app\models\CreateBookForms\FormCreateFandom;
 use app\models\CreateBookForms\FormCreateMain;
@@ -67,6 +69,13 @@ class CreateBookController extends Controller
     public function actionCreateMain()
     {
         if (Yii::$app->user->isGuest) return $this->goHome();
+
+        /*$session = Yii::$app->session;
+        if ($session->isActive) {
+            $id = $session->get('id');
+        }
+
+        $session->open();*/
 
         $model = new FormCreateMain();
         $relations = Relation::getRelationsList();
@@ -133,7 +142,10 @@ class CreateBookController extends Controller
                 $process_book_fandom->save();
             }
             $book = Book::findOne($id);
+            $book->type_id = $model->type;
             $book->step = 2;
+            $book->completeness_id = 1;
+            $book->real_size_id = 1;
             $book->save();
 
             return $this->redirect(Url::to(['create-cover', 'id' => $id]));
@@ -156,13 +168,37 @@ class CreateBookController extends Controller
             if ($path = $model->upload()) {
                 $book = Book::findOne($id);
                 $book->cover = $path;
+
+                $book->is_process = 0;
+                $book->step = 0;
+
                 $book->save();
 
-                return $this->redirect(Url::to(['create-access', 'id' => $id]));
+                return $this->redirect(['/author/author-panel/books-dashboard', 'id' => $id]);
             }
         }
 
         return $this->render('create-cover', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionCreateChapter() {
+        if (Yii::$app->user->isGuest) return $this->goHome();
+        $book = Yii::$app->request->get('id');
+        $model = new FormCreateChapter();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $chapter = new Chapter();
+            $chapter->book_id = $book;
+            $chapter->title = $model->title;
+            $chapter->created_at = new Expression('NOW()');
+            $chapter->content = $model->content;
+            $chapter->parent_id = null;
+
+            if ($chapter->save()) return $this->redirect(['/main/book', 'id' => $book]);
+        }
+
+        return $this->render('create-chapter', [
             'model' => $model,
         ]);
     }

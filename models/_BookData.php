@@ -41,7 +41,8 @@ class _BookData extends ActiveRecord
     {
         $formatter = new Formatter();
         $book = Book::findOne($id);
-        if ($book->is_draft == 0 && $book->is_process == 0) {
+        //VarDumper::dump($book, 10, true); die;
+        //if ($book->is_draft == 0 && $book->is_process == 0) {
 
             $this->id = $id;
 //        $this->created_at = $formatter->asDatetime($book->created_at);
@@ -76,7 +77,7 @@ class _BookData extends ActiveRecord
 
             $this->genres = $book->genres;
             $this->tags = $book->tags;
-        }
+        //}
 
 
         parent::__construct();

@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\_BookData;
+use app\models\_ContentData;
 use app\models\BookCollection;
 use app\models\Collection;
 use app\models\FavoriteBook;
@@ -9,12 +11,16 @@ use app\models\Followers;
 use app\models\FormCreateCollection;
 use app\models\ReadLater;
 use app\models\User;
+use yii\helpers\Url;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\Response;
 use app\models\Like;
 use app\models\Read;
+
+use TPEpubCreator;
+
 
 use yii\helpers\VarDumper;
 
@@ -192,16 +198,124 @@ class InteractionController extends Controller
         return ['success' => false];
     }
 
-    public function  actionRenderCreateCollection() {
+    /*public function  actionRenderCreateCollection() {
+        $id = Yii::$app->request->post('book_id');
         $model = new FormCreateCollection();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $collection = new Collection();
+            $collection->title = $model->title;
+            $collection->user_id = Yii::$app->user->identity->id;
+            $collection->created_at = new Expression('NOW()');
+
+            if ($collection->save()) {
+                $to_collection = new BookCollection();
+                $to_collection->collection_id = $collection->id;
+                $to_collection->book_id = $id;
+                $to_collection->save();
+
+                return $this->redirect(Url::to(['main/book', 'id' => $id]));
+            }
+        }
+
         return $this->renderAjax('//partial/_create_collection', [
             'model' => $model,
         ]);
-    }
+    }*/
+
+    /*public function actionCreateCollectionAndAdd() {
+        //Yii::$app->response->format = Response::FORMAT_JSON;
+    }*/
 
     public function actionCreateCollectionAndAdd() {
-        //Yii::$app->response->format = Response::FORMAT_JSON;
+        $book_id =  Yii::$app->request->post('book_id');
+        $model = new FormCreateCollection();
+
+        if (!Yii::$app->user->isGuest) {
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                $collection = new Collection();
+                $collection->user_id = Yii::$app->user->identity->id;
+                $collection->title = $model->title;
+                $collection->is_private = $model->is_private;
+                $collection->created_at = new Expression('NOW()');
+
+                if ($collection->save()) {
+                    $add = new BookCollection();
+                    $add->book_id = $model->book_id;
+                    $add->collection_id = $collection->id;
+                    if ($add->save()) return $this->redirect(Url::to(['main/book', 'id' => $model->book_id]));
+                }
+            }
+            return $this->renderAjax('//partial/_create_collection', [
+                'model' => $model,
+                'book_id' => $book_id,
+            ]);
+        }
+        return $this->goHome();
     }
 
+    public function actionDownloadBook() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $id = Yii::$app->request->post('book_id');
+        //$id = Yii::$app->request->get('id');
+        $book = new _BookData($id);
+        $content = new _ContentData($id);
 
+
+        $epub = new TPEpubCreator();
+        $epub->epub_file = $book->title.'.epub';
+        $epub->title = $book->title;
+        $epub->creator = $book->author->login;
+        $epub->language = 'ru';
+        $epub->rights = 'Public Domain';
+
+        $begin = "<h1>$book->title</h1>"; $first = true;
+        foreach ($content->root as $root) {
+            if ($root->is_section) {
+                if (array_key_exists($root->id, $content->offspring)) {
+                    foreach ($content->offspring[$root->id] as $offspring) {
+                        if ($first) {
+                            $first = false;
+                            $begin .= "<h3>$offspring->title</h3>";
+
+                            $explodes = explode('<tab>', $offspring->content);
+                            $implode = '';
+                            foreach ($explodes as $explode) $implode .= "<p>$explode</p>";
+                            $text = $begin . $implode;
+                        }
+                        else{
+                            $title ="<h3>$offspring->title</h3>";
+                            $explodes = explode('<tab>', $offspring->content);
+                            $implode = '';
+                            foreach ($explodes as $explode) $implode .= "<p>$explode</p>";
+                            $text = $title . $implode;
+                        }
+                        $epub->AddPage($text, false, $offspring->title);
+                    }
+                }
+            }
+            else {
+                if ($first) {
+                    $first = false;
+                    $begin .= "<h3>$root->title</h3>";
+
+                    $explodes = explode('<tab>', $root->content);
+                    $implode = '';
+                    foreach ($explodes as $explode) $implode .= "<p>$explode</p>";
+                    $text = $begin . $implode;
+                }
+                else {
+                    $title = "<h3>$root->title</h3>";
+                    $explodes = explode('<tab>', $root->content);
+                    $implode = '';
+                    foreach ($explodes as $explode) $implode .= "<p>$explode</p>";
+                    $text = $title . $implode;
+                }
+                $epub->AddPage($text, false, $root->title);
+            }
+        }
+
+        $epub->CreateEPUB();
+        return ['file' => $epub->epub_file];
+        //return Yii::$app->response->sendFile($epub->epub_file)->send();
+    }
 }

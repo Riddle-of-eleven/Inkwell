@@ -14,6 +14,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 use app\widgets\PanelBookDisplay;
+use app\models\_BookData;
+
 
 
 /*$this->params['breadcrumbs'][] = ['label' => 'Кабинет автора'];
@@ -39,7 +41,7 @@ $this->registerCssFile('@web/css/dashboards/book.css');
     <div class="tab" data-tab="2"><div class="tab-number"><?=count($books_complete)?></div>Завершённые</div>
     <div class="tab" data-tab="3"><div class="tab-number"><?=count($books_frozen)?></div>Замороженные</div>
     <div class="tab" data-tab="4"><div class="tab-number"><?=count($books_draft)?></div>Черновики</div>
-    <div class="tab" data-tab="5"><div class="tab-number"><?=count($books_process)?></div>В процессе добавления</div>
+    <!--<div class="tab" data-tab="5"><div class="tab-number"><?=count($books_process)?></div>В процессе добавления</div>-->
 </div>
 
 <div class="dashboard-search">
@@ -51,29 +53,30 @@ $this->registerCssFile('@web/css/dashboards/book.css');
 <div class="tab-contents">
     <section class="tab-content active-tab" data-tab="1">
         <? foreach ($books_progress as $book) {
-            echo PanelBookDisplay::widget(['data' => $book]);
+            $data_progress = new _BookData($book->id);
+            echo PanelBookDisplay::widget(['data' => $data_progress]);
         }?>
     </section>
     <section class="tab-content" data-tab="2">
         <? foreach ($books_complete as $book) {
-            echo PanelBookDisplay::widget(['data' => $book]);
+            $data_complete = new _BookData($book->id);
+            echo PanelBookDisplay::widget(['data' => $data_complete]);
         }?>
     </section>
     <section class="tab-content" data-tab="3">
         <? foreach ($books_frozen as $book) {
-            echo PanelBookDisplay::widget(['data' => $book]);
+            $data_frozen = new _BookData($book->id);
+            echo PanelBookDisplay::widget(['data' => $data_frozen]);
         }?>
     </section>
     <section class="tab-content" data-tab="4">
         <? foreach ($books_draft as $book) {
-            echo PanelBookDisplay::widget(['data' => $book]);
+            $data_draft = new _BookData($book->id);
+            echo PanelBookDisplay::widget(['data' => $data_draft]);
         }?>
     </section>
-    <section class="tab-content" data-tab="5">
-        <? foreach ($books_process as $book) {
-            echo PanelBookDisplay::widget(['data' => $book]);
-        }?>
-    </section>
+
+    <!-- потом добавить секцию для тех, которые в процессе добавления -->
 </div>
 
 
