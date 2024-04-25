@@ -12,7 +12,7 @@ class FormCreateCover extends Model
     {
         return [
             // сайт yii говорит, что есть валидатор image, попробуй его потом
-            [['cover'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['cover'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }
 

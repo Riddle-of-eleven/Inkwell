@@ -23,6 +23,7 @@ use yii\web\IdentityInterface;
  * @property string|null $official_website
  * @property int|null $is_admin
  * @property int|null $is_moderator
+ * @property int|null $theme_id
  *
  * @property AccessLevel[] $accessLevels
  * @property AccessToBook[] $accessToBooks
@@ -148,6 +149,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->getAuthKey() === $authKey;
     }
 
+
+
+
+    public function getTheme() {
+        return $this->hasOne(Theme::class, ['id' => 'theme_id']);
+    }
 
 
 

@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
 <div class="header1">Добавление главы</div>
 
 <div class="head-article">
-    Для добавления абзацев используйте 	&lt;tab&gt;
+    Для добавления абзацев используйте 	&lt;tab&gt;. Вы можете создать эту главу <?=Html::a('из файла .docx', Url::to(['create-chapter-file', 'id' => Yii::$app->request->get('id')]), ['class' => 'highlight-link'])?>
 </div>
 
 

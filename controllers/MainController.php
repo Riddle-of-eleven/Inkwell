@@ -12,6 +12,7 @@ use app\models\Like;
 use app\models\Read;
 use app\models\ReadLater;
 use app\models\Tag;
+use app\models\Theme;
 use app\models\User;
 use app\models\ViewHistory;
 use yii\data\Pagination;
@@ -21,6 +22,7 @@ use yii\i18n\Formatter;
 use yii\web\Controller;
 use Yii;
 use yii\helpers\Url;
+use yii\web\Response;
 
 
 // класс для главных страниц по определённым категориям, например, книгам, фэндомам, etc
@@ -123,6 +125,17 @@ class MainController extends Controller
             'books' => $book_data,
             'follow' => $follow,
         ]);
+    }
+
+
+    public function actionGetThemes() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $themes = Theme::find()->all();
+
+    }
+    public function actionChangeTheme() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
     }
 }
 

@@ -9,6 +9,17 @@ use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\Breadcrumbs;
 
+$theme = Yii::$app->user->getIdentity()->theme->system_name;
+//\yii\helpers\VarDumper::dump($theme);
+if ($theme == null) $this->registerCssFile('@web/css/themes/standard.css');
+else {
+    try {
+        $this->registerCssFile('@web/css/themes/' . $theme . '.css');
+    }
+    catch (Exception $e) {
+        $this->registerCssFile('@web/css/themes/standard.css');
+    }
+}
 
 AppAsset::register($this);
 
@@ -197,11 +208,24 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
                 <div class="line"></div>
 
-                <a href=""><?= palette_icon ?> Сменить тему </a>
+                <button class="change-theme"><?= palette_icon ?> Сменить тему </button>
             </div>
         </div>
     </div>
 </header>
+
+
+<dialog class="change-theme-modal block modal">
+    <div class="close-button"><?=close_icon?></div>
+    <div class="modal-container" id="regular-modal">
+        <div class="header3">Выберите тему</div>
+        <div class="themes-container"></div>
+    </div>
+
+    <div class="modal-container" id="add-modal">
+    </div>
+</dialog>
+
 
 <div class="line"></div>
 

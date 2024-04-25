@@ -60,7 +60,10 @@ echo LinkPager::widget(['pagination' => $pages]);
 
         <div class="reader-book-text">
             <?
-
+                $explodes = explode('<tab>', $chapter->content);
+                $implode = '';
+                foreach ($explodes as $explode) $implode .= "<p>$explode</p>";
+                echo $implode;
             ?>
         </div>
     </div>
