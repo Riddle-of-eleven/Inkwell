@@ -120,22 +120,22 @@ $this->registerJsFile('@web/js/author/metadata-handlers.js', ['depends' => [\yii
     </div>
 
 
-    <div>
-        <div class="field-header-words">
-            <div class="header3">Жанры</div>
-            <!--<div class="symbol-count">0 / 10</div>-->
-        </div>
-        <!--<div class="tag-kinds"><div>Все</div><div>Структура</div><div>Содержание и тематика</div><div>Функция</div></div>-->
-        <div class="selected-items"></div>
-        <div class="field-with-dropdown">
-            <div class="ui field"><?=Html::textInput('genres-input', null, [
-                    'id' => 'genres-input',
-                    'placeholder' => 'Введите первые несколько символов...',
-                    'autocomplete' => 'off'
-                ])?></div>
-            <div class="dropdown-list block hidden" id="genres-select"></div>
-        </div>
-    </div>
+<!--    <div>-->
+<!--        <div class="field-header-words">-->
+<!--            <div class="header3">Жанры</div>-->
+<!--            !--<div class="symbol-count">0 / 10</div>-->-->
+<!--        </div>-->
+<!--        !--<div class="tag-kinds"><div>Все</div><div>Структура</div><div>Содержание и тематика</div><div>Функция</div></div>-->-->
+<!--        <div class="selected-items"></div>-->
+<!--        <div class="field-with-dropdown">-->
+<!--            <div class="ui field">--><?php //=Html::textInput('genres-input', null, [
+//                    'id' => 'genres-input',
+//                    'placeholder' => 'Введите первые несколько символов...',
+//                    'autocomplete' => 'off'
+//                ])?><!--</div>-->
+<!--            <div class="dropdown-list block hidden" id="genres-select"></div>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <!--
     <div>
