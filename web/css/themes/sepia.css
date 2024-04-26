@@ -1,11 +1,13 @@
 :root {
-    --color-background: #E4D9C8;
-    --color-foreground: #E8DFD2;
-    --color-graphics: #39291B;
+    --color-background: #E7DDCE;
+    /*--color-background: #E4D9C8;*/
+    --color-foreground: #F0E8DD;
+    --color-graphics: #554334;
+    /*--color-graphics: #39291B;*/
     --color-accent: #B7431A;
     --color-tip: #B5AA95;
     --color-outline: #CCBFAA;
-    --color-border: #E7E1D3;
+    --color-border: #E8DED4;
     --color-line: #D4C4AC;
     --color-dark-fill: #272727;
     --color-danger-accent: #E25C4A;

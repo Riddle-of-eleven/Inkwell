@@ -7,6 +7,9 @@
     /*font-weight: 500;*/
     box-sizing: border-box;
 }
+*::placeholder {
+    color: var(--color-placeholder) !important;
+}
 
 html {
     min-height: 100vh;
