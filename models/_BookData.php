@@ -41,41 +41,43 @@ class _BookData extends ActiveRecord
     {
         $formatter = new Formatter();
         $book = Book::findOne($id);
+        //VarDumper::dump($book, 10, true); die;
+        //if ($book->is_draft == 0 && $book->is_process == 0) {
 
-        $this->id = $id;
+            $this->id = $id;
 //        $this->created_at = $formatter->asDatetime($book->created_at);
-        $this->created_at = $book->created_at;
-        $this->is_draft = $book->is_draft;
-        $this->is_perfect = $book->is_perfect;
-        $this->is_editable = $book->is_editable;
-        $this->title = $book->title;
-        $this->cover = is_null($book->cover) ? '' : $book->cover;
-        $this->description = $book->description;
-        $this->remark = $book->remark;
-        $this->dedication = is_null($book->dedication) ? '' : $book->dedication;
-        $this->disclaimer = is_null($book->disclaimer) ? '' : $book->disclaimer;
-        $this->is_published = is_null($book->is_published) ? '' : $book->is_published;
+            $this->created_at = $book->created_at;
+            $this->is_draft = $book->is_draft;
+            $this->is_perfect = $book->is_perfect;
+            $this->is_editable = $book->is_editable;
+            $this->title = $book->title;
+            $this->cover = is_null($book->cover) ? '' : $book->cover;
+            $this->description = $book->description;
+            $this->remark = $book->remark;
+            $this->dedication = is_null($book->dedication) ? '' : $book->dedication;
+            $this->disclaimer = is_null($book->disclaimer) ? '' : $book->disclaimer;
+            $this->is_published = is_null($book->is_published) ? '' : $book->is_published;
 
-        $this->type = !($book->type->id == 1); // true, если фанфик
+            $this->type = !($book->type->id == 1); // true, если фанфик
 
-        if ($this->type) {
-            $this->fandoms = $book->fandoms;
-            $this->origins = $book->origins;
-        }
-        $this->author = User::findOne($book->user_id);
+            if ($this->type) {
+                $this->fandoms = $book->fandoms;
+                $this->origins = $book->origins;
+            }
+            $this->author = User::findOne($book->user_id);
 
-        $this->characters = $book->characters;
+            $this->characters = $book->characters;
 
-        /*VarDumper::dump($book->characters, 10, true);
-        die;*/
+            /*VarDumper::dump($book->characters, 10, true);
+            die;*/
 
-        $this->rating = $book->rating;
-        $this->relation = $book->relation0;
-        $this->completeness = $book->completeness;
+            $this->rating = $book->rating;
+            $this->relation = $book->relation0;
+            $this->completeness = $book->completeness;
 
-        $this->genres = $book->genres;
-        $this->tags = $book->tags;
-
+            $this->genres = $book->genres;
+            $this->tags = $book->tags;
+        //}
 
 
         parent::__construct();

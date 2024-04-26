@@ -1,0 +1,13 @@
+.tags-tab {
+    gap: 10px !important;
+}
+
+
+.tag-block {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 20px;
+}
+
+.tag-inner {
+    display: flex; gap: 30px; align-items: center;
+}

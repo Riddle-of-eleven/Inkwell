@@ -7,6 +7,9 @@
     /*font-weight: 500;*/
     box-sizing: border-box;
 }
+*::placeholder {
+    color: var(--color-placeholder) !important;
+}
 
 html {
     min-height: 100vh;
@@ -223,4 +226,28 @@ details > summary {
 }
 .active-step svg {
     fill: var(--color-accent);
+}
+
+.completed-step svg {
+    fill: var(--color-accent);
+}
+
+
+.hidden {
+    display: none !important;
+}
+.blocked {
+
+}
+
+
+.themes-container {
+    width: 350px;
+    display: flex; flex-direction: column; gap: 10px;
+}
+.themes-container button {
+    width: 100%;
+    display: flex; justify-content: space-between; align-items: center; gap: 20px;
+    padding: 8px 10px 8px 20px;
+    font-weight: 500;
 }

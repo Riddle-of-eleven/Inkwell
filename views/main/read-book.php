@@ -25,10 +25,10 @@ echo LinkPager::widget(['pagination' => $pages]);
 
 
 <div class="center-container reader">
-    <div class="reading-progress">
+    <!--<div class="reading-progress">
         <div class="progress-bar"><div class="current-progress"></div></div>
         <div class="tip">24%</div>
-    </div>
+    </div>-->
 
     <div class="reader-header block">
         <div class="reader-header-left">
@@ -55,11 +55,16 @@ echo LinkPager::widget(['pagination' => $pages]);
     <div class="reader-content block">
         <div class="reader-book-header">
             <div class="header2"><?=$chapter->title?></div>
-            <div class="tip"><?=$formatter->asDatetime($chapter->created_at, "d MMMM yyyy, H.i");?></div>
+            <div class="tip"><?=$formatter->asDatetime($chapter->created_at, "d MMMM yyyy, HH.m");?></div>
         </div>
 
         <div class="reader-book-text">
-            <?=$chapter->content?>
+            <?
+                $explodes = explode('<tab>', $chapter->content);
+                $implode = '';
+                foreach ($explodes as $explode) $implode .= "<p>$explode</p>";
+                echo $implode;
+            ?>
         </div>
     </div>
 
@@ -69,10 +74,10 @@ echo LinkPager::widget(['pagination' => $pages]);
         <button class="ui button icon-button"><?=resume_icon?>Следующая глава</button>
     </div>
 
-    <div class="line"></div>
+    <!--<div class="line"></div>-->
 </div>
 
-<div class="header2">Комментарии</div>
+<!--<div class="header2">Комментарии</div>
 
 <div class="comment-form">
     <div class="author-avatar"></div>
@@ -98,6 +103,8 @@ echo LinkPager::widget(['pagination' => $pages]);
         <div class="comment"></div>
     </details>
 </div>
-
+-->
 
 <? } ?>
+
+

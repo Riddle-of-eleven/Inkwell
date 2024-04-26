@@ -151,7 +151,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
 
 
-
     /**
      * Gets query for [[AccessLevels]].
      *

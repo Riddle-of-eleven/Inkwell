@@ -1,0 +1,26 @@
+.fandom-item {
+    padding: 10px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+}
+.fandom-item .vertical-line {
+    height: 100% !important;
+}
+.fandom-title {
+    margin-top: 10px;
+    font-weight: 500;
+}
+.fandom-info {
+    display: flex; flex-direction: column; gap: 10px;
+}
+
+.right-sidebar {
+    display: flex; gap: 10px;
+}
+
+.modal-buttons {
+    display: flex; gap: 20px;
+}
+
+.delete-fandom-confirm .header3 {
+    margin-bottom: 20px;
+}

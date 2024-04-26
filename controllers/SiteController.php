@@ -67,7 +67,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $ids = Book::find()->select('id')->all();
+        $ids = Book::find()->select('id')->where(['<>', 'is_draft', '1'])->andWhere(['<>', 'is_process', '1'])->all();
         $books = [];
         foreach ($ids as $id) {
             $books[$id->id] = new _BookData($id->id);

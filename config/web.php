@@ -8,7 +8,7 @@ $config = [
     'name' => 'Inkwell',
     'language' => 'ru-Ru',
     'layout' => 'common',
-    'timeZone' => 'Europe/Minsk',
+    'timeZone' => 'GMT',
 
     'id' => 'basic',
     'basePath' => dirname(__DIR__),

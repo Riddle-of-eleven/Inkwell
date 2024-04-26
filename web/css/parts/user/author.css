@@ -1,5 +1,5 @@
 .profile-header {
-    display: flex; flex-direction: column; gap: 9px;
+    display: flex; flex-direction: column; gap: 12px;
 }
 
 .author-header {
@@ -8,9 +8,10 @@
 }
 .profile-picture {
     width: 57px; height: 57px;
-    background-image: url(../../images/avatar/cat_leaf.jpg);
-    background-size: 100%;
-    background-position: center;
+    border-radius: 50%;
+}
+.profile-picture > img {
+    width: 57px; height: 57px;
     border-radius: 50%;
 }
 .profile-info {
@@ -33,4 +34,13 @@
 .about-title {
     font-weight: 500;
     font-size: 16px;
+}
+
+
+.followed-author > div {
+    display: flex; align-items: center; gap: 20px;
+    padding: 20px 20px;
+}
+.followed-author .small-profile-picture {
+    margin: 0 !important;
 }

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "genre_type".
@@ -40,5 +41,10 @@ class GenreType extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
         ];
+    }
+
+    public static function getGenreTypesList()
+    {
+        return ArrayHelper::map(self::find()->all(), 'id', 'title');
     }
 }

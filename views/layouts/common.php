@@ -9,6 +9,10 @@ use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\Breadcrumbs;
 
+$session = Yii::$app->session;
+$theme = $session->get('theme');
+if (!$theme) $this->registerCssFile('@web/css/themes/system.css');
+else $this->registerCssFile('@web/css/themes/' . $theme . '.css');
 
 AppAsset::register($this);
 
@@ -18,15 +22,16 @@ $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, 
 $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
+
 ?>
 
 <?php $this->beginPage() ?>
 <!doctype html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?=Yii::$app->language?>">
 <head>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <?=Html::csrfMetaTags()?>
+    <title><?=Html::encode($this->title)?></title>
     <?php $this->head() ?>
 </head>
 <body>
@@ -37,12 +42,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <div class="side-menu guest-menu block">
     <div class="sub-side-menu">
         <div class="ui button very-small-button" id="menu-button">
-            <?= keyboard_double_arrow_left_icon ?>
+            <?=keyboard_double_arrow_left_icon?>
         </div>
 
         <div class="side-buttons">
-            <?= Html::a(person_icon . '<span class="menu-item hidden">Вход</span>', Url::to(['site/login']), ['class'=> 'ui button small-button', 'id' => 'link-login']) ?>
-            <?= Html::a(key_vertical_icon . '<span class="menu-item hidden">Регистрация</span>', Url::to(['site/signup']), ['class'=> 'ui button small-button', 'id' => 'link-register']) ?>
+            <?=Html::a(person_icon . '<span class="menu-item hidden">Вход</span>', Url::to(['site/login']), ['class'=> 'ui button small-button', 'id' => 'link-login'])?>
+            <?=Html::a(key_vertical_icon . '<span class="menu-item hidden">Регистрация</span>', Url::to(['site/signup']), ['class'=> 'ui button small-button', 'id' => 'link-register'])?>
         </div>
     </div>
 </div>
@@ -54,7 +59,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <?= keyboard_double_arrow_left_icon ?>
         </div>
         <div class="small-profile-picture">
-            <?= Html::img('@web/images/avatar/mesmerizing_cat.jpg') ?>
+            <? $id = Yii::$app->user->identity->id;
+                $user = \app\models\User::find()->select('avatar')->where(['id' => $id])->one(); ?>
+            <?= Html::img('@web/'.$user->avatar) ?>
             <span class="menu-item hidden"><?= Yii::$app->user->identity->login ?></:></span>
         </div>
 
@@ -66,7 +73,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         <div class="line"></div>
 
         <div class="side-buttons">
-            <a href=""><?= person_icon ?><span class="menu-item hidden">Профиль</span></a>
+            <?= Html::a(person_icon . '<span class="menu-item hidden">Профиль</span>', Url::to(['main/author', 'id' => $id])) ?>
             <a href=""><?= mail_icon ?><span class="menu-item hidden">Сообщения</span></a>
             <a href=""><?= notifications_icon ?><span class="menu-item hidden">Уведомления</span></a>
         </div>
@@ -83,7 +90,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 </summary>
                 <div class="side-buttons">
                     <?= Html::a(book_2_icon . '<span class="menu-item hidden">Книги</span>', Url::to(['author/author-panel/books-dashboard'])) ?>
-                    <a href=""><?= shelves_icon ?><span class="menu-item hidden">Фэндомы</span></a>
+                    <?= Html::a(shelves_icon . '<span class="menu-item hidden">Фэндомы</span>', Url::to(['author/author-panel/fandoms-dashboard'])) ?>
                     <a href=""><?= deployed_code_icon ?><span class="menu-item hidden">Проекты</span></a>
                     <a href=""><?= bar_chart_icon ?><span class="menu-item hidden">Аналитика</span></a>
                     <a href=""><?= error_icon ?><span class="menu-item hidden">Сообщения об ошибках</span></a>
@@ -101,13 +108,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 <div class="side-buttons">
                     <?= Html::a(bookmark_icon . '<span class="menu-item hidden">Библиотека</span>', Url::to(['reader-panel/library'])) ?>
                     <a href=""><?= list_alt_icon ?><span class="menu-item hidden">Подборки</span></a>
-                    <a href=""><?= chat_icon ?><span class="menu-item hidden">Комментарии и рецензии</span></a>
-                    <a href=""><?= switch_account_icon ?><span class="menu-item hidden">Подписки</span></a>
-                    <a href=""><?= device_reset_icon ?><span class="menu-item hidden">История просмотра</span></a>
+                    <!--<a href=""><?= chat_icon ?><span class="menu-item hidden">Комментарии и рецензии</span></a>-->
+                    <?= Html::a(switch_account_icon . '<span class="menu-item hidden">Подписки на авторов</span>', Url::to(['reader-panel/followed-authors'])) ?>
+                    <?= Html::a(device_reset_icon . '<span class="menu-item hidden">История просмотра</span>', Url::to(['reader-panel/view-history'])) ?>
                 </div>
             </details>
 
-            <div class="to-hide"><?= ink_highlighter_icon ?><span class="menu-item hidden">Кабинет помощника</span></div>
+            <!--<div class="to-hide"><?= ink_highlighter_icon ?><span class="menu-item hidden">Кабинет помощника</span></div>
             <details class="hidden">
                 <summary>
                     <?= ink_highlighter_icon ?>
@@ -118,7 +125,26 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     <a href=""><?= book_2_icon ?><span class="menu-item hidden">Редактируемые книги</span></a>
                     <a href=""><?= group_icon ?><span class="menu-item hidden">Книги в соавторстве</span></a>
                 </div>
-            </details>
+            </details>-->
+
+            <? if (Yii::$app->user->getIdentity()->is_moderator == 1) : ?>
+                <div class="to-hide"><?= shield_person_icon ?><span class="menu-item hidden">Кабинет модератора</span></div>
+                <details class="hidden">
+                    <summary>
+                        <?= shield_person_icon ?>
+                        <span class="menu-item hidden">Кабинет модератора</span>
+                        <div class="expand-icon"><?= expand_more_icon ?></div>
+                    </summary>
+                    <div class="side-buttons">
+                        <?= Html::a(lock_open_icon . '<span class="menu-item hidden">Панель действий</span>', Url::to([''])) ?>
+                        <?= Html::a(tag_icon . '<span class="menu-item hidden">Жанры и теги</span>', Url::to(['moderator/moderator-panel/tags-dashboard'])) ?>
+                        <a href=""><?= flag_icon ?><span class="menu-item hidden">Жалобы и обращения</span></a>
+                        <a href=""><?= block_icon ?><span class="menu-item hidden">Блокировка пользователей</span></a>
+                    </div>
+                </details>
+            <? endif; ?>
+
+
         </div>
 
         <div class="line"></div>
@@ -175,11 +201,22 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
                 <div class="line"></div>
 
-                <a href=""><?= palette_icon ?> Сменить тему </a>
+                <button class="change-theme text-button ui"><?=palette_icon?>Сменить тему</button>
             </div>
         </div>
     </div>
 </header>
+
+
+<dialog class="change-theme-modal block modal">
+    <div class="close-button" id="close-theme-change"><?=close_icon?></div>
+    <div class="modal-container" id="regular-modal">
+        <div class="header3">Выберите одну из предложенных тем</div>
+        <div class="themes-container"></div>
+    </div>
+    <div class="modal-container" id="change-theme-modal"></div>
+</dialog>
+
 
 <div class="line"></div>
 

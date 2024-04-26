@@ -18,6 +18,7 @@ use yii\widgets\ActiveForm;
 
 $this->registerCssFile("@web/css/parts/book/book.css");
 $this->registerJsFile('@web/js/ajax/interaction.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('@web/js/common/collections.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 $formatter = new Formatter();
 
@@ -50,80 +51,6 @@ if (!Yii::$app->user->isGuest) {
 
 ?>
 
-<?
-$this->registerJs(<<<'js'
-let modal = $('.to-collection');
-let open = $('#collection-interaction'); 
-let close = $('.close-button');
-    
-open.click(function () { 
-    modal[0].showModal(); 
-    $('#add-modal').addClass('hidden');
-    $('#regular-modal').removeClass('hidden');
-    $.ajax({
-        type: 'post',
-        url: 'index.php?r=interaction/get-collections',
-        success: function(response) {
-            if (response.data) {
-                let content = '';
-                response.data.forEach(function(element) {
-                    content += `<button class="ui button collection-item block" id="collection-${element.collection.id}" click="addHandler()">
-                                    <div>${element.collection.title}</div>
-                                    <div class="tip-color">${element.count}</div>
-                                </button>`;
-                });
-                $('.collections-container').html(content);
-            }
-        },
-        error: function(error) {
-            
-        }
-    });
-});
-close.click(() => { modal[0].close(); });
-    
-$('.collections-container').on('click', '.collection-item', function() {
-    $.ajax({
-        type: 'post',
-        url: 'index.php?r=interaction/add-to-collection',
-        data: {
-            book_id: (new URL(document.location)).searchParams.get("id"),
-            collection_id: $(this).attr('id') 
-        },
-        success: function(response) {
-            if (response.success) {
-                modal[0].close(); modal.removeClass('showed');
-                if (response.is_already) showMessage('Книга уже добавлена в эту подборку', 'warning');
-                else {
-                    if (response.is_added) showMessage('Книга успешно добавлена в подборку', 'success');
-                    else showMessage('Что-то пошло не так, кажется, книга не была добавлена в подборку', 'error');
-                }
-            }
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
-});
-
-$('.collection-create').click(function(e) {
-    let add = $('#add-modal');
-    e.preventDefault();
-    $.ajax({
-        type: 'post',
-        url: 'index.php?r=interaction/render-create-collection',
-        success: function(response) {
-            $('#regular-modal').addClass('hidden');
-            add.removeClass('hidden');
-            add.html(response);
-        }
-    });
-});
-js, View::POS_LOAD)
-
-
-?>
-
 
 <dialog class="to-collection block modal">
     <div class="close-button"><?=close_icon?></div>
@@ -151,7 +78,7 @@ js, View::POS_LOAD)
                 <div class="creators">
                     <div class="creator">
                         <div>Автор:</div>
-                        <?= Html::a(Html::encode($book->author->login), Url::to(['#']))?>
+                        <?= Html::a(Html::encode($book->author->login), Url::to(['main/author', 'id' => $book->author->id]), ['class' => 'highlight-link'])?>
                     </div>
                 </div>
                 <div class="metas">
@@ -289,7 +216,7 @@ js, View::POS_LOAD)
     <div class="book-sidebar">
         <? if ($book->cover): ?>
             <div class="book-cover">
-                <?= Html::img('@web/images/covers/' . $book->cover, ['alt' => 'обложка']) ?>
+                <?= Html::img('@web/' . $book->cover) ?>
             </div>
         <? endif; ?>
 
@@ -305,7 +232,8 @@ js, View::POS_LOAD)
             <div class="inner-line"></div>
 
             <div>
-                <a href="" class="ui button button-left-align"><?= download_icon ?>Скачать работу</a>
+                <button class="ui button button-left-align" id="download-interaction"><?= download_icon ?><div class="button-text">Скачать работу</div></button>
+
                 <button class="ui button button-left-align" id="collection-interaction"><?= list_alt_icon ?>Добавить в подборку</button>
                 <!--<div class="tip">Работа уже добавлена в 3 подборки.</div>-->
             </div>

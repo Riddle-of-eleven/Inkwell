@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property int|null $user_id
  * @property int|null $book_id
+ * @property string|null $added_at
  *
  * @property Book $book
  * @property User $user

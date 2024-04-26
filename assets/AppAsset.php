@@ -27,12 +27,14 @@ class AppAsset extends AssetBundle
         'css/common/ui.css',
         'css/common/variables.css',
         'css/common/side.css',
+        //'css/themes/standard',
     ];
     public $js = [
         'js/common/menu.js',
         'js/common/handlers.js',
         'js/ui/tabs.js',
         'js/ui/notifications.js',
+        'js/ajax/themes.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

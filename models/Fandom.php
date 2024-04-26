@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "fandom".
@@ -11,6 +12,7 @@ use Yii;
  * @property int|null $this_creator_id
  * @property string|null $title
  * @property string|null $description
+ * @property string|null $created_at
  *
  * @property BookFandom[] $bookFandoms
  * @property Character[] $characters
@@ -124,5 +126,10 @@ class Fandom extends \yii\db\ActiveRecord
     public function getThisCreator()
     {
         return $this->hasOne(User::class, ['id' => 'this_creator_id']);
+    }
+
+    public static function getFandomsList()
+    {
+        return ArrayHelper::map(self::find()->all(), 'id', 'title');
     }
 }

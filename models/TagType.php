@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "tag_type".
@@ -51,5 +52,10 @@ class TagType extends \yii\db\ActiveRecord
     public function getTags()
     {
         return $this->hasMany(Tag::class, ['tag_type_id' => 'id']);
+    }
+
+    public static function getTagTypesList()
+    {
+        return ArrayHelper::map(self::find()->all(), 'id', 'title');
     }
 }

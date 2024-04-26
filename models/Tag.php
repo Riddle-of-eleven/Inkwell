@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "tag".
@@ -10,9 +11,11 @@ use Yii;
  * @property int $id
  * @property string|null $title
  * @property string|null $description
+ * @property string|null $created_at
  * @property int|null $fandom_id
  * @property int|null $tag_type_id
  * @property int $is_only_for_fanfic
+ * @property int $moderator_id
  *
  * @property BookTag[] $bookTags
  * @property TagType $tagType
@@ -73,5 +76,10 @@ class Tag extends \yii\db\ActiveRecord
     public function getTagType()
     {
         return $this->hasOne(TagType::class, ['id' => 'tag_type_id']);
+    }
+
+    public static function getTagsList()
+    {
+        return ArrayHelper::map(self::find()->all(), 'id', 'title');
     }
 }

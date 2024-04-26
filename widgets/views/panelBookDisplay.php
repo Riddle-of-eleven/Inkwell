@@ -15,7 +15,7 @@ use yii\helpers\VarDumper;
     <div class="book-preview-sidebar">
         <div class="side-buttons">
             <?= Html::a(edit_icon, Url::to(['author-panel/book']), ['class' => 'ui button very-small-button']) ?>
-            <div class="ui button very-small-button"><?= new_chapter_icon ?></div>
+            <?= Html::a(new_chapter_icon, Url::to(['author/create-book/create-chapter', 'id' => $data->id]), ['class' => 'ui button very-small-button']) ?>
             <div class="ui button very-small-button"><?= link_deployed_code_icon ?></div>
             <div class="ui button very-small-button"><?= branch_icon ?></div>
         </div>
@@ -32,7 +32,7 @@ use yii\helpers\VarDumper;
                 <div class="creators">
                     <div class="creator">
                         <div class="creator-title">Автор:</div>
-                        <div class="creator-name">afsgrdthfy</div>
+                        <div class="creator-name"><?=$data->author->login?></div>
                     </div>
                     <div class="creator">
                         <div class="creator-title">Редакторы:</div>
@@ -43,7 +43,7 @@ use yii\helpers\VarDumper;
 
             <div class="book-preview-info-cover">
                 <div class="book-preview-info">
-                    <?= Html::a('Самое красивое название', Url::to(['author-panel/book']), ['class' => 'book-preview-title header1']) ?>
+                    <?= Html::a($data->title, Url::to(['author/author-panel/book']), ['class' => 'book-preview-title header1']) ?>
                     <div class="info-pairs">
                         <div class="info-pair"><div class="info-key">Количество частей:</div>16</div>
                         <div class="info-pair"><div class="info-key">Последнее обновление:</div>11 апреля 2024</div>
@@ -71,7 +71,7 @@ use yii\helpers\VarDumper;
     </div>
     <div class="vertical-line"></div>
     <div class="book-preview-cover-actions">
-        <img src="images/covers/cover1.jpg" alt="" class="side-cover">
+        <?=Html::img('@web/'.$data->cover, ['class' => 'side-cover'])?>
         <div class="cover-actions">
             <a href="" class="ui button icon-button"><?= imagesmode_icon?>Изменить</a>
             <a href="" class="ui button small-button danger-button"><?= hide_image_icon ?></a>

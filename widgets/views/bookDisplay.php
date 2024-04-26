@@ -34,12 +34,12 @@ use yii\i18n\Formatter;
             <div class="creators">
                 <div class="creator">
                     <div class="creator-title">Автор:</div>
-                    <div class="creator-name"><?= Html::encode($data->author->login)?></div>
+                    <?= Html::a(Html::encode($data->author->login), Url::to(['main/author', 'id' => $data->author->id]), ['class' => 'creator-name'])?>
                 </div>
-                <div class="creator">
+                <!--<div class="creator">
                     <div class="creator-title">Редакторы:</div>
                     <div class="creator-name">Silmaril, Cactus</div>
-                </div>
+                </div>-->
             </div>
             <div class="accent-metas">
                 <div class="accent-meta"><?= Html::encode($data->relation->title) ?></div>
@@ -82,10 +82,10 @@ use yii\i18n\Formatter;
                             }
                         endif; ?>
                     </div>
-                    <div class="info-pair">
+                    <!--<div class="info-pair">
                         <div class="info-key">Пейринг:</div>
                         <div class="info-value">Ада / Михаил</div>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="small-inner-line"></div>
                 <div class="info-pairs">
@@ -97,14 +97,14 @@ use yii\i18n\Formatter;
                             }
                         endif; ?>
                     </div>
-                    <div class="info-pair">
+                    <!--<div class="info-pair">
                         <div class="info-key">Теги:</div>
                         <? if (isset($data->tags)) :
                             foreach ($data->tags as $tag) {
                                 echo '<div class="info-value">' . $tag->title . '</div>';
                             }
                         endif; ?>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div class="book-preview-cover">

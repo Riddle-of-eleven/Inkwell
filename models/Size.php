@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "size".
@@ -65,5 +66,10 @@ class Size extends \yii\db\ActiveRecord
     public function getBooks0()
     {
         return $this->hasMany(Book::class, ['real_size_id' => 'id']);
+    }
+
+    public static function getSizesList()
+    {
+        return ArrayHelper::map(self::find()->all(), 'id', 'title');
     }
 }

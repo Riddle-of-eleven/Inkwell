@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property int|null $user_id
  * @property int|null $follower_id
+ * @property string|null $followed_at
  *
  * @property User $follower
  * @property User $user
