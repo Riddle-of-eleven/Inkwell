@@ -9,17 +9,10 @@ use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\Breadcrumbs;
 
-$theme = Yii::$app->user->getIdentity()->theme->system_name;
-//\yii\helpers\VarDumper::dump($theme);
-if ($theme == null) $this->registerCssFile('@web/css/themes/standard.css');
-else {
-    try {
-        $this->registerCssFile('@web/css/themes/' . $theme . '.css');
-    }
-    catch (Exception $e) {
-        $this->registerCssFile('@web/css/themes/standard.css');
-    }
-}
+$session = Yii::$app->session;
+$theme = $session->get('theme');
+if (!$theme) $this->registerCssFile('@web/css/themes/system.css');
+else $this->registerCssFile('@web/css/themes/' . $theme . '.css');
 
 AppAsset::register($this);
 
@@ -34,11 +27,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <?php $this->beginPage() ?>
 <!doctype html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?=Yii::$app->language?>">
 <head>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <?=Html::csrfMetaTags()?>
+    <title><?=Html::encode($this->title)?></title>
     <?php $this->head() ?>
 </head>
 <body>
@@ -49,12 +42,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <div class="side-menu guest-menu block">
     <div class="sub-side-menu">
         <div class="ui button very-small-button" id="menu-button">
-            <?= keyboard_double_arrow_left_icon ?>
+            <?=keyboard_double_arrow_left_icon?>
         </div>
 
         <div class="side-buttons">
-            <?= Html::a(person_icon . '<span class="menu-item hidden">Вход</span>', Url::to(['site/login']), ['class'=> 'ui button small-button', 'id' => 'link-login']) ?>
-            <?= Html::a(key_vertical_icon . '<span class="menu-item hidden">Регистрация</span>', Url::to(['site/signup']), ['class'=> 'ui button small-button', 'id' => 'link-register']) ?>
+            <?=Html::a(person_icon . '<span class="menu-item hidden">Вход</span>', Url::to(['site/login']), ['class'=> 'ui button small-button', 'id' => 'link-login'])?>
+            <?=Html::a(key_vertical_icon . '<span class="menu-item hidden">Регистрация</span>', Url::to(['site/signup']), ['class'=> 'ui button small-button', 'id' => 'link-register'])?>
         </div>
     </div>
 </div>
@@ -208,7 +201,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
                 <div class="line"></div>
 
-                <button class="change-theme"><?= palette_icon ?> Сменить тему </button>
+                <button class="change-theme text-button ui"><?=palette_icon?>Сменить тему</button>
             </div>
         </div>
     </div>
@@ -216,14 +209,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 
 <dialog class="change-theme-modal block modal">
-    <div class="close-button"><?=close_icon?></div>
+    <div class="close-button" id="close-theme-change"><?=close_icon?></div>
     <div class="modal-container" id="regular-modal">
-        <div class="header3">Выберите тему</div>
+        <div class="header3">Выберите одну из предложенных тем</div>
         <div class="themes-container"></div>
     </div>
-
-    <div class="modal-container" id="add-modal">
-    </div>
+    <div class="modal-container" id="change-theme-modal"></div>
 </dialog>
 
 

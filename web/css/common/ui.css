@@ -151,6 +151,11 @@ textarea {
     padding: 7px 20px 6px;
 }
 
+.text-button {
+    border: none;
+    background: none;
+}
+
 
 .colored-button {
     display: flex; justify-content: center;
@@ -382,4 +387,8 @@ details:not([open]) .select-header {
 }
 dialog::backdrop {
     background-color: var(--color-backdrop);
+}
+
+.modal-container {
+    display: flex; flex-direction: column; align-items: center; gap: 30px;
 }

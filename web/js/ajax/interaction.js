@@ -118,11 +118,8 @@ $(document).ready(function() {
             data: {book_id: book_id},
             success: function (response) {
                 if (response.file) {
-                    let link = document.createElement('a');
+                    let link= document.createElement('a');
                     link.href = response.file;
-                    //link.download = 'book.epub'; // Устанавливаем имя файла для скачивания
-
-                    // Эмулируем клик по ссылке для скачивания файла
                     link.click();
                 }
             }

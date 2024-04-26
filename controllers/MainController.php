@@ -132,10 +132,19 @@ class MainController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         $themes = Theme::find()->all();
 
+        return ['success' => true, 'data' => $themes];
     }
     public function actionChangeTheme() {
         Yii::$app->response->format = Response::FORMAT_JSON;
+        $theme = Yii::$app->request->post('theme');
+        $session = Yii::$app->session;
+        $old_theme = $session->get('theme');
+        $session->set('theme', $theme);
 
+        return [
+            'old_theme' => $old_theme,
+            'theme' => $theme
+        ];
     }
 }
 

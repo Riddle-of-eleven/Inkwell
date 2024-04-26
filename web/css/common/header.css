@@ -43,7 +43,7 @@ header .main-logo, header .main-logo * {
     width: max-content;
     z-index: 999999;
 }
-.main-menu-content a {
+.main-menu-content a, .main-menu-content button {
     display: flex; gap: 14px;
     text-decoration: none;
     color: var(--color-graphics) !important;
