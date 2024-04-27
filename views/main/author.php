@@ -1,12 +1,12 @@
 <?php
-/* @var User $user */
+/* @var \app\models\Tables\User $user */
 /* @var $books */
 /* @var $follow */
 $this->title = 'Профиль автора '.$user->login;
 
-use app\models\User;
-use yii\helpers\Html;
+use app\models\Tables\User;
 use app\widgets\BookDisplay;
+use yii\helpers\Html;
 
 $this->registerCssFile("@web/css/parts/user/author.css");
 $this->registerJsFile('@web/js/ajax/interaction.js', ['depends' => [\yii\web\JqueryAsset::class]]);

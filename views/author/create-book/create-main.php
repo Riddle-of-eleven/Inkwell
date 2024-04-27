@@ -3,16 +3,20 @@ $this->title = 'Новая книга';
 
 /** @var yii\web\View $this */
 
-/* @var $model */
+/* @var FormCreateMain $model */
+/* @var Genres[] $model_genres */
 /* @var $relations */
 /* @var $ratings */
 /* @var $plan_sizes */
 /* @var $genres */
 
+use app\models\CreateBookForms\FormCreateMain;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\web\View;
+
+use yii\helpers\VarDumper;
 
 \app\assets\DashboardAsset::register($this);
 $this->registerCss(<<<css
@@ -97,7 +101,8 @@ $this->registerJsFile('@web/js/author/metadata-handlers.js', ['depends' => [\yii
             <div class="header3">Категория</div>
             <?= $f->field($model, 'relation')->radioList($relations, [
                 'item' => function($index, $label, $name, $checked, $value) {
-                    return "<div class='ui choice-input-block'><input type='radio' name='$name' id='relation-$value' value='$value'><label for='relation-$value'>$label</label></div>";
+                    $checked_value = $checked ? 'checked' : '';
+                    return "<div class='ui choice-input-block'><input type='radio' name='$name' id='relation-$value' value='$value' $checked_value><label for='relation-$value'>$label</label></div>";
                 }, 'class' => 'dashboard-choice']);
             ?>
         </div>
@@ -105,7 +110,8 @@ $this->registerJsFile('@web/js/author/metadata-handlers.js', ['depends' => [\yii
             <div class="header3">Рейтинг</div>
             <?= $f->field($model, 'rating')->radioList($ratings, [
                 'item' => function($index, $label, $name, $checked, $value) {
-                    return "<div class='ui choice-input-block'><input type='radio' name='$name' id='rating-$value' value='$value'><label for='rating-$value'>$label</label></div>";
+                    $checked_value = $checked ? 'checked' : '';
+                    return "<div class='ui choice-input-block'><input type='radio' name='$name' id='rating-$value' value='$value' $checked_value><label for='rating-$value'>$label</label></div>";
                 }, 'class' => 'dashboard-choice']);
             ?>
         </div>
@@ -113,29 +119,53 @@ $this->registerJsFile('@web/js/author/metadata-handlers.js', ['depends' => [\yii
             <div class="header3">Планируемый размер</div>
             <?= $f->field($model, 'plan_size')->radioList($plan_sizes, [
                 'item' => function($index, $label, $name, $checked, $value) {
-                    return "<div class='ui choice-input-block'><input type='radio' name='$name' id='plan-size-$value' value='$value'><label for='plan-size-$value'>$label</label></div>";
+                    $checked_value = $checked ? 'checked' : '';
+                    return "<div class='ui choice-input-block'><input type='radio' name='$name' id='plan-size-$value' value='$value' $checked_value><label for='plan-size-$value'>$label</label></div>";
                 }, 'class' => 'dashboard-choice']);
             ?>
         </div>
     </div>
 
 
-<!--    <div>-->
-<!--        <div class="field-header-words">-->
-<!--            <div class="header3">Жанры</div>-->
-<!--            !--<div class="symbol-count">0 / 10</div>-->-->
-<!--        </div>-->
-<!--        !--<div class="tag-kinds"><div>Все</div><div>Структура</div><div>Содержание и тематика</div><div>Функция</div></div>-->-->
-<!--        <div class="selected-items"></div>-->
-<!--        <div class="field-with-dropdown">-->
-<!--            <div class="ui field">--><?php //=Html::textInput('genres-input', null, [
-//                    'id' => 'genres-input',
-//                    'placeholder' => 'Введите первые несколько символов...',
-//                    'autocomplete' => 'off'
-//                ])?><!--</div>-->
-<!--            <div class="dropdown-list block hidden" id="genres-select"></div>-->
-<!--        </div>-->
-<!--    </div>-->
+
+    <?
+    //VarDumper::dump($model, 10, true);
+    /*foreach ($genres as $genre) {
+        VarDumper::dump($genre, 10, true);
+    }*/ ?>
+
+    <div>
+        <div class="field-header-words">
+            <div class="header3">Жанры</div>
+            <!--<div class="symbol-count">0 / 10</div>-->
+        </div>
+        <!--<div class="tag-kinds"><div>Все</div><div>Структура</div><div>Содержание и тематика</div><div>Функция</div></div>-->
+        <div class="selected-items">
+            <? if ($model_genres) {
+                foreach ($model_genres as $genre) { ?>
+                    <input type="hidden" name="FormCreateMain[genres][]" value="<?=$genre->id?>">
+                    <div class="selected-item" genre="<?=$genre->id?>">
+                        <?=$genre->title?>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" class="icon to-close" genre="<?=$genre->id?>">
+                            <path d="m339-301.847 141-141 141 141L658.153-339l-141-141 141-141L621-658.153l-141 141-141-141L301.847-621l141 141-141 141L339-301.847Zm141.067 185.846q-74.836 0-141.204-28.42-66.369-28.42-116.182-78.21-49.814-49.791-78.247-116.129-28.433-66.337-28.433-141.173 0-75.836 28.42-141.704 28.42-65.869 78.21-115.682 49.791-49.814 116.129-78.247 66.337-28.433 141.173-28.433 75.836 0 141.704 28.42 65.869 28.42 115.682 78.21 49.814 49.791 78.247 115.629 28.433 65.837 28.433 141.673 0 74.836-28.42 141.204-28.42 66.369-78.21 116.182-49.791 49.814-115.629 78.247-65.837 28.433-141.673 28.433ZM480-168q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z" />
+                        </svg>
+                    </div>
+                <?}
+            }
+            ?>
+
+        </div>
+        <div class="field-with-dropdown">
+            <div class="ui field"><?=Html::textInput('genres-input', null, [
+                    'id' => 'genres-input',
+                    'placeholder' => 'Введите первые несколько символов...',
+                    'autocomplete' => 'off'
+                ])?></div>
+            <div class="dropdown-list block hidden" id="genres-select"></div>
+        </div>
+    </div>
+
+
 
     <!--
     <div>

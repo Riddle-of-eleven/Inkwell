@@ -2,9 +2,8 @@
 
 namespace app\models;
 
-use yii\base\Model;
+use app\models\Tables\Chapter;
 use yii\db\ActiveRecord;
-use yii\helpers\VarDumper;
 
 class _ContentData extends ActiveRecord
 {

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\Tables\User;
 use yii\db\ActiveRecord;
 
 class _AuthorData extends ActiveRecord

@@ -34,6 +34,8 @@
     margin-bottom: 15px;
 }
 
+
+
 /* подпольный выпадающий список */
 .field-with-dropdown {
     position: relative;
@@ -69,6 +71,22 @@
 }
 .selected-item svg {
     fill: var(--color-accent);
+}
+
+
+
+
+/* СЕЛЕКТ И ЕГО ПУНКТЫ*/
+/*.select-container {
+    padding-right: 16px !important;
+}*/
+.select-container select option {
+    background-color: var(--color-foreground);
+}
+select {
+    border: none;
+    background-color: var(--color-foreground);
+    width: 100%;
 }
 
 

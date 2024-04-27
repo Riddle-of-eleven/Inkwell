@@ -57,9 +57,10 @@ button[type=submit] {
     margin-bottom: 6px;
 }
 .tag-kinds > div {
-    padding: 2px 6px;
+    padding: 2px 8px;
     background-color: var(--color-accent10);
     color: var(--color-accent);
     text-decoration: underline;
     border-radius: 4px;
+    cursor: pointer;
 }

@@ -2,25 +2,25 @@
 
 namespace app\controllers\author;
 
-use app\models\Book;
-use app\models\BookFandom;
-use app\models\BookGenre;
-use app\models\Chapter;
 use app\models\CreateBookForms\FormCreateChapter;
 use app\models\CreateBookForms\FormCreateCover;
 use app\models\CreateBookForms\FormCreateFandom;
 use app\models\CreateBookForms\FormCreateFromFile;
 use app\models\CreateBookForms\FormCreateMain;
-use app\models\Fandom;
-use app\models\Genre;
-use app\models\Rating;
-use app\models\Relation;
-use app\models\Size;
-use app\models\Type;
+use app\models\Tables\Book;
+use app\models\Tables\BookFandom;
+use app\models\Tables\BookGenre;
+use app\models\Tables\Chapter;
+use app\models\Tables\Fandom;
+use app\models\Tables\Genre;
+use app\models\Tables\Rating;
+use app\models\Tables\Relation;
+use app\models\Tables\Size;
+use app\models\Tables\Type;
 use SimpleXMLElement;
-use yii\helpers\Url;
 use Yii;
 use yii\db\Expression;
+use yii\helpers\Url;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
@@ -86,9 +86,16 @@ class CreateBookController extends Controller
         $plan_sizes = Size::getSizesList();
         $genres = Genre::getGenresList();
 
+        $model_genres = [];
+
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            /*VarDumper::dump($model, 10, true);
-            die;*/
+            //VarDumper::dump($model, 10, true);
+            foreach ($model->genres as $genre) {
+                $model_genres[] = Genre::findOne($genre);
+            }
+        }
+
+        /*if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $process = new Book();
             $process->user_id = Yii::$app->user->identity->id;
             $process->created_at = new Expression('NOW()');
@@ -117,10 +124,11 @@ class CreateBookController extends Controller
 
                 return $this->redirect(Url::to(['create-fandom', 'id' => $process->id]));
             }
-        }
+        }*/
 
         return $this->render('create-main', [
             'model'=> $model,
+            'model_genres' => $model_genres,
             'relations' => $relations,
             'ratings' => $ratings,
             'plan_sizes' => $plan_sizes,

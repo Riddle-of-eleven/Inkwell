@@ -2,7 +2,7 @@
 
 namespace app\controllers\author;
 
-use app\models\Fandom;
+use app\models\Tables\Fandom;
 use Yii;
 use yii\web\Controller;
 use yii\web\Response;

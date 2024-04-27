@@ -1,19 +1,18 @@
 <?php
 $this->title = Yii::$app->name.' – книга';
 
-/* @var Chapter $chapters */
+/* @var \app\models\Tables\Chapter $chapters */
 /* @var $pages */
-/* @var Book $book */
+/* @var \app\models\Tables\Book $book */
 
 $this->registerCssFile("@web/css/parts/book/reader.css");
 
-use app\models\Chapter;
-use app\models\Book;
-use yii\widgets\LinkPager;
-use yii\helpers\VarDumper;
-use yii\i18n\Formatter;
+use app\models\Tables\Book;
+use app\models\Tables\Chapter;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\i18n\Formatter;
+use yii\widgets\LinkPager;
 
 $formatter = new Formatter();
 

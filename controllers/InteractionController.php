@@ -4,25 +4,21 @@ namespace app\controllers;
 
 use app\models\_BookData;
 use app\models\_ContentData;
-use app\models\BookCollection;
-use app\models\Collection;
-use app\models\FavoriteBook;
-use app\models\Followers;
-use app\models\FormCreateCollection;
-use app\models\ReadLater;
-use app\models\User;
-use yii\helpers\Url;
+use app\models\Tables\BookCollection;
+use app\models\Tables\Collection;
+use app\models\Tables\FavoriteBook;
+use app\models\Tables\Followers;
+use app\models\Tables\FormCreateCollection;
+use app\models\Tables\Like;
+use app\models\Tables\Read;
+use app\models\Tables\ReadLater;
+use TPEpubCreator;
 use Yii;
 use yii\db\Expression;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
-use app\models\Like;
-use app\models\Read;
 
-use TPEpubCreator;
-
-
-use yii\helpers\VarDumper;
 
 class InteractionController extends Controller
 {

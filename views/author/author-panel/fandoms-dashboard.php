@@ -1,7 +1,7 @@
 <?php
 $this->title = 'Фэндомы';
 
-/* @var \app\models\Fandom[] $fandoms */
+/* @var \app\models\Tables\Fandom[] $fandoms */
 
 use yii\helpers\Html;
 use yii\helpers\Url;

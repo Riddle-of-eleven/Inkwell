@@ -2,18 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\FavoriteBook;
-use app\models\Read;
-use app\models\ReadLater;
-use app\models\ViewHistory;
-use yii\helpers\VarDumper;
-use yii\web\Controller;
-use Yii;
-use app\models\Like;
 use app\models\_BookData;
-use app\models\User;
-use app\models\Followers;
-use yii\i18n\Formatter;
+use app\models\Tables\FavoriteBook;
+use app\models\Tables\Followers;
+use app\models\Tables\Like;
+use app\models\Tables\Read;
+use app\models\Tables\ReadLater;
+use app\models\Tables\User;
+use app\models\Tables\ViewHistory;
+use Yii;
+use yii\web\Controller;
 
 class ReaderPanelController extends Controller
 {

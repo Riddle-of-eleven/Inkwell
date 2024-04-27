@@ -3,10 +3,10 @@
 namespace app\controllers\author;
 
 use app\models\CreateFandomForms\FormCreateFandom;
-use app\models\Fandom;
-use yii\helpers\Url;
+use app\models\Tables\Fandom;
 use Yii;
 use yii\db\Expression;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 class CreateFandomController extends Controller
