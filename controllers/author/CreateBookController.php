@@ -32,11 +32,9 @@ class CreateBookController extends Controller
 {
     public function actionFindGenres() {
         Yii::$app->response->format = Response::FORMAT_JSON;
-        $input = Yii::$app->request->post('input');
+        /*$input = Yii::$app->request->post('input');
         $selected_genres = Yii::$app->request->post('selected_genres');
-        $data = [];
 
-        // экранировать потом это дело
         if ($input) $genres = Genre::find()->where(['like', 'title', $input]);
         else $genres = Genre::find();
 
@@ -48,16 +46,29 @@ class CreateBookController extends Controller
 
         foreach ($find_genres as $key => $value) {
             $data[$key] = $value;
-        }
-
-        /*VarDumper::dump($data, 10, true);
-        die;*/
-
-        return $data;
+        }*/
+        return $this->findMeta(
+            Yii::$app->request->post('input'),
+            Yii::$app->request->post('selected_genres'),
+            Genre::class
+        );
+    }
+    public function actionFindTags() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return $this->findMeta(
+            Yii::$app->request->post('input'),
+            Yii::$app->request->post('selected_tags'),
+            Tag::class
+        );
     }
     public function actionFindFandoms() {
         Yii::$app->response->format = Response::FORMAT_JSON;
-        $input = Yii::$app->request->post('input');
+        return $this->findMeta(
+            Yii::$app->request->post('input'),
+            Yii::$app->request->post('selected_fandoms'),
+            Fandom::class
+        );
+        /*$input = Yii::$app->request->post('input');
 
         if ($input) {
             $fandoms = Fandom::find()->where(['like', 'title', $input])->all();
@@ -72,7 +83,7 @@ class CreateBookController extends Controller
             }
         }
 
-        return $data;
+        return $data;*/
     }
 
     public function actionCreateMain()
@@ -322,24 +333,38 @@ class CreateBookController extends Controller
         return $this->render('create-access');
     }*/
 
+
+
+    // вспомогательные функции
     public function deleteFolder($folderPath) {
-        if (!is_dir($folderPath)) {
-            return false;
-        }
+        if (!is_dir($folderPath)) return false;
 
         $files = array_diff(scandir($folderPath), array('.', '..'));
         foreach ($files as $file) {
             $filePath = $folderPath . DIRECTORY_SEPARATOR . $file;
-            if (is_dir($filePath)) {
-                // Рекурсивно удаляем вложенные папки и их содержимое
-                $this->deleteFolder($filePath);
-            } else {
-                // Удаляем файл
-                unlink($filePath);
-            }
+            if (is_dir($filePath)) $this->deleteFolder($filePath);
+            else unlink($filePath);
         }
 
-        // Удаляем саму папку
         return rmdir($folderPath);
+    }
+
+    public function findMeta($input, $selected, $model): array
+    {
+        $data = [];
+        // экранировать потом весь этот input
+        if ($input) $metas = $model::find()->where(['like', 'title', $input]);
+        else $metas = $model::find();
+
+        if ($selected)
+            foreach ($selected as $item) {
+                $metas->andWhere(['<>', 'id', $item]);
+            }
+        $find_metas = $metas->all();
+        foreach ($find_metas as $key => $value) {
+            $data[$key] = $value;
+        }
+
+        return $data;
     }
 }

@@ -133,8 +133,8 @@ $this->registerJsFile('@web/js/author/metadata-handlers.js', ['depends' => [\yii
             <div class="header3">Жанры</div>
             <!--<div class="symbol-count">0 / 10</div>-->
         </div>
-        <!--<div class="tag-kinds"><div>Все</div><div>Структура</div><div>Содержание и тематика</div><div>Функция</div></div>-->
-        <div class="selected-items">
+        <div class="tag-kinds"><div>Все</div><div>Структура</div><div>Содержание и тематика</div><div>Функция</div></div>
+        <div class="selected-items" id="genres-selected-items">
             <? if ($model_genres) {
                 foreach ($model_genres as $genre) { ?>
                     <input type="hidden" name="FormCreateMain[genres][]" value="<?=$genre->id?>">
@@ -163,14 +163,14 @@ $this->registerJsFile('@web/js/author/metadata-handlers.js', ['depends' => [\yii
             <div class="header3">Теги</div>
             <!--<div class="symbol-count">0 / 10</div>-->
         </div>
-        <!--<div class="tag-kinds"><div>Все</div><div>Предупреждения</div><div>Отношения</div><div>Формат</div><div>Место действия</div><div>Эпоха</div></div>-->
-        <div class="selected-items">
+        <div class="tag-kinds"><div>Все</div><div>Предупреждения</div><div>Отношения</div><div>Формат</div><div>Место действия</div><div>Эпоха</div></div>
+        <div class="selected-items" id="tags-selected-items">
             <? if ($model_tags) {
                 foreach ($model_tags as $tag) { ?>
                     <input type="hidden" name="FormCreateMain[genres][]" value="<?=$tag->id?>">
                     <div class="selected-item" genre="<?=$tag->id?>">
                         <?=$tag->title?>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" class="icon to-close" genre="<?=$tag->id?>">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" class="icon to-close" tag="<?=$tag->id?>">
                             <path d="m339-301.847 141-141 141 141L658.153-339l-141-141 141-141L621-658.153l-141 141-141-141L301.847-621l141 141-141 141L339-301.847Zm141.067 185.846q-74.836 0-141.204-28.42-66.369-28.42-116.182-78.21-49.814-49.791-78.247-116.129-28.433-66.337-28.433-141.173 0-75.836 28.42-141.704 28.42-65.869 78.21-115.682 49.791-49.814 116.129-78.247 66.337-28.433 141.173-28.433 75.836 0 141.704 28.42 65.869 28.42 115.682 78.21 49.814 49.791 78.247 115.629 28.433 65.837 28.433 141.673 0 74.836-28.42 141.204-28.42 66.369-78.21 116.182-49.791 49.814-115.629 78.247-65.837 28.433-141.673 28.433ZM480-168q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z" />
                         </svg>
                     </div>
