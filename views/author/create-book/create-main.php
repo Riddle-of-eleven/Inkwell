@@ -151,9 +151,7 @@ $this->registerJsFile('@web/js/author/metadata-handlers.js', ['depends' => [\yii
                         </svg>
                     </div>
                 <?}
-            }
-            ?>
-
+            }?>
         </div>
         <div class="field-with-dropdown">
             <div class="ui field"><?=Html::textInput('genres-input', null, [
