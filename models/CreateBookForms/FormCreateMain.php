@@ -17,6 +17,7 @@ class FormCreateMain extends Model
     public $rating;
     public $plan_size;
     public $genres;
+    public $tags;
 
      public function rules() {
         return [

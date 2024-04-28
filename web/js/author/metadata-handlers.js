@@ -1,53 +1,32 @@
 let genres_input = $('#genres-input');
+let tags_input = $('#tags-input');
 
 genres_input.on('input', function () {
     let input = $(this).val();
-    $.ajax({
-        url: 'index.php?r=author/create-book/find-genres',
-        type: 'post',
-        data: {input: input},
-        success: function (response) {
-            $('#genres-select').empty();
-            $.each(response, function(key, value) {
-                $('#genres-select').append(`<div class="dropdown-item" genre="${key}">${value}</div>`);
-            });
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
+    let genres = getSelectedFromForm('FormCreateMain', 'genres');
+    ajaxDropDown(
+        'genres-dropdown',
+        'index.php?r=author/create-book/find-genres',
+        {input: input, selected_genres: genres},
+        $('#genres-select')
+    );
 });
 
 genres_input.click(function () {
-    // тождественно ли равно?
-    if ($(this).val() === '') {
-        $.ajax({
-            url: 'index.php?r=author/create-book/find-genres',
-            type: 'post',
-            success: function (response) {
-                if (response) {
-                    $('#genres-select').empty();
-                    $.each(response, function(key, value) {
-                        $('#genres-select').append(`<div class="dropdown-item" genre="${key}">${value}</div>`);
-                    });
-                }
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-    }
-    $('#genres-select').removeClass('hidden');
-});
-
-$(document).on('click', function(e) {
-    if (!$(e.target).closest('#genres-select').length && !$(e.target).closest('#genres-input').length) {
-        $('#genres-select').addClass('hidden');
-    }
+    let genres = getSelectedFromForm('FormCreateMain', 'genres');
+    let genres_select = $('#genres-select');
+    if ($(this).val() === '') // тождественно ли равно?
+        ajaxDropDown(
+            'genres-dropdown',
+            'index.php?r=author/create-book/find-genres',
+            {selected_genres: genres},
+            genres_select
+        );
+    genres_select.removeClass('hidden');
 });
 
 $('#genres-select').on('click', '.dropdown-item', function() {
-    let genre = $(this).attr('genre'), title = $(this).html();
+    let genre = $(this).attr('genre'), title = $(this).children('.metadata-title').html();
     let hidden = $('<input>').attr({
         type: 'hidden',
         name: 'FormCreateMain[genres][]',
@@ -62,10 +41,55 @@ $('#genres-select').on('click', '.dropdown-item', function() {
         </svg>
     </div>`);
     //console.log($(this));
-    //$(this).remove();
+    $(this).remove();
 });
 $('.selected-items').on('click', '.to-close', function() {
     let id = $(this).attr('genre');
     $(`input[type="hidden"][value="${id}"]`).remove();
     $(`[genre=${id}]`).remove();
 });
+
+
+
+// закрытие при щелчке вне областей ввода
+$(document).on('click', function(e) {
+    if (!$(e.target).closest('#genres-select').length && !$(e.target).closest('#genres-input').length && !$(e.target).closest('.dropdown-item#genres-dropdown').length) {
+        $('#genres-select').addClass('hidden');
+    }
+    if (!$(e.target).closest('#tags-select').length && !$(e.target).closest('#tags-input').length && !$(e.target).closest('.dropdown-item#tags-dropdown').length) {
+        $('#tags-select').addClass('hidden');
+    }
+});
+
+
+
+// вспомогательные функции
+function getSelectedFromForm(form, field) {
+    let selected = $(`input[type="hidden"][name="${form}[${field}][]"]`);
+    let selected_id = [];
+    $.each(selected, function (key, value) {
+        selected_id[key] = $(value).attr('value');
+    })
+    return selected_id;
+}
+
+function ajaxDropDown(id, url, data, select) {
+    // select это genres-select или tag-select
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: data,
+        success: function (response) {
+            select.empty();
+            $.each(response, function(key, value) {
+                select.append(`<div class="dropdown-item" id="${id}" genre="${value.id}">
+                    <div class="metadata-title">${value.title}</div>
+                    <div class="metadata-description tip">${value.description}</div>
+                </div>`);
+            });
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}

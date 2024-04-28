@@ -16,6 +16,7 @@ use app\models\Tables\Genre;
 use app\models\Tables\Rating;
 use app\models\Tables\Relation;
 use app\models\Tables\Size;
+use app\models\Tables\Tag;
 use app\models\Tables\Type;
 use SimpleXMLElement;
 use Yii;
@@ -32,20 +33,25 @@ class CreateBookController extends Controller
     public function actionFindGenres() {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $input = Yii::$app->request->post('input');
+        $selected_genres = Yii::$app->request->post('selected_genres');
+        $data = [];
 
         // экранировать потом это дело
-        if ($input) {
-            $genres = Genre::find()->where(['like', 'title', $input])->all();
-            foreach ($genres as $genre) {
-                $data[$genre->id] = $genre->title;
+        if ($input) $genres = Genre::find()->where(['like', 'title', $input]);
+        else $genres = Genre::find();
+
+        if ($selected_genres)
+            foreach ($selected_genres as $selected_genre) {
+                $genres->andWhere(['<>', 'id', $selected_genre]);
             }
+        $find_genres = $genres->all();
+
+        foreach ($find_genres as $key => $value) {
+            $data[$key] = $value;
         }
-        else {
-            $genres = Genre::getGenresList();
-            foreach ($genres as $key => $genre) {
-                $data[$key] = $genre;
-            }
-        }
+
+        /*VarDumper::dump($data, 10, true);
+        die;*/
 
         return $data;
     }
@@ -84,15 +90,22 @@ class CreateBookController extends Controller
         $relations = Relation::getRelationsList();
         $ratings = Rating::getRatingsList();
         $plan_sizes = Size::getSizesList();
-        $genres = Genre::getGenresList();
+
+        //$genres = Genre::find();
 
         $model_genres = [];
+        $model_tags = [];
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             //VarDumper::dump($model, 10, true);
-            foreach ($model->genres as $genre) {
-                $model_genres[] = Genre::findOne($genre);
-            }
+            if ($model->genres)
+                foreach ($model->genres as $genre) {
+                    $model_genres[] = Genre::findOne($genre);
+                }
+            if ($model->tags)
+                foreach ($model->tags as $tag) {
+                    $model_tags[] = Tag::findOne($tag);
+                }
         }
 
         /*if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -129,10 +142,11 @@ class CreateBookController extends Controller
         return $this->render('create-main', [
             'model'=> $model,
             'model_genres' => $model_genres,
+            'model_tags' => $model_tags,
+
             'relations' => $relations,
             'ratings' => $ratings,
             'plan_sizes' => $plan_sizes,
-            'genres' => $genres,
         ]);
     }
 

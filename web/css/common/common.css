@@ -137,3 +137,9 @@
 .evaluation-pair {
     display: flex; align-items: center; gap: 10px;
 }
+
+
+
+.metadata-title {
+    font-weight: 500;
+}
