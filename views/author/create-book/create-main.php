@@ -10,6 +10,9 @@ $this->title = 'Новая книга';
 /* @var $ratings */
 /* @var $plan_sizes */
 
+/* @var $genre_types */
+/* @var $tag_types */
+
 use app\models\CreateBookForms\FormCreateMain;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -30,7 +33,9 @@ $this->registerJsFile('@web/js/author/metadata-handlers.js', ['depends' => [\yii
 
 <div class="header1">Добавление книги</div>
 <div class="head-article">
-    Прежде, чем опубликовать книгу, ознакомьтесь с <?= Html::a('правилами публикации', Url::to(['']), ['class' => 'highlight-link']) ?>.
+    Прежде, чем опубликовать книгу, ознакомьтесь с <?=Html::a('правилами публикации', Url::to(['']), ['class' => 'highlight-link'])?>.<br>
+    Также вы можете почитать о <?=Html::a('правилах хорошего тона', Url::to(['']), ['class' => 'highlight-link'])?> (где рассказывается про оформление книг и не только),
+    а также найти жанр и тег по вкусу в <?=Html::a('списке', Url::to(['']), ['class' => 'highlight-link'])?>.
 </div>
 
 
@@ -57,9 +62,6 @@ $this->registerJsFile('@web/js/author/metadata-handlers.js', ['depends' => [\yii
 ?>
 
 <section>
-    <div class="head-article">
-        <?= Html::a('Как грамотно оформить шапку книги?', ['']) ?>
-    </div>
     <div class="header2">Основное</div>
     <div>
         <div class="field-header-words"><div class="header3">Название</div><!--<div class="symbol-count">0 / 100</div>--></div>
@@ -133,7 +135,12 @@ $this->registerJsFile('@web/js/author/metadata-handlers.js', ['depends' => [\yii
             <div class="header3">Жанры</div>
             <!--<div class="symbol-count">0 / 10</div>-->
         </div>
-        <div class="tag-kinds"><div>Все</div><div>Структура</div><div>Содержание и тематика</div><div>Функция</div></div>
+        <div class="tag-kinds">
+            <div class="genre-type" genre_type="0">Все</div>
+            <? foreach ($genre_types as $key => $value) {
+                echo "<div class='genre-type' genre_type='$key'>$value</div>";
+            }?>
+        </div>
         <div class="selected-items" id="genres-selected-items">
             <? if ($model_genres) {
                 foreach ($model_genres as $genre) { ?>
@@ -163,7 +170,12 @@ $this->registerJsFile('@web/js/author/metadata-handlers.js', ['depends' => [\yii
             <div class="header3">Теги</div>
             <!--<div class="symbol-count">0 / 10</div>-->
         </div>
-        <div class="tag-kinds"><div>Все</div><div>Предупреждения</div><div>Отношения</div><div>Формат</div><div>Место действия</div><div>Эпоха</div></div>
+        <div class="tag-kinds">
+            <div class="tag-type" tag_type="0">Все</div>
+            <? foreach ($tag_types as $key => $value) {
+                echo "<div class='tag-type' tag_type='$key'>$value</div>";
+            }?>
+        </div>
         <div class="selected-items" id="tags-selected-items">
             <? if ($model_tags) {
                 foreach ($model_tags as $tag) { ?>
@@ -178,7 +190,7 @@ $this->registerJsFile('@web/js/author/metadata-handlers.js', ['depends' => [\yii
             }?>
         </div>
         <div class="field-with-dropdown">
-            <div class="ui field"><?=Html::textInput('$tags-input', null, [
+            <div class="ui field"><?=Html::textInput('tags-input', null, [
                     'id' => 'tags-input',
                     'placeholder' => 'Введите первые несколько символов...',
                     'autocomplete' => 'off'

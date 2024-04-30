@@ -21,11 +21,11 @@ class FormCreateMain extends Model
 
      public function rules() {
         return [
-            [['title', 'description', 'relation', 'rating', 'plan_size', 'genres'], 'required', 'message' => 'Это поле обязательно'],
+            [['title', 'description', 'relation', 'rating', 'plan_size', 'genres', 'tags'], 'required', 'message' => 'Это поле обязательно'],
             [['remark', 'disclaimer', 'dedication'], 'string'],
 
             // чё с этим делать и как?
-            ['genres', 'required'],
+            //[['genres', 'tags'], 'required'],
         ];
     }
 

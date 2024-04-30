@@ -1,6 +1,7 @@
 let genres_input = $('#genres-input');
 let tags_input = $('#tags-input');
 
+
 // обработка добавления жанров
 genres_input.on('input', function () {
     let input = $(this).val();
@@ -9,7 +10,8 @@ genres_input.on('input', function () {
         'genres-dropdown',
         'index.php?r=author/create-book/find-genres',
         {input: input, selected_genres: genres},
-        $('#genres-select')
+        $('#genres-select'),
+        'genre'
     );
 });
 genres_input.click(function () {
@@ -20,11 +22,12 @@ genres_input.click(function () {
             'genres-dropdown',
             'index.php?r=author/create-book/find-genres',
             {selected_genres: genres},
-            genres_select
+            genres_select,
+            'genre'
         );
     genres_select.removeClass('hidden');
 });
-$('#genres-select').on('click', '.dropdown-item', function() {
+$('#genres-select').on('click', '.dropdown-item:not(.empty-dropdown-item)', function() {
     let genre = $(this).attr('genre'), title = $(this).children('.metadata-title').html();
     let hidden = $('<input>').attr({
         type: 'hidden',
@@ -50,7 +53,6 @@ $('#genres-selected-items').on('click', '.to-close', function() {
 
 
 
-
 // обработка добавления тегов
 tags_input.on('input', function () {
     let input = $(this).val();
@@ -59,7 +61,8 @@ tags_input.on('input', function () {
         'tags-dropdown',
         'index.php?r=author/create-book/find-tags',
         {input: input, selected_tags: tags},
-        $('#tags-select')
+        $('#tags-select'),
+        'tag'
     );
 });
 tags_input.click(function () {
@@ -70,11 +73,12 @@ tags_input.click(function () {
             'tags-dropdown',
             'index.php?r=author/create-book/find-tags',
             {selected_tags: tags},
-            tags_select
+            tags_select,
+            'tag'
         );
     tags_select.removeClass('hidden');
 });
-$('#tags-select').on('click', '.dropdown-item', function() {
+$('#tags-select').on('click', '.dropdown-item:not(.empty-dropdown-item)', function() {
     let tag = $(this).attr('tag'), title = $(this).children('.metadata-title').html();
     let hidden = $('<input>').attr({
         type: 'hidden',
@@ -102,13 +106,47 @@ $('#tags-selected-items').on('click', '.to-close', function() {
 
 // закрытие при щелчке вне областей ввода
 $(document).on('click', function(e) {
-    if (!$(e.target).closest('#genres-select').length && !$(e.target).closest('#genres-input').length && !$(e.target).closest('.dropdown-item#genres-dropdown').length) {
+    if (!$(e.target).closest('#genres-select').length && !$(e.target).closest('#genres-input').length && !$(e.target).closest('.dropdown-item#genres-dropdown').length && !$(e.target).closest('.genre-type').length) {
         $('#genres-select').addClass('hidden');
     }
-    if (!$(e.target).closest('#tags-select').length && !$(e.target).closest('#tags-input').length && !$(e.target).closest('.dropdown-item#tags-dropdown').length) {
+    if (!$(e.target).closest('#tags-select').length && !$(e.target).closest('#tags-input').length && !$(e.target).closest('.dropdown-item#tags-dropdown').length && !$(e.target).closest('.tag-type').length) {
         $('#tags-select').addClass('hidden');
     }
 });
+
+
+
+// жанры по категориям
+$('.genre-type').click(function () {
+    let type = $(this).attr('genre_type');
+    let genres = getSelectedFromForm('FormCreateMain', 'genres');
+    let genres_select = $('#genres-select');
+    ajaxDropDown(
+        'genres-dropdown',
+        'index.php?r=author/create-book/find-genres',
+        {selected_genres: genres, genre_type: type},
+        genres_select,
+        'genre'
+    );
+    genres_select.removeClass('hidden');
+})
+
+
+
+// теги по категориям
+$('.tag-type').click(function () {
+    let type = $(this).attr('tag_type');
+    let tags = getSelectedFromForm('FormCreateMain', 'tags');
+    let tags_select = $('#tags-select');
+    ajaxDropDown(
+        'tags_dropdown',
+        'index.php?r=author/create-book/find-tags',
+        {selected_tags: tags, tag_type: type},
+        tags_select,
+        'tag'
+    );
+    tags_select.removeClass('hidden');
+})
 
 
 
@@ -122,7 +160,7 @@ function getSelectedFromForm(form, field) {
     return selected_id;
 }
 
-function ajaxDropDown(id, url, data, select) {
+function ajaxDropDown(id, url, data, select, type_name) {
     // select это genres-select или tag-select
     $.ajax({
         url: url,
@@ -130,12 +168,14 @@ function ajaxDropDown(id, url, data, select) {
         data: data,
         success: function (response) {
             select.empty();
-            $.each(response, function(key, value) {
-                select.append(`<div class="dropdown-item" id="${id}" genre="${value.id}">
-                    <div class="metadata-title">${value.title}</div>
-                    <div class="metadata-description tip">${value.description}</div>
-                </div>`);
-            });
+            if (Object.keys(response).length !== 0) // опять тождественно равно????
+                $.each(response, function(key, value) {
+                    select.append(`<div class="dropdown-item" id="${id}" ${type_name}="${value.id}">
+                        <div class="metadata-title">${value.title}</div>
+                        <div class="metadata-description tip">${value.description}</div>
+                    </div>`);
+                });
+            else select.append('<div class="tip-color dropdown-item empty-dropdown-item">Ничего не найдено</div>');
         },
         error: function (error) {
             console.log(error);

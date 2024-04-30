@@ -10,13 +10,16 @@ use app\models\CreateBookForms\FormCreateMain;
 use app\models\Tables\Book;
 use app\models\Tables\BookFandom;
 use app\models\Tables\BookGenre;
+use app\models\Tables\BookTag;
 use app\models\Tables\Chapter;
 use app\models\Tables\Fandom;
 use app\models\Tables\Genre;
+use app\models\Tables\GenreType;
 use app\models\Tables\Rating;
 use app\models\Tables\Relation;
 use app\models\Tables\Size;
 use app\models\Tables\Tag;
+use app\models\Tables\TagType;
 use app\models\Tables\Type;
 use SimpleXMLElement;
 use Yii;
@@ -32,94 +35,54 @@ class CreateBookController extends Controller
 {
     public function actionFindGenres() {
         Yii::$app->response->format = Response::FORMAT_JSON;
-        /*$input = Yii::$app->request->post('input');
-        $selected_genres = Yii::$app->request->post('selected_genres');
-
-        if ($input) $genres = Genre::find()->where(['like', 'title', $input]);
-        else $genres = Genre::find();
-
-        if ($selected_genres)
-            foreach ($selected_genres as $selected_genre) {
-                $genres->andWhere(['<>', 'id', $selected_genre]);
-            }
-        $find_genres = $genres->all();
-
-        foreach ($find_genres as $key => $value) {
-            $data[$key] = $value;
-        }*/
         return $this->findMeta(
+            Genre::class,
             Yii::$app->request->post('input'),
             Yii::$app->request->post('selected_genres'),
-            Genre::class
+            Yii::$app->request->post('genre_type'),
+            'genre'
         );
     }
     public function actionFindTags() {
         Yii::$app->response->format = Response::FORMAT_JSON;
         return $this->findMeta(
+            Tag::class,
             Yii::$app->request->post('input'),
             Yii::$app->request->post('selected_tags'),
-            Tag::class
+            Yii::$app->request->post('tag_type'),
+            'tag'
         );
     }
     public function actionFindFandoms() {
         Yii::$app->response->format = Response::FORMAT_JSON;
         return $this->findMeta(
+            Fandom::class,
             Yii::$app->request->post('input'),
             Yii::$app->request->post('selected_fandoms'),
-            Fandom::class
         );
-        /*$input = Yii::$app->request->post('input');
-
-        if ($input) {
-            $fandoms = Fandom::find()->where(['like', 'title', $input])->all();
-            foreach ($fandoms as $fandom) {
-                $data[$fandom->id] = $fandom->title;
-            }
-        }
-        else {
-            $fandoms = Fandom::getFandomsList();
-            foreach ($fandoms as $key => $fandom) {
-                $data[$key] = $fandom;
-            }
-        }
-
-        return $data;*/
     }
 
     public function actionCreateMain()
     {
         if (Yii::$app->user->isGuest) return $this->goHome();
 
-        /*$session = Yii::$app->session;
-        if ($session->isActive) {
-            $id = $session->get('id');
-        }
-
-        $session->open();*/
-
         $model = new FormCreateMain();
         $relations = Relation::getRelationsList();
         $ratings = Rating::getRatingsList();
         $plan_sizes = Size::getSizesList();
 
-        //$genres = Genre::find();
+        $genre_types = GenreType::getGenreTypesList();
+        $tag_types = TagType::getTagTypesList();
 
         $model_genres = [];
         $model_tags = [];
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            //VarDumper::dump($model, 10, true);
             if ($model->genres)
-                foreach ($model->genres as $genre) {
-                    $model_genres[] = Genre::findOne($genre);
-                }
+                foreach ($model->genres as $genre) $model_genres[] = Genre::findOne($genre);
             if ($model->tags)
-                foreach ($model->tags as $tag) {
-                    $model_tags[] = Tag::findOne($tag);
-                }
-        }
+                foreach ($model->tags as $tag) $model_tags[] = Tag::findOne($tag);
 
-        /*if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $process = new Book();
             $process->user_id = Yii::$app->user->identity->id;
             $process->created_at = new Expression('NOW()');
@@ -139,16 +102,24 @@ class CreateBookController extends Controller
             $process->step = 1;
 
             if ($process->save()) {
-                foreach ($model->genres as $genre) {
-                    $process_book_genre = new BookGenre();
-                    $process_book_genre->book_id = $process->id;
-                    $process_book_genre->genre_id = $genre;
-                    $process_book_genre->save();
-                }
+                if ($model->genres)
+                    foreach ($model->genres as $genre) {
+                        $process_book_genre = new BookGenre();
+                        $process_book_genre->book_id = $process->id;
+                        $process_book_genre->genre_id = $genre;
+                        $process_book_genre->save();
+                    }
+                if ($model->tags)
+                    foreach ($model->tags as $tag) {
+                        $process_book_tag = new BookTag();
+                        $process_book_tag->book_id = $process->id;
+                        $process_book_tag->tag_id = $tag;
+                        $process_book_tag->save();
+                    }
 
                 return $this->redirect(Url::to(['create-fandom', 'id' => $process->id]));
             }
-        }*/
+        }
 
         return $this->render('create-main', [
             'model'=> $model,
@@ -158,6 +129,9 @@ class CreateBookController extends Controller
             'relations' => $relations,
             'ratings' => $ratings,
             'plan_sizes' => $plan_sizes,
+
+            'genre_types' => $genre_types,
+            'tag_types' => $tag_types,
         ]);
     }
 
@@ -336,7 +310,8 @@ class CreateBookController extends Controller
 
 
     // вспомогательные функции
-    public function deleteFolder($folderPath) {
+    public function deleteFolder($folderPath): bool
+    {
         if (!is_dir($folderPath)) return false;
 
         $files = array_diff(scandir($folderPath), array('.', '..'));
@@ -349,17 +324,19 @@ class CreateBookController extends Controller
         return rmdir($folderPath);
     }
 
-    public function findMeta($input, $selected, $model): array
+    public function findMeta($model, $input = null, $selected = null, $type = null, $meta_name = null): array
     {
         $data = [];
-        // экранировать потом весь этот input
-        if ($input) $metas = $model::find()->where(['like', 'title', $input]);
-        else $metas = $model::find();
+        $metas = $model::find();
 
+        if ($input) $metas->where(['like', 'title', $input]); // подумать потом о безопасности этого всего
         if ($selected)
             foreach ($selected as $item) {
                 $metas->andWhere(['<>', 'id', $item]);
             }
+        if ($type && $meta_name) $metas->andWhere([$meta_name . '_type_id' => $type]);
+
+
         $find_metas = $metas->all();
         foreach ($find_metas as $key => $value) {
             $data[$key] = $value;

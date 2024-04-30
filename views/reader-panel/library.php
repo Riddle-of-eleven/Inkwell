@@ -21,10 +21,10 @@ use app\widgets\BookDisplay;
 
 
 <div class="tab-header">
-    <div class="tab active-tab" data-tab="1"><div><?=favorite_icon?></div>Понравившиеся</div>
-    <div class="tab" data-tab="2"><div><?=bookmarks_icon?></div>Избранное</div>
-    <div class="tab" data-tab="3"><div><?=priority_icon?></div>Прочитанные</div>
-    <div class="tab" data-tab="4"><div><?=hourglass_icon?></div>Прочитать позже</div>
+    <div class="tab active-tab" data-tab="1"><?=favorite_icon?>Понравившиеся</div>
+    <div class="tab" data-tab="2"><?=bookmarks_icon?>Избранное</div>
+    <div class="tab" data-tab="3"><?=priority_icon?>Прочитанные</div>
+    <div class="tab" data-tab="4"><?=hourglass_icon?>Прочитать позже</div>
 </div>
 
 <div class="tab-contents">

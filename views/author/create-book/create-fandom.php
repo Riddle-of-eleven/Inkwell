@@ -1,5 +1,7 @@
 <?php
-$this->title = Yii::$app->name.' – новая книга';
+$this->title = 'Новая книга';
+
+/** @var yii\web\View $this */
 
 /* @var $id */
 /* @var $model */
