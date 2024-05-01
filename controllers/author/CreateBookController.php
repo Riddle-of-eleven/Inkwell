@@ -15,6 +15,7 @@ use app\models\Tables\Chapter;
 use app\models\Tables\Fandom;
 use app\models\Tables\Genre;
 use app\models\Tables\GenreType;
+use app\models\Tables\Origin;
 use app\models\Tables\Rating;
 use app\models\Tables\Relation;
 use app\models\Tables\Size;
@@ -60,6 +61,17 @@ class CreateBookController extends Controller
             Yii::$app->request->post('input'),
             Yii::$app->request->post('selected_fandoms'),
         );
+    }
+    public function actionFindOrigins() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $fandom = Yii::$app->request->post('fandom');
+        $origins = []; $origins_data = [];
+        if ($fandom)
+            $origins = Fandom::findOne($fandom)->origins;
+        if ($origins)
+            foreach ($origins as $origin)
+                $origins_data[] = ['origin' => $origin, 'media' => $origin->media->singular_title];
+        return $origins_data;
     }
 
     public function actionCreateMain()
@@ -143,10 +155,14 @@ class CreateBookController extends Controller
         $types = Type::getTypesList();
         $id = Yii::$app->request->get('id');
 
+        $model_fandoms = [];
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->fandoms)
+                foreach ($model->fandoms as $fandom) $model_fandoms[] = Fandom::findOne($fandom);
+
             //VarDumper::dump($model, 10, true); die;
-            if ($model->type == 2)
+            /*if ($model->type == 2)
                 foreach ($model->fandoms as $fandom) {
                     $process_book_fandom = new BookFandom();
                     $process_book_fandom->book_id = $id;
@@ -160,12 +176,14 @@ class CreateBookController extends Controller
             $book->real_size_id = 1;
             $book->save();
 
-            return $this->redirect(Url::to(['create-cover', 'id' => $id]));
+            return $this->redirect(Url::to(['create-cover', 'id' => $id]));*/
         }
 
         return $this->render('create-fandom', [
             'model' => $model,
             'types' => $types,
+
+            'model_fandoms' => $model_fandoms
         ]);
     }
 
