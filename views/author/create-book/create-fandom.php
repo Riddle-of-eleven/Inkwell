@@ -26,6 +26,9 @@ $this->registerCss(<<<css
     .fandoms {
         display: flex; flex-direction: column; gap: 10px;
     }
+    .character-dropdown {
+        display: flex; flex-direction: row; gap: 10px;
+    }
 css);
 $this->registerJsFile('@web/js/author/fandoms-handler.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
@@ -97,15 +100,20 @@ $this->registerJsFile('@web/js/author/fandoms-handler.js', ['depends' => [\yii\w
         </div>
 
         <div>
-            <div class="header3">Персонажи</div>
-            <!--<div class="ui field"><input type="text" placeholder="Введите первые несколько символов"></div>-->
-            <div class="tip-color fandom-first">Сначала выберите фэндом</div>
+            <div class="field-header-words">
+                <div class="header3">Персонажи</div>
+                <!--<div class="symbol-count">0 / 10</div>-->
+            </div>
+            <div class="field-with-dropdown characters-container">
+                <div class="tip-color fandom-first">Сначала выберите фэндом</div>
+            </div>
         </div>
 
         <div>
             <div class="header3">Пейринги</div>
-            <div class="tip-color fandom-first">Сначала выберите фэндом</div>
-            <!--<div class="ui button icon-button"><?= new_pairing_icon ?>Добавить пейринг</div>-->
+            <div class="pairing-container">
+                <div class="tip-color fandom-first">Сначала выберите фэндом</div>
+            </div>
         </div>
 
     </div>

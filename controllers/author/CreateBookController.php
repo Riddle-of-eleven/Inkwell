@@ -12,6 +12,7 @@ use app\models\Tables\BookFandom;
 use app\models\Tables\BookGenre;
 use app\models\Tables\BookTag;
 use app\models\Tables\Chapter;
+use app\models\Tables\Character;
 use app\models\Tables\Fandom;
 use app\models\Tables\Genre;
 use app\models\Tables\GenreType;
@@ -73,6 +74,30 @@ class CreateBookController extends Controller
                 $origins_data[] = ['origin' => $origin, 'media' => $origin->media->singular_title];
         return $origins_data;
     }
+    public function actionFindCharacters() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $fandoms = Yii::$app->request->post('selected_fandoms');
+        $characters = Yii::$app->request->post('selected_characters');
+        $input = Yii::$app->request->post('input');
+
+        $data = [];
+        $search = Character::find();
+        $search->andFilterWhere(['like', 'full_name', $input]);
+        if ($fandoms)
+            $search->andWhere(['fandom_id' => $fandoms]);
+        /*if ($characters)
+            foreach ($characters as $character) $search->where(['<>', 'id', $character]);*/
+        $search_result = $search->all();
+        foreach ($search_result as $key => $value) {
+            $data[$key] = [
+                'character' => $value,
+                'fandom' => $value->fandom
+            ];
+        }
+        return $data;
+    }
+
+
 
     public function actionCreateMain()
     {
@@ -347,6 +372,7 @@ class CreateBookController extends Controller
         $data = [];
         $metas = $model::find();
 
+        // можно поменять на filterWhere
         if ($input) $metas->where(['like', 'title', $input]); // подумать потом о безопасности этого всего
         if ($selected)
             foreach ($selected as $item) {
