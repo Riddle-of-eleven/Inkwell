@@ -42,8 +42,7 @@ function ajaxCharactersDropDown(id, url, data, select) {
         type: 'post',
         data: data,
         success: function (response) {
-            console.log(response);
-            /*select.empty();
+            select.empty();
             if (Object.keys(response).length !== 0) // опять тождественно равно????
                 $.each(response, function(key, value) {
                     let to_append = `<div class="dropdown-item character-dropdown" id="${id}" character="${value.character.id}">
@@ -52,7 +51,7 @@ function ajaxCharactersDropDown(id, url, data, select) {
                     </div>`;
                     select.append(to_append);
                 });
-            else select.append('<div class="tip-color dropdown-item empty-dropdown-item">Ничего не найдено</div>');*/
+            else select.append('<div class="tip-color dropdown-item empty-dropdown-item">Ничего не найдено</div>');
         },
         error: function (error) {
             console.log(error);

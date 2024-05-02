@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Новая книга';
+$this->title = 'Новая книга – фэндомные сведения';
 
 /** @var yii\web\View $this */
 
@@ -28,6 +28,15 @@ $this->registerCss(<<<css
     }
     .character-dropdown {
         display: flex; flex-direction: row; gap: 10px;
+    }
+    #selected-fandoms {
+        display: flex; flex-direction: column; gap: 4px;
+    }
+    .fandoms-and-origins {
+        display: flex; flex-direction: column; gap: 8px;
+    }
+    .fandoms-and-origins .field-header-words {
+        margin: 0;
     }
 css);
 $this->registerJsFile('@web/js/author/fandoms-handler.js', ['depends' => [\yii\web\JqueryAsset::class]]);
@@ -77,7 +86,7 @@ $this->registerJsFile('@web/js/author/fandoms-handler.js', ['depends' => [\yii\w
     </div>
 
     <div class="fandom-section hidden">
-        <div>
+        <div class="fandoms-and-origins">
             <div class="field-header-words">
                 <div class="header3">Фэндомы</div>
                 <!--<div class="symbol-count">0 / 10</div>-->
@@ -90,13 +99,7 @@ $this->registerJsFile('@web/js/author/fandoms-handler.js', ['depends' => [\yii\w
                     ])?></div>
                 <div class="dropdown-list block hidden" id="fandoms-select"></div>
             </div>
-        </div>
-
-        <div>
-            <div class="header3">Первоисточники</div>
-            <div id="selected-fandoms">
-                <div class="tip-color fandom-first">Сначала выберите фэндом</div>
-            </div>
+            <div id="selected-fandoms"></div>
         </div>
 
         <div>
@@ -104,6 +107,7 @@ $this->registerJsFile('@web/js/author/fandoms-handler.js', ['depends' => [\yii\w
                 <div class="header3">Персонажи</div>
                 <!--<div class="symbol-count">0 / 10</div>-->
             </div>
+            <div class="selected-items" id="characters-selected-items"></div>
             <div class="field-with-dropdown characters-container">
                 <div class="tip-color fandom-first">Сначала выберите фэндом</div>
             </div>

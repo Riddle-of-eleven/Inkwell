@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Новая книга';
+$this->title = 'Новая книга – общая информация';
 
 /** @var yii\web\View $this */
 

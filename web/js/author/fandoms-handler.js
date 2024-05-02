@@ -48,8 +48,8 @@ $('#selected-fandoms').on('click', '.remove-fandom', function() {
     $(`[fandom=${id}]`).remove();
 
     let selected = $('#selected-fandoms');
-    if (selected.is(':empty'))
-        selected.append('<div class="tip-color fandom-first">Сначала выберите фэндом</div>');
+    /*if (selected.is(':empty'))
+        selected.append('<div class="tip-color fandom-first">Сначала выберите фэндом</div>');*/
 });
 
 
@@ -132,6 +132,7 @@ function createOriginSection(fandom, title, item) {
                 });
                 to_append += `</div>`;
             }
+            else to_append += `<div class="select-content tip-color">У этого фэндома нет первоисточников</div>`;
             to_append += `</details>`;
             selected.append(to_append);
             item.remove();
@@ -155,9 +156,7 @@ characters_container.on('input', '#characters-input', function() {
         $('#characters-select')
     );
 });
-
-
-/*characters_container.on('click', '#characters-input', function() {
+characters_container.on('click', '#characters-input', function() {
     let characters = getSelectedFromForm('FormCreateFandom', 'characters');
     let fandoms = getSelectedFromForm('FormCreateFandom', 'fandoms');
     let characters_select = $('#characters-select');
@@ -169,27 +168,27 @@ characters_container.on('input', '#characters-input', function() {
             characters_select
         );
     characters_select.removeClass('hidden');
-});*/
-
-/*$('#characters-select').on('click', '.dropdown-item:not(.empty-dropdown-item)', function() {
-    let tag = $(this).attr('tag'), title = $(this).children('.metadata-title').html();
+});
+characters_container.on('click', '.dropdown-item:not(.empty-dropdown-item)', function() {
+    let character = $(this).attr('character'), title = $(this).children('.metadata-title').html();
     let hidden = $('<input>').attr({
         type: 'hidden',
-        name: 'FormCreateMain[tags][]',
-        value: tag
+        name: 'FormCreateFandom[characters][]',
+        value: character
     });
-    let selected_items = $('#tags-selected-items');
+    let selected_items = $('#characters-selected-items');
     selected_items.append(hidden);
-    selected_items.append(`<div class="selected-item" tag="${tag}">
+    selected_items.append(`<div class="selected-item" character="${character}">
         ${title}
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" class="icon to-close" tag="${tag}">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" class="icon to-close" character="${character}">
             <path d="m339-301.847 141-141 141 141L658.153-339l-141-141 141-141L621-658.153l-141 141-141-141L301.847-621l141 141-141 141L339-301.847Zm141.067 185.846q-74.836 0-141.204-28.42-66.369-28.42-116.182-78.21-49.814-49.791-78.247-116.129-28.433-66.337-28.433-141.173 0-75.836 28.42-141.704 28.42-65.869 78.21-115.682 49.791-49.814 116.129-78.247 66.337-28.433 141.173-28.433 75.836 0 141.704 28.42 65.869 28.42 115.682 78.21 49.814 49.791 78.247 115.629 28.433 65.837 28.433 141.673 0 74.836-28.42 141.204-28.42 66.369-78.21 116.182-49.791 49.814-115.629 78.247-65.837 28.433-141.673 28.433ZM480-168q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z" />
         </svg>
     </div>`);
     $(this).remove();
 });
-$('#tags-selected-items').on('click', '.to-close', function() {
-    let id = $(this).attr('tag');
-    $(`input[type="hidden"][name="FormCreateMain[tags][]"][value="${id}"]`).remove();
-    $(`[tag=${id}]`).remove();
-});*/
+$('#characters-selected-items').on('click', '.to-close', function() {
+    let id = $(this).attr('character');
+    console.log(id)
+    $(`input[type="hidden"][name="FormCreateFandom[characters][]"][value="${id}"]`).remove();
+    $(`[character=${id}]`).remove();
+});

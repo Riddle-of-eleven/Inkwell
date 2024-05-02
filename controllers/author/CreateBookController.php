@@ -85,8 +85,8 @@ class CreateBookController extends Controller
         $search->andFilterWhere(['like', 'full_name', $input]);
         if ($fandoms)
             $search->andWhere(['fandom_id' => $fandoms]);
-        /*if ($characters)
-            foreach ($characters as $character) $search->where(['<>', 'id', $character]);*/
+        if ($characters)
+            foreach ($characters as $character) $search->andWhere(['<>', 'id', $character]);
         $search_result = $search->all();
         foreach ($search_result as $key => $value) {
             $data[$key] = [
