@@ -4,14 +4,13 @@ namespace app\controllers\moderator;
 
 use app\models\Forms\Moderator\FormChooseType;
 use app\models\Forms\Moderator\FormCreateTag;
-use app\models\Genre;
-use app\models\GenreType;
-use app\models\Tag;
-use app\models\TagType;
+use app\models\Tables\Genre;
+use app\models\Tables\GenreType;
+use app\models\Tables\Tag;
+use app\models\Tables\TagType;
 use Yii;
 use yii\db\Expression;
 use yii\helpers\Url;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 
 class ModeratorPanelController extends Controller

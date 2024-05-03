@@ -31,7 +31,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/common/menu.js',
-        'js/common/handlers.js',
+        'js/common/helpers.js',
         'js/ui/tabs.js',
         'js/ui/notifications.js',
         'js/ajax/themes.js',

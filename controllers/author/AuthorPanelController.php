@@ -2,11 +2,10 @@
 
 namespace app\controllers\author;
 
-use app\models\Book;
-use app\models\Fandom;
+use app\models\Tables\Book;
+use app\models\Tables\Fandom;
 use Yii;
 use yii\helpers\Url;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 
 class AuthorPanelController extends Controller

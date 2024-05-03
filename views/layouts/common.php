@@ -6,7 +6,6 @@
 use app\assets\AppAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\web\View;
 use yii\widgets\Breadcrumbs;
 
 $session = Yii::$app->session;
@@ -60,7 +59,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         </div>
         <div class="small-profile-picture">
             <? $id = Yii::$app->user->identity->id;
-                $user = \app\models\User::find()->select('avatar')->where(['id' => $id])->one(); ?>
+                $user = \app\models\Tables\User::find()->select('avatar')->where(['id' => $id])->one(); ?>
             <?= Html::img('@web/'.$user->avatar) ?>
             <span class="menu-item hidden"><?= Yii::$app->user->identity->login ?></:></span>
         </div>

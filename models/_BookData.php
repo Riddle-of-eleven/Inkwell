@@ -2,8 +2,12 @@
 
 namespace app\models;
 
+use app\models\Tables\Book;
+use app\models\Tables\Completeness;
+use app\models\Tables\Rating;
+use app\models\Tables\Relation;
+use app\models\Tables\User;
 use yii\db\ActiveRecord;
-use yii\helpers\VarDumper;
 use yii\i18n\Formatter;
 
 class _BookData extends ActiveRecord

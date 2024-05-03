@@ -34,6 +34,8 @@
     margin-bottom: 15px;
 }
 
+
+
 /* подпольный выпадающий список */
 .field-with-dropdown {
     position: relative;
@@ -41,16 +43,17 @@
 .dropdown-list {
     position: absolute;
     top: 40px;
-    width: 100%; max-height: 120px;
+    width: 100%; max-height: 200px;
     overflow-y: scroll;
-    padding: 10px 0;
-    display: flex; flex-direction: column; gap: 10px;
+    padding: 8px 0;
+    display: flex; flex-direction: column;
     z-index: 1000;
 }
 .dropdown-item {
     border-bottom: var(--border-width) solid var(--color-border);
-    padding: 5px 20px;
+    padding: 10px 20px;
     cursor: pointer;
+    display: flex; flex-direction: column; gap: 5px;
 }
 .dropdown-item:last-of-type {
     border-bottom: none !important;
@@ -69,6 +72,22 @@
 }
 .selected-item svg {
     fill: var(--color-accent);
+}
+
+
+
+
+/* СЕЛЕКТ И ЕГО ПУНКТЫ*/
+/*.select-container {
+    padding-right: 16px !important;
+}*/
+.select-container select option {
+    background-color: var(--color-foreground);
+}
+select {
+    border: none;
+    background-color: var(--color-foreground);
+    width: 100%;
 }
 
 

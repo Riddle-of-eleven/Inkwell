@@ -4,24 +4,21 @@ namespace app\controllers;
 
 use app\models\_BookData;
 use app\models\_ContentData;
-use app\models\Book;
-use app\models\Chapter;
-use app\models\FavoriteBook;
-use app\models\Followers;
-use app\models\Like;
-use app\models\Read;
-use app\models\ReadLater;
-use app\models\Tag;
-use app\models\Theme;
-use app\models\User;
-use app\models\ViewHistory;
+use app\models\Tables\Book;
+use app\models\Tables\Chapter;
+use app\models\Tables\FavoriteBook;
+use app\models\Tables\Followers;
+use app\models\Tables\Like;
+use app\models\Tables\Read;
+use app\models\Tables\ReadLater;
+use app\models\Tables\Theme;
+use app\models\Tables\User;
+use app\models\Tables\ViewHistory;
+use Yii;
 use yii\data\Pagination;
 use yii\db\Expression;
-use yii\helpers\VarDumper;
-use yii\i18n\Formatter;
-use yii\web\Controller;
-use Yii;
 use yii\helpers\Url;
+use yii\web\Controller;
 use yii\web\Response;
 
 
