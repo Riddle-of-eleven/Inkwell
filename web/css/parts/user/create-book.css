@@ -1,0 +1,39 @@
+form {
+    display: flex; flex-direction: column; gap: 40px;
+}
+.fandom-section {
+    display: flex; flex-direction: column; gap: 20px;
+}
+.fandoms {
+    display: flex; flex-direction: column; gap: 10px;
+}
+
+#selected-fandoms {
+    display: flex; flex-direction: column; gap: 4px;
+}
+.fandoms-and-origins {
+    display: flex; flex-direction: column; gap: 8px;
+}
+.fandoms-and-origins .field-header-words {
+    margin: 0;
+}
+
+/* ПЕЙРИНГИ */
+.pairing-item {
+    display: flex; justify-content: space-between; align-items: start; gap: 20px;
+    padding: 14px 18px;
+    margin-bottom: 6px;
+}
+.pairing-choice {
+    display: flex;
+    width: 100%;
+}
+.pairing-choice .ui {
+    width: 100%;
+}
+.field-select-wider {
+    min-width: 200px !important;
+}
+.field-select-narrow {
+    width: 60px !important;
+}
