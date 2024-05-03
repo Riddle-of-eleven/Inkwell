@@ -87,6 +87,11 @@ class CreateBookController extends Controller
             $search->andWhere(['fandom_id' => $fandoms]);
         if ($characters)
             foreach ($characters as $character) $search->andWhere(['<>', 'id', $character]);
+        $search->orderBy([
+            // может, потом как-то это дело отсортировать по порядку, предложенному пользователем
+            'fandom_id' => SORT_DESC,
+            'full_name' => SORT_ASC
+        ]);
         $search_result = $search->all();
         foreach ($search_result as $key => $value) {
             $data[$key] = [

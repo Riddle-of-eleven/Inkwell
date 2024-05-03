@@ -13,7 +13,7 @@ function getSelectedFromForm(form, field) {
 }
 
 function ajaxDropDown(id, url, data, select, type_name) {
-    // select это genres-select или tag-select
+    // select это выпадающий список, куда добавляются результаты
     $.ajax({
         url: url,
         type: 'post',
@@ -45,7 +45,7 @@ function ajaxCharactersDropDown(id, url, data, select) {
             select.empty();
             if (Object.keys(response).length !== 0) // опять тождественно равно????
                 $.each(response, function(key, value) {
-                    let to_append = `<div class="dropdown-item character-dropdown" id="${id}" character="${value.character.id}">
+                    let to_append = `<div class="dropdown-item" id="${id}" character="${value.character.id}">
                         <div class="metadata-title">${value.character.full_name}</div>
                         <div class="metadata-desciption tip-color">${value.fandom.title}</div>
                     </div>`;

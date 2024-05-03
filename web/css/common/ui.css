@@ -34,6 +34,11 @@
     margin-bottom: 15px;
 }
 
+/* поле, которое селект */
+.field-select {
+    width: max-content;
+    min-width: unset;
+}
 
 
 /* подпольный выпадающий список */
@@ -223,7 +228,7 @@ textarea {
 
 .password-toggle-button {
     display: flex; align-items: center; gap: 12px;
-    margin: -7px -8px -6px 0px;
+    margin: -7px -8px -6px 0;
 }
 .password-toggle-button .vertical-line {
     background-color: var(--color-border);

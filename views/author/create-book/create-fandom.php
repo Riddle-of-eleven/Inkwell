@@ -16,29 +16,7 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 \app\assets\DashboardAsset::register($this);
-$this->registerCss(<<<css
-    form {
-        display: flex; flex-direction: column; gap: 40px;
-    }
-    .fandom-section {
-        display: flex; flex-direction: column; gap: 20px;
-    }
-    .fandoms {
-        display: flex; flex-direction: column; gap: 10px;
-    }
-    .character-dropdown {
-        display: flex; flex-direction: row; gap: 10px;
-    }
-    #selected-fandoms {
-        display: flex; flex-direction: column; gap: 4px;
-    }
-    .fandoms-and-origins {
-        display: flex; flex-direction: column; gap: 8px;
-    }
-    .fandoms-and-origins .field-header-words {
-        margin: 0;
-    }
-css);
+$this->registerCssFile('@web/css/parts/user/create-book.css');
 $this->registerJsFile('@web/js/author/fandoms-handler.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 ?>
@@ -115,7 +93,7 @@ $this->registerJsFile('@web/js/author/fandoms-handler.js', ['depends' => [\yii\w
 
         <div>
             <div class="header3">Пейринги</div>
-            <div class="pairing-container">
+            <div class="field-with-dropdown pairings-container">
                 <div class="tip-color fandom-first">Сначала выберите фэндом</div>
             </div>
         </div>
