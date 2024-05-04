@@ -31,7 +31,7 @@ use yii\helpers\Url;
 
 <!-- ПРИМЕЧАНИЯ -->
 <div class="metadata-item">
-    <label for="step-meta-description" class="header3 metadata-item-title">
+    <label for="step-meta-remark" class="header3 metadata-item-title">
         <div>Примечания</div>
         <span class="content-limit tip-color">2000</span>
     </label>
@@ -43,7 +43,7 @@ use yii\helpers\Url;
 
 <!-- ДИСКЛЕЙМЕР -->
 <div class="metadata-item">
-    <label for="step-meta-description" class="header3 metadata-item-title">
+    <label for="step-meta-disclaimer" class="header3 metadata-item-title">
         <div>Дисклеймер</div>
         <span class="content-limit tip-color">500</span>
     </label>
@@ -55,7 +55,7 @@ use yii\helpers\Url;
 
 <!-- ПОСВЯЩЕНИЕ -->
 <div class="metadata-item">
-    <label for="step-meta-description" class="header3 metadata-item-title">
+    <label for="step-meta-dedication" class="header3 metadata-item-title">
         <div>Посвящение</div>
         <span class="content-limit tip-color">500</span>
     </label>
