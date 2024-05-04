@@ -11,3 +11,10 @@ function loadStepByName(name) {
         }
     });
 }
+
+// должен вернуть количество оставшихся символов?
+function countSymbolsFromField(field, total) {
+    let count = field.val().length;
+    let place = field.closest('.metadata-item').find('.content-limit');
+    place.html(total - count);
+}
