@@ -40,8 +40,6 @@ $this->registerJsFile('@web/js/author/fandoms-handler.js', ['depends' => [\yii\w
 </div>
 
 
-
-
 <? $f = ActiveForm::begin([
     'method' => 'post',
     'id' => 'form-fandom',

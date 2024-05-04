@@ -214,6 +214,8 @@ details > summary {
     border: var(--border-width) solid var(--color-outline);
     border-radius: 10px;
     color: var(--color-tip);
+    cursor: pointer;
+    user-select: none;
 }
 .step svg {
     fill: var(--color-tip);

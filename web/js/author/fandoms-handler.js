@@ -249,3 +249,7 @@ function showCharactersDropdown(element, select) {
     ajaxCharactersDropDown('characters-dropdown', 'index.php?r=author/create-book/find-characters', data, select);
     select.removeClass('hidden');
 }
+
+
+
+/////
