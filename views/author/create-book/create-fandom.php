@@ -40,7 +40,7 @@ $this->registerJsFile('@web/js/author/fandoms-handler.js', ['depends' => [\yii\w
 </div>
 
 
-<? $f = ActiveForm::begin([
+<?php $f = ActiveForm::begin([
     'method' => 'post',
     'id' => 'form-fandom',
     'fieldConfig' => [
@@ -101,4 +101,4 @@ $this->registerJsFile('@web/js/author/fandoms-handler.js', ['depends' => [\yii\w
 </section>
 
 <?= Html::submitButton('Далее', ['class' => 'ui button icon-button', 'name' => 'main-submit']) ?>
-<? ActiveForm::end() ?>
+<?php ActiveForm::end() ?>

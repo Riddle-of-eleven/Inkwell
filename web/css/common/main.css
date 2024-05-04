@@ -1,5 +1,5 @@
 * {
-    font-family: 'Nunito';
+    font-family: 'Nunito', sans-serif;
     transition: .2s;
     color: var(--color-graphics);
     caret-color: var(--color-accent);
