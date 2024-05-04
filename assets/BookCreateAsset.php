@@ -9,7 +9,7 @@ class BookCreateAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        //'css/dashboards/common.css',
+        'css/dashboards/steps.css',
     ];
     public $js = [
         //'js/ui/tabs.js',

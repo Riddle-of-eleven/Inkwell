@@ -10,7 +10,7 @@
 /* обычное поле */
 .field {
     box-sizing: border-box;
-    gap: 16px;
+    /*gap: 16px;*/
     padding: 7px 10px 6px 16px;
     min-width: 370px;
     position: relative;
@@ -99,12 +99,14 @@ select {
 
 
 textarea {
-    width: 100%;
+    width: 100%; max-height: 200px;
     resize: vertical;
-    border: var(--border-width) solid var(--color-outline);
+    /*border: var(--border-width) solid var(--color-outline);
     border-radius: 10px;
+    padding: 7px 10px 6px 16px;*/
     background-color: var(--color-foreground);
-    padding: 7px 10px 6px 16px;
+    border: none;
+    outline: none;
 }
 .symbol-count {
     color: var(--color-tip);

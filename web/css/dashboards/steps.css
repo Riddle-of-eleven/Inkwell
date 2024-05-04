@@ -1,0 +1,16 @@
+.metadata-item {
+    display: flex; flex-direction: column; gap: 5px;
+    margin-bottom: 10px;
+}
+.metadata-item-title {
+    display: flex; justify-content: space-between;
+}
+
+.input-error {
+    display: none;
+    color: var(--color-error);
+    font-size: 12px;
+}
+.required-symbol {
+    color: var(--color-error);
+}
