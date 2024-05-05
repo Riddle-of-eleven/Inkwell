@@ -3,6 +3,7 @@ const description_length= 800;
 const remark_length= 2000;
 const other_length= 500;
 
+let content = $('.step-content');
 
 $(document).ready(function() {
     // вопрос, насколько это будет нужно, если оно загружается уже с некоторыми данными
@@ -15,18 +16,18 @@ $(document).ready(function() {
 });
 
 // подсчёт количества символов в полях
-$(document.body).on('input', '#step-meta-title', function () {
+content.on('input', '#step-meta-title', function () {
     countSymbolsFromField($(this), title_length);
 });
-$(document.body).on('input', '#step-meta-description', function () {
+content.on('input', '#step-meta-description', function () {
     countSymbolsFromField($(this), description_length);
 });
-$(document.body).on('input', '#step-meta-remark', function () {
+content.on('input', '#step-meta-remark', function () {
     countSymbolsFromField($(this), remark_length);
 });
-$(document.body).on('input', '#step-meta-disclaimer', function () {
+content.on('input', '#step-meta-disclaimer', function () {
     countSymbolsFromField($(this), other_length);
 });
-$(document.body).on('input', '#step-meta-dedication', function () {
+content.on('input', '#step-meta-dedication', function () {
     countSymbolsFromField($(this), other_length);
 });

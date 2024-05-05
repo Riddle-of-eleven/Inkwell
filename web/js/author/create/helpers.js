@@ -1,7 +1,6 @@
-function loadStepByName(name) {
+function loadStepByName(url) {
     $.ajax({
-        url: 'index.php?r=author/create/load-step',
-        data: {step: name},
+        url: 'index.php?r=author/create/load-step-' + url,
         type: 'post',
         success: function (response) {
             $(`.step-content`).html(response);
@@ -9,6 +8,12 @@ function loadStepByName(name) {
         error: function (error) {
             console.error('Ошибка: ', error);
         }
+    });
+
+    $.ajax({
+        url: 'index.php?r=author/create/remember-step',
+        type: 'post',
+        data: {step: url},
     });
 }
 

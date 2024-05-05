@@ -2,6 +2,9 @@
 $this->title = 'Добавление книги';
 
 /** @var yii\web\View $this */
+/* @var $step */
+
+use yii\web\View;
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -9,6 +12,13 @@ use yii\helpers\Url;
 use yii\helpers\VarDumper;
 
 \app\assets\BookCreateAsset::register($this);
+
+$this->registerJs(<<<js
+    $(document).ready(function() {
+        loadStepByName('$step');
+        $('[data-step=$step').addClass('active-step');
+    });
+js, View::POS_LOAD);
 
 ?>
 
@@ -20,15 +30,17 @@ use yii\helpers\VarDumper;
 </div>
 
 <div class="steps">
-    <div class="step active-step" data-step="1_main"><?=save_icon?> Общая информация</div>
+    <div class="step" data-step="main"><?=save_icon?> Общая информация</div>
     <?=chevron_right_icon?>
-    <div class="step" data-step="2_fandom"><?=fire_icon?> 2. Фэндомные сведения</div>
+    <div class="step" data-step="fandom"><?=fire_icon?> Фэндомные сведения</div>
     <?=chevron_right_icon?>
-    <div class="step" data-step="3_cover"><?=imagesmode_icon?> 3. Обложка</div>
+    <div class="step" data-step="cover"><?=imagesmode_icon?> Обложка</div>
     <?=chevron_right_icon?>
-    <div class="step completed-step" data-step="4_access"><?=person_icon?> 4. Доступ</div>
+    <div class="step" data-step="access"><?=person_icon?> Доступ</div>
 </div>
 
-<div class="line"></div>
+<!-- есть тут ещё класс completed_step. в целом на завершение шага лучше бы его добавлять и менять иконку на кружочек.
+     а если есть ошибки, тогда на восклицательный знак или типа того
+-->
 
 <section class="step-content"></section>
