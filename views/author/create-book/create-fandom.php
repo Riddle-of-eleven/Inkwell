@@ -61,7 +61,7 @@ $this->registerJsFile('@web/js/author/fandoms-handler.js', ['depends' => [\yii\w
         ?>
     </div>
 
-    <div class="fandom-section hidden">
+    <div class="fandom-section ">
         <div class="fandoms-and-origins">
             <div class="field-header-words">
                 <div class="header3">Фэндомы</div>
@@ -73,7 +73,7 @@ $this->registerJsFile('@web/js/author/fandoms-handler.js', ['depends' => [\yii\w
                         'placeholder' => 'Введите первые несколько символов...',
                         'autocomplete' => 'off'
                     ])?></div>
-                <div class="dropdown-list block hidden" id="fandoms-select"></div>
+                <div class="dropdown-list block" id="fandoms-select"></div>
             </div>
             <div id="selected-fandoms"></div>
         </div>

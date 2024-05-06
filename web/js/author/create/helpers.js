@@ -1,3 +1,4 @@
+// загружает в секцию контента текущий шаг
 function loadStepByName(url) {
     $.ajax({
         url: 'index.php?r=author/create/load-step-' + url,
@@ -17,9 +18,24 @@ function loadStepByName(url) {
     });
 }
 
-// должен вернуть количество оставшихся символов?
+// подсчитывает и устанавливает количество символов около ввода
 function countSymbolsFromField(field, total) {
     let count = field.val().length;
     let place = field.closest('.metadata-item').find('.content-limit');
     place.html(total - count);
+}
+
+// сохраняет вводимые данные
+function saveData(data, session_key) {
+    $.ajax({
+        url: 'index.php?r=author/create/save-data',
+        type: 'post',
+        data: {data: data, session_key: session_key},
+    });
+}
+
+// получает имя сессионного ключа из id
+function getSessionKeyFromId(element) {
+    let id = element.attr('id').split('-');
+    return id[id.length - 1];
 }

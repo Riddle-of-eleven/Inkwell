@@ -1,5 +1,15 @@
 <?php
-/** @var yii\web\View $this */
+/** @var View $this */
+
+/* @var $create_title */
+/* @var $create_description */
+/* @var $create_remark */
+/* @var $create_disclaimer */
+/* @var $create_dedication */
+
+/* @var $create_relation */
+/* @var $create_rating */
+/* @var $create_plan_size */
 
 /* @var Relation[] $relations */
 /* @var Rating[] $ratings */
@@ -7,6 +17,7 @@
 /* @var GenreType[] $genre_types */
 /* @var TagType[] $tag_types */
 
+use yii\web\View;
 use app\models\Tables\Relation;
 use app\models\Tables\Rating;
 use app\models\Tables\Size;
@@ -16,12 +27,27 @@ use app\models\Tables\TagType;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+$this->registerJs(<<<js
+    $(title).val(`$create_title`);
+    $(description).val(`$create_description`);
+    $(remark).val(`$create_remark`);
+    $(disclaimer).val(`$create_disclaimer`);
+    $(dedication).val(`$create_dedication`);
+
+    countSymbolsFromField($(title), title_length);
+    countSymbolsFromField($(description), description_length);
+    countSymbolsFromField($(remark), remark_length);
+    countSymbolsFromField($(disclaimer), other_length);
+    countSymbolsFromField($(dedication), other_length);
+js, View::POS_END);
+
 ?>
 
 <div class="header2">Основное</div>
 
+
 <!-- НАЗВАНИЕ -->
-<div class="metadata-item">
+<div class="metadata-item direct-to-session">
     <label for="step-meta-title" class="header3 metadata-item-title">
         <div>Название <span class="required-symbol">*</span></div>
         <span class="content-limit tip-color">150</span>
@@ -31,7 +57,7 @@ use yii\helpers\Url;
 </div>
 
 <!-- ОПИСАНИЕ -->
-<div class="metadata-item">
+<div class="metadata-item direct-to-session">
     <label for="step-meta-description" class="header3 metadata-item-title">
         <div>Описание <span class="required-symbol">*</span></div>
         <span class="content-limit tip-color">800</span>
@@ -43,7 +69,7 @@ use yii\helpers\Url;
 </div>
 
 <!-- ПРИМЕЧАНИЯ -->
-<div class="metadata-item">
+<div class="metadata-item direct-to-session">
     <label for="step-meta-remark" class="header3 metadata-item-title">
         <div>Примечания</div>
         <span class="content-limit tip-color">2000</span>
@@ -55,7 +81,7 @@ use yii\helpers\Url;
 </div>
 
 <!-- ДИСКЛЕЙМЕР -->
-<div class="metadata-item">
+<div class="metadata-item direct-to-session">
     <label for="step-meta-disclaimer" class="header3 metadata-item-title">
         <div>Дисклеймер</div>
         <span class="content-limit tip-color">500</span>
@@ -67,7 +93,7 @@ use yii\helpers\Url;
 </div>
 
 <!-- ПОСВЯЩЕНИЕ -->
-<div class="metadata-item">
+<div class="metadata-item direct-to-session">
     <label for="step-meta-dedication" class="header3 metadata-item-title">
         <div>Посвящение</div>
         <span class="content-limit tip-color">500</span>
@@ -83,14 +109,15 @@ use yii\helpers\Url;
 
 <div class="metadata-row-items">
     <!-- КАТЕГОРИЯ -->
-    <div class="metadata-item">
+    <div class="metadata-item direct-to-session">
         <div class="header3 metadata-item-title">
             <div>Категория <span class="required-symbol">*</span></div>
         </div>
         <div class="input-block-list" id="step-meta-relation">
-            <? foreach ($relations as $relation) { ?>
+            <? foreach ($relations as $relation) {
+                $relation_checked = $relation->id == $create_relation ? 'checked' : ''; ?>
                 <label class="ui choice-input-block">
-                    <input type="radio" name="relation" value="<?=$relation->id?>">
+                    <input type="radio" name="relation" value="<?=$relation->id?>" <?=$relation_checked?>>
                     <span><?=$relation->title?></span>
                 </label>
             <?}?>
@@ -99,14 +126,15 @@ use yii\helpers\Url;
     </div>
 
     <!-- РЕЙТИНГ -->
-    <div class="metadata-item">
+    <div class="metadata-item direct-to-session">
         <div class="header3 metadata-item-title" id="step-meta-rating">
             <div>Рейтинг <span class="required-symbol">*</span></div>
         </div>
-        <div class="input-block-list">
-            <? foreach ($ratings as $rating) { ?>
+        <div class="input-block-list" id="step-meta-rating">
+            <? foreach ($ratings as $rating) {
+                $rating_checked = $rating->id == $create_rating ? 'checked' : ''; ?>
                 <label class="ui choice-input-block">
-                    <input type="radio" name="rating" value="<?=$rating->id?>">
+                    <input type="radio" name="rating" value="<?=$rating->id?>" <?=$rating_checked?>>
                     <span><?=$rating->title?></span>
                 </label>
             <?}?>
@@ -115,14 +143,15 @@ use yii\helpers\Url;
     </div>
 
     <!-- ПЛАНИРУЕМЫЙ РАЗМЕР -->
-    <div class="metadata-item">
+    <div class="metadata-item direct-to-session">
         <div class="header3 metadata-item-title" id="step-meta-plan_size">
             <div>Планируемый размер <span class="required-symbol">*</span></div>
         </div>
-        <div class="input-block-list">
-            <? foreach ($plan_sizes as $plan_size) { ?>
+        <div class="input-block-list" id="step-meta-plan_size">
+            <? foreach ($plan_sizes as $plan_size) {
+                $plan_size_checked = $plan_size->id == $create_plan_size ? 'checked' : ''; ?>
                 <label class="ui choice-input-block">
-                    <input type="radio" name="plan_size" value="<?=$plan_size->id?>">
+                    <input type="radio" name="plan_size" value="<?=$plan_size->id?>" <?=$plan_size_checked?>>
                     <span><?=$plan_size->title?></span>
                 </label>
             <?}?>

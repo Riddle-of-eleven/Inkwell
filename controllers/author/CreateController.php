@@ -17,6 +17,8 @@ class CreateController extends Controller
     public function actionNewBook() {
         $session = Yii::$app->session;
         $step = $session->has('step') ? $session->get('step') : 'main';
+        $session['create.aaa'] = 'aaa';
+
 
         return $this->render('new-book', [
             'step' => $step,
@@ -28,8 +30,18 @@ class CreateController extends Controller
 
     // вспомогательные функции
     public function actionLoadStepMain() {
-        /*$session = Yii::$app->session;
-        $session->set('step', $step);*/
+        $session = Yii::$app->session;
+
+        $create_title = $session->get('create.title');
+        $create_description = $session->get('create.description');
+        $create_remark = $session->get('create.remark');
+        $create_disclaimer = $session->get('create.disclaimer');
+        $create_dedication = $session->get('create.dedication');
+
+        $create_relation = $session->get('create.relation');
+        $create_rating = $session->get('create.rating');
+        $create_plan_size = $session->get('create.plan_size');
+
 
         $relations = Relation::find()->all();
         $ratings = Rating::find()->all();
@@ -39,7 +51,19 @@ class CreateController extends Controller
         $tag_types = TagType::find()->all();
 
 
-        return $this->renderPartial('steps/step1_main', [
+        return $this->renderAjax('steps/step1_main', [
+            // данные как из формы
+            'create_title' => $create_title,
+            'create_description' => $create_description,
+            'create_remark' => $create_remark,
+            'create_disclaimer' => $create_disclaimer,
+            'create_dedication' => $create_dedication,
+
+            'create_relation' => $create_relation,
+            'create_rating' => $create_rating,
+            'create_plan_size' => $create_plan_size,
+
+            // прочие данные
             'relations' => $relations,
             'ratings' => $ratings,
             'plan_sizes' => $plan_sizes,
@@ -54,23 +78,31 @@ class CreateController extends Controller
 
         $book_types = Type::find()->all();
 
-        return $this->renderPartial('steps/step2_fandom', [
+        return $this->renderAjax('steps/step2_fandom', [
             'book_types' => $book_types,
         ]);
     }
     public function actionLoadStepCover() {
         /*$session = Yii::$app->session;
         $session->set('step', $step);*/
-        return $this->renderPartial('steps/step3_cover');
+        return $this->renderAjax('steps/step3_cover');
     }
     public function actionLoadStepAccess() {
         /*$session = Yii::$app->session;
         $session->set('step', $step);*/
-        return $this->renderPartial('steps/step4_access');
+        return $this->renderAjax('steps/step4_access');
     }
 
     public function actionRememberStep() {
         $session = Yii::$app->session;
         $session->set('step', Yii::$app->request->post('step'));
+    }
+
+
+    public function actionSaveData() {
+        $session = Yii::$app->session;
+        $session_key = Yii::$app->request->post('session_key');
+        $data = Yii::$app->request->post('data');
+        $session->set('create.' . $session_key, $data);
     }
 }

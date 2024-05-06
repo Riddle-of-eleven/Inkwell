@@ -11,8 +11,10 @@ use yii\helpers\Url;
 
 use yii\helpers\VarDumper;
 
-\app\assets\BookCreateAsset::register($this);
+$session = Yii::$app->session;
+VarDumper::dump($session['create.relation'], 10, true);
 
+\app\assets\BookCreateAsset::register($this);
 $this->registerJs(<<<js
     $(document).ready(function() {
         loadStepByName('$step');
