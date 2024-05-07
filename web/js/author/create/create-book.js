@@ -27,6 +27,13 @@ $(document).on('click', function (e) {
         removeDropdownList($(tags));
 });
 
+// открытие выпадающих списков по типу метаданных
+content.on('click', '.chosen-items-to-session [meta-type]', function() {
+    let input = $(this).closest('.metadata-item').find('input');
+    createDropdown(input, createTitleItems, $(this).attr('meta-type'));
+    //console.log($(this).attr('meta-type'))
+});
+
 // добавление выбранных элементов по клику
 content.on('click', '.chosen-items-to-session .dropdown-item', function () {
     addSelectedUnit($(this), createTitleItems);

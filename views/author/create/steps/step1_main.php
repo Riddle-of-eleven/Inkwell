@@ -174,7 +174,7 @@ $create_tags_hidden = $create_tags ? '' : 'hidden';
         <div>Жанры</div>
         <span class="content-limit tip-color">5</span>
     </div>
-    <div class="metadata-item-types">
+    <div class="metadata-item-types" type="genre">
         <div class="metadata-item-type" meta-type="0">Все</div>
         <? foreach ($genre_types as $genre_type) { ?>
             <div class="metadata-item-type" meta-type="<?=$genre_type->id?>"><?=$genre_type->title?></div>
@@ -199,7 +199,7 @@ $create_tags_hidden = $create_tags ? '' : 'hidden';
         <div>Теги</div>
         <span class="content-limit tip-color">20</span>
     </div>
-    <div class="metadata-item-types">
+    <div class="metadata-item-types" type="tag">
         <div class="metadata-item-type" meta-type="0">Все</div>
         <? foreach ($tag_types as $tag_type) { ?>
             <div class="metadata-item-type" meta-type="<?=$tag_type->id?>"><?=$tag_type->title?></div>

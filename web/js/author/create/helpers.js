@@ -21,12 +21,16 @@ function loadStepByName(url) {
 
 
 // создание выпадающего списка (element – это input, callback – функция генерации правильного содержимого)
-function createDropdown(element, callback) {
+function createDropdown(element, callback, type = null) {
     let meta_type = getMetaNameFromId(element.attr('id'));
     $.ajax({
         type: 'post',
         url: 'index.php?r=author/create/find-meta',
-        data: {input: element.val(), meta_type: meta_type},
+        data: {
+            input: element.val(),
+            meta_type: meta_type,
+            type: type
+        },
         success: function (response) {
             let container = element.closest('.field-with-dropdown');
             let neighbor = getNeighborDropdown(element);

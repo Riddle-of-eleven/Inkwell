@@ -127,26 +127,26 @@ class CreateController extends Controller
 
     public function actionFindMeta() {
         Yii::$app->response->format = Response::FORMAT_JSON;
-        $input = Yii::$app->request->post('input');
-        $meta_type = Yii::$app->request->post('meta_type');
+        $request = Yii::$app->request;
+        $input = $request->post('input');
+        $meta_type = $request->post('meta_type');
+        $type_id = $request->post('type');
 
         $session = Yii::$app->session;
 
-        if ($meta_type == 'genres') {
-            return $this->findMeta(Genre::class, $input, $session->get('create.genres'));
-        }
-        if ($meta_type == 'tags') return $this->findMeta(Tag::class, $input);
+        if ($meta_type == 'genres') return $this->findMeta(Genre::class, $input, $session->get('create.genres'), $type_id);
+        if ($meta_type == 'tags') return $this->findMeta(Tag::class, $input, $session->get('create.tags'), $type_id);
         /*if ($meta_type == 'genre') return $this->findMeta(Genre::class, $input);
         if ($meta_type == 'genre') return $this->findMeta(Genre::class, $input);*/
+        return [];
     }
-    public function findMeta($model, $input = null, $selected = null, $type = null, $meta_name = null) {
+    public function findMeta($model, $input = null, $selected = null, $type = null) {
         $data = [];
         $metas = $model::find();
 
-        // можно поменять на filterWhere
         $metas->filterWhere(['like', 'title', $input]); // подумать потом о безопасности этого всего
         $metas->andFilterwhere(['not in', 'id', $selected]);
-        if ($type && $meta_name) $metas->andWhere([$meta_name . '_type_id' => $type]);
+        if ($type) $metas->andWhere(['type_id' => $type]); // проверка нужна, потому что 0 это все
 
         $find_metas = $metas->all();
         foreach ($find_metas as $key => $value) $data[$key] = $value;
