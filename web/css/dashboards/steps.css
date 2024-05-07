@@ -43,6 +43,10 @@
     margin: 8px 0 4px 0;
     display: flex; gap: 6px;
 }
+.metadata-fandom-selected {
+    flex-direction: column; gap: 4px;
+}
+
 .metadata-item-selected-unit {
     width: fit-content;
     display: flex; align-items: center; gap: 6px;
@@ -54,6 +58,16 @@
 .metadata-item-selected-unit svg {
     fill: var(--color-accent);
 }
+
+.metadata-fandom-selected-unit {
+    width: 100%;
+    padding: unset;
+    background-color: unset; color: unset;
+}
+.metadata-fandom-selected-unit svg {
+    fill: var(--color-graphics)
+}
+
 
 
 .inner-details-field {
@@ -86,4 +100,8 @@
     color: var(--color-tip);
     font-size: 13px;
     margin-bottom: 10px;
+}
+
+.empty-origin {
+    padding: 10px 20px 10px 60px;
 }

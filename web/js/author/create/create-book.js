@@ -25,6 +25,9 @@ $(document).on('click', function (e) {
     // теги
     if ($(e.target).attr('id') !== getNameFromId(tags) && !checkClosest(e.target, tags, '.dropdown-list'))
         removeDropdownList($(tags));
+    // фэндомы
+    if ($(e.target).attr('id') !== getNameFromId(fandom) && !checkClosest(e.target, fandom, '.dropdown-list'))
+        removeDropdownList($(fandom));
 });
 
 // открытие выпадающих списков по типу метаданных
@@ -35,10 +38,29 @@ content.on('click', '.chosen-items-to-session [meta-type]', function() {
 });
 
 // добавление выбранных элементов по клику
-content.on('click', '.chosen-items-to-session .dropdown-item', function () {
+content.on('click', '.chosen-items-to-session:not(.fandom-item) .dropdown-item', function () {
     addSelectedUnit($(this), createTitleItems);
 });
 // удаление выбранных элементов по клику
 content.on('click', '.chosen-items-to-session .cancel-icon', function () {
     removeSelectedUnit($(this));
 });
+
+
+
+// ФЭНДОМНЫЕ СВЕДЕНИЯ
+// переключение видимости фэндомной секции
+content.on('change', book_type + ' input[type=radio]', function () {
+    if ($(this).val() === '1') $('.book-type-depend').addClass('hidden');
+    else $('.book-type-depend').removeClass('hidden');
+});
+// добавление выбранного фэндома по клику
+content.on('click', '.fandom-item .dropdown-item', function () {
+    addSelectedFandomUnit($(this), createTitleItems);
+});
+// удаление выбранного фэндома по клику
+content.on('click', '.fandom-item .delete-icon', function () {
+    removeSelectedUnit($(this));
+});
+
+

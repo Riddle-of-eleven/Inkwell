@@ -32,6 +32,7 @@ function createDropdown(element, callback, type = null) {
             type: type
         },
         success: function (response) {
+            //console.log(response)
             let container = element.closest('.field-with-dropdown');
             let neighbor = getNeighborDropdown(element);
             // это проверка на существование и подгонка положения
@@ -72,6 +73,7 @@ function createTitleItems(response, meta_type) {
     else to_append = '<div class="tip-color dropdown-item empty-dropdown-item">Ничего не найдено</div>';
     return to_append;
 }
+// скрытие выпадающего списка
 function removeDropdownList(field) {
     field.closest('.field-with-dropdown').find('.dropdown-list').remove();
 }
@@ -104,6 +106,63 @@ function removeSelectedUnit(button) {
     if (!container.children().length) container.addClass('hidden');
 }
 
+// добавление выбранного, но конкретно для фэндомов
+function addSelectedFandomUnit(unit, callback) {
+    let id = getValueFromId(unit.attr('id'));
+    let key = getSessionKeyFromId(unit);
+
+    saveData(id, key, true, function () {
+        let selected_container = unit.closest('.metadata-item').find('.metadata-item-selected');
+        let to_append =
+            `<details class="metadata-item-selected-unit metadata-fandom-selected-unit" meta="${id}">
+                <summary class="block select-header">
+                    <div class="select-header-expand"><div class="expand-icon">${expand_icon}</div>${unit.find('.metadata-title').text()}</div>
+                    <div class="ui button small-button danger-accent-button remove-fandom">${delete_icon}</div>
+                </summary>
+                <div class="inner-details-field"></div>
+            </details>`;
+        selected_container.removeClass('hidden');
+        selected_container.append(to_append);
+
+        $.ajax({
+            type: 'post',
+            url: 'index.php?r=author/create/find-meta',
+            data: {meta_type: 'origins', fandom_id: id},
+            success: function (response) {
+                console.log(response)
+                let details = $(`.metadata-fandom-selected-unit[meta=${id}] .inner-details-field`);
+                let to_append = '';
+                if (Object.keys(response).length !== 0) { // опять тождественно равно????
+                    to_append += `<div class="inner-details-choice self-table">
+                            <div></div>
+                            <div>Название</div>
+                            <div>Тип медиа</div>
+                            <div>Год создания</div>
+                            <div>Создатель</div>
+                        </div>`;
+                    $.each(response, function (key, value) {
+                        to_append +=
+                            `<label class="inner-details-choice">
+                                <input type='checkbox' name='origins' id="origin-${value.origin.id}" value='${value.origin.id}'>
+                                <span>
+                                    <div>${value.origin.title}</div>
+                                    <div>${value.media}</div>
+                                    <div>${value.origin.release_date}</div>
+                                    <div>${value.origin.creator}</div>
+                                </span>
+                            </label>`;
+                    });
+                }
+                else to_append = `<div class="empty-origin tip-color">У этого фэндома нет первоисточников</div>`;
+
+                details.append(to_append);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+}
 
 
 
@@ -116,17 +175,20 @@ function countSymbolsFromField(field, total) {
     place.html(total - count);
 }
 
-// сохраняет вводимые данные в сессию (последний параметр – это элемент, который требуется удалить)
+// сохраняет вводимые данные в сессию
 function saveData(data, session_key, is_array = false, callback = null) {
     $.ajax({
         url: 'index.php?r=author/create/save-data',
         type: 'post',
         data: {data: data, session_key: session_key, is_array: is_array},
-        success: function () {
+        success: function (response) {
             //console.log(response)
             if (typeof callback === 'function') {
                 callback();
             }
+        },
+        error: function (error) {
+            console.log(error);
         }
     });
 }

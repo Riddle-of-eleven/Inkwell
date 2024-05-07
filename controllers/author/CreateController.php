@@ -2,8 +2,10 @@
 
 namespace app\controllers\author;
 
+use app\models\Tables\Fandom;
 use app\models\Tables\Genre;
 use app\models\Tables\GenreType;
+use app\models\Tables\Origin;
 use app\models\Tables\Rating;
 use app\models\Tables\Relation;
 use app\models\Tables\Size;
@@ -46,7 +48,6 @@ class CreateController extends Controller
         $sort_genres = $this->findAndSortMeta($session->get('create.genres'), Genre::class);
         $sort_tags = $this->findAndSortMeta($session->get('create.tags'), Tag::class);
 
-
         // данные для автоматической загрузки в поля и прочее
         $relations = Relation::find()->all();
         $ratings = Rating::find()->all();
@@ -81,12 +82,20 @@ class CreateController extends Controller
         ]);
     }
     public function actionLoadStepFandom() {
-        /*$session = Yii::$app->session;
-        $session->set('step', $step);*/
+        $session = Yii::$app->session;
 
+        // субъективные данные
+        $create_book_type = $session->get('create.book_type');
+        $sort_fandoms = $this->findAndSortMeta($session->get('create.fandoms'), Fandom::class);
+
+        //объективные данные
         $book_types = Type::find()->all();
 
         return $this->renderAjax('steps/step2_fandom', [
+            // субъективные
+            'create_book_type' => $create_book_type,
+            'create_fandoms' => $sort_fandoms,
+            // объективные
             'book_types' => $book_types,
         ]);
     }
@@ -111,7 +120,7 @@ class CreateController extends Controller
         $session_key = Yii::$app->request->post('session_key');
         $data = Yii::$app->request->post('data');
         $is_array = Yii::$app->request->post('is_array');
-        if ($is_array) {
+        if ($is_array !== 'false') {
             $temp = $session->get('create.' . $session_key);
             if (!$temp) $temp = [];
             $key = array_search($data, $temp);
@@ -136,8 +145,19 @@ class CreateController extends Controller
 
         if ($meta_type == 'genres') return $this->findMeta(Genre::class, $input, $session->get('create.genres'), $type_id);
         if ($meta_type == 'tags') return $this->findMeta(Tag::class, $input, $session->get('create.tags'), $type_id);
-        /*if ($meta_type == 'genre') return $this->findMeta(Genre::class, $input);
-        if ($meta_type == 'genre') return $this->findMeta(Genre::class, $input);*/
+        if ($meta_type == 'fandoms') return $this->findMeta(Fandom::class, $input, $session->get('create.fandoms'));
+
+        if ($meta_type == 'origins') {
+            $fandom = $request->post('fandom_id');
+            $origins = []; $origins_data = [];
+            if ($fandom)
+                $origins = Fandom::findOne($fandom)->origins;
+            if ($origins)
+                foreach ($origins as $origin)
+                    $origins_data[] = ['origin' => $origin, 'media' => $origin->media->singular_title];
+            return $origins_data;
+        }
+        //if ($meta_type == 'genre') return $this->findMeta(Genre::class, $input);
         return [];
     }
     public function findMeta($model, $input = null, $selected = null, $type = null) {

@@ -56,7 +56,7 @@ h1 {
 section.active-tab {
     display: flex !important;
 }
-section, .active-tab section {
+section, .active-tab section, .book-type-depend {
     display: flex; flex-direction: column; gap: 20px;
 }
 
