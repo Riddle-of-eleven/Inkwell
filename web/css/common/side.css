@@ -23,6 +23,7 @@
     padding: 70px 8px 25px 8px;
     display: flex; flex-direction: column; justify-content: space-between; gap: 100px;
     border-top: none; border-bottom: none; border-left: none;
+    z-index: 99999;
 }
 .sub-side-menu {
     display: flex; flex-direction: column; align-items: center; gap: 20px;

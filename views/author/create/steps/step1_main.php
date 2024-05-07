@@ -11,6 +11,10 @@
 /* @var $create_rating */
 /* @var $create_plan_size */
 
+/* @var $create_genres */
+/* @var $create_tags */
+
+
 /* @var Relation[] $relations */
 /* @var Rating[] $ratings */
 /* @var Size[] $plan_sizes */
@@ -26,6 +30,7 @@ use app\models\Tables\TagType;
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\VarDumper;
 
 $this->registerJs(<<<js
     $(title).val(`$create_title`);
@@ -40,6 +45,9 @@ $this->registerJs(<<<js
     countSymbolsFromField($(disclaimer), other_length);
     countSymbolsFromField($(dedication), other_length);
 js, View::POS_END);
+
+$create_genres_hidden = $create_genres ? '' : 'hidden';
+$create_tags_hidden = $create_tags ? '' : 'hidden';
 
 ?>
 
@@ -161,37 +169,56 @@ js, View::POS_END);
 </div>
 
 <!-- ЖАНРЫ -->
-<div class="metadata-item">
-    <label for="step-meta-genres" class="header3 metadata-item-title">
+<div class="metadata-item chosen-items-to-session">
+    <div class="header3 metadata-item-title">
         <div>Жанры</div>
         <span class="content-limit tip-color">5</span>
-    </label>
+    </div>
     <div class="metadata-item-types">
         <div class="metadata-item-type" genre-type="0">Все</div>
         <? foreach ($genre_types as $genre_type) { ?>
             <div class="metadata-item-type" genre-type="<?=$genre_type->id?>"><?=$genre_type->title?></div>
         <?}?>
     </div>
-    <div class="metadata-item-selected hidden">
-        <!--<div class="metadata-item-selected-unit">Роман <?=cancel_icon?></div>-->
+    <div class="metadata-item-selected <?=$create_genres_hidden?>">
+        <? if ($create_genres) :
+            foreach ($create_genres as $create_genre) { ?>
+                <div class="metadata-item-selected-unit" meta="<?=$create_genre->id?>"><?=$create_genre->title?> <?=cancel_icon?></div>
+            <? }
+        endif; ?>
     </div>
-    <div class="ui field"><input type="text" name="step-meta-genres" id="step-meta-genres" placeholder="Введите первые несколько символов..." maxlength="150"></div>
+    <div class="field-with-dropdown">
+        <div class="ui field"><input type="text" name="step-meta-genres" id="step-meta-genres" placeholder="Введите первые несколько символов..." maxlength="150"></div>
+        <!--<div class="dropdown-list block">
+            <div class="dropdown-item">Первый</div>
+            <div class="dropdown-item">Второй</div>
+            <div class="dropdown-item">Третий</div>
+        </div>-->
+    </div>
     <div class="input-error"></div>
 </div>
 
 <!-- ТЕГИ -->
-<div class="metadata-item">
-    <label for="step-meta-tags" class="header3 metadata-item-title">
+<div class="metadata-item chosen-items-to-session">
+    <div class="header3 metadata-item-title">
         <div>Теги</div>
         <span class="content-limit tip-color">20</span>
-    </label>
+    </div>
     <div class="metadata-item-types">
         <div class="metadata-item-type" tag-type="0">Все</div>
         <? foreach ($tag_types as $tag_type) { ?>
             <div class="metadata-item-type" tag-type="<?=$tag_type->id?>"><?=$tag_type->title?></div>
         <?}?>
     </div>
-    <div class="metadata-item-selected hidden"></div>
-    <div class="ui field"><input type="text" name="step-meta-tags" id="step-meta-tags" placeholder="Введите первые несколько символов..." maxlength="150"></div>
+    <div class="metadata-item-selected <?=$create_tags_hidden?>">
+        <? if ($create_tags) :
+            foreach ($create_tags as $create_tag) { ?>
+                <div class="metadata-item-selected-unit" meta="<?=$create_tag->id?>"><?=$create_tag->title?> <?=cancel_icon?></div>
+            <? }
+        endif; ?>
+    </div>
+    <div class="field-with-dropdown">
+        <div class="ui field"><input type="text" name="step-meta-tags" id="step-meta-tags" placeholder="Введите первые несколько символов..." maxlength="150"></div>
+    </div>
     <div class="input-error"></div>
 </div>

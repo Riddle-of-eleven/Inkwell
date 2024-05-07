@@ -12,7 +12,8 @@ use yii\helpers\Url;
 use yii\helpers\VarDumper;
 
 $session = Yii::$app->session;
-VarDumper::dump($session['create.relation'], 10, true);
+VarDumper::dump($session['create.tags'], 10, true);
+//$session->remove('create.genres');
 
 \app\assets\BookCreateAsset::register($this);
 $this->registerJs(<<<js

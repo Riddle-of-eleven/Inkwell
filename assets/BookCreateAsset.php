@@ -17,7 +17,6 @@ class BookCreateAsset extends AssetBundle
         'js/author/create/create-book.js',
         'js/author/create/helpers.js',
         'js/author/create/countdown.js',
-        'js/author/create/save-data.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
