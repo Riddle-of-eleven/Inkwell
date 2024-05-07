@@ -32,10 +32,11 @@ function createDropdown(element, callback) {
             let neighbor = getNeighborDropdown(element);
             // это проверка на существование и подгонка положения
             if (neighbor.length) {
+                //console.log(response);
                 neighbor.empty();
                 neighbor.append(callback(response, meta_type));
                 let bottom = bottomOffset(neighbor.closest('.field-with-dropdown').find('.field'));
-                if (neighbor.outerHeight() > bottom) neighbor.css('top', -(neighbor.outerHeight() + 4));
+                if (neighbor.outerHeight() > (bottom + 10)) neighbor.css('top', -(neighbor.outerHeight() + 4));
                 else neighbor.css('top', (container.find('.field').outerHeight() + 4));
             }
             // это добавление, если его не было
@@ -49,8 +50,10 @@ function createDropdown(element, callback) {
         },
         error: function (error) {
             console.log(error);
+            //return false;
         }
     });
+    //return true;
 }
 // это создание пунктов выпадающего списка по лекалу названия, а не имени (как у персонажей, например)
 function createTitleItems(response, meta_type) {
@@ -69,15 +72,33 @@ function removeDropdownList(field) {
     field.closest('.field-with-dropdown').find('.dropdown-list').remove();
 }
 
+
 // добавление выбранных метаданных
-function addSelectedUnit(unit) {
+function addSelectedUnit(unit, callback) {
     let id = getValueFromId(unit.attr('id'));
     let key = getSessionKeyFromId(unit);
-    saveData(id, key, true);
-
-    // числа добавлять в атрибут meta
+    saveData(id, key, true, function(){
+        // эта функция нужна для того, чтобы saveData() точно выполнилась раньше createDropdown()
+        let selected_container = unit.closest('.metadata-item').find('.metadata-item-selected');
+        let to_append = `<div class="metadata-item-selected-unit" meta="${id}">${unit.find('.metadata-title').text()}${cancel_icon}</div>`;
+        selected_container.removeClass('hidden');
+        selected_container.append(to_append);
+        createDropdown(unit.closest('.metadata-item').find('input'), callback);
+    });
 }
+// удаление выбранных метаданных
+function removeSelectedUnit(button) {
+    let unit = button.closest('.metadata-item-selected-unit');
+    let input = button.closest('.metadata-item').find('input');
 
+    let key = getSessionKeyFromId(input);
+    let value = unit.attr('meta');
+
+    saveData(value, key, true);
+    let container = button.closest('.metadata-item-selected');
+    unit.remove();
+    if (!container.children().length) container.addClass('hidden');
+}
 
 
 
@@ -91,15 +112,18 @@ function countSymbolsFromField(field, total) {
     place.html(total - count);
 }
 
-// сохраняет вводимые данные в сессию
-function saveData(data, session_key, is_array = false) {
+// сохраняет вводимые данные в сессию (последний параметр – это элемент, который требуется удалить)
+function saveData(data, session_key, is_array = false, callback = null) {
     $.ajax({
         url: 'index.php?r=author/create/save-data',
         type: 'post',
         data: {data: data, session_key: session_key, is_array: is_array},
-        /*success: function (response) {
-            console.log(response)
-        }*/
+        success: function () {
+            //console.log(response)
+            if (typeof callback === 'function') {
+                callback();
+            }
+        }
     });
 }
 
@@ -132,9 +156,11 @@ function getNeighborDropdown(input) {
 }
 // проверка на соседей элемента для закрытия
 function checkClosest(target) {
-    let flag = true;
+    let flag = false;
     for (let i = 1; i < arguments.length; i++) {
-        if (!$(target).closest(arguments[i]).length) flag = false;
+        if ($(target).closest(arguments[i]).length) {
+            flag = true; break;
+        }
     }
     return flag;
 }

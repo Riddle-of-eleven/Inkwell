@@ -20,14 +20,18 @@ content.on('click input', '.chosen-items-to-session input[type=text]', function 
 // закрытие выпадающих списков по клику
 $(document).on('click', function (e) {
     // жанры
-    if ($(e.target).attr('id') !== getNameFromId(genres) && !checkClosest(e.target, genres))
+    if ($(e.target).attr('id') !== getNameFromId(genres) && !checkClosest(e.target, genres, '.dropdown-list'))
         removeDropdownList($(genres));
     // теги
-    if ($(e.target).attr('id') !== getNameFromId(tags) && !checkClosest(e.target, tags))
+    if ($(e.target).attr('id') !== getNameFromId(tags) && !checkClosest(e.target, tags, '.dropdown-list'))
         removeDropdownList($(tags));
 });
 
-// добавление элементов по клику
+// добавление выбранных элементов по клику
 content.on('click', '.chosen-items-to-session .dropdown-item', function () {
-    addSelectedUnit($(this));
+    addSelectedUnit($(this), createTitleItems);
+});
+// удаление выбранных элементов по клику
+content.on('click', '.chosen-items-to-session .cancel-icon', function () {
+    removeSelectedUnit($(this));
 });

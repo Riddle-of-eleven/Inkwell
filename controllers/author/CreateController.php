@@ -11,6 +11,7 @@ use app\models\Tables\Tag;
 use app\models\Tables\TagType;
 use app\models\Tables\Type;
 use Yii;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -25,8 +26,6 @@ class CreateController extends Controller
             'step' => $step,
         ]);
     }
-
-
 
 
     // вспомогательные функции
@@ -44,11 +43,8 @@ class CreateController extends Controller
         $create_rating = $session->get('create.rating');
         $create_plan_size = $session->get('create.plan_size');
 
-        $genres_id = $session->get('create.genres');
-        $create_genres = $genres_id ? Genre::find()->where(['id' => $genres_id])->all() : [];
-
-        $tags_id = $session->get('create.tags');
-        $create_tags = $tags_id ? Tag::find()->where(['id' => $tags_id])->all() : [];
+        $sort_genres = $this->findAndSortMeta($session->get('create.genres'), Genre::class);
+        $sort_tags = $this->findAndSortMeta($session->get('create.tags'), Tag::class);
 
 
         // данные для автоматической загрузки в поля и прочее
@@ -72,8 +68,8 @@ class CreateController extends Controller
             'create_rating' => $create_rating,
             'create_plan_size' => $create_plan_size,
 
-            'create_genres' => $create_genres,
-            'create_tags' => $create_tags,
+            'create_genres' => $sort_genres,
+            'create_tags' => $sort_tags,
 
             // прочие данные
             'relations' => $relations,
@@ -118,8 +114,6 @@ class CreateController extends Controller
         if ($is_array) {
             $temp = $session->get('create.' . $session_key);
             if (!$temp) $temp = [];
-
-            //return array_search($data, $temp);
             $key = array_search($data, $temp);
             if ($key !== false) unset($temp[$key]);
             else $temp[] = $data;
@@ -136,7 +130,11 @@ class CreateController extends Controller
         $input = Yii::$app->request->post('input');
         $meta_type = Yii::$app->request->post('meta_type');
 
-        if ($meta_type == 'genres') return $this->findMeta(Genre::class, $input);
+        $session = Yii::$app->session;
+
+        if ($meta_type == 'genres') {
+            return $this->findMeta(Genre::class, $input, $session->get('create.genres'));
+        }
         if ($meta_type == 'tags') return $this->findMeta(Tag::class, $input);
         /*if ($meta_type == 'genre') return $this->findMeta(Genre::class, $input);
         if ($meta_type == 'genre') return $this->findMeta(Genre::class, $input);*/
@@ -147,12 +145,27 @@ class CreateController extends Controller
 
         // можно поменять на filterWhere
         $metas->filterWhere(['like', 'title', $input]); // подумать потом о безопасности этого всего
-        $metas->andFilterwhere(['<>', 'id', $selected]);
+        $metas->andFilterwhere(['not in', 'id', $selected]);
         if ($type && $meta_name) $metas->andWhere([$meta_name . '_type_id' => $type]);
 
         $find_metas = $metas->all();
         foreach ($find_metas as $key => $value) $data[$key] = $value;
 
         return $data;
+    }
+    public function findAndSortMeta($ids, $model) {
+        if (!$ids) return [];
+        $creates = $model::findAll(['id' => $ids]);
+        if ($creates) {
+            $sort = [];
+            foreach ($ids as $id)
+                foreach ($creates as $create)
+                    if ($create->id == $id) {
+                        $sort[] = $create;
+                        break;
+                    }
+            return $sort;
+        }
+        else return [];
     }
 }

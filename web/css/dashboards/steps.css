@@ -38,6 +38,11 @@
     border-radius: 4px;
     cursor: pointer;
 }
+
+.metadata-item-selected {
+    margin: 8px 0 4px 0;
+    display: flex; gap: 6px;
+}
 .metadata-item-selected-unit {
     width: fit-content;
     display: flex; align-items: center; gap: 6px;

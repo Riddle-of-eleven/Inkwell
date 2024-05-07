@@ -175,25 +175,20 @@ $create_tags_hidden = $create_tags ? '' : 'hidden';
         <span class="content-limit tip-color">5</span>
     </div>
     <div class="metadata-item-types">
-        <div class="metadata-item-type" genre-type="0">Все</div>
+        <div class="metadata-item-type" meta-type="0">Все</div>
         <? foreach ($genre_types as $genre_type) { ?>
-            <div class="metadata-item-type" genre-type="<?=$genre_type->id?>"><?=$genre_type->title?></div>
+            <div class="metadata-item-type" meta-type="<?=$genre_type->id?>"><?=$genre_type->title?></div>
         <?}?>
     </div>
     <div class="metadata-item-selected <?=$create_genres_hidden?>">
         <? if ($create_genres) :
             foreach ($create_genres as $create_genre) { ?>
-                <div class="metadata-item-selected-unit" meta="<?=$create_genre->id?>"><?=$create_genre->title?> <?=cancel_icon?></div>
+                <div class="metadata-item-selected-unit" meta="<?=$create_genre->id?>"><?=$create_genre->title?> <?=cancel_icon_class?></div>
             <? }
         endif; ?>
     </div>
     <div class="field-with-dropdown">
         <div class="ui field"><input type="text" name="step-meta-genres" id="step-meta-genres" placeholder="Введите первые несколько символов..." maxlength="150"></div>
-        <!--<div class="dropdown-list block">
-            <div class="dropdown-item">Первый</div>
-            <div class="dropdown-item">Второй</div>
-            <div class="dropdown-item">Третий</div>
-        </div>-->
     </div>
     <div class="input-error"></div>
 </div>
@@ -205,15 +200,15 @@ $create_tags_hidden = $create_tags ? '' : 'hidden';
         <span class="content-limit tip-color">20</span>
     </div>
     <div class="metadata-item-types">
-        <div class="metadata-item-type" tag-type="0">Все</div>
+        <div class="metadata-item-type" meta-type="0">Все</div>
         <? foreach ($tag_types as $tag_type) { ?>
-            <div class="metadata-item-type" tag-type="<?=$tag_type->id?>"><?=$tag_type->title?></div>
+            <div class="metadata-item-type" meta-type="<?=$tag_type->id?>"><?=$tag_type->title?></div>
         <?}?>
     </div>
     <div class="metadata-item-selected <?=$create_tags_hidden?>">
         <? if ($create_tags) :
             foreach ($create_tags as $create_tag) { ?>
-                <div class="metadata-item-selected-unit" meta="<?=$create_tag->id?>"><?=$create_tag->title?> <?=cancel_icon?></div>
+                <div class="metadata-item-selected-unit" meta="<?=$create_tag->id?>"><?=$create_tag->title?> <?=cancel_icon_class?></div>
             <? }
         endif; ?>
     </div>
