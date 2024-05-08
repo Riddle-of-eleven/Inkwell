@@ -87,6 +87,7 @@ class CreateController extends Controller
         // субъективные данные
         $create_book_type = $session->get('create.book_type');
         $sort_fandoms = $this->findAndSortMeta($session->get('create.fandoms'), Fandom::class);
+        $create_origins = $session->get('create.origins');
 
         //объективные данные
         $book_types = Type::find()->all();
@@ -95,6 +96,7 @@ class CreateController extends Controller
             // субъективные
             'create_book_type' => $create_book_type,
             'create_fandoms' => $sort_fandoms,
+            'create_origins' => $create_origins,
             // объективные
             'book_types' => $book_types,
         ]);
@@ -132,6 +134,19 @@ class CreateController extends Controller
             $session->set('create.' . $session_key, $data);
 
     }
+    public function actionRemoveOrigins() {
+        $session = Yii::$app->session;
+        $fandom = Yii::$app->request->post('fandom_id');
+        if ($fandom) {
+            $origins = $session->get('create.origins');
+            $fandom_origins = Origin::find()->where(['fandom_id' => $origins])->all();
+            foreach ($fandom_origins as $fandom_origin) {
+                $key = array_search($fandom_origin->id, $origins);
+                if ($key !== false) unset($origins[$key]);
+            }
+            $session->set('create.origins', $origins);
+        }
+    }
 
 
     public function actionFindMeta() {
@@ -153,8 +168,10 @@ class CreateController extends Controller
             if ($fandom)
                 $origins = Fandom::findOne($fandom)->origins;
             if ($origins)
-                foreach ($origins as $origin)
-                    $origins_data[] = ['origin' => $origin, 'media' => $origin->media->singular_title];
+                foreach ($origins as $origin) {
+                    $checked = in_array($origin->id, $session->get('create.origins')) ? 'checked' : '';
+                    $origins_data[] = ['origin' => $origin, 'media' => $origin->media->singular_title, 'checked' => $checked];
+                }
             return $origins_data;
         }
         //if ($meta_type == 'genre') return $this->findMeta(Genre::class, $input);

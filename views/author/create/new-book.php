@@ -12,7 +12,7 @@ use yii\helpers\Url;
 use yii\helpers\VarDumper;
 
 /*$session = Yii::$app->session;
-VarDumper::dump($session['create.fandoms'], 10, true);
+VarDumper::dump($session['create.origins'], 10, true);
 /*$session->remove('create.genres');*/
 
 \app\assets\BookCreateAsset::register($this);

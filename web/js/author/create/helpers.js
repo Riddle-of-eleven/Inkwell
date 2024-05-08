@@ -92,8 +92,8 @@ function addSelectedUnit(unit, callback) {
         createDropdown(unit.closest('.metadata-item').find('input'), callback);
     });
 }
-// удаление выбранных метаданных
-function removeSelectedUnit(button) {
+// удаление выбранных метаданных (check_for_origins нужен для удаления сопутствующих первоисточников у фэндома)
+function removeSelectedUnit(button, check_for_origins = false) {
     let unit = button.closest('.metadata-item-selected-unit');
     let input = button.closest('.metadata-item').find('input');
 
@@ -101,6 +101,17 @@ function removeSelectedUnit(button) {
     let value = unit.attr('meta');
 
     saveData(value, key, true);
+    if (check_for_origins) {
+        $.ajax({
+            type: 'post',
+            url: 'index.php?r=author/create/remove-origins',
+            data: {fandom_id: check_for_origins},
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
     let container = button.closest('.metadata-item-selected');
     unit.remove();
     if (!container.children().length) container.addClass('hidden');
@@ -143,7 +154,7 @@ function addSelectedFandomUnit(unit, callback) {
                     $.each(response, function (key, value) {
                         to_append +=
                             `<label class="inner-details-choice">
-                                <input type='checkbox' name='origins' id="origin-${value.origin.id}" value='${value.origin.id}'>
+                                <input type='checkbox' name='origins' id="origin-${value.origin.id}" value='${value.origin.id}' ${value.checked}>
                                 <span>
                                     <div>${value.origin.title}</div>
                                     <div>${value.media}</div>
@@ -161,10 +172,10 @@ function addSelectedFandomUnit(unit, callback) {
                 console.log(error);
             }
         });
+
+        createDropdown(unit.closest('.metadata-item').find('input'), callback);
     });
 }
-
-
 
 
 

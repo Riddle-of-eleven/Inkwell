@@ -3,6 +3,7 @@
 
 /* @var $create_book_type */
 /* @var Fandom[] $create_fandoms */
+/* @var $create_origins */
 
 
 /* @var Type[] $book_types */
@@ -47,7 +48,7 @@ $create_fandoms_hidden = $create_fandoms ? '' : 'hidden';
         <div class="field-with-dropdown">
             <div class="ui field"><input type="text" name="step-meta-fandoms" id="step-meta-fandoms" placeholder="Введите первые несколько символов" maxlength="150"></div>
         </div>
-        <div class="metadata-item-selected metadata-fandom-selected <?=$create_fandoms_hidden?>">
+        <div class="metadata-item-selected metadata-fandom-selected <?=$create_fandoms_hidden?>" id="step-meta-origins">
             <? if ($create_fandoms) :
                 foreach ($create_fandoms as $create_fandom) { ?>
                     <details class="metadata-item-selected-unit metadata-fandom-selected-unit" meta="<?=$create_fandom->id?>">
@@ -65,9 +66,10 @@ $create_fandoms_hidden = $create_fandoms ? '' : 'hidden';
                                         <div>Год создания</div>
                                         <div>Создатель</div>
                                     </div>
-                                    <? foreach ($origins as $origin) { ?>
+                                    <? foreach ($origins as $origin) {
+                                        $origin_checked = in_array($origin->id, $create_origins) ? 'checked' : ''; ?>
                                         <label class="inner-details-choice">
-                                            <input type='checkbox' name='origins' id="" value=''>
+                                            <input type='checkbox' name='origins' id="origin-<?=$origin->id?>" value='<?=$origin->id?>' <?=$origin_checked?>>
                                             <span>
                                                 <div><?=$origin->title?></div>
                                                 <div><?=$origin->media->title?></div>
@@ -77,7 +79,7 @@ $create_fandoms_hidden = $create_fandoms ? '' : 'hidden';
                                         </label>
                                     <?}?>
                                 <? else : ?>
-                                    <div class="empty-origin tip-color">У этого фэндома нет первоисточников</div>`
+                                    <div class="empty-origin tip-color">У этого фэндома нет первоисточников</div>
                             <? endif;?>
                         </div>
                     </details>

@@ -60,7 +60,11 @@ content.on('click', '.fandom-item .dropdown-item', function () {
 });
 // удаление выбранного фэндома по клику
 content.on('click', '.fandom-item .delete-icon', function () {
-    removeSelectedUnit($(this));
+    let meta = $(this).closest('.metadata-item-selected-unit').attr('meta');
+    removeSelectedUnit($(this), meta);
 });
 
-
+// сохранение выбранных первоисточников
+content.on('change', origins + ' input', function () {
+    saveData($(this).val(), 'origins', true);
+})
