@@ -5,6 +5,7 @@
 /* @var Fandom[] $create_fandoms */
 /* @var $create_origins */
 /* @var Character[] $create_characters */
+/* @var Tag[] $create_fandom_tags */
 
 
 /* @var Type[] $book_types */
@@ -12,6 +13,7 @@
 use app\models\Tables\Type;
 use app\models\Tables\Fandom;
 use app\models\Tables\Character;
+use app\models\Tables\Tag;
 
 use yii\helpers\VarDumper;
 
@@ -20,9 +22,12 @@ use yii\helpers\VarDumper;
 $fandom_section_class = $create_book_type == 2 ? '' : 'hidden';
 $create_fandoms_hidden = $create_fandoms ? '' : 'hidden';
 $create_characters_hidden = $create_characters ? '' : 'hidden';
+$create_fandom_tags_hidden = $create_fandom_tags ? '' : 'hidden';
 
 $fandom_replacement_class = $create_fandoms ? 'hidden' : '';
 $fandom_depend_class = $create_fandoms ? '' : 'hidden';
+
+//VarDumper::dump($create_fandom_tags, 10, true);
 ?>
 
 <div class="header2">Тип книги</div>
@@ -39,7 +44,6 @@ $fandom_depend_class = $create_fandoms ? '' : 'hidden';
     </div>
     <div class="input-error"></div>
 </div>
-
 
 <div class="book-type-depend <?=$fandom_section_class?>">
     <div class="header2">Фэндомные сведения</div>
@@ -73,6 +77,7 @@ $fandom_depend_class = $create_fandoms ? '' : 'hidden';
                                         <div>Создатель</div>
                                     </div>
                                     <? foreach ($origins as $origin) {
+
                                         $origin_checked = in_array($origin->id, $create_origins) ? 'checked' : ''; ?>
                                         <label class="inner-details-choice">
                                             <input type='checkbox' name='origins' id="origin-<?=$origin->id?>" value='<?=$origin->id?>' <?=$origin_checked?>>
@@ -139,7 +144,13 @@ $fandom_depend_class = $create_fandoms ? '' : 'hidden';
             <span class="content-limit tip-color hidden">5</span>
         </div>
         <div class="head-article fandom-depend <?=$fandom_depend_class?>" style="margin-bottom: 10px">Если у фэндома, который вы выбрали, есть специальные теги, можете выбрать их здесь</div>
-        <div class="metadata-item-selected hidden"></div>
+        <div class="metadata-item-selected <?=$create_fandom_tags_hidden?>">
+            <? if ($create_fandom_tags) :
+                foreach ($create_fandom_tags as $create_fandom_tag) { ?>
+                    <div class="metadata-item-selected-unit" meta="<?=$create_fandom_tag->id?>"><?=$create_fandom_tag->title?> <?=cancel_icon_class?></div>
+                <? }
+            endif; ?>
+        </div>
         <div class="tip-color fandom-depend-replacement <?=$fandom_replacement_class?>">Сначала выберите фэндом</div>
         <div class="field-with-dropdown">
             <div class="ui field fandom-depend <?=$fandom_depend_class?>"><input type="text" name="step-meta-fandom_tags" id="step-meta-fandom_tags" placeholder="Введите первые несколько символов" maxlength="150"></div>

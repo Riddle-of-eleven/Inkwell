@@ -12,8 +12,7 @@ use yii\helpers\Url;
 use yii\helpers\VarDumper;
 
 /*$session = Yii::$app->session;
-VarDumper::dump($session['create.characters'], 10, true);
-$session->remove('create.characters');*/
+VarDumper::dump($session['create.fandom_tags'], 10, true);*/
 
 \app\assets\BookCreateAsset::register($this);
 $this->registerJs(<<<js

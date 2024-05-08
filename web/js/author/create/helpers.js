@@ -32,7 +32,7 @@ function createDropdown(element, callback, type = null) {
             type: type
         },
         success: function (response) {
-            //console.log(response)
+            console.log(response)
             let container = element.closest('.field-with-dropdown');
             let neighbor = getNeighborDropdown(element);
             // это проверка на существование и подгонка положения
@@ -124,7 +124,12 @@ function removeSelectedUnit(button, remove_depend = false, next = null) {
                 if (response.characters) {
                     let container = $(characters).closest('.metadata-item');
                     $.each(response.characters, function (key, value) {
-                        //console.log(value)
+                        container.find(`.metadata-item-selected-unit[meta=${value}]`).remove();
+                    });
+                }
+                if (response.fandom_tags) {
+                    let container = $(fandom_tags).closest('.metadata-item');
+                    $.each(response.fandom_tags, function (key, value) {
                         container.find(`.metadata-item-selected-unit[meta=${value}]`).remove();
                     });
                 }

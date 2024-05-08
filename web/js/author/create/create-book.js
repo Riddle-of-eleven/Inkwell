@@ -32,6 +32,10 @@ $(document).on('click', function (e) {
     // персонажи
     if ($(e.target).attr('id') !== getNameFromId(characters) && !checkClosest(e.target, characters, '.dropdown-list'))
         removeDropdownList($(characters));
+
+    // фэндомные спец. теги
+    if ($(e.target).attr('id') !== getNameFromId(fandom_tags) && !checkClosest(e.target, fandom_tags, '.dropdown-list'))
+        removeDropdownList($(fandom_tags));
 });
 
 // открытие выпадающих списков по типу метаданных
@@ -57,6 +61,10 @@ content.on('click', '.chosen-items-to-session .cancel-icon', function () {
 // переключение видимости фэндомной секции
 content.on('change', book_type + ' input[type=radio]', function () {
     if ($(this).val() === '1') {
+        let selected = $('.book-type-depend .metadata-item-selected');
+        selected.empty();
+        selected.addClass('hidden');
+        setFandomDependVisibility(false);
         $('.book-type-depend').addClass('hidden');
         $.ajax({ // стирает все сведения о фэндоме
             type: 'post',
