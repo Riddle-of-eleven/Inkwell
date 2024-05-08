@@ -24,4 +24,11 @@
     --color-success30: #52602C;
     --color-error30: #59312C;
     --color-warning30: #615427;
+
+
+    /* прозрачные цвета (ПРОВЕРИТЬ НА ТЁМНОЙ ТЕМЕ!!!!!!!!) */
+    --color-accent5: rgba(251, 120, 74, 0.05);
+    --color-accent10: rgba(251, 120, 74, 0.1);
+    --color-accent20: rgba(251, 120, 74, 0.2);
+    --color-accent70: rgba(251, 120, 74, 0.7);
 }

@@ -4,23 +4,29 @@
 /* @var $create_book_type */
 /* @var Fandom[] $create_fandoms */
 /* @var $create_origins */
+/* @var Character[] $create_characters */
 
 
 /* @var Type[] $book_types */
 
 use app\models\Tables\Type;
 use app\models\Tables\Fandom;
+use app\models\Tables\Character;
 
 use yii\helpers\VarDumper;
 
-//VarDumper::dump($create_fandoms, 10, true);
+//VarDumper::dump($create_characters, 10, true);
 
 $fandom_section_class = $create_book_type == 2 ? '' : 'hidden';
 $create_fandoms_hidden = $create_fandoms ? '' : 'hidden';
+$create_characters_hidden = $create_characters ? '' : 'hidden';
+
+$fandom_replacement_class = $create_fandoms ? 'hidden' : '';
+$fandom_depend_class = $create_fandoms ? '' : 'hidden';
 ?>
 
 <div class="header2">Тип книги</div>
-<div class="head-article tip-color">Если ваша книга является фанфиком, у вас появится возможность указать фэндом, первоисточники, персонажей и пейринги.</div>
+<div class="head-article">Если ваша книга является фанфиком, у вас появится возможность указать фэндом, первоисточники, персонажей и пейринги.</div>
 <div class="metadata-item direct-to-session">
     <div class="input-block-list" id="step-meta-book_type">
         <? foreach ($book_types as $book_type) {
@@ -37,7 +43,7 @@ $create_fandoms_hidden = $create_fandoms ? '' : 'hidden';
 
 <div class="book-type-depend <?=$fandom_section_class?>">
     <div class="header2">Фэндомные сведения</div>
-    <div class="head-article tip-color">Для каждого фэндома можно указать сколько угодно первоисточников</div>
+    <div class="head-article">Для каждого фэндома можно указать сколько угодно первоисточников</div>
 
     <!-- ФЭНДОМ -->
     <div class="metadata-item chosen-items-to-session fandom-item">
@@ -90,28 +96,54 @@ $create_fandoms_hidden = $create_fandoms ? '' : 'hidden';
     </div>
 
 
-
     <!-- ПЕРСОНАЖИ -->
-    <div class="metadata-item">
+    <div class="metadata-item chosen-items-to-session">
         <div class="header3 metadata-item-title">
             <div>Персонажи</div>
             <span class="content-limit tip-color hidden">20</span>
         </div>
-        <div class="metadata-item-selected hidden"></div>
-        <div class="tip-color">Сначала выберите фэндом</div>
-        <!--<div class="ui field"><input type="text" name="step-meta-characters" id="step-meta-characters" placeholder="Введите первые несколько символов" maxlength="150"></div>-->
+        <div class="metadata-item-selected <?=$create_characters_hidden?>">
+            <? if ($create_characters) :
+                foreach ($create_characters as $create_character) { ?>
+                    <div class="metadata-item-selected-unit" meta="<?=$create_character->id?>"><?=$create_character->full_name?> <?=cancel_icon_class?></div>
+                <? }
+            endif; ?>
+        </div>
+        <div class="tip-color fandom-depend-replacement <?=$fandom_replacement_class?>">Сначала выберите фэндом</div>
+        <div class="field-with-dropdown">
+            <div class="ui field fandom-depend <?=$fandom_depend_class?>"><input type="text" name="step-meta-characters" id="step-meta-characters" placeholder="Введите первые несколько символов" maxlength="150"></div>
+        </div>
         <div class="input-error"></div>
     </div>
 
+
     <!-- ПЕЙРИНГИ -->
-    <div class="metadata-item">
+    <div class="metadata-item chosen-items-to-session">
         <div class="header3 metadata-item-title">
             <div>Пейринги</div>
             <span class="content-limit tip-color hidden">5</span>
         </div>
         <div class="metadata-item-selected hidden"></div>
-        <div class="tip-color">Сначала выберите фэндом</div>
-        <!--<div class="ui field"><input type="text" name="step-meta-pairing" id="step-meta-pairing" placeholder="Введите первые несколько символов" maxlength="150"></div>-->
+        <div class="tip-color fandom-depend-replacement <?=$fandom_replacement_class?>">Сначала выберите фэндом</div>
+        <div class="field-with-dropdown">
+            <div class="ui field fandom-depend <?=$fandom_depend_class?>"><input type="text" name="step-meta-pairings" id="step-meta-pairings" placeholder="Введите первые несколько символов" maxlength="150"></div>
+        </div>
+            <div class="input-error"></div>
+    </div>
+
+
+    <!-- ФЭНДОМНЫЕ ТЕГИ -->
+    <div class="metadata-item chosen-items-to-session">
+        <div class="header3 metadata-item-title">
+            <div>Фэндомные теги</div>
+            <span class="content-limit tip-color hidden">5</span>
+        </div>
+        <div class="head-article fandom-depend <?=$fandom_depend_class?>" style="margin-bottom: 10px">Если у фэндома, который вы выбрали, есть специальные теги, можете выбрать их здесь</div>
+        <div class="metadata-item-selected hidden"></div>
+        <div class="tip-color fandom-depend-replacement <?=$fandom_replacement_class?>">Сначала выберите фэндом</div>
+        <div class="field-with-dropdown">
+            <div class="ui field fandom-depend <?=$fandom_depend_class?>"><input type="text" name="step-meta-fandom_tags" id="step-meta-fandom_tags" placeholder="Введите первые несколько символов" maxlength="150"></div>
+        </div>
         <div class="input-error"></div>
     </div>
 </div>

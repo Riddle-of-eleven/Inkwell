@@ -2,6 +2,7 @@
 
 namespace app\controllers\author;
 
+use app\models\Tables\Character;
 use app\models\Tables\Fandom;
 use app\models\Tables\Genre;
 use app\models\Tables\GenreType;
@@ -54,7 +55,7 @@ class CreateController extends Controller
         $plan_sizes = Size::find()->all();
 
         $genre_types = GenreType::find()->all();
-        $tag_types = TagType::find()->all();
+        $tag_types = TagType::find()->where(['<>', 'id', 6])->all(); // исключает фэндомные теги
 
 
         return $this->renderAjax('steps/step1_main', [
@@ -88,6 +89,7 @@ class CreateController extends Controller
         $create_book_type = $session->get('create.book_type');
         $sort_fandoms = $this->findAndSortMeta($session->get('create.fandoms'), Fandom::class);
         $create_origins = $session->get('create.origins');
+        $create_characters = $this->findAndSortMeta($session->get('create.characters'), Character::class);
 
         //объективные данные
         $book_types = Type::find()->all();
@@ -97,6 +99,7 @@ class CreateController extends Controller
             'create_book_type' => $create_book_type,
             'create_fandoms' => $sort_fandoms,
             'create_origins' => $create_origins,
+            'create_characters' => $create_characters,
             // объективные
             'book_types' => $book_types,
         ]);
@@ -134,19 +137,48 @@ class CreateController extends Controller
             $session->set('create.' . $session_key, $data);
 
     }
-    public function actionRemoveOrigins() {
+    public function actionRemoveFandomDepend() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
         $session = Yii::$app->session;
         $fandom = Yii::$app->request->post('fandom_id');
         if ($fandom) {
-            $origins = $session->get('create.origins');
-            $fandom_origins = Origin::find()->where(['fandom_id' => $origins])->all();
+            /*$origins = $session->get('create.origins');
+            $fandom_origins = Origin::find()->where(['fandom_id' => $fandom])->all();
             foreach ($fandom_origins as $fandom_origin) {
                 $key = array_search($fandom_origin->id, $origins);
                 if ($key !== false) unset($origins[$key]);
             }
-            $session->set('create.origins', $origins);
+            $session->set('create.origins', $origins);*/
+            $origins = $this->removeDepend($fandom, 'origins', Origin::class);
+            $characters = $this->removeDepend($fandom, 'characters', Character::class);
+            return ['origins' => $origins, 'characters' => $characters];
         }
+        return [];
     }
+    public function removeDepend($fandom, $type, $model) {
+        $session = Yii::$app->session;
+        $save = [];
+        $metas = $session->get('create.' . $type);
+        $fandom_metas = $model::find()->where(['fandom_id' => $fandom])->all();
+        foreach ($fandom_metas as $fandom_meta) {
+            $key = array_search($fandom_meta->id, $metas);
+            $save[] = $fandom_meta->id;
+            if ($key !== false) unset($metas[$key]);
+        }
+        $session->set('create.' . $type, $metas);
+        return $save;
+    }
+
+    public function actionUnsetFandom() {
+        $session = Yii::$app->session;
+
+        $session->remove('create.fandoms');
+        $session->remove('create.origins');
+        $session->remove('create.characters');
+
+        // ещё пейринги и спец. теги
+    }
+
 
 
     public function actionFindMeta() {
@@ -174,7 +206,19 @@ class CreateController extends Controller
                 }
             return $origins_data;
         }
-        //if ($meta_type == 'genre') return $this->findMeta(Genre::class, $input);
+
+        if ($meta_type == 'characters') {
+            $fandoms = $session->get('create.fandoms');
+            $data = [];
+            $characters = Character::find()
+                ->andFilterWhere(['like', 'full_name', $input])
+                ->andFilterWhere(['not in', 'id', $session->get('create.characters')])
+                ->andFilterWhere(['in', 'fandom_id', $session->get('create.fandoms')])
+                ->all();
+            foreach ($characters as $key => $value) $data[$key] = ['character' => $value, 'fandom' => $value->fandom];
+            return $data;
+        }
+
         return [];
     }
     public function findMeta($model, $input = null, $selected = null, $type = null) {
@@ -184,6 +228,7 @@ class CreateController extends Controller
         $metas->filterWhere(['like', 'title', $input]); // подумать потом о безопасности этого всего
         $metas->andFilterwhere(['not in', 'id', $selected]);
         if ($type) $metas->andWhere(['type_id' => $type]); // проверка нужна, потому что 0 это все
+        if ($model == Tag::class) $metas->andWhere(['<>', 'type_id', 6]); // фэндомные теги не должны отображаться
 
         $find_metas = $metas->all();
         foreach ($find_metas as $key => $value) $data[$key] = $value;

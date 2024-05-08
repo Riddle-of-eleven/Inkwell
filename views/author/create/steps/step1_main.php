@@ -168,6 +168,7 @@ $create_tags_hidden = $create_tags ? '' : 'hidden';
     </div>
 </div>
 
+
 <!-- ЖАНРЫ -->
 <div class="metadata-item chosen-items-to-session">
     <div class="header3 metadata-item-title">
@@ -192,6 +193,7 @@ $create_tags_hidden = $create_tags ? '' : 'hidden';
     </div>
     <div class="input-error"></div>
 </div>
+
 
 <!-- ТЕГИ -->
 <div class="metadata-item chosen-items-to-session">

@@ -31,11 +31,9 @@ body > * {
 }
 
 
-
 input {
     padding: 0;
 }
-
 
 
 a {
@@ -224,7 +222,7 @@ details > summary {
 .active-step {
     background-color: var(--color-accent10);
     border-color: var(--color-accent);
-    color: var(--color-graphics);
+    color: var(--color-accent);
 }
 .active-step svg {
     fill: var(--color-accent);

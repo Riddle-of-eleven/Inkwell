@@ -13,8 +13,12 @@ const
     tags = '#step-meta-tags',
 
     book_type = '#step-meta-book_type',
-    fandom = '#step-meta-fandoms',
-    origins = '#step-meta-origins';
+    fandoms = '#step-meta-fandoms',
+    origins = '#step-meta-origins',
+
+    characters = '#step-meta-characters',
+    pairings = '#step-meta-pairings',
+    fandom_tags = '#step-meta-fandom_tags';
 
 const
     cancel_icon = `<svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" class="icon cancel-icon">

@@ -73,6 +73,20 @@ function createTitleItems(response, meta_type) {
     else to_append = '<div class="tip-color dropdown-item empty-dropdown-item">Ничего не найдено</div>';
     return to_append;
 }
+// а это пункты по лекалу имени персонажа
+function createNameItems(response, meta_type) {
+    let to_append = '';
+    if (Object.keys(response).length !== 0) {// опять тождественно равно????
+        $.each(response, function (key, value) {
+            to_append += `<div class="dropdown-item" id="step-meta-${meta_type}-${value.character.id}">
+                            <div class="metadata-title">${value.character.full_name}</div>`;
+            if (value.fandom) to_append += `<div class="metadata-description tip">${value.fandom.title}</div>`;
+            to_append += `</div>`;
+        });
+    }
+    else to_append = '<div class="tip-color dropdown-item empty-dropdown-item">Ничего не найдено</div>';
+    return to_append;
+}
 // скрытие выпадающего списка
 function removeDropdownList(field) {
     field.closest('.field-with-dropdown').find('.dropdown-list').remove();
@@ -93,7 +107,7 @@ function addSelectedUnit(unit, callback) {
     });
 }
 // удаление выбранных метаданных (check_for_origins нужен для удаления сопутствующих первоисточников у фэндома)
-function removeSelectedUnit(button, check_for_origins = false) {
+function removeSelectedUnit(button, remove_depend = false, next = null) {
     let unit = button.closest('.metadata-item-selected-unit');
     let input = button.closest('.metadata-item').find('input');
 
@@ -101,20 +115,34 @@ function removeSelectedUnit(button, check_for_origins = false) {
     let value = unit.attr('meta');
 
     saveData(value, key, true);
-    if (check_for_origins) {
+    if (remove_depend) {
         $.ajax({
             type: 'post',
-            url: 'index.php?r=author/create/remove-origins',
-            data: {fandom_id: check_for_origins},
+            url: 'index.php?r=author/create/remove-fandom-depend',
+            data: {fandom_id: remove_depend},
+            success: function (response) {
+                if (response.characters) {
+                    let container = $(characters).closest('.metadata-item');
+                    $.each(response.characters, function (key, value) {
+                        //console.log(value)
+                        container.find(`.metadata-item-selected-unit[meta=${value}]`).remove();
+                    });
+                }
+                continueActions(); // вот это нужно для правильной последовательности действий
+            },
             error: function (error) {
                 console.log(error);
             }
         });
     }
+    else continueActions();
 
-    let container = button.closest('.metadata-item-selected');
-    unit.remove();
-    if (!container.children().length) container.addClass('hidden');
+    function continueActions() {
+        let container = button.closest('.metadata-item-selected');
+        unit.remove();
+        if (!container.children().length) container.addClass('hidden');
+        if (next) next(); // и вот это тоже, блин
+    }
 }
 
 // добавление выбранного, но конкретно для фэндомов
@@ -140,7 +168,7 @@ function addSelectedFandomUnit(unit, callback) {
             url: 'index.php?r=author/create/find-meta',
             data: {meta_type: 'origins', fandom_id: id},
             success: function (response) {
-                console.log(response)
+                //console.log(response)
                 let details = $(`.metadata-fandom-selected-unit[meta=${id}] .inner-details-field`);
                 let to_append = '';
                 if (Object.keys(response).length !== 0) { // опять тождественно равно????
@@ -245,4 +273,16 @@ function checkClosest(target) {
 // считает расстояние от нижнего края элемента до конца окна
 function bottomOffset(element) {
     return $(window).height() - element[0].getBoundingClientRect().bottom;
+}
+
+// задаёт видимость полям, зависимым от фэндома
+function setFandomDependVisibility(visibility) {
+    if (visibility) {
+        $('.fandom-depend').removeClass('hidden');
+        $('.fandom-depend-replacement').addClass('hidden');
+    }
+    else {
+        $('.fandom-depend').addClass('hidden');
+        $('.fandom-depend-replacement').removeClass('hidden');
+    }
 }

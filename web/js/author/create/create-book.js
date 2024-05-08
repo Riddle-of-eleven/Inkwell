@@ -15,7 +15,8 @@ content.on('change', '.direct-to-session input[type=radio]', function () {
 
 // открытие выпадающих списков по клику
 content.on('click input', '.chosen-items-to-session input[type=text]', function () {
-    createDropdown($(this), createTitleItems);
+    if (getSessionKeyFromId($(this)) === 'characters') createDropdown($(this), createNameItems);
+    else createDropdown($(this), createTitleItems);
 });
 // закрытие выпадающих списков по клику
 $(document).on('click', function (e) {
@@ -26,8 +27,11 @@ $(document).on('click', function (e) {
     if ($(e.target).attr('id') !== getNameFromId(tags) && !checkClosest(e.target, tags, '.dropdown-list'))
         removeDropdownList($(tags));
     // фэндомы
-    if ($(e.target).attr('id') !== getNameFromId(fandom) && !checkClosest(e.target, fandom, '.dropdown-list'))
-        removeDropdownList($(fandom));
+    if ($(e.target).attr('id') !== getNameFromId(fandoms) && !checkClosest(e.target, fandoms, '.dropdown-list'))
+        removeDropdownList($(fandoms));
+    // персонажи
+    if ($(e.target).attr('id') !== getNameFromId(characters) && !checkClosest(e.target, characters, '.dropdown-list'))
+        removeDropdownList($(characters));
 });
 
 // открытие выпадающих списков по типу метаданных
@@ -39,7 +43,8 @@ content.on('click', '.chosen-items-to-session [meta-type]', function() {
 
 // добавление выбранных элементов по клику
 content.on('click', '.chosen-items-to-session:not(.fandom-item) .dropdown-item', function () {
-    addSelectedUnit($(this), createTitleItems);
+    if (getSessionKeyFromId($(this)) === 'characters') addSelectedUnit($(this), createNameItems);
+    else addSelectedUnit($(this), createTitleItems);
 });
 // удаление выбранных элементов по клику
 content.on('click', '.chosen-items-to-session .cancel-icon', function () {
@@ -51,17 +56,29 @@ content.on('click', '.chosen-items-to-session .cancel-icon', function () {
 // ФЭНДОМНЫЕ СВЕДЕНИЯ
 // переключение видимости фэндомной секции
 content.on('change', book_type + ' input[type=radio]', function () {
-    if ($(this).val() === '1') $('.book-type-depend').addClass('hidden');
+    if ($(this).val() === '1') {
+        $('.book-type-depend').addClass('hidden');
+        $.ajax({ // стирает все сведения о фэндоме
+            type: 'post',
+            url: 'index.php?r=author/create/unset-fandom'
+        });
+    }
     else $('.book-type-depend').removeClass('hidden');
 });
 // добавление выбранного фэндома по клику
 content.on('click', '.fandom-item .dropdown-item', function () {
+    setFandomDependVisibility(true);
     addSelectedFandomUnit($(this), createTitleItems);
 });
 // удаление выбранного фэндома по клику
-content.on('click', '.fandom-item .delete-icon', function () {
+content.on('click', '.fandom-item .remove-fandom', function (e) {
+    e.preventDefault();
     let meta = $(this).closest('.metadata-item-selected-unit').attr('meta');
-    removeSelectedUnit($(this), meta);
+    removeSelectedUnit($(this), meta, function () {
+        let selected = $('.metadata-fandom-selected');
+        if (!selected.children().length) setFandomDependVisibility(false);
+    });
+
 });
 
 // сохранение выбранных первоисточников
