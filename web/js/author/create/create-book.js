@@ -14,7 +14,7 @@ content.on('change', '.direct-to-session input[type=radio]', function () {
 
 
 // открытие выпадающих списков по клику
-content.on('click input', '.chosen-items-to-session input[type=text]', function () {
+content.on('click input', '.chosen-items-to-session:not(.pairings-item) input[type=text]', function () {
     if (getSessionKeyFromId($(this)) === 'characters') createDropdown($(this), createNameItems);
     else createDropdown($(this), createTitleItems);
 });
@@ -42,7 +42,6 @@ $(document).on('click', function (e) {
 content.on('click', '.chosen-items-to-session [meta-type]', function() {
     let input = $(this).closest('.metadata-item').find('input');
     createDropdown(input, createTitleItems, $(this).attr('meta-type'));
-    //console.log($(this).attr('meta-type'))
 });
 
 // добавление выбранных элементов по клику
@@ -92,4 +91,26 @@ content.on('click', '.fandom-item .remove-fandom', function (e) {
 // сохранение выбранных первоисточников
 content.on('change', origins + ' input', function () {
     saveData($(this).val(), 'origins', true);
-})
+});
+
+
+// добавление нового pairing-item при клике на кнопку
+content.on('click', pairings, function () {
+    let place = $(pairings).closest('.metadata-item').find('.metadata-item-selected');
+    addNewPairingItem(place);
+    place.removeClass('hidden');
+});
+// открытие выпадающего списка
+content.on('click input', '.pairing-characters-input', function() {
+    //createDropdown($(this));
+
+    // наверное, надо сначала идти в сессию, добавлять пейринг (пустой массив с полями characters и relationship), возвращать номер элемента, который уже присваивать в id
+});
+
+
+
+
+
+
+
+

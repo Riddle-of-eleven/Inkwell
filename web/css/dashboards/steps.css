@@ -105,3 +105,13 @@
 .empty-origin {
     padding: 10px 20px 10px 60px;
 }
+
+
+.pairing-item {
+    width: 100%;
+    display: flex; justify-content: space-between; align-items: start; gap: 20px;
+    padding: 12px 18px;
+}
+.pairing-choice {
+    width: 100%;
+}

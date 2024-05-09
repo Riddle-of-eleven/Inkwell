@@ -37,7 +37,7 @@
 /* поле, которое селект */
 .field-select {
     width: max-content;
-    min-width: unset;
+    /*min-width: unset;*/
 }
 
 

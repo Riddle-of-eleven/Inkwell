@@ -211,6 +211,40 @@ function addSelectedFandomUnit(unit, callback) {
 }
 
 
+function addNewPairingItem(place) {
+    $.ajax({
+        type: 'post',
+        url: 'index.php?r=author/create/find-meta',
+        data: {meta_type: 'relationship'},
+        success: function (response) {
+            //console.log(response);
+            let to_append =
+                `<div class="pairing-item block">
+                    <div class="pairing-choice">
+                        <div class="field-with-dropdown">
+                            <div class="ui field"><input type="text" name="pairing-characters-input" class="pairing-characters-input" id="step-meta-pairing_characters" placeholder="Введите первые несколько символов..."></div>
+                        </div>
+                        <div class="selected-items pairing-selected-items hidden"></div>
+                    </div>
+                    <div class="ui field field-select">
+                        <select name="relationship" id="relationship">`;
+            if (response)
+                $.each(response, function (key, value) {
+                    to_append += `<option value="${value.id}">${value.title}</option>`;
+                });
+            to_append += `</select></div>`;
+            to_append += `<div class="ui button small-button delete-button">${delete_icon}</div>
+                </div>`;
+            place.append(to_append);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+
+}
+
+
 
 // подсчитывает и устанавливает количество символов около ввода
 function countSymbolsFromField(field, total) {

@@ -123,17 +123,15 @@ $fandom_depend_class = $create_fandoms ? '' : 'hidden';
 
 
     <!-- ПЕЙРИНГИ -->
-    <div class="metadata-item chosen-items-to-session">
+    <div class="metadata-item chosen-items-to-session pairings-item">
         <div class="header3 metadata-item-title">
             <div>Пейринги</div>
             <span class="content-limit tip-color hidden">5</span>
         </div>
-        <div class="metadata-item-selected hidden"></div>
         <div class="tip-color fandom-depend-replacement <?=$fandom_replacement_class?>">Сначала выберите фэндом</div>
-        <div class="field-with-dropdown">
-            <div class="ui field fandom-depend <?=$fandom_depend_class?>"><input type="text" name="step-meta-pairings" id="step-meta-pairings" placeholder="Введите первые несколько символов" maxlength="150"></div>
-        </div>
-            <div class="input-error"></div>
+        <div class="ui button icon-button fandom-depend" id="step-meta-pairings"><?=new_pairing_icon?>Добавить пейринг</div>
+        <div class="metadata-item-selected hidden"></div>
+        <div class="input-error"></div>
     </div>
 
 

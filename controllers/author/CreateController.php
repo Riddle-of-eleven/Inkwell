@@ -9,6 +9,7 @@ use app\models\Tables\GenreType;
 use app\models\Tables\Origin;
 use app\models\Tables\Rating;
 use app\models\Tables\Relation;
+use app\models\Tables\Relationship;
 use app\models\Tables\Size;
 use app\models\Tables\Tag;
 use app\models\Tables\TagType;
@@ -223,6 +224,7 @@ class CreateController extends Controller
 
         if ($meta_type == 'fandom_tags') return $this->findMeta(Tag::class, $input, $session->get('create.fandom_tags'), 6);
 
+        if ($meta_type == 'relationship') return Relationship::find()->all();
 
         return [];
     }
