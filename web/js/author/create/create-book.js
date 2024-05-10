@@ -52,7 +52,7 @@ content.on('click', '.chosen-items-to-session:not(.fandom-item):not(.pairings-it
     else addSelectedUnit($(this), createTitleItems);
 });
 // удаление выбранных элементов по клику
-content.on('click', '.chosen-items-to-session .cancel-icon', function () {
+content.on('click', '.chosen-items-to-session:not(.pairings-item) .cancel-icon', function () {
     removeSelectedUnit($(this));
 });
 
@@ -101,7 +101,7 @@ content.on('click', pairings, function () {
     let limit = $(this).closest('.metadata-item').find('.content-limit');
     let limit_number = parseInt(limit.text());
     if (limit_number > 0) {
-        let place = $(pairings).closest('.metadata-item').find('.metadata-item-selected');
+        let place = $(pairings).closest('.metadata-item').find('.metadata-pairing-selected');
         addNewPairingItem(place);
         place.removeClass('hidden');
         limit.html(--limit_number);
@@ -110,15 +110,86 @@ content.on('click', pairings, function () {
 // открытие выпадающего списка пейринга
 content.on('click input', '.pairing-characters-input', function() {
     let pairing_id = $(this).closest('.pairing-item').attr('meta');
-     createDropdown($(this), createNameItems, pairing_id);
+    createDropdown($(this), createNameItems, pairing_id);
 });
 // добавление персонажей в пейринг
 content.on('click', '.pairing-item .dropdown-item', function () {
+    let id = getValueFromId($(this).attr('id'));
+    let name = $(this).find('.metadata-title').text();
+    let pairing = $(this).closest('.pairing-item').attr('meta');
+    let unit = $(this);
 
+    // отдельный аякс типа saveData, только для пейринга
+    $.ajax({
+        url: 'index.php?r=author/create/save-pairing',
+        type: 'post',
+        data: {data_type: 'characters', id: id, pairing: pairing},
+        success: function () {
+            let selected_container = unit.closest('.pairing-item').find('.metadata-item-selected');
+            let to_append =
+                `<div class="metadata-item-selected-unit pairing_character_item_selected_unit" meta="${id}">${name}${cancel_icon}</div>`;
+            selected_container.removeClass('hidden');
+            selected_container.append(to_append);
+            createDropdown(unit.closest('.pairing-item').find('input[type=text]'), createNameItems, pairing);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
 });
+// изменение типа взаимоотношений
+content.on('change', '.pairing-item select[name=relationship]', function () {
+    let id = $(this).val();
+    let pairing = $(this).closest('.pairing-item').attr('meta');
+    $.ajax({
+        url: 'index.php?r=author/create/save-pairing',
+        type: 'post',
+        data: {data_type: 'relationship', id: id, pairing: pairing},
+        /*success: function (response) {
+            console.log(response)
+        },*/
+        error: function (error) {
+            console.log(error);
+        }
+    });
+});
+// удаление персонажа из пейринга
+content.on('click', '.pairing-item .cancel-icon', function () {
+    let character_id = $(this).closest('.metadata-item-selected-unit').attr('meta');
+    let pairing_id = $(this).closest('.pairing-item').attr('meta');
+    let unit = $(this).closest('.metadata-item-selected-unit');
 
-
-
-
+    $.ajax({
+        url: 'index.php?r=author/create/delete-pairing',
+        type: 'post',
+        data: {remove: 'character', pairing_id: pairing_id, character_id: character_id},
+        success: function () {
+            let container = unit.closest('.metadata-item-selected');
+            unit.remove();
+            if (!container.children().length) container.addClass('hidden');
+        },
+        error: function (error) {
+            console.log(error)
+        }
+    });
+});
+// удаление пейринга
+content.on('click', '.pairing-item .delete-button', function() {
+    let pairing_id = $(this).closest('.pairing-item').attr('meta');
+    let item = $(this).closest('.pairing-item');
+    $.ajax({
+        url: 'index.php?r=author/create/delete-pairing',
+        type: 'post',
+        data: {remove: 'pairing', pairing_id: pairing_id},
+        success: function () {
+            let container = item.closest('.metadata-pairing-selected');
+            item.remove();
+            if (!container.children().length) container.addClass('hidden');
+        },
+        error: function (error) {
+            console.log(error)
+        }
+    });
+});
 
 

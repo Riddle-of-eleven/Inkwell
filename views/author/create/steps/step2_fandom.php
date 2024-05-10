@@ -7,21 +7,25 @@
 /* @var Character[] $create_characters */
 /* @var Tag[] $create_fandom_tags */
 
+/* @var $create_pairings */
 
 /* @var Type[] $book_types */
+/* @var Relationship[] $relationships */
 
 use app\models\Tables\Type;
 use app\models\Tables\Fandom;
 use app\models\Tables\Character;
 use app\models\Tables\Tag;
+use app\models\Tables\Relationship;
 
-use yii\helpers\VarDumper;
+//use yii\helpers\VarDumper;
 
-//VarDumper::dump($create_characters, 10, true);
+//VarDumper::dump($create_pairings, 10, true);
 
 $fandom_section_class = $create_book_type == 2 ? '' : 'hidden';
 $create_fandoms_hidden = $create_fandoms ? '' : 'hidden';
 $create_characters_hidden = $create_characters ? '' : 'hidden';
+$create_pairings_hidden = $create_pairings ? '' : 'hidden';
 $create_fandom_tags_hidden = $create_fandom_tags ? '' : 'hidden';
 
 $fandom_replacement_class = $create_fandoms ? 'hidden' : '';
@@ -130,7 +134,39 @@ $fandom_depend_class = $create_fandoms ? '' : 'hidden';
         </div>
         <div class="tip-color fandom-depend-replacement <?=$fandom_replacement_class?>">Сначала выберите фэндом</div>
         <div class="ui button icon-button fandom-depend <?=$fandom_depend_class?>" id="step-meta-pairings"><?=new_pairing_icon?>Добавить пейринг</div>
-        <div class="metadata-item-selected metadata-pairing-selected hidden"></div>
+        <div class="metadata-item-selected metadata-pairing-selected <?=$create_pairings_hidden?>">
+            <? if ($create_pairings) :
+                foreach ($create_pairings as $key => $value) { ?>
+                    <div class="pairing-item block" meta="<?=$key?>">
+                        <div class="pairing-choice">
+                            <div class="field-with-dropdown">
+                                <div class="ui field">
+                                    <input type="text" name="pairing-characters-input" class="pairing-characters-input" id="step-meta-main-pairing_characters-<?=$key?>" placeholder="Введите первые несколько символов...">
+                                </div>
+                            </div>
+                            <div class="metadata-item-selected pairing-selected-items">
+                                <? if ($value['characters']) :
+                                    foreach ($value['characters'] as $character) { ?>
+                                         <div class="metadata-item-selected-unit" meta="<?=$character->id?>"><?=$character->full_name?> <?=cancel_icon_class?></div>
+                                    <? }
+                                endif; ?>
+
+                            </div>
+                        </div>
+                        <div class="ui field field-select">
+                            <select name="relationship" id="relationship-<?=$key?>>">
+                                <? if ($relationships)
+                                    foreach ($relationships as $relationship) {
+                                        $relationship_selected = $relationship->id == $value['relationship']->id ? 'selected' : ''; ?>
+                                        <option value="<?=$relationship->id?>" <?=$relationship_selected?>><?=$relationship->title?></option>
+                                    <?}?>
+                            </select>
+                        </div>
+                        <div class="ui button small-button delete-button danger-accent-button"><?=delete_icon?></div>
+                    </div>
+                <? }
+            endif; ?>
+        </div>
         <div class="input-error"></div>
     </div>
 
@@ -141,7 +177,7 @@ $fandom_depend_class = $create_fandoms ? '' : 'hidden';
             <div>Фэндомные теги</div>
             <span class="content-limit tip-color fandom-depend <?=$fandom_depend_class?>">5</span>
         </div>
-        <div class="head-article fandom-depend <?=$fandom_depend_class?>" style="margin-bottom: 10px">Если у фэндома, который вы выбрали, есть специальные теги, можете выбрать их здесь</div>
+        <div class="head-article fandom-depend <?=$fandom_depend_class?>" style="margin-bottom: 10px">Если у фэндома, который вы выбрали, есть специальные теги, можете добавить их здесь</div>
         <div class="metadata-item-selected <?=$create_fandom_tags_hidden?>">
             <? if ($create_fandom_tags) :
                 foreach ($create_fandom_tags as $create_fandom_tag) { ?>

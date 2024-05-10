@@ -93,8 +93,22 @@ class CreateController extends Controller
         $create_characters = $this->findAndSortMeta($session->get('create.characters'), Character::class);
         $create_fandom_tags = $this->findAndSortMeta($session->get('create.fandom_tags'), Tag::class);
 
+        $create_pairings = $session->get('create.pairings');
+        $pairings_info = [];
+        foreach ($create_pairings as $create_pairing) {
+            $pairings_info[] = [
+                'relationship' => Relationship::findOne($create_pairing['relationship']),
+                'characters' => Character::find()->where(['id' => $create_pairing['characters']])->all()
+            ];
+        }
+        /*$pairings_info = [
+            'relationship' => Relationship::findOne($create_pairings['relationship']),
+            'characters' => Character::find()->where(['id' => $create_pairings['characters']])
+        ];*/
+
         //объективные данные
         $book_types = Type::find()->all();
+        $relationships = Relationship::find()->all();
 
         return $this->renderAjax('steps/step2_fandom', [
             // субъективные
@@ -103,8 +117,10 @@ class CreateController extends Controller
             'create_origins' => $create_origins,
             'create_characters' => $create_characters,
             'create_fandom_tags' => $create_fandom_tags,
+            'create_pairings' => $pairings_info,
             // объективные
             'book_types' => $book_types,
+            'relationships' => $relationships,
         ]);
     }
     public function actionLoadStepCover() {
@@ -139,6 +155,40 @@ class CreateController extends Controller
         else
             $session->set('create.' . $session_key, $data);
 
+    }
+    public function actionSavePairing() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $session = Yii::$app->session;
+        $data_type = Yii::$app->request->post('data_type');
+        $item_id = (int)Yii::$app->request->post('id');
+        $pairing_id = Yii::$app->request->post('pairing');
+
+        $pairings = $session->get('create.pairings');
+
+        if ($data_type == 'characters') $pairings[$pairing_id][$data_type][] = $item_id;
+        else if ($data_type == 'relationship') $pairings[$pairing_id][$data_type] = $item_id;
+
+        $session->set('create.pairings', $pairings);
+    }
+    public function actionDeletePairing() {
+        $session = Yii::$app->session;
+        $remove = Yii::$app->request->post('remove');
+        $pairing = Yii::$app->request->post('pairing_id');
+        if ($remove == 'character') {
+            $character = Yii::$app->request->post('character_id');
+            $pairings = $session->get('create.pairings');
+            if ($pairings[$pairing]) {
+                $key = array_search($character, $pairings[$pairing]['characters']);
+                if ($key !== false) unset($pairings[$pairing]['characters'][$key]);
+            }
+            $session->set('create.pairings', $pairings);
+        }
+        else if ($remove == 'pairing') {
+            $pairings = $session->get('create.pairings');
+            if ($pairings[$pairing]) unset($pairings[$pairing]);
+            $session->set('create.pairings', $pairings);
+        }
     }
     public function actionRemoveFandomDepend() {
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -196,7 +246,7 @@ class CreateController extends Controller
             $pairings = $session->get('create.pairings');
             $relationships = Relationship::find()->all();
             // по умолчанию между персонажами романтическая связь
-            $pairings[] = ['relationship' => $relationships[0], 'characters' => []];
+            $pairings[] = ['relationship' => $relationships[0]->id, 'characters' => []];
             $session->set('create.pairings', $pairings);
             return [
                 'id' => array_key_last($pairings),

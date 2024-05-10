@@ -34,7 +34,6 @@ function createDropdown(element, callback, type = null) {
             type: type // в случае пейринга сюда передаётся его id
         },
         success: function (response) {
-            //console.log(response)
             let container = element.closest('.field-with-dropdown');
             let neighbor = getNeighborDropdown(element);
             // это проверка на существование и подгонка положения
@@ -227,7 +226,7 @@ function addNewPairingItem(place) {
                             <div class="field-with-dropdown">
                                 <div class="ui field"><input type="text" name="pairing-characters-input" class="pairing-characters-input" id="step-meta-main-pairing_characters-${response.id}" placeholder="Введите первые несколько символов..."></div>
                             </div>
-                            <div class="selected-items pairing-selected-items hidden"></div>
+                            <div class="metadata-item-selected pairing-selected-items hidden"></div>
                         </div>
                         <div class="ui field field-select">
                             <select name="relationship" id="relationship-${response.id}">`;
@@ -265,7 +264,7 @@ function saveData(data, session_key, is_array = false, callback = null) {
         url: 'index.php?r=author/create/save-data',
         type: 'post',
         data: {data: data, session_key: session_key, is_array: is_array},
-        success: function (response) {
+        success: function () {
             //console.log(response)
             if (typeof callback === 'function') {
                 callback();
@@ -281,7 +280,7 @@ function saveData(data, session_key, is_array = false, callback = null) {
 // получает имя сессионного ключа из id (по элементу)
 function getSessionKeyFromId(element) {
     let id = element.attr('id').split('-');
-    if (parseInt(id[id.length - 1])) return id[id.length - 2];
+    if (Number.isInteger(parseInt(id[id.length - 1]))) return id[id.length - 2];
     return id[id.length - 1];
 }
 // преобразовывает вид строки id просто в имя id
@@ -290,10 +289,10 @@ function getNameFromId(id) {
     return false;
 }
 // то же самое, но получает имя типа метаданных
-function getMetaNameFromId(id) {
+/*function getMetaNameFromId(id) {
     let words = id.split("-");
     return words[words.length - 1];
-}
+}*/
 // получает числового представление id (если такое вообще есть)
 function getValueFromId(id) {
     return parseInt(id.match(/\d+/)[0]);
