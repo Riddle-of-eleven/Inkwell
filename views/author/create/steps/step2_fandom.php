@@ -105,7 +105,7 @@ $fandom_depend_class = $create_fandoms ? '' : 'hidden';
     <div class="metadata-item chosen-items-to-session">
         <div class="header3 metadata-item-title">
             <div>Персонажи</div>
-            <span class="content-limit tip-color hidden">20</span>
+            <span class="content-limit tip-color fandom-depend <?=$fandom_depend_class?>">20</span>
         </div>
         <div class="metadata-item-selected <?=$create_characters_hidden?>">
             <? if ($create_characters) :
@@ -126,11 +126,11 @@ $fandom_depend_class = $create_fandoms ? '' : 'hidden';
     <div class="metadata-item chosen-items-to-session pairings-item">
         <div class="header3 metadata-item-title">
             <div>Пейринги</div>
-            <span class="content-limit tip-color hidden">5</span>
+            <span class="content-limit tip-color fandom-depend <?=$fandom_depend_class?>">5</span>
         </div>
         <div class="tip-color fandom-depend-replacement <?=$fandom_replacement_class?>">Сначала выберите фэндом</div>
-        <div class="ui button icon-button fandom-depend" id="step-meta-pairings"><?=new_pairing_icon?>Добавить пейринг</div>
-        <div class="metadata-item-selected hidden"></div>
+        <div class="ui button icon-button fandom-depend <?=$fandom_depend_class?>" id="step-meta-pairings"><?=new_pairing_icon?>Добавить пейринг</div>
+        <div class="metadata-item-selected metadata-pairing-selected hidden"></div>
         <div class="input-error"></div>
     </div>
 
@@ -139,7 +139,7 @@ $fandom_depend_class = $create_fandoms ? '' : 'hidden';
     <div class="metadata-item chosen-items-to-session">
         <div class="header3 metadata-item-title">
             <div>Фэндомные теги</div>
-            <span class="content-limit tip-color hidden">5</span>
+            <span class="content-limit tip-color fandom-depend <?=$fandom_depend_class?>">5</span>
         </div>
         <div class="head-article fandom-depend <?=$fandom_depend_class?>" style="margin-bottom: 10px">Если у фэндома, который вы выбрали, есть специальные теги, можете выбрать их здесь</div>
         <div class="metadata-item-selected <?=$create_fandom_tags_hidden?>">

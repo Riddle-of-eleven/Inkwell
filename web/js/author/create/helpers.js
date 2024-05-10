@@ -22,17 +22,19 @@ function loadStepByName(url) {
 
 // создание выпадающего списка (element – это input, callback – функция генерации правильного содержимого)
 function createDropdown(element, callback, type = null) {
-    let meta_type = getMetaNameFromId(element.attr('id'));
+    //let meta_type = getMetaNameFromId(element.attr('id'));
+    let meta_type = getSessionKeyFromId(element);
+    //console.log(meta_type)
     $.ajax({
         type: 'post',
         url: 'index.php?r=author/create/find-meta',
         data: {
             input: element.val(),
             meta_type: meta_type,
-            type: type
+            type: type // в случае пейринга сюда передаётся его id
         },
         success: function (response) {
-            console.log(response)
+            //console.log(response)
             let container = element.closest('.field-with-dropdown');
             let neighbor = getNeighborDropdown(element);
             // это проверка на существование и подгонка положения
@@ -214,28 +216,32 @@ function addSelectedFandomUnit(unit, callback) {
 function addNewPairingItem(place) {
     $.ajax({
         type: 'post',
-        url: 'index.php?r=author/create/find-meta',
-        data: {meta_type: 'relationship'},
+        url: 'index.php?r=author/create/manage-pairing',
+        data: {action: 'create'},
         success: function (response) {
             //console.log(response);
-            let to_append =
-                `<div class="pairing-item block">
-                    <div class="pairing-choice">
-                        <div class="field-with-dropdown">
-                            <div class="ui field"><input type="text" name="pairing-characters-input" class="pairing-characters-input" id="step-meta-pairing_characters" placeholder="Введите первые несколько символов..."></div>
+            if (response) {
+                let to_append =
+                    `<div class="pairing-item block" meta="${response.id}">
+                        <div class="pairing-choice">
+                            <div class="field-with-dropdown">
+                                <div class="ui field"><input type="text" name="pairing-characters-input" class="pairing-characters-input" id="step-meta-main-pairing_characters-${response.id}" placeholder="Введите первые несколько символов..."></div>
+                            </div>
+                            <div class="selected-items pairing-selected-items hidden"></div>
                         </div>
-                        <div class="selected-items pairing-selected-items hidden"></div>
-                    </div>
-                    <div class="ui field field-select">
-                        <select name="relationship" id="relationship">`;
-            if (response)
-                $.each(response, function (key, value) {
-                    to_append += `<option value="${value.id}">${value.title}</option>`;
-                });
-            to_append += `</select></div>`;
-            to_append += `<div class="ui button small-button delete-button">${delete_icon}</div>
-                </div>`;
-            place.append(to_append);
+                        <div class="ui field field-select">
+                            <select name="relationship" id="relationship-${response.id}">`;
+                if (response.relationships)
+                    $.each(response.relationships, function (key, value) {
+                        let selected = '';
+                        if (response.this_relationship === value.id) selected = 'selected';
+                        to_append += `<option value="${value.id}" ${selected}>${value.title}</option>`;
+                    });
+                to_append += `</select></div>`;
+                to_append += `<div class="ui button small-button delete-button danger-accent-button">${delete_icon}</div>
+                    </div>`;
+                place.append(to_append);
+            }
         },
         error: function (error) {
             console.log(error);

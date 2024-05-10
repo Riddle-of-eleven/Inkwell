@@ -11,8 +11,9 @@ use yii\helpers\Url;
 
 use yii\helpers\VarDumper;
 
-/*$session = Yii::$app->session;
-VarDumper::dump($session['create.fandom_tags'], 10, true);*/
+$session = Yii::$app->session;
+//VarDumper::dump($session['create.pairings'], 10, true);
+//$session->set('create.pairings', []);
 
 \app\assets\BookCreateAsset::register($this);
 $this->registerJs(<<<js

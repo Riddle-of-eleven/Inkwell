@@ -32,7 +32,9 @@ $(document).on('click', function (e) {
     // персонажи
     if ($(e.target).attr('id') !== getNameFromId(characters) && !checkClosest(e.target, characters, '.dropdown-list'))
         removeDropdownList($(characters));
-
+    // пейринги
+    if (!checkClosest(e.target, '.dropdown-list', '.pairing-characters-input'))
+        removeDropdownList($('.pairing-characters-input'));
     // фэндомные спец. теги
     if ($(e.target).attr('id') !== getNameFromId(fandom_tags) && !checkClosest(e.target, fandom_tags, '.dropdown-list'))
         removeDropdownList($(fandom_tags));
@@ -45,7 +47,7 @@ content.on('click', '.chosen-items-to-session [meta-type]', function() {
 });
 
 // добавление выбранных элементов по клику
-content.on('click', '.chosen-items-to-session:not(.fandom-item) .dropdown-item', function () {
+content.on('click', '.chosen-items-to-session:not(.fandom-item):not(.pairings-item) .dropdown-item', function () {
     if (getSessionKeyFromId($(this)) === 'characters') addSelectedUnit($(this), createNameItems);
     else addSelectedUnit($(this), createTitleItems);
 });
@@ -96,18 +98,24 @@ content.on('change', origins + ' input', function () {
 
 // добавление нового pairing-item при клике на кнопку
 content.on('click', pairings, function () {
-    let place = $(pairings).closest('.metadata-item').find('.metadata-item-selected');
-    addNewPairingItem(place);
-    place.removeClass('hidden');
+    let limit = $(this).closest('.metadata-item').find('.content-limit');
+    let limit_number = parseInt(limit.text());
+    if (limit_number > 0) {
+        let place = $(pairings).closest('.metadata-item').find('.metadata-item-selected');
+        addNewPairingItem(place);
+        place.removeClass('hidden');
+        limit.html(--limit_number);
+    }
 });
-// открытие выпадающего списка
+// открытие выпадающего списка пейринга
 content.on('click input', '.pairing-characters-input', function() {
-    //createDropdown($(this));
-
-    // наверное, надо сначала идти в сессию, добавлять пейринг (пустой массив с полями characters и relationship), возвращать номер элемента, который уже присваивать в id
+    let pairing_id = $(this).closest('.pairing-item').attr('meta');
+     createDropdown($(this), createNameItems, pairing_id);
 });
+// добавление персонажей в пейринг
+content.on('click', '.pairing-item .dropdown-item', function () {
 
-
+});
 
 
 

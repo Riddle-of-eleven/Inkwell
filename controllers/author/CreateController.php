@@ -145,17 +145,17 @@ class CreateController extends Controller
         $session = Yii::$app->session;
         $fandom = Yii::$app->request->post('fandom_id');
         if ($fandom) {
-            /*$origins = $session->get('create.origins');
-            $fandom_origins = Origin::find()->where(['fandom_id' => $fandom])->all();
-            foreach ($fandom_origins as $fandom_origin) {
-                $key = array_search($fandom_origin->id, $origins);
-                if ($key !== false) unset($origins[$key]);
-            }
-            $session->set('create.origins', $origins);*/
             $origins = $this->removeDepend($fandom, 'origins', Origin::class);
             $characters = $this->removeDepend($fandom, 'characters', Character::class);
             $fandom_tags = $this->removeDepend($fandom, 'fandom_tags', Tag::class);
-            return ['origins' => $origins, 'characters' => $characters, 'fandom_tags' => $fandom_tags];
+
+            // ещё пейринги удалять
+
+            return [
+                'origins' => $origins,
+                'characters' => $characters,
+                'fandom_tags' => $fandom_tags
+            ];
         }
         return [];
     }
@@ -179,10 +179,33 @@ class CreateController extends Controller
         $session->set('create.fandoms', []);
         $session->set('create.origins', []);
         $session->set('create.characters', []);
+        $session->set('create.pairings', []);
+        $session->set('create.fandom_tags', []);
 
         // ещё пейринги и спец. теги
     }
 
+
+
+    public function actionManagePairing() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $session = Yii::$app->session;
+        $action = Yii::$app->request->post('action');
+        $id = Yii::$app->request->post('pairing');
+        if ($action == 'create') {
+            $pairings = $session->get('create.pairings');
+            $relationships = Relationship::find()->all();
+            // по умолчанию между персонажами романтическая связь
+            $pairings[] = ['relationship' => $relationships[0], 'characters' => []];
+            $session->set('create.pairings', $pairings);
+            return [
+                'id' => array_key_last($pairings),
+                'this_relationship' => $relationships[0]->id,
+                'relationships' => $relationships
+            ];
+        }
+        return [];
+    }
 
 
     public function actionFindMeta() {
@@ -222,9 +245,21 @@ class CreateController extends Controller
             return $data;
         }
 
-        if ($meta_type == 'fandom_tags') return $this->findMeta(Tag::class, $input, $session->get('create.fandom_tags'), 6);
+        if ($meta_type == 'pairing_characters') {
+            $data = [];
+            $pairing_id = $type_id;
+            $pairing_characters = $session->get('create.pairings')[$pairing_id]['characters'];
+            $characters = Character::find()
+                ->andFilterWhere(['like', 'full_name', $input])
+                ->andFilterWhere(['not in', 'id', $pairing_characters])
+                ->andFilterWhere(['in', 'fandom_id', $session->get('create.fandoms')])
+                ->all();
+            foreach ($characters as $key => $value) $data[$key] = ['character' => $value, 'fandom' => $value->fandom];
 
-        if ($meta_type == 'relationship') return Relationship::find()->all();
+            return $data;
+        }
+
+        if ($meta_type == 'fandom_tags') return $this->findMeta(Tag::class, $input, $session->get('create.fandom_tags'), 6);
 
         return [];
     }
