@@ -199,12 +199,23 @@ class CreateController extends Controller
             $characters = $this->removeDepend($fandom, 'characters', Character::class);
             $fandom_tags = $this->removeDepend($fandom, 'fandom_tags', Tag::class);
 
-            // ещё пейринги удалять
+            // удаление пейрингов
+            $pairings = $session->get('create.pairings');
+            $to_remove = [];
+            foreach ($pairings as $key => $pairing) {
+                $pairing_characters = Character::find()->where(['fandom_id' => $fandom])->andWhere(['in', 'id', $pairing['characters']]);
+                if ($pairing_characters) $to_remove[] = $key;
+            }
+            foreach ($to_remove as $key) {
+                unset($pairings[$key]);
+            }
+            $session->set('create.pairings', $pairings);
 
             return [
                 'origins' => $origins,
                 'characters' => $characters,
-                'fandom_tags' => $fandom_tags
+                'fandom_tags' => $fandom_tags,
+                'pairings' => $to_remove
             ];
         }
         return [];
@@ -231,8 +242,6 @@ class CreateController extends Controller
         $session->set('create.characters', []);
         $session->set('create.pairings', []);
         $session->set('create.fandom_tags', []);
-
-        // ещё пейринги и спец. теги
     }
 
 
@@ -319,8 +328,15 @@ class CreateController extends Controller
 
         $metas->filterWhere(['like', 'title', $input]); // подумать потом о безопасности этого всего
         $metas->andFilterwhere(['not in', 'id', $selected]);
-        if ($type && $type != 6) $metas->andWhere(['type_id' => $type])->andWhere(['<>', 'type_id', 6]); // проверка нужна, потому что 0 это все
-        if ($type == 6) $metas->andWhere(['type_id' => $type]); // фэндомные теги не должны отображаться
+
+        if ($model == Genre::class) if ($type) $metas->andWhere(['type_id' => $type]); // потому что оно 0 считает за значение
+        if ($model == Tag::class) {
+            if ($type) {
+                if ($type != 6) $metas->andFilterWhere(['type_id' => $type])->andWhere(['<>', 'type_id', 6]); // проверка нужна, потому что 0 это все
+                if ($type == 6) $metas->andWhere(['type_id' => $type]); // фэндомные теги не должны отображаться
+            }
+            else $metas->andWhere(['<>', 'type_id', 6]);
+        }
 
         $find_metas = $metas->all();
         foreach ($find_metas as $key => $value) $data[$key] = $value;

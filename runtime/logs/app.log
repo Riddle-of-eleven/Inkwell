@@ -5042,3 +5042,173 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1715372111.9351
     'REQUEST_TIME' => 1715372111
 ]
+2024-05-10 23:04:53 [127.0.0.1][1][rr41j8kevspp7rn7lmckq8bfsts8d3jo][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'type_id' in 'where clause' in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php:1320
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(1320): PDOStatement->execute()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(1186): yii\db\Command->internalExecute()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(417): yii\db\Command->queryInternal()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Query.php(249): yii\db\Command->queryAll()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\ActiveQuery.php(133): yii\db\Query->all()
+#5 C:\OSPanel\domains\Inkwell\controllers\author\CreateController.php(325): yii\db\ActiveQuery->all()
+#6 C:\OSPanel\domains\Inkwell\controllers\author\CreateController.php(272): app\controllers\author\CreateController->findMeta()
+#7 [internal function]: app\controllers\author\CreateController->actionFindMeta()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#12 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#13 C:\OSPanel\domains\Inkwell\web\index.php(16): yii\base\Application->run()
+#14 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'type_id' in 'where clause'
+The SQL being executed was: SELECT * FROM `fandom` WHERE (`id`<>'1') AND (`type_id` <> 6) in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Schema.php:676
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(1325): yii\db\Schema->convertException()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(1186): yii\db\Command->internalExecute()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(417): yii\db\Command->queryInternal()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Query.php(249): yii\db\Command->queryAll()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\ActiveQuery.php(133): yii\db\Query->all()
+#5 C:\OSPanel\domains\Inkwell\controllers\author\CreateController.php(325): yii\db\ActiveQuery->all()
+#6 C:\OSPanel\domains\Inkwell\controllers\author\CreateController.php(272): app\controllers\author\CreateController->findMeta()
+#7 [internal function]: app\controllers\author\CreateController->actionFindMeta()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#12 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#13 C:\OSPanel\domains\Inkwell\web\index.php(16): yii\base\Application->run()
+#14 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'type_id' in 'where clause'
+)
+
+2024-05-10 23:04:53 [127.0.0.1][1][rr41j8kevspp7rn7lmckq8bfsts8d3jo][info][application] $_GET = [
+    'r' => 'author/create/find-meta'
+]
+
+$_POST = [
+    'input' => ''
+    'meta_type' => 'fandoms'
+    'type' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    '_identity' => '47671cca0df5b555ee3b3067c73d057da91213311e81de000055f204baa4c08aa:2:{i:0;s:9:\"_identity\";i:1;s:22:\"[1,\"some key\",2592000]\";}'
+    '_csrf' => 'dcec215c9dba8f7e9b9e82445955378772a0beb642d2b87f19cfdc88b3827258a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"2HQ8eESChF_kJs7JNl5-lCBxHppK3TIV\";}'
+    'PHPSESSID' => 'rr41j8kevspp7rn7lmckq8bfsts8d3jo'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 'some key'
+    'theme' => 'sepia'
+    'step' => 'fandom'
+    'create' => []
+    'create.aaa' => 'aaa'
+    'create.title' => 'Хорошо ли?'
+    'create.description' => 'В общем-то, да, пока что просто замечательно'
+    'create.remark' => 'Абракадабра'
+    'create.disclaimer' => 'Этот текст побудет тут'
+    'create.dedication' => 'Здесь была Вика'
+    'create.1' => '1'
+    'create.2' => '2'
+    'create.relation' => '2'
+    'create.rating' => '2'
+    'create.plan_size' => '4'
+    'create.genres' => [
+        0 => '1'
+        2 => '3'
+    ]
+    'create.book_type' => '2'
+    'create.tags' => [
+        0 => '9'
+        1 => '5'
+    ]
+    'create.fandoms' => [
+        0 => '1'
+    ]
+    'create.origins' => [
+        0 => '1'
+        1 => '2'
+    ]
+    'create.characters' => [
+        0 => '1'
+        1 => '2'
+    ]
+    'create.fandom_tags' => [
+        0 => '10'
+    ]
+    'create.pairings' => [
+        0 => [
+            'relationship' => 1
+            'characters' => [
+                0 => 1
+                1 => 2
+            ]
+        ]
+        1 => [
+            'relationship' => 1
+            'characters' => [
+                0 => 5
+                1 => 6
+            ]
+        ]
+        2 => [
+            'relationship' => 1
+            'characters' => [
+                0 => 9
+                1 => 11
+            ]
+        ]
+    ]
+]
+
+$_SERVER = [
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '30'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_X_CSRF_TOKEN' => 'gkjBwXxeEZNfUesuIWa7dFY_tbF22eyi0ajP5Nk6mQewAJD5GRtC0DcXtEVrFYw-GFOAnBqartqZ2L-v6m7QUQ=='
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded; charset=UTF-8'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'HTTP_REFERER' => 'http://inkwell/web/index.php?r=author%2Fcreate/new-book'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => '_identity=47671cca0df5b555ee3b3067c73d057da91213311e81de000055f204baa4c08aa%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A22%3A%22%5B1%2C%22some%20key%22%2C2592000%5D%22%3B%7D; _csrf=dcec215c9dba8f7e9b9e82445955378772a0beb642d2b87f19cfdc88b3827258a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%222HQ8eESChF_kJs7JNl5-lCBxHppK3TIV%22%3B%7D; PHPSESSID=rr41j8kevspp7rn7lmckq8bfsts8d3jo'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '54153'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => 'r=author/create/find-meta'
+    'REQUEST_URI' => '/web/index.php?r=author/create/find-meta'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1715382293.6468
+    'REQUEST_TIME' => 1715382293
+]

@@ -1,7 +1,14 @@
-const title_length= 150;
-const description_length= 800;
-const remark_length= 2000;
-const other_length= 500;
+const
+    title_length= 150,
+    description_length= 800,
+    remark_length= 2000,
+    other_length= 500;
+
+const
+    length5 = 5,
+    length10 = 10,
+    length20 = 20;
+
 
 // подсчёт количества символов в полях
 content.on('input', '#step-meta-title', function () {

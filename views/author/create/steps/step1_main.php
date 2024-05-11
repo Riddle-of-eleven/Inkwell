@@ -44,6 +44,9 @@ $this->registerJs(<<<js
     countSymbolsFromField($(remark), remark_length);
     countSymbolsFromField($(disclaimer), other_length);
     countSymbolsFromField($(dedication), other_length);
+    
+    countSelectedChildren($(genres), '.metadata-item-selected', length10);
+    countSelectedChildren($(tags), '.metadata-item-selected', length20);
 js, View::POS_END);
 
 $create_genres_hidden = $create_genres ? '' : 'hidden';

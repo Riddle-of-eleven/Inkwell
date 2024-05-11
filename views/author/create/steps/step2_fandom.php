@@ -12,6 +12,7 @@
 /* @var Type[] $book_types */
 /* @var Relationship[] $relationships */
 
+use yii\web\View;
 use app\models\Tables\Type;
 use app\models\Tables\Fandom;
 use app\models\Tables\Character;
@@ -32,6 +33,13 @@ $fandom_replacement_class = $create_fandoms ? 'hidden' : '';
 $fandom_depend_class = $create_fandoms ? '' : 'hidden';
 
 //VarDumper::dump($create_fandom_tags, 10, true);
+
+$this->registerJs(<<<js
+    countSelectedChildren($(fandoms), '.metadata-fandom-selected', length5);
+    countSelectedChildren($(characters), '.metadata-item-selected', length20);
+    countSelectedChildren($(pairings), '.metadata-pairing-selected', length5);
+    countSelectedChildren($(fandom_tags), '.metadata-item-selected', length5);
+js, View::POS_END);
 ?>
 
 <div class="header2">Тип книги</div>
@@ -111,7 +119,7 @@ $fandom_depend_class = $create_fandoms ? '' : 'hidden';
             <div>Персонажи</div>
             <span class="content-limit tip-color fandom-depend <?=$fandom_depend_class?>">20</span>
         </div>
-        <div class="metadata-item-selected <?=$create_characters_hidden?>">
+        <div class="metadata-item-selected fandom-depend <?=$create_characters_hidden?>">
             <? if ($create_characters) :
                 foreach ($create_characters as $create_character) { ?>
                     <div class="metadata-item-selected-unit" meta="<?=$create_character->id?>"><?=$create_character->full_name?> <?=cancel_icon_class?></div>
@@ -134,7 +142,7 @@ $fandom_depend_class = $create_fandoms ? '' : 'hidden';
         </div>
         <div class="tip-color fandom-depend-replacement <?=$fandom_replacement_class?>">Сначала выберите фэндом</div>
         <div class="ui button icon-button fandom-depend <?=$fandom_depend_class?>" id="step-meta-pairings"><?=new_pairing_icon?>Добавить пейринг</div>
-        <div class="metadata-item-selected metadata-pairing-selected <?=$create_pairings_hidden?>">
+        <div class="metadata-item-selected metadata-pairing-selected fandom-depend <?=$create_pairings_hidden?>">
             <? if ($create_pairings) :
                 foreach ($create_pairings as $key => $value) { ?>
                     <div class="pairing-item block" meta="<?=$key?>">
@@ -178,7 +186,7 @@ $fandom_depend_class = $create_fandoms ? '' : 'hidden';
             <span class="content-limit tip-color fandom-depend <?=$fandom_depend_class?>">5</span>
         </div>
         <div class="head-article fandom-depend <?=$fandom_depend_class?>" style="margin-bottom: 10px">Если у фэндома, который вы выбрали, есть специальные теги, можете добавить их здесь</div>
-        <div class="metadata-item-selected <?=$create_fandom_tags_hidden?>">
+        <div class="metadata-item-selected fandom-depend <?=$create_fandom_tags_hidden?>">
             <? if ($create_fandom_tags) :
                 foreach ($create_fandom_tags as $create_fandom_tag) { ?>
                     <div class="metadata-item-selected-unit" meta="<?=$create_fandom_tag->id?>"><?=$create_fandom_tag->title?> <?=cancel_icon_class?></div>

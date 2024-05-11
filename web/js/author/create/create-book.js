@@ -44,16 +44,25 @@ $(document).on('click', function (e) {
 content.on('click', '.chosen-items-to-session [meta-type]', function() {
     let input = $(this).closest('.metadata-item').find('input');
     createDropdown(input, createTitleItems, $(this).attr('meta-type'));
+
 });
 
 // добавление выбранных элементов по клику
 content.on('click', '.chosen-items-to-session:not(.fandom-item):not(.pairings-item) .dropdown-item', function () {
-    if (getSessionKeyFromId($(this)) === 'characters') addSelectedUnit($(this), createNameItems);
-    else addSelectedUnit($(this), createTitleItems);
+    let limit = findLimit($(this));
+    let limit_number = parseInt(limit.text());
+    if (limit_number > 0) {
+        if (getSessionKeyFromId($(this)) === 'characters') addSelectedUnit($(this), createNameItems);
+        else addSelectedUnit($(this), createTitleItems);
+        limit.html(--limit_number);
+    }
 });
 // удаление выбранных элементов по клику
 content.on('click', '.chosen-items-to-session:not(.pairings-item) .cancel-icon', function () {
+    let limit = findLimit($(this));
+    let limit_number = parseInt(limit.text());
     removeSelectedUnit($(this));
+    limit.html(++limit_number);
 });
 
 
@@ -66,6 +75,12 @@ content.on('change', book_type + ' input[type=radio]', function () {
         selected.empty();
         selected.addClass('hidden');
         setFandomDependVisibility(false);
+
+        findLimit($(fandoms)).html(length5);
+        findLimit($(characters)).html(length20);
+        findLimit($(pairings)).html(length5);
+        findLimit($(fandom_tags)).html(length5);
+
         $('.book-type-depend').addClass('hidden');
         $.ajax({ // стирает все сведения о фэндоме
             type: 'post',
@@ -76,17 +91,25 @@ content.on('change', book_type + ' input[type=radio]', function () {
 });
 // добавление выбранного фэндома по клику
 content.on('click', '.fandom-item .dropdown-item', function () {
-    setFandomDependVisibility(true);
-    addSelectedFandomUnit($(this), createTitleItems);
+    let limit = findLimit($(this));
+    let limit_number = parseInt(limit.text());
+    if (limit_number > 0) {
+        setFandomDependVisibility(true);
+        addSelectedFandomUnit($(this), createTitleItems);
+        limit.html(--limit_number);
+    }
 });
 // удаление выбранного фэндома по клику
 content.on('click', '.fandom-item .remove-fandom', function (e) {
     e.preventDefault();
     let meta = $(this).closest('.metadata-item-selected-unit').attr('meta');
+    let limit = findLimit($(this));
+    let limit_number = parseInt(limit.text());
     removeSelectedUnit($(this), meta, function () {
         let selected = $('.metadata-fandom-selected');
         if (!selected.children().length) setFandomDependVisibility(false);
     });
+    limit.html(++limit_number);
 
 });
 

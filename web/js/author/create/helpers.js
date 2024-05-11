@@ -122,6 +122,7 @@ function removeSelectedUnit(button, remove_depend = false, next = null) {
             url: 'index.php?r=author/create/remove-fandom-depend',
             data: {fandom_id: remove_depend},
             success: function (response) {
+                //console.log(response.characters)
                 if (response.characters) {
                     let container = $(characters).closest('.metadata-item');
                     $.each(response.characters, function (key, value) {
@@ -134,7 +135,13 @@ function removeSelectedUnit(button, remove_depend = false, next = null) {
                         container.find(`.metadata-item-selected-unit[meta=${value}]`).remove();
                     });
                 }
-                continueActions(); // вот это нужно для правильной последовательности действий
+                if (response.pairings) {
+                    let container = $(pairings).closest('.metadata-item');
+                    $.each(response.pairings, function (key, value) {
+                        container.find(`.pairing-item[meta=${value}]`).remove();
+                    });
+                }
+                continueActions() // вот это нужно для правильной последовательности действий
             },
             error: function (error) {
                 console.log(error);
@@ -256,6 +263,21 @@ function countSymbolsFromField(field, total) {
     let count = field.val().length;
     let place = field.closest('.metadata-item').find('.content-limit');
     place.html(total - count);
+}
+//
+function countSelectedChildren(element, selected_class, total) {
+    let selected = element.closest('.chosen-items-to-session').find(selected_class);
+    let count = selected.children().length;
+    let place = element.closest('.chosen-items-to-session').find('.content-limit');
+    place.html(total - count);
+}
+//
+function findLimit(element) {
+    return element.closest('.metadata-item').find('.content-limit');
+}
+//
+function findClosest(element, id) {
+    return element.closest('.metadata-item').find(id)/*.length !== 0*/;
 }
 
 // сохраняет вводимые данные в сессию
