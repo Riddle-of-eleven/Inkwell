@@ -1,4 +1,29 @@
-let menu_button = document.querySelector('#menu-button');
+let menu = $('.side-menu');
+$('#menu-button').on('click', function () {
+    $.ajax({
+        url: 'index.php?r=main/toggle-side-menu',
+        type: 'post',
+        success: function (response) {
+            if (response.is_open === true) {
+                let styleSheet = $("<link>");
+                styleSheet.attr({
+                    rel:  "stylesheet",
+                    type: "text/css",
+                    href: "/web/css/menu/active.css"
+                });
+                $("head").append(styleSheet);
+            }
+            else $(`link[href="/web/css/menu/active.css"]`).remove();
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+});
+
+
+
+/*let menu_button = document.querySelector('#menu-button');
 let sidebar = document.querySelector('.side-menu');
 let body = document.body;
 
@@ -40,4 +65,4 @@ document.addEventListener('click', function(event) {
     if (!menu_container.contains(event.target)) {
         menu_content.classList.add('hidden');
     }
-})
+})*/

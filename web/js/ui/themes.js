@@ -5,15 +5,17 @@ $('.change-theme').click(function () {
         type: 'post',
         url: 'index.php?r=main/get-themes',
         success: function (response) {
-            let content = '';
-            response.data.forEach(function (element) {
-                content += `<button class="ui button block theme-item" theme="${element.system_name}">
-                                ${element.title}
-                                ${element.svg} 
-                            </button>`
-            });
-            $('.themes-container').html(content);
-            modal.showModal();
+            if (response.success) {
+                let content = '';
+                response.data.forEach(function (element) {
+                    content += `<button class="ui button block theme-item" theme="${element.system_name}">
+                                    ${element.title}
+                                    ${element.svg} 
+                                </button>`
+                });
+                $('.themes-container').html(content);
+                modal.showModal();
+            }
         },
         error: function (error) {
             console.log(error);
@@ -32,7 +34,6 @@ $('.themes-container').on('click', '.theme-item', function () {
         url: 'index.php?r=main/change-theme',
         data: {theme: $(this).attr('theme')},
         success: function (response) {
-            console.log(response);
             if (response.old_theme)
                 $(`link[href="/web/css/themes/${response.old_theme}.css"]`).attr('href', `/web/css/themes/${response.theme}.css`);
         },

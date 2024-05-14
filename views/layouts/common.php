@@ -10,8 +10,14 @@ use yii\widgets\Breadcrumbs;
 
 $session = Yii::$app->session;
 $theme = $session->get('theme');
-if (!$theme) $this->registerCssFile('@web/css/themes/system.css');
+if (!$theme) {
+    $this->registerCssFile('@web/css/themes/system.css');
+    $session->set('theme', 'system');
+}
 else $this->registerCssFile('@web/css/themes/' . $theme . '.css');
+
+$is_open = $session->get('is_open');
+if ($is_open == 'open') $this->registerCssFile('@web/css/menu/active.css');
 
 AppAsset::register($this);
 
@@ -38,7 +44,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 
 <? if (Yii::$app->user->isGuest) : ?>
-<div class="side-menu guest-menu block">
+<div class="side-menu guest-menu block active">
     <div class="sub-side-menu">
         <div class="ui button very-small-button" id="menu-button">
             <?=keyboard_double_arrow_left_icon?>
@@ -52,7 +58,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 </div>
 
 <? else :?>
-<div class="side-menu block">
+<div class="side-menu block active">
     <div class="sub-side-menu">
         <div class="ui button very-small-button" id="menu-button">
             <?= keyboard_double_arrow_left_icon ?>
@@ -61,7 +67,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <? $id = Yii::$app->user->identity->id;
                 $user = \app\models\Tables\User::find()->select('avatar')->where(['id' => $id])->one(); ?>
             <?= Html::img('@web/'.$user->avatar) ?>
-            <span class="menu-item hidden"><?= Yii::$app->user->identity->login ?></:></span>
+            <span class="menu-item hidden"><?= Yii::$app->user->identity->login ?></span>
         </div>
 
         <div class="side-buttons icon-accent">
@@ -200,7 +206,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
                 <div class="line"></div>
 
-                <button class="change-theme text-button ui"><?=palette_icon?>Сменить тему</button>
+                <?= Html::button(palette_icon . 'Сменить тему', ['class' => 'change-theme text-button ui'])?>
             </div>
         </div>
     </div>

@@ -89,9 +89,9 @@
     display: flex; gap: 11px;
 }
 
-.book-card .statistics {
+/*.book-card .statistics {
     display: flex; gap: 24px;
-}
+}*/
 
 .stats-pair {
     display: flex; gap: 6px;

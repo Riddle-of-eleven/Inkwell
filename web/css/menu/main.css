@@ -72,46 +72,6 @@
 }
 
 
-:root {
-    --menu-width: 300px;
-}
-.active-body {
-    margin-left: var(--menu-width);
-    width: calc(100% - var(--menu-width));
-}
-
-.active {
-    width: var(--menu-width) !important;
-}
-.active .hidden {
-    display: block !important;
-}
-.active .to-hide {
-    display: none;
-}
-.active .sub-side-menu {
-    align-items: start;
-}
-.active.side-menu {
-    padding: 25px 30px;
-}
-.active.side-menu .line {
-    width: calc(100% + 30px + 30px) !important;
-    margin-left: -30px; margin-right: -30px;
-}
-.active .small-profile-picture {
-    margin-left: 35px;
-    margin-top: -2px;
-}
-.active .side-buttons>* {
-    justify-content: left;
-}
-
-.guest-menu, .active.guest-menu {
-    padding-top: 100px !important;
-}
-
-
 
 summary {
     display: flex; gap: 14px;

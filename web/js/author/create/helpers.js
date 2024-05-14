@@ -10,12 +10,6 @@ function loadStepByName(url) {
             console.error('Ошибка: ', error);
         }
     });
-
-    $.ajax({
-        url: 'index.php?r=author/create/remember-step',
-        type: 'post',
-        data: {step: url},
-    });
 }
 
 

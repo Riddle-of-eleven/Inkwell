@@ -24,7 +24,7 @@ class CreateController extends Controller
     public function actionNewBook() {
         $session = Yii::$app->session;
         $step = $session->has('step') ? $session->get('step') : 'main';
-        $session['create.aaa'] = 'aaa';
+        //$session['create.aaa'] = 'aaa';
 
         return $this->render('new-book', [
             'step' => $step,
@@ -35,6 +35,7 @@ class CreateController extends Controller
     // вспомогательные функции
     public function actionLoadStepMain() {
         $session = Yii::$app->session;
+        $session->set('step', 'main');
 
         // получение данных от пользователя
         $create_title = $session->get('create.title');
@@ -85,6 +86,7 @@ class CreateController extends Controller
     }
     public function actionLoadStepFandom() {
         $session = Yii::$app->session;
+        $session->set('step', 'fandom');
 
         // субъективные данные
         $create_book_type = $session->get('create.book_type');
@@ -124,21 +126,26 @@ class CreateController extends Controller
         ]);
     }
     public function actionLoadStepCover() {
-        /*$session = Yii::$app->session;
-        $session->set('step', $step);*/
+        $session = Yii::$app->session;
+        $session->set('step', 'cover');
+
         return $this->renderAjax('steps/step3_cover');
     }
     public function actionLoadStepAccess() {
-        /*$session = Yii::$app->session;
-        $session->set('step', $step);*/
+        $session = Yii::$app->session;
+        $session->set('step', 'access');
+
         return $this->renderAjax('steps/step4_access');
     }
 
 
-    public function actionRememberStep() {
+    /*public function actionRememberStep() {
         $session = Yii::$app->session;
         $session->set('step', Yii::$app->request->post('step'));
-    }
+    }*/
+
+
+
     public function actionSaveData() {
         $session = Yii::$app->session;
         $session_key = Yii::$app->request->post('session_key');

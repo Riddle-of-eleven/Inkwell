@@ -128,8 +128,8 @@ class MainController extends Controller
     public function actionGetThemes() {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $themes = Theme::find()->all();
-
-        return ['success' => true, 'data' => $themes];
+        if ($themes) return ['success' => true, 'data' => $themes];
+        else return ['success' => false];
     }
     public function actionChangeTheme() {
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -142,6 +142,19 @@ class MainController extends Controller
             'old_theme' => $old_theme,
             'theme' => $theme
         ];
+    }
+    public function actionToggleSideMenu() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $session = Yii::$app->session;
+        $is_open = $session->get('is_open');
+        if ($is_open == 'open') {
+            $session->set('is_open', 'closed');
+            return ['is_open' => false];
+        }
+        else {
+            $session->set('is_open', 'open');
+            return ['is_open' => true];
+        }
     }
 }
 
