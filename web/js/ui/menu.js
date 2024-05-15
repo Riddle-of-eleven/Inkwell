@@ -22,6 +22,19 @@ $('#menu-button').on('click', function () {
 });
 
 
+$('.extendable-menu-item').on('click', function () {
+    $(this).find('.closed-menu-tooltip').removeClass('hidden');
+});
+$(document).on('click', function (e) {
+    if (!$(e.target).closest('#extendable-author').length)
+        $('#extendable-author').find('.closed-menu-tooltip').addClass('hidden');
+    if (!$(e.target).closest('#extendable-reader').length)
+        $('#extendable-reader').find('.closed-menu-tooltip').addClass('hidden');
+    if (!$(e.target).closest('#extendable-moderator').length)
+        $('#extendable-moderator').find('.closed-menu-tooltip').addClass('hidden');
+});
+
+
 
 /*let menu_button = document.querySelector('#menu-button');
 let sidebar = document.querySelector('.side-menu');

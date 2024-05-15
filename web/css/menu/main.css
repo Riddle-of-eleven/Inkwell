@@ -24,6 +24,7 @@
     display: flex; flex-direction: column; justify-content: space-between; gap: 100px;
     border-top: none; border-bottom: none; border-left: none;
     z-index: 99999;
+    overflow: visible;
 }
 .sub-side-menu {
     display: flex; flex-direction: column; align-items: center; gap: 20px;
@@ -36,9 +37,9 @@
 .side-menu a {
     text-decoration: none;
 }
-.side-menu {
+/*.side-menu {
     overflow-y: scroll;
-}
+}*/
 
 
 .side-buttons {
@@ -87,4 +88,40 @@ details[open] .expand-icon {
 
 details > .side-buttons {
     margin: 16px 0 10px 22px;
+}
+
+
+.vertical-expand-line {
+    width: 1px; height: 60%;
+    background-color: var(--color-accent);
+    border-radius: 4px;
+    position: absolute;
+    left: 34px;
+    align-self: center;
+}
+.to-hide {
+    position: relative;
+}
+.closed-menu-tooltip {
+    position: absolute;
+    left: 54px; top: -15px;
+    display: flex; flex-direction: column; gap: 14px;
+    width: max-content;
+}
+.closed-menu-tooltip a {
+    display: flex; gap: 14px;
+    width: max-content;
+}
+.menu-tooltip-header {
+    padding: 15px 20px 10px;
+    border-bottom: var(--border-width) solid var(--color-border);
+    display: flex; align-items: center; gap: 14px;
+    color: var(--color-accent);
+}
+.menu-tooltip-header svg {
+    fill: var(--color-accent);
+}
+.menu-tooltip-content {
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 0 20px 20px;
 }

@@ -20,6 +20,7 @@ body {
 }
 .active.side-menu {
     padding: 25px 30px;
+    overflow-y: scroll;
 }
 .active.side-menu .line {
     width: calc(100% + 30px + 30px) !important;
