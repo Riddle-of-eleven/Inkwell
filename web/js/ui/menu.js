@@ -66,16 +66,16 @@ menu_button.onclick = function () {
     if (register) register.classList.toggle('button-left-align');
 
     localStorage.setItem('is_open', !is_open);
-}
+}*/
 
 
-let menu_content = document.querySelector('.main-menu-content');
-let menu_container = document.querySelector('.main-menu-container');
+let menu_content = $('.main-menu-content');
+let menu_container = $('.main-menu-container');
 function toggle_menu() {
-    menu_content.classList.toggle("hidden");
+    menu_content.toggleClass("hidden");
 }
-document.addEventListener('click', function(event) {
-    if (!menu_container.contains(event.target)) {
-        menu_content.classList.add('hidden');
+$(document).on('click', function(event) {
+    if (!menu_container[0].contains(event.target)) {
+        menu_content.addClass('hidden');
     }
-})*/
+})

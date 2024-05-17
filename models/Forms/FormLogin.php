@@ -1,7 +1,8 @@
 <?php
 
-namespace app\models\Tables;
+namespace app\models\Forms;
 
+use app\models\Tables\User;
 use Yii;
 use yii\base\Model;
 
@@ -27,7 +28,7 @@ class FormLogin extends Model
     {
         if ($this->validate()) {
             if ($this->getUser())
-            return Yii::$app->user->login($this->getUser(), $this->remember_me ? 3600*24*30 : 0);
+                return Yii::$app->user->login($this->getUser(), $this->remember_me ? 3600*24*30 : 0);
         }
         return false;
     }
@@ -37,7 +38,6 @@ class FormLogin extends Model
         if (!$this->_user) {
             $this->_user = User::findByUsername($this->login);
         }
-
         return $this->_user;
     }
 }

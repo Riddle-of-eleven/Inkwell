@@ -81,7 +81,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             [['is_banned', 'is_publisher', 'is_admin', 'is_moderator'], 'integer'],
             [['login'], 'string', 'max' => 200],
             [['password'], 'string', 'max' => 100],
-            [['salt'], 'string', 'max' => 10],
+            [['salt'], 'string', 'max' => 100],
             [['email'], 'string', 'max' => 340],
             [['avatar'], 'string', 'max' => 400],
             [['about'], 'string', 'max' => 2500],

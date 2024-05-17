@@ -4,11 +4,11 @@ namespace app\controllers;
 
 use app\models\_BookData;
 use app\models\_ContentData;
+use app\models\Forms\FormCreateCollection;
 use app\models\Tables\BookCollection;
 use app\models\Tables\Collection;
 use app\models\Tables\FavoriteBook;
 use app\models\Tables\Followers;
-use app\models\Tables\FormCreateCollection;
 use app\models\Tables\Like;
 use app\models\Tables\Read;
 use app\models\Tables\ReadLater;
@@ -33,7 +33,7 @@ class InteractionController extends Controller
 //                $id = $like->id;
 //                $date = $like->liked_at;
                 $like->delete();
-                return [ 'success' => true, 'is_liked' => false ];
+                return ['success' => true, 'is_liked' => false];
             }
             else {
                 $new_like = new Like();
