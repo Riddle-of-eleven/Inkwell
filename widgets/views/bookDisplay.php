@@ -114,7 +114,7 @@ $book_cover_hidden = $data->cover != '' ? '' : 'hidden';
 
             </div>
             <div class="book-preview-cover <?=$book_cover_hidden?>">
-                <?= Html::img($data->cover) ?>
+                <?=Html::img('@web/images/covers/uploads/' . $data->cover)?>
             </div>
         </div>
 
