@@ -204,6 +204,9 @@ textarea {
 .danger-accent-button svg {
     fill: var(--color-danger-accent);
 }
+.danger-accent-icon-button svg {
+    fill: var(--color-danger-accent);
+}
 
 
 .filled-button {
@@ -397,6 +400,33 @@ details:not([open]) .select-header {
     transition: none;
 }
 
+
+/* ЗАГРУЗКА ФАЙЛА*/
+input[type=file] {
+    display: none;
+}
+.upload-container {
+    width: 100%;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    border: var(--border-width) dashed var(--color-outline);
+    border-radius: var(--border-radius-block);
+    padding: 30px 20px;
+}
+.upload-container .upload-text:first-child {
+    /*font-size: 16px;*/
+    font-weight: 500;
+}
+.cover-preview {
+    width: 100%;
+}
+.cover-preview canvas {
+    height: 100px;
+    width: 100%;
+}
+.dragover {
+    background-color: var(--color-dragover);
+    border-color: var(--color-accent);
+}
 
 
 

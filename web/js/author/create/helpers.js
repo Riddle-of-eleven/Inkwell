@@ -101,7 +101,7 @@ function addSelectedUnit(unit, callback) {
         createDropdown(unit.closest('.metadata-item').find('input'), callback);
     });
 }
-// удаление выбранных метаданных (check_for_origins нужен для удаления сопутствующих первоисточников у фэндома)
+// удаление выбранных метаданных
 function removeSelectedUnit(button, remove_depend = false, next = null) {
     let unit = button.closest('.metadata-item-selected-unit');
     let input = button.closest('.metadata-item').find('input');
@@ -119,9 +119,13 @@ function removeSelectedUnit(button, remove_depend = false, next = null) {
                 //console.log(response.characters)
                 if (response.characters) {
                     let container = $(characters).closest('.metadata-item');
+                    let limit = findLimit($(characters));
+                    let limit_number = parseInt(limit.text());
                     $.each(response.characters, function (key, value) {
+                        ++limit_number;
                         container.find(`.metadata-item-selected-unit[meta=${value}]`).remove();
                     });
+                    limit.html(limit_number);
                 }
                 if (response.fandom_tags) {
                     let container = $(fandom_tags).closest('.metadata-item');

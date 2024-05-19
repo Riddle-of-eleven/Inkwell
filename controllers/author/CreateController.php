@@ -14,10 +14,12 @@ use app\models\Tables\Size;
 use app\models\Tables\Tag;
 use app\models\Tables\TagType;
 use app\models\Tables\Type;
+use app\models\Tables\Book;
 use Yii;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
+use yii\web\UploadedFile;
 
 class CreateController extends Controller
 {
@@ -97,16 +99,13 @@ class CreateController extends Controller
 
         $create_pairings = $session->get('create.pairings');
         $pairings_info = [];
-        foreach ($create_pairings as $create_pairing) {
-            $pairings_info[] = [
-                'relationship' => Relationship::findOne($create_pairing['relationship']),
-                'characters' => Character::find()->where(['id' => $create_pairing['characters']])->all()
-            ];
-        }
-        /*$pairings_info = [
-            'relationship' => Relationship::findOne($create_pairings['relationship']),
-            'characters' => Character::find()->where(['id' => $create_pairings['characters']])
-        ];*/
+        if ($create_pairings)
+            foreach ($create_pairings as $create_pairing) {
+                $pairings_info[] = [
+                    'relationship' => Relationship::findOne($create_pairing['relationship']),
+                    'characters' => Character::find()->where(['id' => $create_pairing['characters']])->all()
+                ];
+            }
 
         //объективные данные
         $book_types = Type::find()->all();
@@ -129,7 +128,11 @@ class CreateController extends Controller
         $session = Yii::$app->session;
         $session->set('step', 'cover');
 
-        return $this->renderAjax('steps/step3_cover');
+        $create_cover = $session->get('create.cover');
+
+        return $this->renderAjax('steps/step3_cover', [
+            'create_cover' => $create_cover
+        ]);
     }
     public function actionLoadStepAccess() {
         $session = Yii::$app->session;
@@ -143,6 +146,28 @@ class CreateController extends Controller
         $session = Yii::$app->session;
         $session->set('step', Yii::$app->request->post('step'));
     }*/
+
+
+    public function actionUploadCover() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $session = Yii::$app->session;
+        $image = UploadedFile::getInstanceByName('cropped_image');
+        if ($image) {
+            $path = 'images/covers/uploads/' . uniqid() . '.png';
+            if ($image->saveAs($path)) {
+                $session->set('create.cover', $path);
+                return ['url' => $path];
+            }
+        }
+        return $image->extension;
+    }
+    public function actionRemoveCover() {
+        $session = Yii::$app->session;
+        $cover = $session->get('create.cover');
+        if ($cover)
+            if (file_exists($cover)) unlink($cover); // удаляет файл с сервера, если
+        $session->set('create.cover', '');
+    }
 
 
 
@@ -209,14 +234,16 @@ class CreateController extends Controller
             // удаление пейрингов
             $pairings = $session->get('create.pairings');
             $to_remove = [];
-            foreach ($pairings as $key => $pairing) {
-                $pairing_characters = Character::find()->where(['fandom_id' => $fandom])->andWhere(['in', 'id', $pairing['characters']]);
-                if ($pairing_characters) $to_remove[] = $key;
+            if ($pairings) {
+                foreach ($pairings as $key => $pairing) {
+                    $pairing_characters = Character::find()->where(['fandom_id' => $fandom])->andWhere(['in', 'id', $pairing['characters']]);
+                    if ($pairing_characters) $to_remove[] = $key;
+                }
+                foreach ($to_remove as $key) {
+                    unset($pairings[$key]);
+                }
+                $session->set('create.pairings', $pairings);
             }
-            foreach ($to_remove as $key) {
-                unset($pairings[$key]);
-            }
-            $session->set('create.pairings', $pairings);
 
             return [
                 'origins' => $origins,
@@ -231,19 +258,20 @@ class CreateController extends Controller
         $session = Yii::$app->session;
         $save = [];
         $metas = $session->get('create.' . $type);
-        $fandom_metas = $model::find()->where(['fandom_id' => $fandom])->all();
-        foreach ($fandom_metas as $fandom_meta) {
-            $key = array_search($fandom_meta->id, $metas);
-            $save[] = $fandom_meta->id;
-            if ($key !== false) unset($metas[$key]);
+        if ($metas) {
+            $fandom_metas = $model::find()->where(['fandom_id' => $fandom])->all();
+            foreach ($fandom_metas as $fandom_meta) {
+                $key = array_search($fandom_meta->id, $metas);
+                $save[] = $fandom_meta->id;
+                if ($key !== false) unset($metas[$key]);
+            }
+            $session->set('create.' . $type, $metas);
         }
-        $session->set('create.' . $type, $metas);
         return $save;
     }
 
     public function actionUnsetFandom() {
         $session = Yii::$app->session;
-
         $session->set('create.fandoms', []);
         $session->set('create.origins', []);
         $session->set('create.characters', []);
@@ -294,7 +322,7 @@ class CreateController extends Controller
                 $origins = Fandom::findOne($fandom)->origins;
             if ($origins)
                 foreach ($origins as $origin) {
-                    $checked = in_array($origin->id, $session->get('create.origins')) ? 'checked' : '';
+                    $checked = $session->get('create.origins') ? (in_array($origin->id, $session->get('create.origins')) ? 'checked' : '') : '';
                     $origins_data[] = ['origin' => $origin, 'media' => $origin->media->singular_title, 'checked' => $checked];
                 }
             return $origins_data;

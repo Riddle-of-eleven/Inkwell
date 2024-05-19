@@ -18,7 +18,9 @@ const
 
     characters = '#step-meta-characters',
     pairings = '#step-meta-pairings',
-    fandom_tags = '#step-meta-fandom_tags';
+    fandom_tags = '#step-meta-fandom_tags',
+
+    cover = '#step-meta-cover';
 
 const
     cancel_icon = `<svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" class="icon cancel-icon">

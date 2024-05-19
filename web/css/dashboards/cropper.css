@@ -1,0 +1,27 @@
+img:not(.crop-result) {
+    /*display: block;*/
+    max-width: 100%; /* This rule is very important, please do not ignore this! */
+}
+
+.cover-buttons {
+    display: flex; gap: 10px;
+}
+
+
+.cover-preview {
+    display: flex; flex-direction: column; gap: 8px;
+}
+.cover-preview * {
+    transition: 0s;
+}
+
+#image-preview {
+    display: flex;
+    /*justify-content: center;*/
+}
+
+.crop-result {
+    height: 360px;
+    aspect-ratio: 6 / 9;
+    object-fit: contain;
+}

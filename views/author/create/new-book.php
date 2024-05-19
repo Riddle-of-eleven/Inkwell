@@ -12,10 +12,11 @@ use yii\helpers\Url;
 use yii\helpers\VarDumper;
 
 $session = Yii::$app->session;
-//VarDumper::dump($session['create.pairings'], 10, true);
+//VarDumper::dump($session['create.cover'], 10, true);
 //$session->set('create.pairings', []);
 
 \app\assets\BookCreateAsset::register($this);
+\app\assets\BookCreateCropperAsset::register($this);
 $this->registerJs(<<<js
     $(document).ready(function() {
         loadStepByName('$step');

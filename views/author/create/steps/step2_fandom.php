@@ -89,8 +89,7 @@ js, View::POS_END);
                                         <div>Создатель</div>
                                     </div>
                                     <? foreach ($origins as $origin) {
-
-                                        $origin_checked = in_array($origin->id, $create_origins) ? 'checked' : ''; ?>
+                                        $origin_checked = $create_origins ? (in_array($origin->id, $create_origins) ? 'checked' : '') : ''; ?>
                                         <label class="inner-details-choice">
                                             <input type='checkbox' name='origins' id="origin-<?=$origin->id?>" value='<?=$origin->id?>' <?=$origin_checked?>>
                                             <span>

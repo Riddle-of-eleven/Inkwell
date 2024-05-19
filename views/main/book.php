@@ -216,7 +216,7 @@ if (!Yii::$app->user->isGuest) {
     <div class="book-sidebar">
         <? if ($book->cover): ?>
             <div class="book-cover">
-                <?= Html::img('@web/' . $book->cover) ?>
+                <?=Html::img('@web/' . $book->cover)?>
             </div>
         <? endif; ?>
 

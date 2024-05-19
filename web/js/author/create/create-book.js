@@ -71,15 +71,15 @@ content.on('click', '.chosen-items-to-session:not(.pairings-item) .cancel-icon',
 // переключение видимости фэндомной секции
 content.on('change', book_type + ' input[type=radio]', function () {
     if ($(this).val() === '1') {
-        let selected = $('.book-type-depend .metadata-item-selected');
-        selected.empty();
-        selected.addClass('hidden');
-        setFandomDependVisibility(false);
-
         findLimit($(fandoms)).html(length5);
         findLimit($(characters)).html(length20);
         findLimit($(pairings)).html(length5);
         findLimit($(fandom_tags)).html(length5);
+
+        let selected = $('.book-type-depend .metadata-item-selected');
+        selected.empty();
+        selected.addClass('hidden');
+        setFandomDependVisibility(false);
 
         $('.book-type-depend').addClass('hidden');
         $.ajax({ // стирает все сведения о фэндоме
@@ -105,6 +105,7 @@ content.on('click', '.fandom-item .remove-fandom', function (e) {
     let meta = $(this).closest('.metadata-item-selected-unit').attr('meta');
     let limit = findLimit($(this));
     let limit_number = parseInt(limit.text());
+
     removeSelectedUnit($(this), meta, function () {
         let selected = $('.metadata-fandom-selected');
         if (!selected.children().length) setFandomDependVisibility(false);

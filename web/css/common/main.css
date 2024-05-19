@@ -43,6 +43,9 @@ a {
     color: var(--color-accent);
     text-decoration: underline !important;
 }
+.highlight {
+    color: var(--color-accent);
+}
 
 button {
     padding: 0;
@@ -117,7 +120,7 @@ section, .active-tab section, .book-type-depend {
 
 .line {
     width: 100% !important; max-width: none !important;
-    height: 1px !important;
+    height: 1px !important; max-height: 1px;
     background-color: var(--color-line);
 }
 .inner-line {
