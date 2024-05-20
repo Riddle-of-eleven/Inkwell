@@ -17,6 +17,7 @@ use yii\web\IdentityInterface;
  * @property int|null $is_banned
  * @property string|null $banned_until
  * @property string|null $about
+ * @property string|null $contact
  * @property string|null $url
  * @property int|null $is_publisher
  * @property string|null $official_website
@@ -84,7 +85,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             [['salt'], 'string', 'max' => 100],
             [['email'], 'string', 'max' => 340],
             [['avatar'], 'string', 'max' => 400],
-            [['about'], 'string', 'max' => 2500],
+            [['about'], 'string', 'max' => 800],
+            [['contact'], 'string', 'max' => 500],
             [['url'], 'string', 'max' => 60],
             [['official_website'], 'string', 'max' => 255],
 
@@ -108,6 +110,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'is_banned' => 'Is Banned',
             'banned_until' => 'Banned Until',
             'about' => 'About',
+            'contact' => 'Contact',
             'url' => 'Url',
             'is_publisher' => 'Is Publisher',
             'official_website' => 'Official Website',

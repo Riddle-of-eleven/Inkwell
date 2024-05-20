@@ -163,7 +163,7 @@ class CreateController extends Controller
         $session = Yii::$app->session;
         $cover = $session->get('create.cover');
         if ($cover)
-            if (file_exists($cover)) unlink($cover); // удаляет файл с сервера, если
+            if (file_exists($cover)) unlink($cover); // удаляет файл с сервера, если таковой существует
         $session->set('create.cover', '');
     }
 

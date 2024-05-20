@@ -1,5 +1,5 @@
 <?php
-/* @var \app\models\Tables\User $user */
+/* @var User $user */
 /* @var $books */
 /* @var $follow */
 $this->title = 'Профиль автора '.$user->login;
@@ -11,6 +11,7 @@ use yii\helpers\Html;
 $this->registerCssFile("@web/css/parts/user/author.css");
 $this->registerJsFile('@web/js/ajax/interaction.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
+$theme = Yii::$app->session->get('theme');
 
 if (!Yii::$app->user->isGuest) {
     $follow_class = $follow ? 'filled-button' : '';
@@ -22,7 +23,9 @@ if (!Yii::$app->user->isGuest) {
 
 <div class="profile-header">
     <div class="block author-header">
-        <div class="profile-picture"><?=Html::img('@web/images/avatar/uploads/'.$user->avatar)?></div>
+        <div class="profile-picture">
+            <? echo !$user->avatar ? blank_avatar : Html::img('@web/images/avatar/uploads/' . $user->avatar . '.png') ?>
+        </div>
         <div class="profile-info">
             <div class="profile-name header2"><?=$user->login?></div>
             <!--<div class="profile-online-status tip">Был в сети 2 часа назад</div>-->
@@ -54,11 +57,11 @@ if (!Yii::$app->user->isGuest) {
 <div class="tab-contents">
     <section class="tags-tab tab-content active-tab" data-tab="1">
         <div class="block author-about">
-            <div class="about-title">О себе</div>
+            <div class="about-title header3">О себе</div>
             <div class="about-text"><?=$user->about?></div>
 
-            <!--<div class="about-title">Контактная информация</div>
-            <div class="about-text">Подписывайтесь на меня в соцсетях.</div>-->
+            <div class="about-title header3">Контактная информация</div>
+            <div class="about-text"><?=$user->contact?></div>
         </div>
     </section>
 

@@ -62,6 +62,9 @@
     border-radius: 50%;
     width: 36px; height: 36px;
 }
+.small-profile-picture svg {
+    width: 36px; height: 36px;
+}
 
 .side-menu .side-buttons {
     width: 100%;

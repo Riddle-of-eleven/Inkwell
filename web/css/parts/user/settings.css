@@ -1,0 +1,29 @@
+button[type=submit] {
+    margin: 0;
+}
+
+.avatar-preview {
+    display: flex; flex-direction: column; gap: 10px;
+}
+#image-preview, #image-preview * {
+    transition: 0s;
+}
+
+.avatar-image-preview {
+    border-radius: 50%;
+    overflow: hidden;
+}
+.avatar-image-preview, .avatar-image-preview img, .crop-result {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+}
+
+.avatar-buttons {
+    display: flex; gap: 4px;
+}
+
+
+.cropper-view-box,
+.cropper-face {
+    border-radius: 50%;
+}

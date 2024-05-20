@@ -13,41 +13,57 @@ $this->registerCssFile("@web/css/site/login.css");
 
 <div class="center-container">
     <? $f = ActiveForm::begin([
-            'method' => 'post',
-            'id' => 'form-signup',
-            'fieldConfig' => [
-                'template' => "{input}\n{error}",
-            ],
-            'options' => ['class' => 'enter-form'],
-        ])
-    ?>
+        'method' => 'post',
+        'id' => 'form-signup',
+        'fieldConfig' => [
+            'template' => "{input}\n{error}",
+        ],
+        'options' => ['class' => 'enter-form'],
+    ]) ?>
 
     <div class="enter-form-header">
         <div class="header1">Регистрация</div>
-        <div class="">Уже есть аккаунт? <?= Html::a('Войти', Url::to(['site/login'])) ?></div>
+        <div class="">Уже есть аккаунт? <?= Html::a('Войти', Url::to(['site/login']), ['class' => 'highlight-link']) ?></div>
     </div>
 
     <div class="enter-form-fields">
-        <?= $f->field($model, 'email', [
-            'options' => ['class' => 'ui field'],
-            'inputOptions' => ['class' => '']
-        ])->textInput(['autofocus' => false, 'placeholder' => 'Электронная почта'])->label(false); ?>
+        <div class="record-item">
+            <?= $f->field($model, 'login', [
+                'options' => ['class' => 'ui field'],
+                'inputOptions' => ['class' => ''],
+                'template' => "{input}",
+            ])->textInput(['placeholder' => 'Имя пользователя', 'maxlength' => '50'])->label(false); ?>
+            <?= $f->field($model, 'login', [
+                'options' => ['class' => 'under-field'],
+                'template' => "{hint}{error}",
+            ])->hint('Не менее 6, не более 50 символов.', ['class' => 'hint']); ?>
+        </div>
 
-        <?= $f->field($model, 'login', [
-            'options' => ['class' => 'ui field field-with-hint'],
-            'inputOptions' => ['class' => ''],
-            'template' => "{input}\n{hint}{error}",
-        ])->textInput(['autofocus' => false, 'placeholder' => 'Имя пользователя'])->label(false)->hint('Не менее 6, не более 50 символов', [
-            'class' => 'hint',
-        ]); ?>
+        <div class="record-item">
+            <?= $f->field($model, 'email', [
+                'options' => ['class' => 'ui field'],
+                'inputOptions' => ['class' => ''],
+                'template' => "{input}",
+            ])->textInput(['placeholder' => 'Электронная почта'])->label(false); ?>
+            <?= $f->field($model, 'email', [
+                'options' => ['class' => 'under-field'],
+                'template' => "{hint}{error}",
+            ]); ?>
+        </div>
 
-        <?=$f->field($model, 'password', [
-            'options' => ['class' => 'ui field password-field field-with-hint'],
-            'inputOptions' => ['class' => ''],
-            'template' => "{input}\n<div class=\"password-toggle-button\"><div class=\"vertical-line\"></div>" . visibility_icon . "</div>\n{hint}{error}",
-        ])->passwordInput(['placeholder' => 'Пароль'])->label(false)->hint('Не менее 8 символов, хотя бы одна цифра и специальный символ', [
-            'class' => 'hint',
-        ]); ?>
+        <div class="record-item">
+            <?= $f->field($model, 'password', [
+                'options' => ['class' => 'ui field'],
+                'inputOptions' => ['class' => ''],
+                'template' => "{input}",
+                // 'template' => "{input}\n<div class=\"password-toggle-button\"><div class=\"vertical-line\"></div>" . visibility_icon . "</div>\n{hint}{error}",
+            ])->passwordInput(['placeholder' => 'Пароль', 'maxlength' => '40'])->label(false); ?>
+            <?= $f->field($model, 'password', [
+                'options' => ['class' => 'under-field'],
+                'template' => "{hint}{error}",
+            ])->hint('Не менее 8, не более 40 символов, хотя бы одна цифра и специальный символ.', ['class' => 'hint']); ?>
+        </div>
+
     </div>
 
     <?= Html::submitButton('Зарегистрироваться', ['class' => 'ui button colored-button', 'name' => 'login-submit']) ?>

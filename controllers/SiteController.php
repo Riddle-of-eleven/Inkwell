@@ -94,11 +94,13 @@ class SiteController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $user = User::findByUsername($model->login);
-            $security = Yii::$app->security;
-            $salt = $user->salt;
-            if ($security->validatePassword($model->password . $salt, $user->password)) {
-                Yii::$app->user->login($user);
-                return $this->goHome();
+            if ($user) {
+                $security = Yii::$app->security;
+                $salt = $user->salt;
+                if ($security->validatePassword($model->password . $salt, $user->password)) {
+                    Yii::$app->user->login($user);
+                    return $this->goHome();
+                }
             }
         }
 

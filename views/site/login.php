@@ -24,24 +24,36 @@ $this->registerCssFile("@web/css/site/login.css");
 
     <div class="enter-form-header">
         <div class="header1">Вход</div>
-        <div class="">Ещё нет аккаунта? <?= Html::a('Зарегистрироваться', Url::to(['site/signup']))?></div>
+        <div class="">Ещё нет аккаунта? <?= Html::a('Зарегистрироваться', Url::to(['site/signup']), ['class' => 'highlight-link'])?></div>
     </div>
 
     <div class="enter-form-fields">
-        <?= $f->field($model, 'login', [
-            'options' => ['class' => 'ui field field-with-hint'],
-            'inputOptions' => ['class' => ''],
-            'template' => "{input}\n{hint}{error}",
-        ])->textInput(['autofocus' => false, 'placeholder' => 'Имя пользователя'])->label(false); ?>
+        <div class="record-item">
+            <?= $f->field($model, 'login', [
+                'options' => ['class' => 'ui field'],
+                'inputOptions' => ['class' => ''],
+                'template' => "{input}",
+            ])->textInput(['placeholder' => 'Имя пользователя', 'maxlength' => '50'])->label(false); ?>
+            <?= $f->field($model, 'login', [
+                'options' => ['class' => 'under-field'],
+                'template' => "{error}",
+            ]); ?>
+        </div>
 
-        <?=$f->field($model, 'password', [
-            'options' => ['class' => 'ui field password-field field-with-hint'],
-            'inputOptions' => ['class' => ''],
-            'template' => "{input}\n<div class=\"password-toggle-button\"><div class=\"vertical-line\"></div>" . visibility_icon . "</div>\n{hint}{error}",
-        ])->passwordInput(['placeholder' => 'Пароль'])->label(false); ?>
+        <div class="record-item">
+            <?= $f->field($model, 'password', [
+                'options' => ['class' => 'ui field'],
+                'inputOptions' => ['class' => ''],
+                'template' => "{input}",
+                // 'template' => "{input}\n<div class=\"password-toggle-button\"><div class=\"vertical-line\"></div>" . visibility_icon . "</div>\n{hint}{error}",
+            ])->passwordInput(['placeholder' => 'Пароль', 'maxlength' => '50'])->label(false); ?>
+            <?= $f->field($model, 'password', [
+                'options' => ['class' => 'under-field'],
+                'template' => "{error}",
+            ]); ?>
+        </div>
 
         <div class="space-between">
-
             <?= $f->field($model, 'remember_me', [
                 'options' => ['tag' => false],
                 'template' => '{input}',
@@ -51,7 +63,7 @@ $this->registerCssFile("@web/css/site/login.css");
             ]) ?>
             <label for="remember_me">Запомнить меня</label>
 
-            <a href="">Забыли пароль?</a>
+            <?=Html::a('Забыли пароль?', Url::to(['']), ['class' => 'highlight-link']) ?>
         </div>
     </div>
 

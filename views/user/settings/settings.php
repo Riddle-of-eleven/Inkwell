@@ -10,6 +10,8 @@ use yii\web\View;
 
 \app\assets\DashboardAsset::register($this);
 \app\assets\SettingsAsset::register($this);
+\app\assets\SettingsCropperAsset::register($this);
+
 $this->registerJs(<<<js
     $(document).ready(function() {
         loadTab('user/settings', '$tab', $('.tab-contents'));
@@ -34,7 +36,7 @@ js, View::POS_LOAD);
         <div class="tab" data-tab="publisher"><?=apartment_icon?> Для издательств</div>
     <? endif; ?>
 
-    <div class="tab" data-tab="actions"><?=warning_icon?> Опасные действия</div>
+    <div class="tab" data-tab="actions"><?=warning_icon?> Действия</div>
 </div>
 
 <section class="tab-contents"></section>

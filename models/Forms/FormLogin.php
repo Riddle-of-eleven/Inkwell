@@ -17,10 +17,10 @@ class FormLogin extends Model
     public function rules()
     {
         return [
-            [['login', 'password'], 'required', 'message' => 'Это поле обязательно'],
-            ['login', 'string', 'length' => [6, 50], 'message' => 'Некорректная длина'],
+            [['login', 'password'], 'required', 'message' => 'Это поле обязательно.'],
+            ['login', 'string', 'length' => [6, 50], 'message' => 'Некорректная длина.'],
             ['remember_me', 'boolean'],
-            ['password', 'string', 'length' => [8, 40], 'message' => 'Некорректная длина'],
+            ['password', 'string', 'length' => [8, 40], 'message' => 'Некорректная длина.'],
         ];
     }
 

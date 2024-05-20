@@ -13,9 +13,9 @@ class FormSignup extends Model
     public function rules()
     {
         return [
-            [['email', 'login', 'password'], 'required', 'message'=> 'Это поле обязательно'],
-            ['login', 'string', 'length' => [6, 50], 'message' => 'Некорректная длина'],
-            ['password', 'string', 'length' => [8, 40], 'message' => 'Некорректная длина'],
+            [['email', 'login', 'password'], 'required', 'message'=> 'Это поле обязательно.'],
+            ['login', 'string', 'length' => [6, 50], 'message' => 'Некорректная длина.'],
+            ['password', 'string', 'length' => [8, 40], 'message' => 'Некорректная длина.'],
             ['email', 'email', 'message' => 'Некорректный email'],
         ];
     }

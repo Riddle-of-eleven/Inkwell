@@ -55,7 +55,7 @@ button {
 section.active-tab {
     display: flex !important;
 }
-section, .active-tab section, .book-type-depend {
+section, .active-tab section, .book-type-depend, section > form {
     display: flex; flex-direction: column; gap: 20px;
 }
 
@@ -255,8 +255,20 @@ details > summary {
 }
 
 
-
 .record-item {
     display: flex; flex-direction: column;
     gap: 10px;
+}
+.record-item .header3 {
+    margin: 0;
+}
+
+
+
+.blank-avatar circle {
+    fill: var(--color-background);
+    stroke: var(--color-outline);
+}
+.blank-avatar path {
+    fill: var(--color-outline);
 }

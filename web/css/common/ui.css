@@ -16,23 +16,45 @@
     position: relative;
 }
 
-.field > input[type=text],
-.field > input[type=password] {
+.field input[type=text],
+.field input[type=password] {
     background-color: transparent;
     border: none;
     width: 100%;
 }
-.field > input[type=text]:focus {
+.field input[type=text]:focus, .field input[type=password]:focus {
     outline: none;
 }
-.field > input[type=text]::placeholder {
+.field input[type=text]::placeholder {
     color: var(--color-tip);
     user-select: none;
 }
 
-.field-with-hint {
-    margin-bottom: 15px;
+
+/* ОКОЛО-ПОЛЕВЫЕ ВЕЩИ */
+.field-item {
+    display: flex; flex-direction: column; gap: 4px;
 }
+.under-field {
+    display: flex; flex-direction: row; gap: 4px;
+    flex-wrap: wrap;
+}
+/* подсказка */
+.hint {
+    color: var(--color-tip);
+    font-size: 12px;
+}
+/* ошибка */
+.help-block {
+    color: var(--color-danger-accent);
+    font-size: 12px;
+}
+/* поле с ошибкой */
+.has-error {
+    border-color: var(--color-danger-accent);
+}
+
+
 
 /* поле, которое селект */
 .field-select {
@@ -242,13 +264,6 @@ textarea {
 
 
 
-.hint {
-    position: absolute;
-    top: 38px;
-    color: var(--color-tip);
-    font-size: 12px;
-}
-
 
 
 
@@ -280,6 +295,10 @@ textarea {
 }
 .tab-content.active-tab {
     display: block;
+}
+
+.tab-contents .header2:not(:first-of-type) {
+    margin-top: 20px;
 }
 
 .tab-number {

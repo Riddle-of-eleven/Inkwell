@@ -14,8 +14,29 @@ class FormSystemSettings extends Model
     public function rules() {
         return [
             ['login', 'string', 'length' => [6, 50], 'message' => 'Некорректная длина'],
-            [['old_password', 'new_password'], 'string', 'length' => [8, 40], 'message' => 'Некорректная длина'],
+            [['old_password', 'new_password'],
+                'string',
+                'length' => [8, 40],
+                'message' => 'Некорректная длина',
+                'tooShort' => 'Пароль должен содержать минимум 8 символов'],
             ['email', 'email', 'message' => 'Некорректный email'],
+
+            ['new_password', 'comparePasswords']
         ];
+    }
+
+    public function attributeLabels() {
+        return [
+            'login' => 'Имя пользователя',
+            'old_password' => 'Старый пароль',
+            'new_password' => 'Новый пароль',
+            'email' => 'Электронная почта',
+        ];
+    }
+
+
+    public function comparePasswords($attribute) {
+        if ($this->old_password === $this->$attribute)
+            $this->addError($attribute, 'Новый и старый пароли не должны совпадать');
     }
 }

@@ -64,9 +64,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <?= keyboard_double_arrow_left_icon ?>
         </div>
         <div class="small-profile-picture">
-            <? $id = Yii::$app->user->identity->id;
-                $user = \app\models\Tables\User::find()->select('avatar')->where(['id' => $id])->one(); ?>
-            <?= Html::img('@web/images/avatar/uploads/'.$user->avatar) ?>
+            <? echo !Yii::$app->user->identity->avatar ? blank_avatar : Html::img('@web/images/avatar/uploads/' . Yii::$app->user->identity->avatar . '.png') ?>
+
             <span class="menu-item hidden"><?= Yii::$app->user->identity->login ?></span>
         </div>
 
@@ -78,7 +77,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         <div class="line"></div>
 
         <div class="side-buttons">
-            <?= Html::a(person_icon . '<span class="menu-item hidden">Профиль</span>', Url::to(['main/author', 'id' => $id])) ?>
+            <?= Html::a(person_icon . '<span class="menu-item hidden">Профиль</span>', Url::to(['main/author', 'id' => Yii::$app->user->identity->id])) ?>
             <a href=""><?= mail_icon ?><span class="menu-item hidden">Сообщения</span></a>
             <?= Html::a(notifications_icon . '<span class="menu-item hidden">Уведомления</span>', Url::to(['user/notifications/all'])) ?>
         </div>
