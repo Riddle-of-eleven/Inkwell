@@ -66,12 +66,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         <div class="small-profile-picture">
             <? $id = Yii::$app->user->identity->id;
                 $user = \app\models\Tables\User::find()->select('avatar')->where(['id' => $id])->one(); ?>
-            <?= Html::img('@web/'.$user->avatar) ?>
+            <?= Html::img('@web/images/avatar/uploads/'.$user->avatar) ?>
             <span class="menu-item hidden"><?= Yii::$app->user->identity->login ?></span>
         </div>
 
         <div class="side-buttons icon-accent">
-            <?=Html::a(new_book_icon . '<span class="menu-item hidden">Новая книга</span>', Url::to(['author/create-book/create-main']))?>
+            <?=Html::a(new_book_icon . '<span class="menu-item hidden">Новая книга</span>', Url::to(['author/create/new-book']))?>
             <a href=""><?= new_project_icon ?><span class="menu-item hidden">Новый проект</span></a>
         </div>
 
@@ -80,7 +80,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         <div class="side-buttons">
             <?= Html::a(person_icon . '<span class="menu-item hidden">Профиль</span>', Url::to(['main/author', 'id' => $id])) ?>
             <a href=""><?= mail_icon ?><span class="menu-item hidden">Сообщения</span></a>
-            <a href=""><?= notifications_icon ?><span class="menu-item hidden">Уведомления</span></a>
+            <?= Html::a(notifications_icon . '<span class="menu-item hidden">Уведомления</span>', Url::to(['user/notifications/all'])) ?>
         </div>
 
         <div class="line"></div>
@@ -198,7 +198,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         <div class="line"></div>
 
         <div class="side-buttons">
-            <a href=""><?= tune_icon ?><span class="menu-item hidden">Настройки</span></a>
+            <?= Html::a(tune_icon . '<span class="menu-item hidden">Настройки</span>', Url::to(['user/settings/show'])) ?>
         </div>
 
         <div class="line"></div>

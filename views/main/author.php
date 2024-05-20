@@ -22,7 +22,7 @@ if (!Yii::$app->user->isGuest) {
 
 <div class="profile-header">
     <div class="block author-header">
-        <div class="profile-picture"><?=Html::img('@web/'.$user->avatar)?></div>
+        <div class="profile-picture"><?=Html::img('@web/images/avatar/uploads/'.$user->avatar)?></div>
         <div class="profile-info">
             <div class="profile-name header2"><?=$user->login?></div>
             <!--<div class="profile-online-status tip">Был в сети 2 часа назад</div>-->

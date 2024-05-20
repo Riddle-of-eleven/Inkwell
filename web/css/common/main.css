@@ -51,12 +51,6 @@ button {
     padding: 0;
 }
 
-h1 {
-    font-size: 24px;
-    font-weight: 500;
-    margin: 10px 0;
-}
-
 
 section.active-tab {
     display: flex !important;
@@ -85,7 +79,8 @@ section, .active-tab section, .book-type-depend {
 
 .header1, .header1 * {
     font-weight: 500;
-    font-size: 22px;
+    font-size: 24px;
+    margin: 10px 0;
 }
 .header2 {
     font-size: 20px;
@@ -257,4 +252,11 @@ details > summary {
     display: flex; justify-content: space-between; align-items: center; gap: 20px;
     padding: 8px 10px 8px 20px;
     font-weight: 500;
+}
+
+
+
+.record-item {
+    display: flex; flex-direction: column;
+    gap: 10px;
 }

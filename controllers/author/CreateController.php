@@ -26,8 +26,6 @@ class CreateController extends Controller
     public function actionNewBook() {
         $session = Yii::$app->session;
         $step = $session->has('step') ? $session->get('step') : 'main';
-        //$session['create.aaa'] = 'aaa';
-
         return $this->render('new-book', [
             'step' => $step,
         ]);
