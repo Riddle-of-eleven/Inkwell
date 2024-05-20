@@ -1,0 +1,143 @@
+@media only screen and (max-width: 600px) {
+    * {
+        font-size: 15px;
+    }
+
+    html {
+        width: 100vw;
+    }
+
+
+    body {
+        padding: 20px 20px 40px;
+    }
+
+    body > * {
+        max-width: 100%;
+        width: 100%;
+    }
+
+
+    /* боковое меню */
+    .side-menu {
+        display: none;
+    }
+
+
+    /* хедер */
+    .left-header .search-field {
+        display: none;
+    }
+    .right-header > *:not(.main-menu-container) {
+        display: none;
+    }
+
+
+    /* виджет книги */
+    .book-preview {
+        width: 100%;
+        flex-direction: column-reverse;
+        padding: 10px 0;
+    }
+    .book-preview-content .line {
+        width: calc(100% + 20px + 20px) !important;
+        margin-right: -20px; margin-left: -20px;
+    }
+
+    .book-preview > *:not(.vertical-line) {
+        padding: 10px 20px;
+    }
+
+    .book-preview-sidebar {
+        justify-content: space-between;
+    }
+    .book-preview-sidebar, .side-buttons {
+        flex-direction: row;
+    }
+    .book-preview-sidebar .line {
+        display: none;
+    }
+
+    .book-preview .vertical-line {
+        width: 100% !important; height: 1px !important;
+    }
+
+    .book-preview-main-meta {
+        flex-direction: column-reverse;
+        align-items: start;
+        gap: 10px;
+    }
+
+    .book-preview-info-cover {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .creator > * {
+        font-size: 16px;
+    }
+
+    .publication-stats {
+        flex-direction: row;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .tip-key, .tip-value .vertical-line {
+        display: none;
+    }
+    .tip-value, .tip-value * {
+        color: var(--color-tip)
+    }
+
+    .book-evaluation {
+        gap: 15px;
+    }
+    .publication-stats .book-size .size-value:last-child {
+        display: none;
+    }
+
+
+    /* книга */
+    .book-header {
+        display: flex; flex-direction: column;
+    }
+    .main-info {
+        padding: 20px !important;
+    }
+    .info-header {
+        flex-direction: column-reverse;
+        align-items: start;
+        gap: 10px;
+    }
+    .book-card .main-info .inner-line {
+        width: calc(100% + 20px + 20px);
+        margin-left: -20px; margin-right: -20px;
+    }
+    .info-pair {
+        flex-wrap: wrap;
+    }
+    .disclaimer {
+        padding: 10px 14px;
+        margin-left: -14px; margin-right: -14px;
+    }
+
+    .book-card .statistics {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-gap: 20px;
+    }
+
+    .toc-chapter {
+        padding: 20px;
+    }
+    .chapter-meta {
+        flex-direction: column;
+        gap: 6px;
+    }
+    .toc-chapters {
+        margin: 8px 0;
+        margin-left: 10px;
+    }
+}

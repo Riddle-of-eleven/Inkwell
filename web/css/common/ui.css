@@ -10,7 +10,7 @@
 /* обычное поле */
 .field {
     box-sizing: border-box;
-    gap: 16px;
+    /*gap: 16px;*/
     padding: 7px 10px 6px 16px;
     min-width: 370px;
     position: relative;
@@ -37,7 +37,7 @@
 /* поле, которое селект */
 .field-select {
     width: max-content;
-    min-width: unset;
+    /*min-width: unset;*/
 }
 
 
@@ -47,9 +47,9 @@
 }
 .dropdown-list {
     position: absolute;
-    top: 40px;
+    /*top: -400px;*/
     width: 100%; max-height: 200px;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 8px 0;
     display: flex; flex-direction: column;
     z-index: 1000;
@@ -99,12 +99,14 @@ select {
 
 
 textarea {
-    width: 100%;
+    width: 100%; max-height: 200px;
     resize: vertical;
-    border: var(--border-width) solid var(--color-outline);
+    /*border: var(--border-width) solid var(--color-outline);
     border-radius: 10px;
+    padding: 7px 10px 6px 16px;*/
     background-color: var(--color-foreground);
-    padding: 7px 10px 6px 16px;
+    border: none;
+    outline: none;
 }
 .symbol-count {
     color: var(--color-tip);
@@ -202,6 +204,9 @@ textarea {
 .danger-accent-button svg {
     fill: var(--color-danger-accent);
 }
+.danger-accent-icon-button svg {
+    fill: var(--color-danger-accent);
+}
 
 
 .filled-button {
@@ -297,19 +302,20 @@ textarea {
 }
 
 
-
 /* ЧЕКБОКС И РАДИОКНОПКА */
 input[type=checkbox], input[type=radio] {
     position: absolute;
     z-index: -1;
     opacity: 0;
 }
-input[type=checkbox]+label, input[type=radio]+label {
+input[type=checkbox]+label, input[type=radio]+label,
+[type=checkbox]+span, input[type=radio]+span {
     display: inline-flex;
     align-items: center;
     user-select: none;
 }
-input[type=checkbox]+label::before {
+/* чекбокс */
+input[type=checkbox]+label::before, input[type=checkbox]+span::before {
     content: '';
     display: inline-block;
     width: 14px; height: 14px;
@@ -321,13 +327,13 @@ input[type=checkbox]+label::before {
     background-position: center center;
     background-size: 70% 70%;
 }
-input[type=checkbox]:checked+label::before {
+input[type=checkbox]:checked+label::before, input[type=checkbox]:checked+span::before {
     border-color: var(--color-accent);
     background-color: var(--color-accent10);
     background-image: url("data:image/svg+xml,%3csvg width='8' height='7' viewBox='0 0 8 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M2.68947 6.21228C2.7082 6.23114 2.73367 6.24176 2.76024 6.2418C2.78682 6.24184 2.81232 6.2313 2.83112 6.21251L7.56172 1.48191C7.60039 1.44324 7.60082 1.38067 7.56268 1.34147L7.04105 0.80527C7.02241 0.78611 6.99688 0.77521 6.97015 0.775003C6.94342 0.774796 6.91772 0.785298 6.89879 0.804167L2.76023 4.92838L1.10101 3.28316C1.06191 3.24439 0.99883 3.24452 0.959894 3.28346L0.438262 3.80507C0.399298 3.84404 0.399196 3.90718 0.438034 3.94627L2.68947 6.21228Z' fill='%23FB784A' stroke='%23FB784A' stroke-width='0.2' stroke-linejoin='round'/%3e%3c/svg%3e");
 }
-
-input[type=radio]+label::before {
+/* радиокнопка */
+input[type=radio]+label::before, input[type=radio]+span::before {
     content: '';
     display: inline-block;
     width: 14px; height: 14px;
@@ -339,18 +345,16 @@ input[type=radio]+label::before {
     background-position: center center;
     background-size: 50% 50%;
 }
-input[type=radio]:checked+label::before {
+input[type=radio]:checked+label::before, input[type=radio]:checked+span::before {
     border-color: var(--color-accent);
     background-color: var(--color-accent10);
     background-image: url("data:image/svg+xml,%3Csvg width='8' height='9' viewBox='0 0 8 9' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.26' y='0.76' width='7.48' height='7.48' rx='3.74' fill='%23FB784A' fill-opacity='0.5' stroke='%23FB784A' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
-
-
+/* обёртка радиокнопок и чекбоксов и label */
 .choice-input-block {
     padding: 8px 17px;
     width: 100%;
 }
-
 
 
 /* ТИПА СЕЛЕКТЫ */
@@ -396,6 +400,33 @@ details:not([open]) .select-header {
     transition: none;
 }
 
+
+/* ЗАГРУЗКА ФАЙЛА*/
+input[type=file] {
+    display: none;
+}
+.upload-container {
+    width: 100%;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    border: var(--border-width) dashed var(--color-outline);
+    border-radius: var(--border-radius-block);
+    padding: 30px 20px;
+}
+.upload-container .upload-text:first-child {
+    /*font-size: 16px;*/
+    font-weight: 500;
+}
+.cover-preview {
+    width: 100%;
+}
+.cover-preview canvas {
+    height: 100px;
+    width: 100%;
+}
+.dragover {
+    background-color: var(--color-dragover);
+    border-color: var(--color-accent);
+}
 
 
 

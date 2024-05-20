@@ -3,14 +3,16 @@
 namespace app\controllers;
 
 use app\models\_BookData;
+use app\models\Forms\FormLogin;
+use app\models\Forms\FormSignup;
 use app\models\Tables\Book;
-use app\models\Tables\FormLogin;
-use app\models\Tables\FormSignup;
 use app\models\Tables\User;
 use Yii;
 use yii\db\Expression;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -83,20 +85,22 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+        if (!Yii::$app->user->isGuest) return $this->goHome();
 
         $model = new FormLogin();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        /*if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goHome();
-        }
-
-        /*if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            VarDumper::dump(Yii::$app->request->post(), 10, true);
-            VarDumper::dump($model->attributes, 10, true);
-            die;
         }*/
+
+        if ($model->load(Yii::$app->request->post())) {
+            $user = User::findByUsername($model->login);
+            $security = Yii::$app->security;
+            $salt = $user->salt;
+            if ($security->validatePassword($model->password . $salt, $user->password)) {
+                Yii::$app->user->login($user);
+                return $this->goHome();
+            }
+        }
 
         $model->password = '';
         return $this->render('login', [
@@ -125,12 +129,20 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $user = new User();
             $user->login = $model->login;
-            //$user->password = Yii::$app->security->generatePasswordHash($model->password);
-            $user->password = $model->password;
+
+            $security = Yii::$app->security;
+            $salt = $security->generateRandomString();
+            $user->password = $security->generatePasswordHash($model->password . $salt);
+            $user->salt = $salt;
+
             $user->email = $model->email;
             $user->registered_at = new Expression('NOW()');
+            //$user->avatar = '';
 
-            if ($user->save()) return $this->goHome();
+            if ($user->save()) {
+                $url = Url::toRoute('login');
+                Yii::$app->getResponse()->redirect($url);
+            }
         }
         return $this->render('signup', [
             'model' => $model

@@ -28,7 +28,7 @@ $this->registerCssFile('@web/css/dashboards/book.css');
 
 <div class="dashboard-header">
     <div>
-        <h1>Книги</h1>
+        <div class="header1">Книги</div>
         <div class="tip-color">На этой странице отображаются все книги, автором которых вы являетесь.</div>
     </div>
     <?= Html::a(new_book_icon . 'Добавить книгу', Url::to(['author/create-book/create-main']), ['class' => 'ui button icon-button accent-button']) ?>

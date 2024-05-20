@@ -10,6 +10,7 @@ use yii\helpers\VarDumper;
 use yii\i18n\Formatter;
 
 
+$book_cover_hidden = $data->cover != '' ? '' : 'hidden';
 
 ?>
 
@@ -106,15 +107,18 @@ use yii\i18n\Formatter;
                         endif; ?>
                     </div>-->
                 </div>
+
+                <div class="small-inner-line"></div>
+
+                <div class="book-preview-description"><?= Html::encode($data->description)?></div>
+
             </div>
-            <div class="book-preview-cover">
-                <?= Html::img($data->cover) ?>
+            <div class="book-preview-cover <?=$book_cover_hidden?>">
+                <?=Html::img('@web/images/covers/uploads/' . $data->cover)?>
             </div>
         </div>
 
-        <div class="line"></div>
 
-        <div class="book-preview-description"><?= Html::encode($data->description)?></div>
 
         <div class="line"></div>
 

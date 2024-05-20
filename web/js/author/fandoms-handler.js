@@ -9,7 +9,8 @@ let fandom_first_str = '<div class="tip-color fandom-first">Сначала вы�
 
 // отображение и скрытие всего, что касается фэндомных сведений
 $('#type-radio input').on('change', function () {
-    if ($(this).val() == 2) $('.fandom-section').removeClass('hidden');
+    // тождественно равно?????
+    if ($(this).val() === 2) $('.fandom-section').removeClass('hidden');
     else $('.fandom-section').addClass('hidden');
 });
 
@@ -249,3 +250,7 @@ function showCharactersDropdown(element, select) {
     ajaxCharactersDropDown('characters-dropdown', 'index.php?r=author/create-book/find-characters', data, select);
     select.removeClass('hidden');
 }
+
+
+
+/////

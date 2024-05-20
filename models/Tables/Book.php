@@ -85,7 +85,7 @@ class Book extends \yii\db\ActiveRecord
             [['user_id', 'is_draft', 'is_perfect', 'is_editable', 'type_id', 'rating_id', 'completeness_id', 'relation_id', 'plan_size_id', 'real_size_id', 'publisher_id', 'is_published', 'access_level_id', 'is_process', 'step'], 'integer'],
             [['created_at'], 'safe'],
             [['title'], 'string', 'max' => 500],
-            [['cover'], 'string', 'max' => 400],
+            [['cover'], 'safe'],
             [['description'], 'string', 'max' => 2500],
             [['remark'], 'string', 'max' => 6000],
             [['dedication', 'disclaimer'], 'string', 'max' => 1500],
