@@ -11,7 +11,7 @@ $this->registerCssFile("@web/css/parts/user/author.css");
 ?>
 
 <div>
-    <h1>Подписки</h1>
+    <div class="header1">Подписки</div>
     <div class="tip-color">Здесь показаны все авторы, на которых вы подписались</div>
 </div>
 

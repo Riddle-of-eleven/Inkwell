@@ -46,6 +46,9 @@ a {
 .highlight {
     color: var(--color-accent);
 }
+.highlight-svg > svg {
+    fill: var(--color-accent);
+}
 
 button {
     padding: 0;

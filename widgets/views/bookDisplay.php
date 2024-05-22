@@ -12,6 +12,57 @@ use yii\i18n\Formatter;
 
 $book_cover_hidden = $data->cover != '' ? '' : 'hidden';
 
+//VarDumper::dump($data->id, 10, true);
+
+$book = \app\models\Tables\Book::findOne($data->id);
+//VarDumper::dump($book->chapters, 10, true);
+
+
+$chapters = count($book->chapters);
+$remainder = $chapters % 10;
+if ($remainder == 1) $chapters_name = 'часть';
+else if ($remainder >= 2 && $remainder <= 4) $chapters_name = 'части';
+else if ($remainder >= 5) $chapters_name = 'частей';
+else if ($remainder == 0) $chapters_name = 'частей';
+
+
+$symbols = 0;
+if ($chapters) {
+    foreach ($book->chapters as $chapter) {
+        if ($chapter->content) $symbols += mb_strlen($chapter->content);
+    }
+}
+$remainder = $symbols % 10;
+if ($remainder == 1) $symbols_name = 'знак';
+else if ($remainder >= 2 && $remainder <= 4) $symbols_name = 'знака';
+else if ($remainder >= 5) $symbols_name = 'знаков';
+else if ($remainder == 0) $symbols_name = 'знаков';
+$symbols_word = '';
+if ($symbols >= 1000) {
+    $symbols = round($symbols / 1000);
+    $symbols_word = 'тыс.';
+    $symbols_name = 'знаков';
+}
+
+
+$words = 0;
+if ($chapters) {
+    foreach ($book->chapters as $chapter) {
+        if ($chapter->content) $words += count(explode(' ', $chapter->content));
+    }
+}
+$remainder = $words % 10;
+if ($remainder == 1) $words_name = 'слово';
+else if ($remainder >= 2 && $remainder <= 4) $words_name = 'слова';
+else if ($remainder >= 5) $words_name = 'слов';
+else if ($remainder == 0) $words_name = 'слов';
+$words_word = '';
+if ($words >= 1000) {
+    $words = round($words / 1000);
+    $words_word = 'тыс.';
+    $words_name = 'слов';
+}
+
 ?>
 
 
@@ -59,30 +110,34 @@ $book_cover_hidden = $data->cover != '' ? '' : 'hidden';
                     <div class="info-pair">
                         <div class="info-key">Фэндом:</div>
                         <? if (isset($data->fandoms)) :
-                        foreach ($data->fandoms as $fandom) {
-                            echo '<div class="info-value">' . $fandom->title . '</div>';
-                        }
-                        endif; ?>
-                    </div>
-                    <div class="info-pair">
-                        <div class="info-key">Первоисточник:</div>
-                        <? if (isset($data->origins)) :
-                            foreach ($data->origins as $origin) {
-                                echo '<div class="info-value">' . $origin->title . ' (' . $origin->release_date .')'. '</div>';
+                            foreach ($data->fandoms as $fandom) {
+                                echo '<div class="info-value">' . $fandom->title . '</div>';
                             }
+                            else :
+                                echo '<div class="info-value">Ориджинал</div>';
                         endif; ?>
                     </div>
-                    <div class="info-pair">
-                        <div class="info-key">Персонажи:</div>
-                        <? if (isset($data->characters)) :
-                            $first = true;
-                            foreach ($data->characters as $character) {
-                                if ($first) $first= false;
-                                else echo ', ';
-                                echo '<div class="info-value">' . $character->full_name . '</div>';
-                            }
-                        endif; ?>
-                    </div>
+                    <? if (isset($data->origins)) : ?>
+                        <div class="info-pair">
+                            <div class="info-key">Первоисточник:</div>
+                                <? foreach ($data->origins as $origin) {
+                                    echo '<div class="info-value">' . $origin->title . ' (' . $origin->release_date .')'. '</div>';
+                                }?>
+                        </div>
+                    <? endif; ?>
+                    <?if ($data->characters) : ?>
+                        <div class="info-pair">
+                            <div class="info-key">Персонажи:</div>
+                            <div class="info-value">
+                                <? $first = true;
+                                foreach ($data->characters as $character) {
+                                    if ($first) $first= false;
+                                    else echo ', ';
+                                    echo $character->full_name;
+                                }?>
+                            </div>
+                        </div>
+                    <? endif; ?>
                     <!--<div class="info-pair">
                         <div class="info-key">Пейринг:</div>
                         <div class="info-value">Ада / Михаил</div>
@@ -90,22 +145,32 @@ $book_cover_hidden = $data->cover != '' ? '' : 'hidden';
                 </div>
                 <div class="small-inner-line"></div>
                 <div class="info-pairs">
-                    <div class="info-pair">
-                        <div class="info-key">Жанры:</div>
-                        <? if (isset($data->genres)) :
-                            foreach ($data->genres as $genre) {
-                                echo '<div class="info-value">' . $genre->title . '</div>';
-                            }
-                        endif; ?>
-                    </div>
-                    <!--<div class="info-pair">
-                        <div class="info-key">Теги:</div>
-                        <? if (isset($data->tags)) :
-                            foreach ($data->tags as $tag) {
-                                echo '<div class="info-value">' . $tag->title . '</div>';
-                            }
-                        endif; ?>
-                    </div>-->
+                    <? if (isset($data->genres)) : ?>
+                        <div class="info-pair">
+                            <div class="info-key">Жанры:</div>
+                            <div class="info-value">
+                                <? $first = true;
+                                foreach ($data->genres as $genre) {
+                                    if ($first) $first= false;
+                                    else echo ', ';
+                                    echo $genre->title;
+                                } ?>
+                            </div>
+                        </div>
+                    <? endif; ?>
+                    <? if (isset($data->tags)) : ?>
+                        <div class="info-pair">
+                            <div class="info-key">Теги:</div>
+                            <div class="info-value">
+                                <? $first = true;
+                                foreach ($data->tags as $tag) {
+                                    if ($first) $first= false;
+                                    else echo ', ';
+                                    echo $tag->title;
+                                } ?>
+                            </div>
+                        </div>
+                    <? endif; ?>
                 </div>
 
                 <div class="small-inner-line"></div>
@@ -127,28 +192,28 @@ $book_cover_hidden = $data->cover != '' ? '' : 'hidden';
             <div class="book-size">
                 <div class="tip-key">Размер:</div>
                 <div class="tip-value">
-                    <div class="size-value">Миди</div>
+                    <div class="size-value"><?=$book->realSize->title?></div>
                     <div class="vertical-line"></div>
-                    <div class="size-value">3 части</div>
+                    <div class="size-value"><?=$chapters . ' ' . $chapters_name?></div>
                     <div class="vertical-line"></div>
-                    <div class="size-value">24 страницы</div>
+                    <div class="size-value"><?=$words . ' ' . $words_word . ' ' . $words_name?></div>
                     <div class="vertical-line"></div>
-                    <div class="size-value">43 тыс. знаков</div>
+                    <div class="size-value"><?=$symbols . ' ' . $symbols_word . ' ' . $symbols_name?></div>
                 </div>
             </div>
             <div class="book-date">
                 <div class="tip-key">Дата публикации:</div>
                 <div class="tip-value">
                     <?  $formatter = new Formatter();
-                        echo $formatter->asDate($data->created_at, 'dd.MM.yyyy');
+                        echo $formatter->asDate($data->created_at, 'd MMMM yyyy');
                     ?>
                 </div>
             </div>
 
 
             <div class="book-evaluation">
-                <div class="evaluation-pair"><?= favorite_icon ?> 144</div>
-                <div class="evaluation-pair"><?= chat_bubble_icon ?> 32</div>
+                <div class="evaluation-pair"><?= favorite_icon . count($book->likes)?></div>
+                <!--<div class="evaluation-pair"><?= chat_bubble_icon ?> 32</div>-->
             </div>
         </div>
 

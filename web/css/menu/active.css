@@ -30,10 +30,17 @@ body {
     margin-left: 35px;
     margin-top: -2px;
 }
-.active .side-buttons>* {
+.active .side-buttons > * {
     justify-content: left;
 }
 
 .guest-menu, .active.guest-menu {
     padding-top: 100px !important;
+}
+
+
+.side-menu summary:hover, .side-menu a:not(.button):hover {
+    padding: 6px 6px 6px 10px; margin: -6px -6px -6px -10px;
+    border-radius: 10px;
+    background-color: var(--color-dark-fill);
 }

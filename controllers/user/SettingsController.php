@@ -2,6 +2,7 @@
 
 namespace app\controllers\user;
 
+use app\models\Forms\User\FormPublisherSettings;
 use Yii;
 use yii\web\Controller;
 use app\models\Tables\User;
@@ -87,12 +88,29 @@ class SettingsController extends Controller
     public function actionLoadBlacklist() {
         $session = Yii::$app->session;
         $session->set('settings.show.tab', 'blacklist');
+
         return $this->renderAjax('tabs/blacklist');
     }
     public function actionLoadPublisher() {
         $session = Yii::$app->session;
         $session->set('settings.show.tab', 'publisher');
-        return $this->renderAjax('tabs/publisher');
+
+        $publisher_model = new FormPublisherSettings();
+        $user = Yii::$app->user->identity;
+        $publisher_model->official_website = $user->official_website;
+        if ($publisher_model->load(Yii::$app->request->post()) && $publisher_model->validate()) {
+            $change = false;
+            if ($user->official_website != $publisher_model->official_website) {
+                $user->official_website = $publisher_model->official_website;
+                $change = true;
+            }
+            if ($change) $user->save();
+            return $this->redirect(Url::to(['user/settings/show']));
+        }
+
+        return $this->renderAjax('tabs/publisher', [
+            'publisher_model' => $publisher_model
+        ]);
     }
     public function actionLoadActions() {
         $session = Yii::$app->session;

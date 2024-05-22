@@ -40,6 +40,12 @@
 /*.side-menu {
     overflow-y: scroll;
 }*/
+.guest-menu {
+    padding-top: 100px;
+}
+.guest-menu a {
+    width: 100%;
+}
 
 
 .side-buttons {
@@ -71,13 +77,21 @@
 }
 
 
-.menu-item:hover {
-    background-color: var(--color-selection);
+.side-menu .extendable-menu-item:hover, .side-menu a:not(.button):hover {
+    padding: 4px 2px; margin: -4px -2px;
+    border-radius: 10px;
+    background-color: var(--color-dark-fill);
+}
+.extendable-menu-item:hover .vertical-expand-line {
+    left: 36px;
+}
+.extendable-menu-item:hover .closed-menu-tooltip {
+    left: 56px; top: -11px;
 }
 
 
 
-summary {
+.side-menu summary {
     display: flex; gap: 14px;
 }
 details[open] .expand-icon {
@@ -89,13 +103,35 @@ details[open] .expand-icon {
 }
 
 
-details > .side-buttons {
+.side-menu details[open] summary {
+    padding: 6px 6px 6px 10px; margin: -6px -6px -6px -10px;
+    border-radius: 10px;
+    background-color: var(--color-dark-fill);
+    position: relative;
+}
+.side-menu details[open] summary::before {
+    content: "";
+    position: absolute;
+    left: -6px; top: 0; bottom: 0;
+    width: 1px; height: 12px;
+    background-color: var(--color-accent);
+    border-radius: 4px;
+    align-self: center;
+}
+
+
+.side-menu details[open] summary > svg {
+    fill: var(--color-accent);
+}
+
+
+.side-menu details > .side-buttons {
     margin: 16px 0 10px 22px;
 }
 
 
 .vertical-expand-line {
-    width: 1px; height: 60%;
+    width: 1px; height: 12px;
     background-color: var(--color-accent);
     border-radius: 4px;
     position: absolute;

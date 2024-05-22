@@ -161,7 +161,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 </div>
             </details>-->
 
-            <? if (Yii::$app->user->getIdentity()->is_moderator == 1) : ?>
+            <? if (Yii::$app->user->identity->is_moderator == 1) : ?>
                 <!-- КАБИНЕТ МОДЕРАТОРА -->
                 <div class="to-hide extendable-menu-item" id="extendable-moderator">
                     <?=shield_person_icon?>
@@ -187,6 +187,32 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                         <?= Html::a(tag_icon . '<span class="menu-item hidden">Жанры и теги</span>', Url::to(['moderator/moderator-panel/tags-dashboard'])) ?>
                         <a href=""><?= flag_icon ?><span class="menu-item hidden">Жалобы и обращения</span></a>
                         <a href=""><?= block_icon ?><span class="menu-item hidden">Блокировка пользователей</span></a>
+                    </div>
+                </details>
+            <? endif; ?>
+
+            <? if (Yii::$app->user->identity->is_admin == 1) : ?>
+                <!-- КАБИНЕТ АДМИНИСТРАТОРА -->
+                <div class="to-hide extendable-menu-item" id="extendable-moderator">
+                    <?=passkey_icon?>
+                    <div class="vertical-expand-line"></div>
+                    <div class="closed-menu-tooltip block hidden">
+                        <div class="menu-tooltip-header"><?=passkey_icon?>Кабинет администратора</div>
+                        <div class="menu-tooltip-content">
+                            <a href=""><?= apartment_icon ?>Издательства</a>
+                            <a href=""><?= shield_person_icon ?>Модераторы</a>
+                        </div>
+                    </div>
+                </div>
+                <details class="hidden">
+                    <summary>
+                        <?= passkey_icon ?>
+                        <span class="menu-item hidden">Кабинет администратора</span>
+                        <div class="expand-icon"><?= expand_more_icon ?></div>
+                    </summary>
+                    <div class="side-buttons">
+                        <a href=""><?= apartment_icon ?><span class="menu-item hidden">Издательства</span></a>
+                        <a href=""><?= shield_person_icon ?><span class="menu-item hidden">Модераторы</span></a>
                     </div>
                 </details>
             <? endif; ?>

@@ -7,6 +7,7 @@ $this->title = 'Профиль автора '.$user->login;
 use app\models\Tables\User;
 use app\widgets\BookDisplay;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->registerCssFile("@web/css/parts/user/author.css");
 $this->registerJsFile('@web/js/ajax/interaction.js', ['depends' => [\yii\web\JqueryAsset::class]]);
@@ -57,11 +58,24 @@ if (!Yii::$app->user->isGuest) {
 <div class="tab-contents">
     <section class="tags-tab tab-content active-tab" data-tab="1">
         <div class="block author-about">
-            <div class="about-title header3">О себе</div>
-            <div class="about-text"><?=$user->about?></div>
+            <? if ($user->about || $user->contact || ($user->is_publisher == 1 && $user->official_website)) :?>
+                <? if ($user->about) : ?>
+                    <div class="about-title header3">О себе</div>
+                    <div class="about-text"><?=$user->about?></div>
+                <? endif; ?>
 
-            <div class="about-title header3">Контактная информация</div>
-            <div class="about-text"><?=$user->contact?></div>
+                <? if ($user->contact) : ?>
+                    <div class="about-title header3">Контактная информация</div>
+                    <div class="about-text"><?=$user->contact?></div>
+                <? endif; ?>
+
+                <? if ($user->is_publisher == 1 && $user->official_website) : ?>
+                    <div class="about-title header3">Официальный сайт</div>
+                    <div class="about-text"><?=Html::a($user->official_website, Url::to($user->official_website), ['class' => 'highlight-link'])?></div>
+                <? endif; ?>
+            <? else: ?>
+                <div class="tip-color">Автор предпочёл не рассказывать о себе.</div>
+            <? endif; ?>
         </div>
     </section>
 

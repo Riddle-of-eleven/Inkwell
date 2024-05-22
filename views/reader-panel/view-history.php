@@ -15,7 +15,7 @@ $formatter = new Formatter();
 ?>
 
 <div>
-    <h1>История просмотра</h1>
+    <div class="header1">История просмотра</div
     <div class="tip-color">Здесь сохраняются все книги, которые вы просматривали</div>
 </div>
 

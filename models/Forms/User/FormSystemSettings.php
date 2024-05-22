@@ -20,6 +20,7 @@ class FormSystemSettings extends Model
                 'message' => 'Некорректная длина',
                 'tooShort' => 'Пароль должен содержать минимум 8 символов'],
             ['email', 'email', 'message' => 'Некорректный email'],
+            ['email', 'required', 'message' => 'Данное поле не может быть пустым'],
 
             ['new_password', 'comparePasswords']
         ];
