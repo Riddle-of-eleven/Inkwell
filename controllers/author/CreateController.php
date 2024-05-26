@@ -2,11 +2,19 @@
 
 namespace app\controllers\author;
 
+use app\models\Tables\AccessToBook;
+use app\models\Tables\BookCharacter;
+use app\models\Tables\BookFandom;
+use app\models\Tables\BookGenre;
+use app\models\Tables\BookOrigin;
+use app\models\Tables\BookTag;
 use app\models\Tables\Character;
 use app\models\Tables\Fandom;
 use app\models\Tables\Genre;
 use app\models\Tables\GenreType;
 use app\models\Tables\Origin;
+use app\models\Tables\Pairing;
+use app\models\Tables\PairingCharacter;
 use app\models\Tables\PublicEditing;
 use app\models\Tables\Rating;
 use app\models\Tables\Relation;
@@ -16,6 +24,10 @@ use app\models\Tables\Tag;
 use app\models\Tables\TagType;
 use app\models\Tables\Type;
 use app\models\Tables\Book;
+use app\models\Tables\User;
+use PHPUnit\Exception;
+use yii\db\Expression;
+use yii\helpers\Url;
 use Yii;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
@@ -27,8 +39,11 @@ class CreateController extends Controller
     public function actionNewBook() {
         $session = Yii::$app->session;
         $step = $session->has('step') ? $session->get('step') : 'main';
+        $allow = $this->checkAllow();
+
         return $this->render('new-book', [
             'step' => $step,
+            'allow' => $allow,
         ]);
     }
 
@@ -139,6 +154,10 @@ class CreateController extends Controller
 
         // пользовательские данные
         $create_public_editing = $session->get('create.public_editing');
+        $create_coauthor = User::findOne($session->get('create.coauthor'));
+        $create_beta = User::findOne($session->get('create.beta'));
+        $create_gamma = User::findOne($session->get('create.gamma'));
+
 
         // автоматические, объективные данные
         $public_editing = PublicEditing::find()->all();
@@ -146,6 +165,9 @@ class CreateController extends Controller
         return $this->renderAjax('steps/step4_access', [
             // субъективные
             'create_public_editing' => $create_public_editing,
+            'create_coauthor' => $create_coauthor,
+            'create_beta' => $create_beta,
+            'create_gamma' => $create_gamma,
             // объективные
             'public_editing' => $public_editing,
         ]);
@@ -188,10 +210,225 @@ class CreateController extends Controller
             else $temp[] = $data;
             $session->set('create.' . $session_key, $temp);
         }
-        else
-            $session->set('create.' . $session_key, $data);
+        else {
+            if ($session_key == 'coauthor' || $session_key == 'beta' || $session_key == 'gamma') {
+                if ($session->get('create.' . $session_key) == $data) $session->remove('create.' . $session_key);
+                else $session->set('create.' . $session_key, $data);
+            }
+            else $session->set('create.' . $session_key, $data);
+        }
 
     }
+
+    public function actionSaveBook() {
+        $session = Yii::$app->session;
+        $user = Yii::$app->user->identity;
+
+        $title = $session->get('create.title');
+        $description = $session->get('create.description');
+        $remark = $session->get('create.remark');
+        $disclaimer = $session->get('create.disclaimer');
+        $dedication = $session->get('create.dedication');
+        $relation = $session->get('create.relation');
+        $rating = $session->get('create.rating');
+        $plan_size = $session->get('create.plan_size');
+        $genres = $session->get('create.genres');
+        $tags = $session->get('create.tags');
+
+        $book_type = $session->get('create.book_type');
+        $fandoms = $session->get('create.fandoms');
+        $origins = $session->get('create.origins');
+        $characters = $session->get('create.characters');
+        $pairings = $session->get('create.pairings');
+        $fandom_tags = $session->get('create.fandom_tags');
+
+        $cover = $session->get('create.cover');
+
+        $public_editing = $session->get('create.public_editing');
+        $coauthor = $session->get('create.coauthor');
+        $beta = $session->get('create.beta');
+        $gamma = $session->get('create.gamma');
+
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            // КНИГА
+            $book = new Book();
+            $book->user_id = $user->id;
+            $book->created_at = new Expression('NOW()');
+            $book->is_draft = 1;
+            $book->is_perfect = 0;
+            $book->public_editing_id = $public_editing;
+            $book->title = $title;
+            $book->cover = $cover;
+            $book->description = $description;
+            $book->remark = $remark;
+            $book->dedication = $dedication;
+            $book->disclaimer = $disclaimer;
+            $book->type_id = $book_type;
+            $book->rating_id = $rating;
+            $book->completeness_id = 1;
+            $book->relation_id = $relation;
+            $book->plan_size_id = $plan_size;
+            $book->real_size_id = null; // потому что нет никакого размера
+            if (!$book->save()) throw new \Exception('Не удалось сохранить книгу');
+            
+            // ЖАНРЫ
+            if ($genres)
+                foreach ($genres as $genre) {
+                    $book_genre = new BookGenre();
+                    $book_genre->book_id = $book->id;
+                    $book_genre->genre_id = $genre;
+                    if (!$book_genre->save()) throw new \Exception('Не удалось сохранить жанры');
+                }
+
+            // ТЕГИ
+            if ($tags)
+                foreach ($tags as $tag) {
+                    $book_tag = new BookTag();
+                    $book_tag->book_id = $book->id;
+                    $book_tag->tag_id = $tag;
+                    if (!$book_tag->save()) throw new \Exception('Не удалось сохранить теги');
+                }
+
+            // ФЭНДОМЫ
+            if ($fandoms)
+                foreach ($fandoms as $fandom) {
+                    $book_fandom = new BookFandom();
+                    $book_fandom->book_id = $book->id;
+                    $book_fandom->fandom_id = $fandom;
+                    if (!$book_fandom->save()) throw new \Exception('Не удалось сохранить фэндомы');
+                }
+
+            // ПЕРВОИСТОЧНИКИ
+            if ($origins)
+                foreach ($origins as $origin) {
+                    $book_origin = new BookOrigin();
+                    $book_origin->book_id = $book->id;
+                    $book_origin->origin_id = $origin;
+                    if (!$book_origin->save()) throw new \Exception('Не удалось сохранить первоисточники');
+                }
+
+            // ПЕРСОНАЖИ
+            if ($characters)
+                foreach ($characters as $character) {
+                    $book_character = new BookCharacter();
+                    $book_character->book_id = $book->id;
+                    $book_character->character_id = $character;
+                    if (!$book_character->save()) throw new \Exception('Не удалось сохранить персонажей');
+                }
+
+            // ПЕЙРИНГИ
+            if ($pairings)
+                foreach ($pairings as $pairing) {
+                    $pairing = new Pairing();
+                    $pairing->book_id = $book->id;
+                    $pairing->relationship_id = $pairing['relationship'];
+                    if (!$pairing->save()) throw new \Exception('Не удалось сохранить пейринг');
+
+                    foreach ($pairing['characters'] as $character) {
+                        $pairing_character = new PairingCharacter();
+                        $pairing_character->character_id = $character;
+                        $pairing_character->pairing_id = $pairing->id;
+                        if (!$pairing_character->save()) throw new \Exception('Не удалось сохранить персонажей пейринга');
+                    }
+                }
+
+            // ФЭНДОМНЫЕ ТЕГИ
+            if ($fandom_tags)
+                foreach ($fandom_tags as $fandom_tag) {
+                    $book_fandom_tag = new BookTag();
+                    $book_fandom_tag->book_id = $book->id;
+                    $book_fandom_tag->tag_id = $fandom_tag;
+                    if (!$book_fandom_tag->save()) throw new \Exception('Не удалось сохранить фэндомные теги');
+                }
+
+            // ДОСТУП
+            if ($coauthor || $beta || $gamma) {
+                $access_to_book = new AccessToBook();
+                $access_to_book->book_id = $book->id;
+                $access_to_book->coauthor_id = $coauthor;
+                $access_to_book->beta_id = $beta;
+                $access_to_book->gamma_id = $gamma;
+                if (!$access_to_book->save()) throw new \Exception('Не удалось сохранить пользователей доступа');
+            }
+
+            $transaction->commit();
+            $this->deleteAll();
+            return $this->redirect(Url::toRoute(['author/modify/book', 'book' => $book->id]));
+        }
+        catch (\Exception $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+    }
+    public function actionDeleteAll() {
+        $this->deleteAll();
+        return $this->redirect(Url::to(['author/author-panel/books-dashboard']));
+    }
+
+    public function deleteAll() {
+        $session = Yii::$app->session;
+
+        $session->remove('step');
+
+        $session->remove('create.title');
+        $session->remove('create.description');
+        $session->remove('create.remark');
+        $session->remove('create.disclaimer');
+        $session->remove('create.dedication');
+        $session->remove('create.relation');
+        $session->remove('create.rating');
+        $session->remove('create.plan_size');
+        $session->remove('create.genres');
+        $session->remove('create.tags');
+
+        $session->remove('create.book_type');
+        $session->remove('create.fandoms');
+        $session->remove('create.origins');
+        $session->remove('create.characters');
+        $session->remove('create.pairings');
+        $session->remove('create.fandom_tags');
+
+        $cover = $session->get('create.cover');
+        if ($cover)
+            if (file_exists($cover)) unlink($cover); // удаляет файл с сервера, если таковой существует
+        $session->remove('create.cover');
+
+        $session->remove('create.public_editing');
+        $session->remove('create.coauthor');
+        $session->remove('create.beta');
+        $session->remove('create.gamma');
+    }
+
+    public function  actionCheckAllow() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return ['allow' => $this->checkAllow()];
+    }
+    public function checkAllow() {
+        $session = Yii::$app->session;
+        $allow = true;
+
+        // общая информация
+        if (!$session->has('create.title') || $session->get('create.title') == '') $allow = false;
+        if (!$session->has('create.description') || $session->get('create.description') == '') $allow = false;
+        if (!$session->has('create.relation') || $session->get('create.relation') == '') $allow = false;
+        if (!$session->has('create.rating') || $session->get('create.rating') == '') $allow = false;
+        if (!$session->has('create.plan_size') || $session->get('create.plan_size') == '') $allow = false;
+
+        // фэндомные сведения
+        if (!$session->has('create.book_type') || $session->get('create.book_type') == '') $allow = false;
+        else if ($session->get('create.book_type') == 2) {
+            if (!$session->has('create.fandoms') || $session->get('create.fandoms') == []) $allow = false;
+        }
+
+        // доступ
+        if (!$session->has('create.public_editing') || $session->get('create.public_editing') == '') $allow = false;
+
+        return  $allow;
+    }
+
+
+
     public function actionSavePairing() {
         Yii::$app->response->format = Response::FORMAT_JSON;
 
@@ -359,23 +596,33 @@ class CreateController extends Controller
 
         if ($meta_type == 'fandom_tags') return $this->findMeta(Tag::class, $input, $session->get('create.fandom_tags'), 6);
 
+        if ($meta_type == 'coauthor') return $this->findMeta(User::class, $input, $session->get('create.coauthor'), Yii::$app->user->identity->id);
+        if ($meta_type == 'beta') return $this->findMeta(User::class, $input, $session->get('create.beta'), Yii::$app->user->identity->id);
+        if ($meta_type == 'gamma') return $this->findMeta(User::class, $input, $session->get('create.gamma'), Yii::$app->user->identity->id);
+
         return [];
     }
     public function findMeta($model, $input = null, $selected = null, $type = null) {
+        $session = Yii::$app->session;
         $data = [];
         $metas = $model::find();
 
-        $metas->filterWhere(['like', 'title', $input]); // подумать потом о безопасности этого всего
+        if ($model != User::class) $metas->filterWhere(['like', 'title', $input]); // подумать потом о безопасности этого всего
+        else $metas->filterWhere(['like', 'login', $input]);
         $metas->andFilterwhere(['not in', 'id', $selected]);
 
         if ($model == Genre::class) if ($type) $metas->andWhere(['type_id' => $type]); // потому что оно 0 считает за значение
         if ($model == Tag::class) {
             if ($type) {
                 if ($type != 6) $metas->andFilterWhere(['type_id' => $type])->andWhere(['<>', 'type_id', 6]); // проверка нужна, потому что 0 это все
-                if ($type == 6) $metas->andWhere(['type_id' => $type]); // фэндомные теги не должны отображаться
+                if ($type == 6) { // фэндомные теги не должны отображаться
+                    $metas->andWhere(['type_id' => $type])->andWhere(['in', 'fandom_id', $session->get('create.fandoms')]);
+                }
             }
             else $metas->andWhere(['<>', 'type_id', 6]);
         }
+
+        if ($model == User::class) $metas->andFilterWhere(['is_publisher' => 0])->andWhere(['<>', 'id', $type]);
 
         $find_metas = $metas->all();
         foreach ($find_metas as $key => $value) $data[$key] = $value;

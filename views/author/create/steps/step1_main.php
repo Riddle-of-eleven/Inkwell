@@ -47,6 +47,10 @@ $this->registerJs(<<<js
     
     countSelectedChildren($(genres), '.metadata-item-selected', length10);
     countSelectedChildren($(tags), '.metadata-item-selected', length20);
+    
+    /*$(document).on('load click change input', function () {
+        allow_main = checkAllowMain()
+    });*/
 js, View::POS_END);
 
 $create_genres_hidden = $create_genres ? '' : 'hidden';

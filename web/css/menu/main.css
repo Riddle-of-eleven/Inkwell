@@ -145,12 +145,20 @@ details[open] .expand-icon {
     position: absolute;
     left: 54px; top: -15px;
     display: flex; flex-direction: column; gap: 14px;
-    width: max-content;
+    width: 280px;
 }
 .closed-menu-tooltip a {
+    width: 100%;
     display: flex; gap: 14px;
-    width: max-content;
+    /*width: max-content;*/
 }
+.closed-menu-tooltip a:hover {
+    padding: 4px 8px !important;
+    margin: -4px -8px !important;
+    border-radius: 10px;
+    background-color: var(--color-dark-fill);
+}
+
 .menu-tooltip-header {
     padding: 15px 20px 10px;
     border-bottom: var(--border-width) solid var(--color-border);

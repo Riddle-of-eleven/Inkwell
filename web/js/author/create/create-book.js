@@ -3,6 +3,48 @@ $('.step').click(function () {
     loadStepByName($(this).data('step'));
 });
 
+let allow_main,
+    allow_fandom,
+    allow_access;
+
+let delete_confirm = $('#delete-book-confirm')[0];
+
+// проверка на возможность добавления
+$(document).on('load click change input', function () {
+    $.ajax({
+        type: 'post',
+        url: 'index.php?r=author/create/check-allow',
+        success: function (response) {
+            //console.log(response)
+            if (response.allow) $('#save-new-book').removeClass('disabled-button');
+            else $('#save-new-book').addClass('disabled-button');
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+});
+
+// добавление книги
+$('#save-new-book').click(function () {
+    $.ajax('index.php?r=author/create/save-book');
+});
+
+// удаление всего добавленного
+$('#delete-new-book').click(function () {
+    delete_confirm.showModal();
+});
+$('.close-button').click(function () {
+    delete_confirm.close();
+});
+$('#reject-delete').click(function () {
+    delete_confirm.close();
+});
+$('#accept-delete').click(function () {
+    $.ajax('index.php?r=author/create/delete-all');
+});
+
+
 
 // обработка сохранения введённых данных в сессии
 content.on('input', '.direct-to-session input[type=text], .direct-to-session textarea', function () {
@@ -15,7 +57,9 @@ content.on('change', '.direct-to-session input[type=radio]', function () {
 
 // открытие выпадающих списков по клику
 content.on('click input', '.chosen-items-to-session:not(.pairings-item) input[type=text]', function () {
-    if (getSessionKeyFromId($(this)) === 'characters') createDropdown($(this), createNameItems);
+    let key = getSessionKeyFromId($(this));
+    if (key === 'characters') createDropdown($(this), createNameItems);
+    else if (key === 'coauthor' || key === 'beta' || key === 'gamma') createDropdown($(this), createUserItems);
     else createDropdown($(this), createTitleItems);
 });
 // закрытие выпадающих списков по клику
@@ -38,6 +82,15 @@ $(document).on('click', function (e) {
     // фэндомные спец. теги
     if ($(e.target).attr('id') !== getNameFromId(fandom_tags) && !checkClosest(e.target, fandom_tags, '.dropdown-list'))
         removeDropdownList($(fandom_tags));
+    // соавтор
+    if ($(e.target).attr('id') !== getNameFromId(coauthor) && !checkClosest(e.target, coauthor, '.dropdown-list'))
+        removeDropdownList($(coauthor));
+    // бета
+    if ($(e.target).attr('id') !== getNameFromId(beta) && !checkClosest(e.target, beta, '.dropdown-list'))
+        removeDropdownList($(beta));
+    // гамма
+    if ($(e.target).attr('id') !== getNameFromId(gamma) && !checkClosest(e.target, gamma, '.dropdown-list'))
+        removeDropdownList($(gamma));
 });
 
 // открытие выпадающих списков по типу метаданных
@@ -63,6 +116,18 @@ content.on('click', '.chosen-items-to-session:not(.pairings-item) .cancel-icon',
     let limit_number = parseInt(limit.text());
     removeSelectedUnit($(this));
     limit.html(++limit_number);
+});
+
+// добавление пользователей по клику
+content.on('click', '.chosen-items-to-session.user-item .dropdown-item', function() {
+    $(this).closest('.user-item').find('.field-with-dropdown').addClass('hidden');
+    addSelectedUserUnit($(this), createUserItems);
+});
+// удаление пользователей по клику
+content.on('click', '.chosen-items-to-session.user-item .delete-icon', function () {
+    $(this).closest('.metadata-item-selected').addClass('hidden');
+    $(this).closest('.user-item').find('.field-with-dropdown').removeClass('hidden');
+    removeSelectedUnit($(this), false, null, false);
 });
 
 
@@ -215,5 +280,3 @@ content.on('click', '.pairing-item .delete-button', function() {
         }
     });
 });
-
-

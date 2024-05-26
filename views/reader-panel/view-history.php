@@ -8,6 +8,7 @@ use yii\helpers\Url;
 use app\widgets\BookDisplay;
 use yii\i18n\Formatter;
 use yii\helpers\VarDumper;
+use app\models\Tables\Book;
 
 $this->registerCssFile("@web/css/parts/user/reader-panel.css");
 
@@ -20,13 +21,12 @@ $formatter = new Formatter();
 </div>
 
 
-
-
-
 <? if ($views)
     foreach ($views as $key => $view) {?>
         <details class="view-history">
-            <summary class="block"><div class="expand-icon"><?= expand_more_icon ?></div><div class=""><?=$formatter->asDate($key, 'dd MMMM yyyy')?></div></summary>
+            <summary class="block select-header">
+                <div class="select-header-expand"><?=expand_more_icon?><?=$formatter->asDate($key, 'dd MMMM yyyy')?></div>
+            </summary>
             <div class="contents">
                 <? foreach ($view as $id => $times) { ?>
                     <div class="view-info block tip">Вы просматривали эту книгу в
@@ -38,7 +38,7 @@ $formatter = new Formatter();
                             else echo ', '.$time;
                         }?>
                     </div>
-                    <? echo BookDisplay::widget(['data' => new \app\models\_BookData($id)]);
+                    <? echo BookDisplay::widget(['book' => Book::findOne($id)]);
                 } ?>
 
             </div>

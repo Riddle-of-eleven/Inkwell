@@ -12,6 +12,44 @@ function loadStepByName(url) {
     });
 }
 
+// проверяет, можно ли публиковать книгу
+function checkAllowMain() {
+    let allow = true, error = [];
+    if ($(title).val() === '') {
+        allow = false;
+        error.push(title);
+    }
+    if ($(description).val() === '') {
+        allow = false;
+        error.push(description);
+    }
+    if (!$('[name=relation]:checked').val()) {
+        allow = false;
+        error.push(relation);
+    }
+    if (!$('[name=rating]:checked').val()) {
+        allow = false;
+        error.push(rating);
+    }
+    if (!$('[name=plan_size]:checked').val()) {
+        allow = false;
+        error.push(plan_size);
+    }
+
+    return {allow: allow, error: error};
+}
+function checkAllowFandom() {
+    let allow = true, error = [];
+    if (!$('[name=book_type]:checked').val()) {
+        allow = false;
+        error.push(book_type);
+    }
+    else if ($('[name=book_type]:checked').val() === 2) {
+        console.log($('.metadata-fandom-selected'))
+    }
+    return {allow: allow, error: error};
+}
+
 
 
 // создание выпадающего списка (element – это input, callback – функция генерации правильного содержимого)
@@ -30,6 +68,7 @@ function createDropdown(element, callback, type = null) {
         success: function (response) {
             let container = element.closest('.field-with-dropdown');
             let neighbor = getNeighborDropdown(element);
+            //console.log(response);
             // это проверка на существование и подгонка положения
             if (neighbor.length) {
                 //console.log(response);
@@ -82,6 +121,23 @@ function createNameItems(response, meta_type) {
     else to_append = '<div class="tip-color dropdown-item empty-dropdown-item">Ничего не найдено</div>';
     return to_append;
 }
+// ну а это – по пользовательскому
+function createUserItems(response, meta_type) {
+    let to_append = '';
+    if (Object.keys(response).length !== 0) {// опять тождественно равно????
+        $.each(response, function (key, value) {
+            to_append += `<div class="dropdown-item dropdown-user-item" id="step-meta-${meta_type}-${value.id}">
+                            <div class="small-profile-picture">`;
+            if (value.avatar) to_append += `<img src="/web/images/avatar/uploads/${value.avatar}.png">`;
+            else to_append += blank_avatar;
+            to_append += `</div>
+                            <div class="metadata-title">${value.login}</div>
+                </div>`;
+        });
+    }
+    else to_append = '<div class="tip-color dropdown-item empty-dropdown-item">Ничего не найдено</div>';
+    return to_append;
+}
 // скрытие выпадающего списка
 function removeDropdownList(field) {
     field.closest('.field-with-dropdown').find('.dropdown-list').remove();
@@ -101,15 +157,37 @@ function addSelectedUnit(unit, callback) {
         createDropdown(unit.closest('.metadata-item').find('input'), callback);
     });
 }
+// добавление выбранных редакторов и соавтора
+function addSelectedUserUnit(unit, callback) {
+    let id = getValueFromId(unit.attr('id'));
+    let key = getSessionKeyFromId(unit);
+    saveData(id, key, false, function () {
+        let selected_container = unit.closest('.metadata-item').find('.metadata-user-selected');
+        let to_append =
+            `<div class="metadata-item-selected-unit metadata-user-item-selected block select-header" meta="${id}">
+                <div class="select-header-expand">
+                    <div class="small-profile-picture">
+                        ${unit.closest('.dropdown-item').find('.small-profile-picture').html()}
+                    </div>
+                    <div class="metadata-title">${unit.find('.metadata-title').text()}</div>
+                </div>
+                <div class="ui button small-button danger-accent-button remove-user">${delete_icon}</div>
+            </div>`;
+        selected_container.removeClass('hidden');
+        selected_container.append(to_append);
+        createDropdown(unit.closest('.metadata-item').find('input'), callback);
+    });
+}
+
 // удаление выбранных метаданных
-function removeSelectedUnit(button, remove_depend = false, next = null) {
+function removeSelectedUnit(button, remove_depend = false, next = null, is_array = true) {
     let unit = button.closest('.metadata-item-selected-unit');
     let input = button.closest('.metadata-item').find('input');
 
     let key = getSessionKeyFromId(input);
     let value = unit.attr('meta');
 
-    saveData(value, key, true);
+    saveData(value, key, is_array);
     if (remove_depend) {
         $.ajax({
             type: 'post',

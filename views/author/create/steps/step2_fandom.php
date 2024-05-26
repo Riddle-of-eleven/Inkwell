@@ -39,6 +39,10 @@ $this->registerJs(<<<js
     countSelectedChildren($(characters), '.metadata-item-selected', length20);
     countSelectedChildren($(pairings), '.metadata-pairing-selected', length5);
     countSelectedChildren($(fandom_tags), '.metadata-item-selected', length5);
+    
+    /*$(document).on('load click change input', function () {
+        allow_fandom = checkAllowFandom()
+    });*/
 js, View::POS_END);
 ?>
 

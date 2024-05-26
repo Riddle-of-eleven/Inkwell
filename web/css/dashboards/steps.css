@@ -47,6 +47,7 @@
     flex-direction: column; gap: 4px;
 }
 
+
 .metadata-item-selected-unit {
     width: fit-content;
     display: flex; align-items: center; gap: 6px;
@@ -57,6 +58,14 @@
 }
 .metadata-item-selected-unit svg {
     fill: var(--color-accent);
+}
+
+.metadata-user-selected {
+    width: 100%;
+}
+.metadata-user-item-selected {
+    margin: 0;
+    width: 100%;
 }
 
 .metadata-fandom-selected-unit {

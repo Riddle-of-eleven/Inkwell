@@ -2,27 +2,21 @@
 
 namespace app\models\Tables;
 
+use Yii;
+
 /**
  * This is the model class for table "access_to_book".
  *
  * @property int $id
  * @property int|null $book_id
- * @property int|null $user_id
- * @property int|null $co_author_1_id
- * @property int|null $co_author_2_id
- * @property int|null $beta_1_id
- * @property int|null $beta_2_id
- * @property int|null $gamma_1_id
- * @property int|null $gamma_2_id
+ * @property int|null $coauthor_id
+ * @property int|null $beta_id
+ * @property int|null $gamma_id
  *
- * @property User $beta1
- * @property User $beta2
+ * @property User $beta
  * @property Book $book
- * @property User $coAuthor1
- * @property User $coAuthor2
- * @property User $gamma1
- * @property User $gamma2
- * @property User $user
+ * @property User $coauthor
+ * @property User $gamma
  */
 class AccessToBook extends \yii\db\ActiveRecord
 {
@@ -40,15 +34,11 @@ class AccessToBook extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['book_id', 'user_id', 'co_author_1_id', 'co_author_2_id', 'beta_1_id', 'beta_2_id', 'gamma_1_id', 'gamma_2_id'], 'integer'],
+            [['book_id', 'coauthor_id', 'beta_id', 'gamma_id'], 'integer'],
             [['book_id'], 'exist', 'skipOnError' => true, 'targetClass' => Book::class, 'targetAttribute' => ['book_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
-            [['co_author_1_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['co_author_1_id' => 'id']],
-            [['co_author_2_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['co_author_2_id' => 'id']],
-            [['beta_1_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['beta_1_id' => 'id']],
-            [['beta_2_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['beta_2_id' => 'id']],
-            [['gamma_1_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['gamma_1_id' => 'id']],
-            [['gamma_2_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['gamma_2_id' => 'id']],
+            [['coauthor_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['coauthor_id' => 'id']],
+            [['beta_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['beta_id' => 'id']],
+            [['gamma_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['gamma_id' => 'id']],
         ];
     }
 
@@ -60,34 +50,20 @@ class AccessToBook extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'book_id' => 'Book ID',
-            'user_id' => 'User ID',
-            'co_author_1_id' => 'Co Author 1 ID',
-            'co_author_2_id' => 'Co Author 2 ID',
-            'beta_1_id' => 'Beta 1 ID',
-            'beta_2_id' => 'Beta 2 ID',
-            'gamma_1_id' => 'Gamma 1 ID',
-            'gamma_2_id' => 'Gamma 2 ID',
+            'coauthor_id' => 'Coauthor ID',
+            'beta_id' => 'Beta ID',
+            'gamma_id' => 'Gamma ID',
         ];
     }
 
     /**
-     * Gets query for [[Beta1]].
+     * Gets query for [[Beta]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getBeta1()
+    public function getBeta()
     {
-        return $this->hasOne(User::class, ['id' => 'beta_1_id']);
-    }
-
-    /**
-     * Gets query for [[Beta2]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getBeta2()
-    {
-        return $this->hasOne(User::class, ['id' => 'beta_2_id']);
+        return $this->hasOne(User::class, ['id' => 'beta_id']);
     }
 
     /**
@@ -101,52 +77,22 @@ class AccessToBook extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[CoAuthor1]].
+     * Gets query for [[Coauthor]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCoAuthor1()
+    public function getCoauthor()
     {
-        return $this->hasOne(User::class, ['id' => 'co_author_1_id']);
+        return $this->hasOne(User::class, ['id' => 'coauthor_id']);
     }
 
     /**
-     * Gets query for [[CoAuthor2]].
+     * Gets query for [[Gamma]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCoAuthor2()
+    public function getGamma()
     {
-        return $this->hasOne(User::class, ['id' => 'co_author_2_id']);
-    }
-
-    /**
-     * Gets query for [[Gamma1]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getGamma1()
-    {
-        return $this->hasOne(User::class, ['id' => 'gamma_1_id']);
-    }
-
-    /**
-     * Gets query for [[Gamma2]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getGamma2()
-    {
-        return $this->hasOne(User::class, ['id' => 'gamma_2_id']);
-    }
-
-    /**
-     * Gets query for [[User]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'gamma_id']);
     }
 }

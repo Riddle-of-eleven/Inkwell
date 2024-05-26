@@ -1,13 +1,15 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $data */
+/* @var $book Book*/
 
+use app\models\Tables\Book;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\VarDumper;
 
 
+VarDumper::dump($book->accessToBooks, 10, true);
 ?>
 
 
@@ -15,7 +17,7 @@ use yii\helpers\VarDumper;
     <div class="book-preview-sidebar">
         <div class="side-buttons">
             <?= Html::a(edit_icon, Url::to(['author-panel/book']), ['class' => 'ui button very-small-button']) ?>
-            <?= Html::a(new_chapter_icon, Url::to(['author/create-book/create-chapter', 'id' => $data->id]), ['class' => 'ui button very-small-button']) ?>
+            <?= Html::a(new_chapter_icon, Url::to(['author/create-book/create-chapter', 'id' => $book->id]), ['class' => 'ui button very-small-button']) ?>
             <div class="ui button very-small-button"><?= link_deployed_code_icon ?></div>
             <div class="ui button very-small-button"><?= branch_icon ?></div>
         </div>
@@ -32,8 +34,9 @@ use yii\helpers\VarDumper;
                 <div class="creators">
                     <div class="creator">
                         <div class="creator-title">Автор:</div>
-                        <div class="creator-name"><?=$data->author->login?></div>
+                        <div class="creator-name"><?=$book->user->login?></div>
                     </div>
+
                     <div class="creator">
                         <div class="creator-title">Редакторы:</div>
                         <div class="creator-name">sdtfliy</div>
@@ -43,7 +46,7 @@ use yii\helpers\VarDumper;
 
             <div class="book-preview-info-cover">
                 <div class="book-preview-info">
-                    <?= Html::a($data->title, Url::to(['author/author-panel/book']), ['class' => 'book-preview-title header1']) ?>
+                    <?= Html::a($book->title, Url::to(['author/author-panel/book']), ['class' => 'book-preview-title header1']) ?>
                     <div class="info-pairs">
                         <div class="info-pair"><div class="info-key">Количество частей:</div>16</div>
                         <div class="info-pair"><div class="info-key">Последнее обновление:</div>11 апреля 2024</div>
@@ -71,10 +74,10 @@ use yii\helpers\VarDumper;
     </div>
 
 
-    <? if ($data->cover) : ?>
+    <? if ($book->cover) : ?>
         <div class="vertical-line"></div>
         <div class="book-preview-cover-actions">
-            <?=Html::img('@web/images/covers/uploads/' . $data->cover, ['class' => 'side-cover'])?>
+            <?=Html::img('@web/images/covers/uploads/' . $book->cover, ['class' => 'side-cover'])?>
             <!--<div class="cover-actions">
                 <a href="" class="ui button icon-button"><?= imagesmode_icon?>Изменить</a>
                 <a href="" class="ui button small-button danger-button"><?= hide_image_icon ?></a>

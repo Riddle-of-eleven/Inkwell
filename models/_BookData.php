@@ -53,7 +53,7 @@ class _BookData extends ActiveRecord
             $this->created_at = $book->created_at;
             $this->is_draft = $book->is_draft;
             $this->is_perfect = $book->is_perfect;
-            $this->is_editable = $book->is_editable;
+            $this->is_editable = $book->public_editing_id;
             $this->title = $book->title;
             $this->cover = is_null($book->cover) ? '' : $book->cover;
             $this->description = $book->description;

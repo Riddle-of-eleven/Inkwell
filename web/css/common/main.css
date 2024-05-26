@@ -75,6 +75,11 @@ section, .active-tab section, .book-type-depend, section > form {
 }
 
 
+:focus {
+    outline: none;
+}
+
+
 
 .no-underline {
     text-decoration: none !important;
@@ -203,7 +208,8 @@ details > summary {
 
 
 .head-article {
-    padding: 3px 0 3px 16px;
+    /*padding: 3px 0 3px 16px;*/
+    padding-left: 10px;
     border-left: 2px solid var(--color-accent);
 }
 
@@ -286,4 +292,8 @@ details > summary {
 
 .title-description {
     display: flex; flex-direction: column;
+}
+
+.publish-actions, .modal-buttons {
+    display: flex; align-items: center; gap: 14px;
 }

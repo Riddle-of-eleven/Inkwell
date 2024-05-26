@@ -46,7 +46,7 @@ js);
         <div class="header1">Книги</div>
         <div class="tip-color">На этой странице отображаются все книги, автором которых вы являетесь.</div>
     </div>
-    <?= Html::a(new_book_icon . 'Добавить книгу', Url::to(['author/create-book/create-main']), ['class' => 'ui button icon-button accent-button']) ?>
+    <?= Html::a(new_book_icon . 'Добавить книгу', Url::to(['author/create/new-book']), ['class' => 'ui button icon-button accent-button']) ?>
 </div>
 
 

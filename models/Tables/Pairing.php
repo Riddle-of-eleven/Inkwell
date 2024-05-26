@@ -8,13 +8,12 @@ use Yii;
  * This is the model class for table "pairing".
  *
  * @property int $id
- * @property int $characterA_id
- * @property int $characterB_id
  * @property int $book_id
+ * @property int $relationship_id
  *
  * @property Book $book
- * @property Character $characterA
- * @property Character $characterB
+ * @property PairingCharacter[] $pairingCharacters
+ * @property Relationship $relationship
  */
 class Pairing extends \yii\db\ActiveRecord
 {
@@ -32,11 +31,10 @@ class Pairing extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['characterA_id', 'characterB_id', 'book_id'], 'required'],
-            [['characterA_id', 'characterB_id', 'book_id'], 'integer'],
+            [['book_id', 'relationship_id'], 'required'],
+            [['book_id', 'relationship_id'], 'integer'],
             [['book_id'], 'exist', 'skipOnError' => true, 'targetClass' => Book::class, 'targetAttribute' => ['book_id' => 'id']],
-            [['characterA_id'], 'exist', 'skipOnError' => true, 'targetClass' => Character::class, 'targetAttribute' => ['characterA_id' => 'id']],
-            [['characterB_id'], 'exist', 'skipOnError' => true, 'targetClass' => Character::class, 'targetAttribute' => ['characterB_id' => 'id']],
+            [['relationship_id'], 'exist', 'skipOnError' => true, 'targetClass' => Relationship::class, 'targetAttribute' => ['relationship_id' => 'id']],
         ];
     }
 
@@ -47,9 +45,8 @@ class Pairing extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'characterA_id' => 'Character A ID',
-            'characterB_id' => 'Character B ID',
             'book_id' => 'Book ID',
+            'relationship_id' => 'Relationship ID',
         ];
     }
 
@@ -64,22 +61,22 @@ class Pairing extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[CharacterA]].
+     * Gets query for [[PairingCharacters]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCharacterA()
+    public function getPairingCharacters()
     {
-        return $this->hasOne(Character::class, ['id' => 'characterA_id']);
+        return $this->hasMany(PairingCharacter::class, ['pairing_id' => 'id']);
     }
 
     /**
-     * Gets query for [[CharacterB]].
+     * Gets query for [[Relationship]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCharacterB()
+    public function getRelationship()
     {
-        return $this->hasOne(Character::class, ['id' => 'characterB_id']);
+        return $this->hasOne(Relationship::class, ['id' => 'relationship_id']);
     }
 }
