@@ -8,6 +8,7 @@ use app\models\Forms\FormSignup;
 use app\models\Tables\Book;
 use app\models\Tables\User;
 use Yii;
+use yii\data\Pagination;
 use yii\db\Expression;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -68,13 +69,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $ids = Book::find()->select('id')->where(['<>', 'is_draft', '1'])->andWhere(['<>', 'is_process', '1'])->orderBy(['id' => SORT_DESC])->all();
-        $books = [];
-        foreach ($ids as $id) {
-            $books[$id->id] = new _BookData($id->id);
-        }
+        $books_query = Book::find()->where(['<>', 'is_draft', '1'])->orderBy(['id' => SORT_DESC]);
+        $count = clone $books_query;
+        $pages = new Pagination(['totalCount' => $count->count(), 'pageSize' => 2]);
+        $books = $books_query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
         return $this->render('index', [
-            'books' => $books
+            'books' => $books,
+            'pages' => $pages,
         ]);
     }
 

@@ -69,12 +69,16 @@ use yii\helpers\VarDumper;
         </div>
 
     </div>
-    <div class="vertical-line"></div>
-    <div class="book-preview-cover-actions">
-        <?=Html::img('@web/images/covers/uploads/' . $data->cover, ['class' => 'side-cover'])?>
-        <div class="cover-actions">
-            <a href="" class="ui button icon-button"><?= imagesmode_icon?>Изменить</a>
-            <a href="" class="ui button small-button danger-button"><?= hide_image_icon ?></a>
+
+
+    <? if ($data->cover) : ?>
+        <div class="vertical-line"></div>
+        <div class="book-preview-cover-actions">
+            <?=Html::img('@web/images/covers/uploads/' . $data->cover, ['class' => 'side-cover'])?>
+            <!--<div class="cover-actions">
+                <a href="" class="ui button icon-button"><?= imagesmode_icon?>Изменить</a>
+                <a href="" class="ui button small-button danger-button"><?= hide_image_icon ?></a>
+            </div>-->
         </div>
-    </div>
+    <? endif; ?>
 </div>

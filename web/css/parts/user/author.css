@@ -42,12 +42,3 @@
 .author-about .about-title:not(:first-of-type) {
     margin-top: 10px;
 }
-
-
-.followed-author > div {
-    display: flex; align-items: center; gap: 20px;
-    padding: 20px 20px;
-}
-.followed-author .small-profile-picture {
-    margin: 0 !important;
-}

@@ -7,6 +7,7 @@ use app\models\Tables\Fandom;
 use app\models\Tables\Genre;
 use app\models\Tables\GenreType;
 use app\models\Tables\Origin;
+use app\models\Tables\PublicEditing;
 use app\models\Tables\Rating;
 use app\models\Tables\Relation;
 use app\models\Tables\Relationship;
@@ -136,14 +137,19 @@ class CreateController extends Controller
         $session = Yii::$app->session;
         $session->set('step', 'access');
 
-        return $this->renderAjax('steps/step4_access');
+        // пользовательские данные
+        $create_public_editing = $session->get('create.public_editing');
+
+        // автоматические, объективные данные
+        $public_editing = PublicEditing::find()->all();
+
+        return $this->renderAjax('steps/step4_access', [
+            // субъективные
+            'create_public_editing' => $create_public_editing,
+            // объективные
+            'public_editing' => $public_editing,
+        ]);
     }
-
-
-    /*public function actionRememberStep() {
-        $session = Yii::$app->session;
-        $session->set('step', Yii::$app->request->post('step'));
-    }*/
 
 
     public function actionUploadCover() {

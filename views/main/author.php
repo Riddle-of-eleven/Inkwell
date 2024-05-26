@@ -1,9 +1,10 @@
 <?php
 /* @var User $user */
-/* @var $books */
+/* @var Book[] $books */
 /* @var $follow */
 $this->title = 'Профиль автора '.$user->login;
 
+use app\models\Tables\Book;
 use app\models\Tables\User;
 use app\widgets\BookDisplay;
 use yii\helpers\Html;
@@ -25,7 +26,7 @@ if (!Yii::$app->user->isGuest) {
 <div class="profile-header">
     <div class="block author-header">
         <div class="profile-picture">
-            <? echo !$user->avatar ? blank_avatar : Html::img('@web/images/avatar/uploads/' . $user->avatar . '.png') ?>
+            <?= !$user->avatar ? blank_avatar : Html::img('@web/images/avatar/uploads/' . $user->avatar . '.png') ?>
         </div>
         <div class="profile-info">
             <div class="profile-name header2"><?=$user->login?></div>
@@ -33,7 +34,7 @@ if (!Yii::$app->user->isGuest) {
         </div>
     </div>
 
-    <? if (!Yii::$app->user->isGuest) :?>
+    <? if (!Yii::$app->user->isGuest && Yii::$app->user->identity != $user) :?>
     <div class="author-actions">
         <div class="">
             <button class="ui button button-left-align <?=@$follow_class?>" id="follow-interaction"><?=favorite_icon?><div class="button-text"><?=$follow_text?></div></button>
@@ -82,7 +83,7 @@ if (!Yii::$app->user->isGuest) {
     <section class="tags-tab tab-content" data-tab="2">
         <? if ($books) {
             foreach ($books as $book) {
-                echo BookDisplay::widget(['data' => $book]);
+                echo BookDisplay::widget(['book' => $book]);
            }
         } ?>
     </section>

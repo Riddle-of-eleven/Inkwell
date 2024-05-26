@@ -6,11 +6,11 @@ use yii\base\Widget;
 
 class BookDisplay extends Widget
 {
-    public $data;
+    public $book;
     public function run ()
     {
         return $this->render('bookDisplay', [
-            'data' => $this->data,
+            'book' => $this->book,
         ]);
     }
 }

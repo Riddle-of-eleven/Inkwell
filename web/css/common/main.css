@@ -89,9 +89,11 @@ section, .active-tab section, .book-type-depend, section > form {
     font-size: 20px;
     font-weight: 500;
 }
-.header3 {
+.header3, .header3 div {
     font-weight: 600;
+    font-size: 15px;
 }
+
 
 .tip {
     font-size: 12px;
@@ -201,7 +203,7 @@ details > summary {
 
 
 .head-article {
-    padding-left: 16px;
+    padding: 3px 0 3px 16px;
     border-left: 2px solid var(--color-accent);
 }
 
@@ -274,4 +276,14 @@ details > summary {
 }
 .blank-avatar path {
     fill: var(--color-outline);
+}
+
+
+
+.main-epigraph {
+    font-size: 20px;
+}
+
+.title-description {
+    display: flex; flex-direction: column;
 }

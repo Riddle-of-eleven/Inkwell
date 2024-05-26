@@ -10,7 +10,7 @@ namespace app\models\Tables;
  * @property string|null $created_at
  * @property int|null $is_draft
  * @property int|null $is_perfect
- * @property int|null $is_editable
+ * @property int|null $public_editing_id
  * @property string|null $title
  * @property string|null $cover
  * @property string|null $description
@@ -26,8 +26,6 @@ namespace app\models\Tables;
  * @property int|null $publisher_id
  * @property int|null $is_published
  * @property int|null $access_level_id
- * @property int|null $is_process
- * @property int|null $step
  *
  * @property AccessLevel $accessLevel
  * @property AccessToBook[] $accessToBooks
@@ -82,7 +80,7 @@ class Book extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'is_draft', 'is_perfect', 'is_editable', 'type_id', 'rating_id', 'completeness_id', 'relation_id', 'plan_size_id', 'real_size_id', 'publisher_id', 'is_published', 'access_level_id', 'is_process', 'step'], 'integer'],
+            [['user_id', 'is_draft', 'is_perfect', 'public_editing_id', 'type_id', 'rating_id', 'completeness_id', 'relation_id', 'plan_size_id', 'real_size_id', 'publisher_id', 'is_published', 'access_level_id'], 'integer'],
             [['created_at'], 'safe'],
             [['title'], 'string', 'max' => 500],
             [['cover'], 'safe'],
@@ -112,7 +110,7 @@ class Book extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'is_draft' => 'Is Draft',
             'is_perfect' => 'Is Perfect',
-            'is_editable' => 'Is Editable',
+            'public_editing_id' => 'Public Editing Id',
             'title' => 'Title',
             'cover' => 'Cover',
             'description' => 'Description',
@@ -128,8 +126,6 @@ class Book extends \yii\db\ActiveRecord
             'publisher_id' => 'Publisher ID',
             'is_published' => 'Is Published',
             'access_level_id' => 'Access Level ID',
-            'is_process' => 'Is Process',
-            'step' => 'Step',
         ];
     }
 
@@ -389,5 +385,15 @@ class Book extends \yii\db\ActiveRecord
     public function getViewHistories()
     {
         return $this->hasMany(ViewHistory::class, ['book_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[PublicEditing]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPublicEditing()
+    {
+        return $this->hasOne(PublicEditing::class, ['id' => 'public_editing_id']);
     }
 }

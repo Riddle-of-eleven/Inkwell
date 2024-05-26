@@ -28,9 +28,9 @@ js, View::POS_LOAD);
 
 <div class="header1">Добавление книги</div>
 <div class="head-article">
-    Прежде, чем опубликовать книгу, ознакомьтесь с <?=Html::a('правилами публикации', Url::to(['']), ['class' => 'highlight-link'])?>.<br>
-    Также вы можете почитать о <?=Html::a('правилах хорошего тона', Url::to(['']), ['class' => 'highlight-link'])?> (где рассказывается про оформление книг и не только),
-    а также найти жанр и тег по вкусу в <?=Html::a('списке', Url::to(['']), ['class' => 'highlight-link'])?>.
+    Прежде, чем опубликовать книгу, ознакомьтесь с <?=Html::a('правилами публикации', Url::to(['information/publication_rules']), ['class' => 'highlight-link'])?>.<br>
+    Также вы можете почитать о <?=Html::a('правилах хорошего тона', Url::to(['information/behavior']), ['class' => 'highlight-link'])?> (где рассказывается про оформление книг и не только),
+    а также найти жанр и тег по вкусу в <?=Html::a('списке', Url::to(['main/tags']), ['class' => 'highlight-link'])?>.
 </div>
 
 <div class="steps">

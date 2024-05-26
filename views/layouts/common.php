@@ -63,11 +63,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         <div class="ui button very-small-button" id="menu-button">
             <?= keyboard_double_arrow_left_icon ?>
         </div>
-        <div class="small-profile-picture">
-            <? echo !Yii::$app->user->identity->avatar ? blank_avatar : Html::img('@web/images/avatar/uploads/' . Yii::$app->user->identity->avatar . '.png') ?>
 
+        <a class="small-profile-picture" href="index.php?r=main/author&id=<?=Yii::$app->user->identity->id?>">
+            <? echo !Yii::$app->user->identity->avatar ? blank_avatar : Html::img('@web/images/avatar/uploads/' . Yii::$app->user->identity->avatar . '.png') ?>
             <span class="menu-item hidden"><?= Yii::$app->user->identity->login ?></span>
-        </div>
+        </a>
 
         <div class="side-buttons icon-accent">
             <?=Html::a(new_book_icon . '<span class="menu-item hidden">Новая книга</span>', Url::to(['author/create/new-book']))?>
@@ -193,7 +193,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
             <? if (Yii::$app->user->identity->is_admin == 1) : ?>
                 <!-- КАБИНЕТ АДМИНИСТРАТОРА -->
-                <div class="to-hide extendable-menu-item" id="extendable-moderator">
+                <div class="to-hide extendable-menu-item" id="extendable-admin">
                     <?=passkey_icon?>
                     <div class="vertical-expand-line"></div>
                     <div class="closed-menu-tooltip block hidden">
@@ -257,10 +257,10 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         <div class="main-menu-container">
             <div href="" class="ui button small-button" onclick="toggle_menu()"><?= menu_icon ?></div>
             <div class="main-menu-content block hidden">
-                <a href=""><?= emoji_objects_icon ?> Ориджиналы </a>
-                <a href=""><?= menu_book_icon ?> Фанфики </a>
-                <a href=""><?= cognition_icon ?> Авторы </a>
-                <a href=""><?= shelves_icon ?> Фэндомы </a>
+                <?= Html::a(emoji_objects_icon . 'Ориджиналы', Url::to(['main/originals'])) ?>
+                <?= Html::a(menu_book_icon . 'Фанфики', Url::to(['main/fanfics'])) ?>
+                <?= Html::a(cognition_icon . 'Авторы', Url::to(['main/authors'])) ?>
+                <?= Html::a(shelves_icon . 'Фэндомы', Url::to(['main/fandoms'])) ?>
                 <a href=""><?= list_alt_icon ?> Подборки </a>
 
                 <div class="line"></div>

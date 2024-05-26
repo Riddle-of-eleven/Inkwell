@@ -19,7 +19,7 @@ $this->registerCssFile("@web/css/parts/user/author.css");
     foreach ($follows as $follow) { ?>
     <div class="followed-author block">
         <div>
-            <div class="small-profile-picture"><?=Html::img('@web/'.$follow->avatar)?></div>
+            <div class="small-profile-picture"><?= !$follow->avatar ? blank_avatar : Html::img('@web/images/avatar/uploads/' . $follow->avatar . '.png') ?></div>
             <?= Html::a($follow->login, Url::to(['main/author', 'id' => $follow->id]), ['class' => 'profile-name header3']) ?>
         </div>
     </div>

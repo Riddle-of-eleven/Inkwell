@@ -256,7 +256,6 @@ class InteractionController extends Controller
         $book = new _BookData($id);
         $content = new _ContentData($id);
 
-
         $epub = new TPEpubCreator();
         $epub->epub_file = $book->title.'.epub';
         $epub->title = $book->title;

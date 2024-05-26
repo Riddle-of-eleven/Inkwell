@@ -6,6 +6,7 @@ use app\models\_BookData;
 use app\models\_ContentData;
 use app\models\Tables\Book;
 use app\models\Tables\Chapter;
+use app\models\Tables\Fandom;
 use app\models\Tables\FavoriteBook;
 use app\models\Tables\Followers;
 use app\models\Tables\Like;
@@ -41,20 +42,18 @@ class MainController extends Controller
         ]);
     }
 
-    public function actionRandBook()
-    {
-        $ids = Book::find()->select('id')->where(['is_draft' => 0])->andWhere(['is_process' => 0])->column();
+    public function actionRandBook() {
+        $ids = Book::find()->select('id')->where(['is_draft' => 0])->column();
         $id = array_rand($ids);
         $url = Url::toRoute(['book', 'id' => $ids[$id]]);
         Yii::$app->getResponse()->redirect($url);
     }
 
-    public function actionBook() {
-        $id = Yii::$app->request->get('id');
-        $test = Book::findOne($id);
+    public function actionBook($id) {
+        $book = Book::findOne($id);
 
-        if ($test->is_draft != 0 || $test->is_process != 0) return $this->goHome();
-        $book = new _BookData($id);
+        if ($book->is_draft != 0) return $this->goHome();
+        //$book = new _BookData($id);
         $content = new _ContentData($id);
 
         $like = false; $read = false; $read_later = false; $favorite = false;
@@ -105,12 +104,12 @@ class MainController extends Controller
     public function actionAuthor() {
         $id = Yii::$app->request->get('id');
         $user = User::findOne($id);
-        $books = Book::find()->where(['user_id' => $id])->andWhere(['<>', 'is_draft', 1])->andWhere(['<>', 'is_process', 1])->all();
+        $books = Book::find()->where(['user_id' => $id])->andWhere(['<>', 'is_draft', 1])->all();
 
-        $book_data = [];
+        /*$book_data = [];
         foreach ($books as $book) {
             $book_data[] = new _BookData($book->id);
-        }
+        }*/
 
         $follow = false;
         if (!Yii::$app->user->isGuest) {
@@ -119,12 +118,71 @@ class MainController extends Controller
 
         return $this->render('author', [
             'user' => $user,
-            'books' => $book_data,
+            'books' => $books,
             'follow' => $follow,
         ]);
     }
 
 
+    // главное меню
+    public function actionOriginals() {
+        $originals_query = Book::find()->where(['type_id' => 1])->andWhere(['is_draft' => 0]);
+        $count = clone $originals_query;
+        $pages = new Pagination(['totalCount' => $count->count(), 'pageSize' => 2]);
+        $originals = $originals_query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $this->render('originals', [
+            'originals' => $originals,
+            'pages' => $pages,
+        ]);
+    }
+    public function actionFanfics() {
+        $fanfics_query = Book::find()->where(['type_id' => 2])->andWhere(['is_draft' => 0]);
+        $count = clone $fanfics_query;
+        $pages = new Pagination(['totalCount' => $count->count(), 'pageSize' => 2]);
+        $fanfics = $fanfics_query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $this->render('fanfics', [
+            'fanfics' => $fanfics,
+            'pages' => $pages,
+        ]);
+    }
+    public function actionAuthors() {
+        $authors_query = User::find()->joinWith(['books'=> function ($authors_query) {
+            $authors_query->where(['is_draft' => 0]);
+        }])->groupBy('user.id');;
+        $count = clone $authors_query;
+        $pages = new Pagination(['totalCount' => $count->count(), 'pageSize' => 2]);
+        $authors = $authors_query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $this->render('authors', [
+            'authors' => $authors,
+            'pages' => $pages,
+        ]);
+    }
+    public function actionFandoms() {
+        $fandoms_query = Fandom::find();
+        $count = clone $fandoms_query;
+        $pages = new Pagination(['totalCount' => $count->count(), 'pageSize' => 2]);
+        $fandoms = $fandoms_query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $this->render('fandoms', [
+            'fandoms' => $fandoms,
+            'pages' => $pages,
+        ]);
+    }
+
+
+
+    // служебные экшены
     public function actionGetThemes() {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $themes = Theme::find()->all();

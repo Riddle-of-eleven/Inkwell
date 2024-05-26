@@ -1,13 +1,13 @@
 <?php
-$this->title = Yii::$app->name.' – все книги';
-
-/* @var \app\models\_BookData $book */
+/* @var \app\models\Tables\Book $book */
 /* @var \app\models\_ContentData $content */
 /* @var $like */
 /* @var $read */
 /* @var $read_later */
 /* @var $favorite */
 /* @var $model */
+
+$this->title = $book->title;
 
 use yii\helpers\Html;
 use yii\helpers\VarDumper;
@@ -19,6 +19,10 @@ use yii\widgets\ActiveForm;
 $this->registerCssFile("@web/css/parts/book/book.css");
 $this->registerJsFile('@web/js/ajax/interaction.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerJsFile('@web/js/common/collections.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+
+//VarDumper::dump($book->characters, 10, true);
+//die;
+
 
 $formatter = new Formatter();
 
@@ -49,6 +53,7 @@ if (!Yii::$app->user->isGuest) {
     $favorite_text = $favorite ? 'В избранном' : 'Добавить в избранное';
 }
 
+
 ?>
 
 
@@ -78,45 +83,65 @@ if (!Yii::$app->user->isGuest) {
                 <div class="creators">
                     <div class="creator">
                         <div>Автор:</div>
-                        <?= Html::a(Html::encode($book->author->login), Url::to(['main/author', 'id' => $book->author->id]), ['class' => 'highlight-link'])?>
+                        <?= Html::a(Html::encode($book->user->login), Url::to(['main/author', 'id' => $book->user->id]), ['class' => 'highlight-link'])?>
                     </div>
                 </div>
                 <div class="metas">
-                    <div class="main-meta"><?= Html::encode($book->relation->title) ?></div>
+                    <div class="main-meta"><?= Html::encode($book->relation0->title) ?></div>
                     <div class="main-meta"><?= Html::encode($book->rating->title) ?></div>
                     <div class="main-meta"><?= Html::encode($book->completeness->title) ?></div>
                 </div>
             </div>
             <div class="inner-line"></div>
-            <h1><?= Html::encode($book->title)?></h1>
+            <h1 class="header1"><?= Html::encode($book->title)?></h1>
             <div class="info-pairs">
-                <div class="info-pair">
-                    <div class="info-key">Фэндом:</div>
-                    <? if (isset($book->fandoms)) :
-                        foreach ($book->fandoms as $fandom) {
-                            echo '<div class="info-value">' . $fandom->title . '</div>';
-                        }
-                    endif; ?>
-                </div>
-                <div class="info-pair">
-                    <div class="info-key">Первоисточник:</div>
-                    <? if (isset($book->origins)) :
-                        foreach ($book->origins as $origin) {
-                            echo '<div class="info-value">' . $origin->title . ' (' . $origin->release_date .')'. '</div>';
-                        }
-                    endif; ?>
-                </div>
-                <div class="info-pair">
-                    <div class="info-key">Персонажи:</div>
-                    <? if (isset($book->characters)) :
-                        $first = true;
-                        foreach ($book->characters as $character) {
-                            if ($first) $first= false;
-                            else echo ', ';
-                            echo '<div class="info-value">' . $character->full_name . '</div>';
-                        }
-                    endif; ?>
-                </div>
+
+                <!-- ФЭНДОМЫ -->
+                <? if ($book->fandoms) : ?>
+                    <div class="info-pair">
+                        <div class="info-key">Фэндом:</div>
+                        <div class="info-value">
+                            <? $first = true;
+                            foreach ($book->fandoms as $fandom) {
+                                if ($first) $first= false;
+                                else echo ', ';
+                                echo $fandom->title;
+                            } ?>
+                        </div>
+                    </div>
+                <? endif; ?>
+
+                <!-- ПЕРВОИСТОЧНИКИ -->
+                <? if ($book->origins) : ?>
+                    <div class="info-pair">
+                        <div class="info-key">Первоисточник:</div>
+                        <div class="info-value">
+                            <? $first = true;
+                            foreach ($book->origins as $origin) {
+                                if ($first) $first= false;
+                                else echo ', ';
+                                echo $origin->title . " ($origin->release_date)";
+                            } ?>
+                        </div>
+                    </div>
+                <? endif; ?>
+
+                <!-- ПЕРСОНАЖИ -->
+                <? if ($book->characters) : ?>
+                    <div class="info-pair">
+                        <div class="info-key">Персонажи:</div>
+                        <div class="info-value">
+                            <? $first = true;
+                            foreach ($book->characters as $character) {
+                                if ($first) $first= false;
+                                else echo ', ';
+                                echo $character->full_name;
+                            } ?>
+                        </div>
+                    </div>
+                <? endif; ?>
+
+                <!-- ПЕЙРИНГИ -->
                 <div class="info-pair">
                     <div class="info-key">Пейринг:</div>
                     <div class="info-value">Ада / Михаил</div>
@@ -124,42 +149,73 @@ if (!Yii::$app->user->isGuest) {
             </div>
             <div class="small-inner-line"></div>
             <div class="info-pairs">
-                <div class="info-pair">
-                    <div class="info-key">Жанры:</div>
-                    <? if (isset($book->genres)) :
-                        foreach ($book->genres as $genre) {
-                            echo '<div class="info-value">' . $genre->title . '</div>';
-                        }
-                    endif; ?>
-                </div>
-                <div class="info-pair">
-                    <div class="info-key">Теги:</div>
-                    <? if (isset($book->tags)) :
-                        foreach ($book->tags as $tag) {
-                            echo '<div class="info-value">' . $tag->title . '</div>';
-                        }
-                    endif; ?>
-                </div>
+
+                <!-- ЖАНРЫ -->
+                <? if ($book->genres) : ?>
+                    <div class="info-pair">
+                        <div class="info-key">Жанры:</div>
+                        <div class="info-value">
+                            <? $first = true;
+                            foreach ($book->genres as $genre) {
+                                if ($first) $first= false;
+                                else echo ', ';
+                                echo $genre->title;
+                            } ?>
+                        </div>
+                    </div>
+                <? endif; ?>
+
+                <!-- ТЕГИ -->
+                <? if ($book->tags) : ?>
+                    <div class="info-pair">
+                        <div class="info-key">Теги:</div>
+                        <div class="info-value">
+                            <? $first = true;
+                            foreach ($book->tags as $tag) {
+                                if ($first) $first= false;
+                                else echo ', ';
+                                echo $tag->title;
+                            } ?>
+                        </div>
+                    </div>
+                <? endif; ?>
             </div>
             <div class="small-inner-line"></div>
             <div class="info-pairs-vertical">
-                <div class="info-pair-vertical">
-                    <div class="info-key">Описание:</div>
-                    <div class="info-value"><?= Html::encode($book->description)?></div>
-                </div>
-                <div class="info-pair-vertical">
-                    <div class="info-key">Примечание:</div>
-                    <div class="info-value"><?= Html::encode($book->remark)?>.</div>
-                </div>
-                <div class="info-pair-vertical">
-                    <div class="info-key">Посвящение:</div>
-                    <div class="info-value"><?= Html::encode($book->dedication)?></div>
-                </div>
+
+                <!-- ОПИСАНИЕ -->
+                <? if ($book->description) : ?>
+                    <div class="info-pair-vertical">
+                        <div class="info-key">Описание:</div>
+                        <div class="info-value"><?= Html::encode($book->description)?></div>
+                    </div>
+                <? endif; ?>
+
+                <!-- ПРИМЕЧАНИЯ -->
+                <? if ($book->remark) : ?>
+                    <div class="info-pair-vertical">
+                        <div class="info-key">Примечание:</div>
+                        <div class="info-value"><?= Html::encode($book->remark)?>.</div>
+                    </div>
+                <? endif; ?>
+
+                <!-- ПОСВЯЕЩЕНИЕ -->
+                <? if ($book->dedication) : ?>
+                    <div class="info-pair-vertical">
+                        <div class="info-key">Посвящение:</div>
+                        <div class="info-value"><?= Html::encode($book->dedication)?></div>
+                    </div>
+                <? endif; ?>
             </div>
-            <div class="info-pair-vertical disclaimer">
-                <div class="info-key key-disclaimer">Дисклеймер:</div>
-                <div class="info-value"><?= Html::encode($book->disclaimer)?></div>
-            </div>
+
+            <!-- ДИСКЛЕЙМЕР -->
+            <? if ($book->disclaimer) : ?>
+                <div class="info-pair-vertical disclaimer">
+                    <div class="info-key key-disclaimer">Дисклеймер:</div>
+                    <div class="info-value"><?= Html::encode($book->disclaimer)?></div>
+                </div>
+            <? endif; ?>
+
             <div class="inner-line"></div>
             <div class="publication-stats">
                 <div class="book-size">

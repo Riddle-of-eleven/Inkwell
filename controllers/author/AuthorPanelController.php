@@ -12,35 +12,78 @@ class AuthorPanelController extends Controller
 {
     public function actionBooksDashboard() {
         if (Yii::$app->user->isGuest) return $this->goHome();
+        $session = Yii::$app->session;
+        $tab = $session->has('author-panel.book-dashboard.tab') ? $session->get('author-panel.book-dashboard.tab') : 'progress';
 
         $user = Yii::$app->user->identity->id;
-        //$books = Book::find()->where(['user_id' => $user])->all();
-        $progress = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 1])->andWhere(['<>', 'is_draft', 1])->andWhere(['<>', 'is_process', 1]);
-        $complete = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 2])->andWhere(['<>', 'is_draft', 1])->andWhere(['<>', 'is_process', 1]);
-        $frozen = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 3])->andWhere(['<>', 'is_draft', 1])->andWhere(['<>', 'is_process', 1]);
-        $draft = Book::find()->where(['user_id' => $user])->andWhere(['is_draft' => 1])->andWhere(['<>', 'is_process', 1]);
-        $process = Book::find()->where(['user_id' => $user])->andWhere(['is_process' => 1]);
+        $progress = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 1])->andWhere(['<>', 'is_draft', 1]);
+        $complete = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 2])->andWhere(['<>', 'is_draft', 1]);
+        $frozen = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 3])->andWhere(['<>', 'is_draft', 1]);
+        $draft = Book::find()->where(['user_id' => $user])->andWhere(['is_draft' => 1]);
 
-        $books_progress = $progress->all();
+        /*$books_progress = $progress->all();
         $books_complete = $complete->all();
         $books_frozen = $frozen->all();
-        $books_draft = $draft->all();
-        $books_process = $process->all();
+        $books_draft = $draft->all();*/
 
-        /*$count_progress = $progress->count();
+        $count_progress = $progress->count();
         $count_complete = $complete->count();
         $count_frozen = $frozen->count();
         $count_draft = $draft->count();
-        $count_process = $process->count();*/
 
-        return $this->render('books-dashboard', [
-            'books_progress' => $books_progress,
-            'books_complete' => $books_complete,
-            'books_frozen' => $books_frozen,
-            'books_draft' => $books_draft,
-            'books_process' => $books_process,
+        return $this->render('dashboard/books', [
+            'tab' => $tab,
+            'progress' => $count_progress,
+            'complete' => $count_complete,
+            'frozen' => $count_frozen,
+            'draft' => $count_draft,
         ]);
     }
+    public function actionLoadProgress() {
+        $session = Yii::$app->session;
+        $session->set('author-panel.book-dashboard.tab', 'progress');
+
+        $user = Yii::$app->user->identity->id;
+        $progress = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 1])->andWhere(['<>', 'is_draft', 1])->all();
+
+        return $this->renderAjax('dashboard/view', [
+            'books' => $progress,
+        ]);
+    }
+    public function actionLoadComplete() {
+        $session = Yii::$app->session;
+        $session->set('author-panel.book-dashboard.tab', 'complete');
+
+        $user = Yii::$app->user->identity->id;
+        $complete = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 2])->andWhere(['<>', 'is_draft', 1])->all();
+
+        return $this->renderAjax('dashboard/view', [
+            'books' => $complete,
+        ]);
+    }
+    public function actionLoadFrozen() {
+        $session = Yii::$app->session;
+        $session->set('author-panel.book-dashboard.tab', 'frozen');
+
+        $user = Yii::$app->user->identity->id;
+        $frozen = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 3])->andWhere(['<>', 'is_draft', 1])->all();
+
+        return $this->renderAjax('dashboard/view', [
+            'books' => $frozen,
+        ]);
+    }
+    public function actionLoadDraft() {
+        $session = Yii::$app->session;
+        $session->set('author-panel.book-dashboard.tab', 'draft');
+
+        $user = Yii::$app->user->identity->id;
+        $draft = Book::find()->where(['user_id' => $user])->andWhere(['is_draft' => 1])->all();
+
+        return $this->renderAjax('dashboard/view', [
+            'books' => $draft,
+        ]);
+    }
+
 
     public function actionBook() {
         if (Yii::$app->user->isGuest) return $this->goHome();

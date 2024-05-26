@@ -1,22 +1,16 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $data _BookData*/
+/* @var $book Book */
 
 use app\models\_BookData;
+use app\models\Tables\Book;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\VarDumper;
 use yii\i18n\Formatter;
 
-
-$book_cover_hidden = $data->cover != '' ? '' : 'hidden';
-
-//VarDumper::dump($data->id, 10, true);
-
-$book = \app\models\Tables\Book::findOne($data->id);
-//VarDumper::dump($book->chapters, 10, true);
-
+$book_cover_hidden = $book->cover != '' ? '' : 'hidden';
 
 $chapters = count($book->chapters);
 $remainder = $chapters % 10;
@@ -24,7 +18,6 @@ if ($remainder == 1) $chapters_name = 'часть';
 else if ($remainder >= 2 && $remainder <= 4) $chapters_name = 'части';
 else if ($remainder >= 5) $chapters_name = 'частей';
 else if ($remainder == 0) $chapters_name = 'частей';
-
 
 $symbols = 0;
 if ($chapters) {
@@ -86,7 +79,7 @@ if ($words >= 1000) {
             <div class="creators">
                 <div class="creator">
                     <div class="creator-title">Автор:</div>
-                    <?= Html::a(Html::encode($data->author->login), Url::to(['main/author', 'id' => $data->author->id]), ['class' => 'creator-name'])?>
+                    <?= Html::a(Html::encode($book->user->login), Url::to(['main/author', 'id' => $book->user->id]), ['class' => 'creator-name'])?>
                 </div>
                 <!--<div class="creator">
                     <div class="creator-title">Редакторы:</div>
@@ -94,9 +87,9 @@ if ($words >= 1000) {
                 </div>-->
             </div>
             <div class="accent-metas">
-                <div class="accent-meta"><?= Html::encode($data->relation->title) ?></div>
-                <div class="accent-meta"><?= Html::encode($data->rating->title) ?></div>
-                <div class="accent-meta"><?= Html::encode($data->completeness->title) ?></div>
+                <div class="accent-meta"><?= Html::encode($book->relation0->title) ?></div>
+                <div class="accent-meta"><?= Html::encode($book->rating->title) ?></div>
+                <div class="accent-meta"><?= Html::encode($book->completeness->title) ?></div>
             </div>
         </div>
         <div class="line"></div>
@@ -104,33 +97,33 @@ if ($words >= 1000) {
 
         <div class="book-preview-info-cover">
             <div class="book-preview-info">
-                <div class="book-preview-title header1"><?=Html::a($data->title, Url::to(['main/book', 'id' => $data->id]))?></div>
+                <div class="book-preview-title header1"><?=Html::a($book->title, Url::to(['main/book', 'id' => $book->id]))?></div>
                 <div class="small-inner-line"></div>
                 <div class="info-pairs">
                     <div class="info-pair">
                         <div class="info-key">Фэндом:</div>
-                        <? if (isset($data->fandoms)) :
-                            foreach ($data->fandoms as $fandom) {
+                        <? if (isset($book->fandoms)) :
+                            foreach ($book->fandoms as $fandom) {
                                 echo '<div class="info-value">' . $fandom->title . '</div>';
                             }
                             else :
                                 echo '<div class="info-value">Ориджинал</div>';
                         endif; ?>
                     </div>
-                    <? if (isset($data->origins)) : ?>
+                    <? if (isset($book->origins)) : ?>
                         <div class="info-pair">
                             <div class="info-key">Первоисточник:</div>
-                                <? foreach ($data->origins as $origin) {
+                                <? foreach ($book->origins as $origin) {
                                     echo '<div class="info-value">' . $origin->title . ' (' . $origin->release_date .')'. '</div>';
                                 }?>
                         </div>
                     <? endif; ?>
-                    <?if ($data->characters) : ?>
+                    <?if ($book->characters) : ?>
                         <div class="info-pair">
                             <div class="info-key">Персонажи:</div>
                             <div class="info-value">
                                 <? $first = true;
-                                foreach ($data->characters as $character) {
+                                foreach ($book->characters as $character) {
                                     if ($first) $first= false;
                                     else echo ', ';
                                     echo $character->full_name;
@@ -145,12 +138,12 @@ if ($words >= 1000) {
                 </div>
                 <div class="small-inner-line"></div>
                 <div class="info-pairs">
-                    <? if (isset($data->genres)) : ?>
+                    <? if (isset($book->genres)) : ?>
                         <div class="info-pair">
                             <div class="info-key">Жанры:</div>
                             <div class="info-value">
                                 <? $first = true;
-                                foreach ($data->genres as $genre) {
+                                foreach ($book->genres as $genre) {
                                     if ($first) $first= false;
                                     else echo ', ';
                                     echo $genre->title;
@@ -158,12 +151,12 @@ if ($words >= 1000) {
                             </div>
                         </div>
                     <? endif; ?>
-                    <? if (isset($data->tags)) : ?>
+                    <? if (isset($book->tags)) : ?>
                         <div class="info-pair">
                             <div class="info-key">Теги:</div>
                             <div class="info-value">
                                 <? $first = true;
-                                foreach ($data->tags as $tag) {
+                                foreach ($book->tags as $tag) {
                                     if ($first) $first= false;
                                     else echo ', ';
                                     echo $tag->title;
@@ -175,11 +168,11 @@ if ($words >= 1000) {
 
                 <div class="small-inner-line"></div>
 
-                <div class="book-preview-description"><?= Html::encode($data->description)?></div>
+                <div class="book-preview-description"><?= Html::encode($book->description)?></div>
 
             </div>
             <div class="book-preview-cover <?=$book_cover_hidden?>">
-                <?=Html::img('@web/images/covers/uploads/' . $data->cover)?>
+                <?=Html::img('@web/images/covers/uploads/' . $book->cover)?>
             </div>
         </div>
 
@@ -205,14 +198,14 @@ if ($words >= 1000) {
                 <div class="tip-key">Дата публикации:</div>
                 <div class="tip-value">
                     <?  $formatter = new Formatter();
-                        echo $formatter->asDate($data->created_at, 'd MMMM yyyy');
+                        echo $formatter->asDate($book->created_at, 'd MMMM yyyy');
                     ?>
                 </div>
             </div>
 
 
             <div class="book-evaluation">
-                <div class="evaluation-pair"><?= favorite_icon . count($book->likes)?></div>
+                <div class="evaluation-pair highlight-svg"><?= favorite_icon . count($book->likes)?></div>
                 <!--<div class="evaluation-pair"><?= chat_bubble_icon ?> 32</div>-->
             </div>
         </div>

@@ -77,7 +77,7 @@
 }
 
 
-.side-menu .extendable-menu-item:hover, .side-menu a:not(.button):hover {
+.side-menu .extendable-menu-item:hover, .side-menu a:not(.button):not(.small-profile-picture):hover {
     padding: 4px 2px; margin: -4px -2px;
     border-radius: 10px;
     background-color: var(--color-dark-fill);

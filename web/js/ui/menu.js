@@ -42,6 +42,11 @@ $(document).on('click', function (e) {
         element.removeClass('highlight-svg');
         element.find('.closed-menu-tooltip').addClass('hidden');
     }
+    if (!$(e.target).closest('#extendable-admin').length) {
+        let element = $('#extendable-admin');
+        element.removeClass('highlight-svg');
+        element.find('.closed-menu-tooltip').addClass('hidden');
+    }
 });
 
 
