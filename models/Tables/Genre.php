@@ -2,7 +2,7 @@
 
 namespace app\models\Tables;
 
-use yii\helpers\ArrayHelper;
+use Yii;
 
 /**
  * This is the model class for table "genre".
@@ -10,12 +10,13 @@ use yii\helpers\ArrayHelper;
  * @property int $id
  * @property string|null $title
  * @property string|null $description
- * @property int $genre_type_id
  * @property string|null $created_at
+ * @property int $type_id
  * @property int|null $moderator_id
  *
  * @property BookGenre[] $bookGenres
- * @property GenreType $genreType
+ * @property User $moderator
+ * @property GenreType $type
  */
 class Genre extends \yii\db\ActiveRecord
 {
@@ -33,11 +34,13 @@ class Genre extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['genre_type_id'], 'required'],
-            [['genre_type_id'], 'integer'],
+            [['created_at'], 'safe'],
+            [['type_id'], 'required'],
+            [['type_id', 'moderator_id'], 'integer'],
             [['title'], 'string', 'max' => 500],
             [['description'], 'string', 'max' => 2500],
-            [['genre_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => GenreType::class, 'targetAttribute' => ['genre_type_id' => 'id']],
+            [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => GenreType::class, 'targetAttribute' => ['type_id' => 'id']],
+            [['moderator_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['moderator_id' => 'id']],
         ];
     }
 
@@ -50,7 +53,9 @@ class Genre extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'description' => 'Description',
-            'genre_type_id' => 'Genre Type ID',
+            'created_at' => 'Created At',
+            'type_id' => 'Type ID',
+            'moderator_id' => 'Moderator ID',
         ];
     }
 
@@ -65,17 +70,22 @@ class Genre extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[GenreType]].
+     * Gets query for [[Moderator]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getGenreType()
+    public function getModerator()
     {
-        return $this->hasOne(GenreType::class, ['id' => 'genre_type_id']);
+        return $this->hasOne(User::class, ['id' => 'moderator_id']);
     }
 
-    public static function getGenresList()
+    /**
+     * Gets query for [[Type]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getType()
     {
-        return ArrayHelper::map(self::find()->all(), 'id', 'title');
+        return $this->hasOne(GenreType::class, ['id' => 'type_id']);
     }
 }

@@ -11,7 +11,7 @@ use yii\helpers\Url;
 
 ?>
 
-<div class="header1">Добавление метки</div>
+<div class="header1">Добавление жанра или тега</div>
 <div class="head-article tip-color">
     Помните о том, что жанры и теги должны быть полезными. В <a href="" class="highlight-link">некоторых случаях</a> администратор может удалить то, что вы добавите.
 </div>
@@ -30,18 +30,23 @@ use yii\helpers\Url;
 ]) ?>
 
 <section>
-    <div class="field-header-words"><div class="header3">Выберите тип создаваемой метки</div><!--<div class="symbol-count">0 / 100</div>--></div>
+    <div class="header3">Выбор типа</div>
+    <div class="head-article">
+        Разница между тегом и жанром заключается в том, что жанр описывает общие направления литературы и такие понятия, которые определяют книгу целиком. Теги помечают отдельные её моменты, сообщают читателю о том, что он может встретить на страницах книги.
+    </div>
+
         <?= $f->field($model, 'type')->radioList([1 => 'Жанр', 2 => 'Тег'], [
             'item' => function($index, $label, $name, $checked, $value) {
-                return "<div class='ui choice-input-block'>
+                return "<label class='ui choice-input-block'>
                             <input type='radio' name='$name' id='type-$value' value='$value'>
-                            <label for='type-$value'>$label</label>
-                        </div>";
+                            <span>$label</span>
+                        </label>";
             }, 'class' => 'dashboard-choice', 'id' => 'type-radio']);
         ?>
 
-    <div class="tip-color">Разница между тегом и жанром заключается в том, что жанр описывает общие направления литературы и такие понятия, которые определяют книгу целиком. Теги помечают отдельные её моменты, сообщают читателю о том, что он может встретить на страницах книги.</div>
+    <div class="inner-line"></div>
+
 </section>
 
-<?= Html::submitButton('Далее', ['class' => 'ui button icon-button', 'name' => 'main-submit']) ?>
+<?= Html::submitButton(skip_next_icon . 'Далее', ['class' => 'ui button icon-button', 'name' => 'main-submit']) ?>
 <? ActiveForm::end() ?>

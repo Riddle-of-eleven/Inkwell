@@ -16,9 +16,9 @@ $this->registerCssFile('@web/css/dashboards/tag.css');
 <div class="dashboard-header">
     <div>
         <h1>Жанры и теги</h1>
-        <div class="tip-color">На этой странице отображаются жанры и теги (метки), добавленные вами</div>
+        <div class="tip-color">На этой странице отображаются жанры и теги, добавленные вами</div>
     </div>
-    <?= Html::a(new_tag_icon . 'Добавить метку', Url::to(['moderator/moderator-panel/choose-type']), ['class' => 'ui button icon-button accent-button']) ?>
+    <?= Html::a(new_tag_icon . 'Добавить жанр или тег', Url::to(['moderator/moderator-panel/choose-type']), ['class' => 'ui button icon-button accent-button']) ?>
 </div>
 
 

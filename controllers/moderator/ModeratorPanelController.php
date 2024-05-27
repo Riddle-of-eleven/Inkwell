@@ -55,24 +55,14 @@ class ModeratorPanelController extends Controller
         $model = new FormCreateTag();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             //VarDumper::dump($model, 10, true);
-            if ($type == 1) {
-                $genre = new Genre();
-                $genre->title = $model->title;
-                $genre ->description = $model->description;
-                $genre->created_at = new Expression('NOW()');
-                $genre->genre_type_id = $model->type;
-                $genre->moderator_id = Yii::$app->user->identity->id;
-                if ($genre->save()) return $this->redirect(Url::to(['tags-dashboard']));
-            }
-            else if ($type == 2) {
-                $tag = new Tag();
-                $tag->title = $model->title;
-                $tag ->description = $model->description;
-                $tag->created_at = new Expression('NOW()');
-                $tag->tag_type_id = $model->type;
-                $tag->moderator_id = Yii::$app->user->identity->id;
-                if ($tag->save()) return $this->redirect(Url::to(['tags-dashboard']));
-            }
+            if ($type == 1) $tag = new Genre();
+            else if ($type == 2) $tag = new Tag();
+            $tag->title = $model->title;
+            $tag ->description = $model->description;
+            $tag->created_at = new Expression('NOW()');
+            $tag->type_id = $model->type;
+            $tag->moderator_id = Yii::$app->user->identity->id;
+            if ($tag->save()) return $this->redirect(Url::to(['tags-dashboard']));
         }
 
         return $this->render('create-tag/create', [

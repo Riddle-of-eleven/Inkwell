@@ -2,7 +2,7 @@
 
 namespace app\models\Tables;
 
-use yii\helpers\ArrayHelper;
+use Yii;
 
 /**
  * This is the model class for table "tag".
@@ -12,12 +12,14 @@ use yii\helpers\ArrayHelper;
  * @property string|null $description
  * @property string|null $created_at
  * @property int|null $fandom_id
- * @property int|null $tag_type_id
- * @property int $is_only_for_fanfic
- * @property int $moderator_id
+ * @property int|null $type_id
+ * @property int|null $is_only_for_fanfic
+ * @property int|null $moderator_id
  *
  * @property BookTag[] $bookTags
- * @property TagType $tagType
+ * @property Fandom $fandom
+ * @property User $moderator
+ * @property TagType $type
  */
 class Tag extends \yii\db\ActiveRecord
 {
@@ -35,10 +37,13 @@ class Tag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fandom_id', 'tag_type_id', 'is_only_for_fanfic'], 'integer'],
+            [['created_at'], 'safe'],
+            [['fandom_id', 'type_id', 'is_only_for_fanfic', 'moderator_id'], 'integer'],
             [['title'], 'string', 'max' => 500],
             [['description'], 'string', 'max' => 2500],
-            [['tag_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => TagType::class, 'targetAttribute' => ['tag_type_id' => 'id']],
+            [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => TagType::class, 'targetAttribute' => ['type_id' => 'id']],
+            [['moderator_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['moderator_id' => 'id']],
+            [['fandom_id'], 'exist', 'skipOnError' => true, 'targetClass' => Fandom::class, 'targetAttribute' => ['fandom_id' => 'id']],
         ];
     }
 
@@ -51,9 +56,11 @@ class Tag extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'description' => 'Description',
+            'created_at' => 'Created At',
             'fandom_id' => 'Fandom ID',
-            'tag_type_id' => 'Tag Type ID',
+            'type_id' => 'Type ID',
             'is_only_for_fanfic' => 'Is Only For Fanfic',
+            'moderator_id' => 'Moderator ID',
         ];
     }
 
@@ -68,17 +75,32 @@ class Tag extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[TagType]].
+     * Gets query for [[Fandom]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTagType()
+    public function getFandom()
     {
-        return $this->hasOne(TagType::class, ['id' => 'tag_type_id']);
+        return $this->hasOne(Fandom::class, ['id' => 'fandom_id']);
     }
 
-    public static function getTagsList()
+    /**
+     * Gets query for [[Moderator]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getModerator()
     {
-        return ArrayHelper::map(self::find()->all(), 'id', 'title');
+        return $this->hasOne(User::class, ['id' => 'moderator_id']);
+    }
+
+    /**
+     * Gets query for [[Type]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getType()
+    {
+        return $this->hasOne(TagType::class, ['id' => 'type_id']);
     }
 }

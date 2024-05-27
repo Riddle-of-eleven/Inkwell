@@ -320,15 +320,15 @@ class CreateController extends Controller
             // ПЕЙРИНГИ
             if ($pairings)
                 foreach ($pairings as $pairing) {
-                    $pairing = new Pairing();
-                    $pairing->book_id = $book->id;
-                    $pairing->relationship_id = $pairing['relationship'];
-                    if (!$pairing->save()) throw new \Exception('Не удалось сохранить пейринг');
+                    $pairing_db = new Pairing();
+                    $pairing_db->book_id = $book->id;
+                    $pairing_db->relationship_id = $pairing['relationship'];
+                    if (!$pairing_db->save()) throw new \Exception('Не удалось сохранить пейринг');
 
                     foreach ($pairing['characters'] as $character) {
                         $pairing_character = new PairingCharacter();
                         $pairing_character->character_id = $character;
-                        $pairing_character->pairing_id = $pairing->id;
+                        $pairing_character->pairing_id = $pairing_db->id;
                         if (!$pairing_character->save()) throw new \Exception('Не удалось сохранить персонажей пейринга');
                     }
                 }

@@ -469,6 +469,11 @@ const passkey_icon = <<<passkey
     </svg>
 passkey;
 
+const skip_next_icon = <<<skip_next
+    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" class="icon">
+        <path d="M643.38-267.69v-424.62h52v424.62h-52Zm-378.76-24v-376.62L559.08-480 264.62-291.69Zm52-188.31Zm0 94 145.61-94-145.61-94v188Z" />
+    </svg>
+skip_next;
 
 
 
