@@ -58,7 +58,6 @@ $create_tags_hidden = $create_tags ? '' : 'hidden';
 
 ?>
 
-<div class="header2">Основное</div>
 
 
 <!-- НАЗВАНИЕ -->

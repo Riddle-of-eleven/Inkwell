@@ -32,7 +32,6 @@ $this->registerJs(<<<js
         $('[data-tab=$tab').addClass('active-tab');
     });
 js, View::POS_LOAD);
-
 $this->registerJs(<<<js
     $('.tab').click(function () {
         loadTab('author/author-panel', $(this).data('tab'), $('.tab-contents'));

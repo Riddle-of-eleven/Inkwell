@@ -2,6 +2,8 @@
 
 namespace app\models\Tables;
 
+use Yii;
+
 /**
  * This is the model class for table "book".
  *
@@ -29,17 +31,25 @@ namespace app\models\Tables;
  *
  * @property AccessLevel $accessLevel
  * @property AccessToBook[] $accessToBooks
+ * @property BookCharacter[] $bookCharacters
+ * @property BookCollection[] $bookCollections
+ * @property BookFandom[] $bookFandoms
+ * @property BookGenre[] $bookGenres
+ * @property BookOrigin[] $bookOrigins
+ * @property BookTag[] $bookTags
  * @property Chapter[] $chapters
  * @property Comment[] $comments
  * @property Completeness $completeness
  * @property Download[] $downloads
  * @property FavoriteBook[] $favoriteBooks
  * @property Like[] $likes
+ * @property Pairing[] $pairings
  * @property Size $planSize
+ * @property PublicEditing $publicEditing
  * @property User $publisher
  * @property Rating $rating
+ * @property ReadLater[] $readLaters
  * @property Read[] $reads
- * @property ReadLater[] $readsLater
  * @property Size $realSize
  * @property RecycleBin[] $recycleBins
  * @property Relation $relation0
@@ -47,25 +57,9 @@ namespace app\models\Tables;
  * @property Type $type
  * @property User $user
  * @property ViewHistory[] $viewHistories
- *
- *
- *
- * @property Genre[] $genres
- * @property Tag[] $tags
- * @property Fandom[] $fandoms
- * @property Origin[] $origins
- * @property Character[] $characters
  */
 class Book extends \yii\db\ActiveRecord
 {
-    /**
-     * @var mixed|null
-     */
-    public $author;
-    /**
-     * @var mixed|null
-     */
-
     /**
      * {@inheritdoc}
      */
@@ -83,11 +77,12 @@ class Book extends \yii\db\ActiveRecord
             [['user_id', 'is_draft', 'is_perfect', 'public_editing_id', 'type_id', 'rating_id', 'completeness_id', 'relation_id', 'plan_size_id', 'real_size_id', 'publisher_id', 'is_published', 'access_level_id'], 'integer'],
             [['created_at'], 'safe'],
             [['title'], 'string', 'max' => 500],
-            [['cover'], 'safe'],
+            [['cover'], 'string', 'max' => 400],
             [['description'], 'string', 'max' => 2500],
             [['remark'], 'string', 'max' => 6000],
             [['dedication', 'disclaimer'], 'string', 'max' => 1500],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['public_editing_id'], 'exist', 'skipOnError' => true, 'targetClass' => PublicEditing::class, 'targetAttribute' => ['public_editing_id' => 'id']],
             [['publisher_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['publisher_id' => 'id']],
             [['access_level_id'], 'exist', 'skipOnError' => true, 'targetClass' => AccessLevel::class, 'targetAttribute' => ['access_level_id' => 'id']],
             [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Type::class, 'targetAttribute' => ['type_id' => 'id']],
@@ -110,7 +105,7 @@ class Book extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'is_draft' => 'Is Draft',
             'is_perfect' => 'Is Perfect',
-            'public_editing_id' => 'Public Editing Id',
+            'public_editing_id' => 'Public Editing ID',
             'title' => 'Title',
             'cover' => 'Cover',
             'description' => 'Description',
@@ -150,67 +145,64 @@ class Book extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Collections]].
+     * Gets query for [[BookCharacters]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCollections()
+    public function getBookCharacters()
     {
-        return $this->hasMany(Collection::class, ['id' => 'collection_id'])
-            ->viaTable('book_collection', ['book_id' => 'id']);
+        return $this->hasMany(BookCharacter::class, ['book_id' => 'id']);
     }
 
     /**
-     * Gets query for [[Fandoms]].
+     * Gets query for [[BookCollections]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getFandoms()
+    public function getBookCollections()
     {
-        return $this->hasMany(Fandom::class, ['id' => 'fandom_id'])
-            ->viaTable('book_fandom', ['book_id' => 'id']);
+        return $this->hasMany(BookCollection::class, ['book_id' => 'id']);
     }
 
     /**
-     * Gets query for [[Genres]].
+     * Gets query for [[BookFandoms]].
      *
      * @return \yii\db\ActiveQuery
-     *
      */
-    public function getGenres()
+    public function getBookFandoms()
     {
-        return $this->hasMany(Genre::class, ['id' => 'genre_id'])
-            ->viaTable('book_genre', ['book_id' => 'id']);
+        return $this->hasMany(BookFandom::class, ['book_id' => 'id']);
     }
 
     /**
-     * Gets query for [[Origins]].
+     * Gets query for [[BookGenres]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getOrigins()
+    public function getBookGenres()
     {
-        return $this->hasMany(Origin::class, ['id' => 'origin_id'])
-            ->viaTable('book_origin', ['book_id' => 'id']);
+        return $this->hasMany(BookGenre::class, ['book_id' => 'id']);
     }
 
     /**
-     * Gets query for [[Tags]].
+     * Gets query for [[BookOrigins]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTags()
+    public function getBookOrigins()
     {
-        return $this->hasMany(Tag::class, ['id' => 'tag_id'])
-            ->viaTable('book_tag', ['book_id' => 'id']);
+        return $this->hasMany(BookOrigin::class, ['book_id' => 'id']);
     }
 
-    public function getCharacters()
+    /**
+     * Gets query for [[BookTags]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBookTags()
     {
-        return $this->hasMany(Character::class, ['id' => 'character_id'])
-            ->viaTable('book_character', ['book_id' => 'id']);
+        return $this->hasMany(BookTag::class, ['book_id' => 'id']);
     }
-
 
     /**
      * Gets query for [[Chapters]].
@@ -257,7 +249,7 @@ class Book extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getFavoriteBooks() // что-то типа getUsersByFavorite
+    public function getFavoriteBooks()
     {
         return $this->hasMany(FavoriteBook::class, ['book_id' => 'id']);
     }
@@ -273,6 +265,16 @@ class Book extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Pairings]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPairings()
+    {
+        return $this->hasMany(Pairing::class, ['book_id' => 'id']);
+    }
+
+    /**
      * Gets query for [[PlanSize]].
      *
      * @return \yii\db\ActiveQuery
@@ -280,6 +282,16 @@ class Book extends \yii\db\ActiveRecord
     public function getPlanSize()
     {
         return $this->hasOne(Size::class, ['id' => 'plan_size_id']);
+    }
+
+    /**
+     * Gets query for [[PublicEditing]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPublicEditing()
+    {
+        return $this->hasOne(PublicEditing::class, ['id' => 'public_editing_id']);
     }
 
     /**
@@ -303,6 +315,16 @@ class Book extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[ReadLaters]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReadLaters()
+    {
+        return $this->hasMany(ReadLater::class, ['book_id' => 'id']);
+    }
+
+    /**
      * Gets query for [[Reads]].
      *
      * @return \yii\db\ActiveQuery
@@ -310,11 +332,6 @@ class Book extends \yii\db\ActiveRecord
     public function getReads()
     {
         return $this->hasMany(Read::class, ['book_id' => 'id']);
-    }
-
-    public function getReadsLater()
-    {
-        return $this->hasMany(ReadLater::class, ['book_id' => 'id']);
     }
 
     /**
@@ -386,14 +403,44 @@ class Book extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ViewHistory::class, ['book_id' => 'id']);
     }
-
-    /**
-     * Gets query for [[PublicEditing]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPublicEditing()
-    {
-        return $this->hasOne(PublicEditing::class, ['id' => 'public_editing_id']);
-    }
 }
+
+
+/*
+
+public function getCollections()
+{
+    return $this->hasMany(Collection::class, ['id' => 'collection_id'])
+        ->viaTable('book_collection', ['book_id' => 'id']);
+}
+
+public function getFandoms()
+{
+    return $this->hasMany(Fandom::class, ['id' => 'fandom_id'])
+        ->viaTable('book_fandom', ['book_id' => 'id']);
+}
+
+public function getGenres()
+{
+    return $this->hasMany(Genre::class, ['id' => 'genre_id'])
+        ->viaTable('book_genre', ['book_id' => 'id']);
+}
+
+public function getOrigins()
+{
+    return $this->hasMany(Origin::class, ['id' => 'origin_id'])
+        ->viaTable('book_origin', ['book_id' => 'id']);
+}
+
+public function getTags()
+{
+    return $this->hasMany(Tag::class, ['id' => 'tag_id'])
+        ->viaTable('book_tag', ['book_id' => 'id']);
+}
+public function getCharacters()
+{
+    return $this->hasMany(Character::class, ['id' => 'character_id'])
+        ->viaTable('book_character', ['book_id' => 'id']);
+}
+
+*/

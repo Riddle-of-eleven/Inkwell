@@ -354,6 +354,7 @@ class CreateController extends Controller
 
             $transaction->commit();
             $this->deleteAll();
+            $session->set('modify.book.tab', 'chapters');
             return $this->redirect(Url::toRoute(['author/modify/book', 'book' => $book->id]));
         }
         catch (\Exception $e) {

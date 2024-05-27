@@ -9,14 +9,14 @@ use yii\helpers\Url;
 use yii\helpers\VarDumper;
 
 
-VarDumper::dump($book->accessToBooks, 10, true);
+//VarDumper::dump($book->accessToBooks[0]->, 10, true);
 ?>
 
 
 <div class="block book-preview">
     <div class="book-preview-sidebar">
         <div class="side-buttons">
-            <?= Html::a(edit_icon, Url::to(['author-panel/book']), ['class' => 'ui button very-small-button']) ?>
+            <?= Html::a(edit_icon, Url::toRoute(['author/modify/book', 'book' => $book->id]), ['class' => 'ui button very-small-button']) ?>
             <?= Html::a(new_chapter_icon, Url::to(['author/create-book/create-chapter', 'id' => $book->id]), ['class' => 'ui button very-small-button']) ?>
             <div class="ui button very-small-button"><?= link_deployed_code_icon ?></div>
             <div class="ui button very-small-button"><?= branch_icon ?></div>
@@ -36,17 +36,32 @@ VarDumper::dump($book->accessToBooks, 10, true);
                         <div class="creator-title">Автор:</div>
                         <div class="creator-name"><?=$book->user->login?></div>
                     </div>
-
-                    <div class="creator">
-                        <div class="creator-title">Редакторы:</div>
-                        <div class="creator-name">sdtfliy</div>
-                    </div>
+                    <? if ($book->accessToBooks) :
+                        if ($book->accessToBooks[0]->coauthor) : ?>
+                            <div class="creator">
+                                <div class="creator-title">Соавтор:</div>
+                                <div class="creator-name"><?=$book->accessToBooks[0]->coauthor->login?></div>
+                            </div>
+                        <? endif;
+                        if ($book->accessToBooks[0]->beta) : ?>
+                            <div class="creator">
+                                <div class="creator-title">Бета:</div>
+                                <div class="creator-name"><?=$book->accessToBooks[0]->beta->login?></div>
+                            </div>
+                        <? endif;
+                        if ($book->accessToBooks[0]->gamma) : ?>
+                            <div class="creator">
+                                <div class="creator-title">Гамма:</div>
+                                <div class="creator-name"><?=$book->accessToBooks[0]->gamma->login?></div>
+                            </div>
+                        <? endif;
+                     endif; ?>
                 </div>
             </div>
 
             <div class="book-preview-info-cover">
                 <div class="book-preview-info">
-                    <?= Html::a($book->title, Url::to(['author/author-panel/book']), ['class' => 'book-preview-title header1']) ?>
+                    <?= Html::a($book->title, Url::toRoute(['author/modify/book', 'book' => $book->id]), ['class' => 'book-preview-title header1']) ?>
                     <div class="info-pairs">
                         <div class="info-pair"><div class="info-key">Количество частей:</div>16</div>
                         <div class="info-pair"><div class="info-key">Последнее обновление:</div>11 апреля 2024</div>
