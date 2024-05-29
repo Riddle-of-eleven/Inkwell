@@ -161,3 +161,14 @@
 .fandoms-item-header {
     display: flex; gap: 20px; align-items: center;
 }
+
+
+
+/* для пользовательского и прочего */
+.modify-toc-section-title {
+    width: 100%;
+    justify-content: space-between;
+}
+.toc-action-buttons {
+    display: flex; gap: 6px;
+}

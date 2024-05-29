@@ -53,4 +53,10 @@ class ModifyController extends Controller
             'leaves' => $leaves,
         ]);
     }
+
+
+
+    public function actionAddChapter() {
+        return $this->render('add-chapter');
+    }
 }

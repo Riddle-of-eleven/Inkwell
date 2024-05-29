@@ -43,7 +43,7 @@
 }
 .main-meta {
     padding: 3px 10px;
-    border: 0.5px solid var(--color-accent);
+    border: var(--border-width) solid var(--color-accent);
     border-radius: 6px;
     background-color: var(--color-accent10);
 }
@@ -141,7 +141,7 @@
 }
 .toc-section-title {
     display: flex;
-    padding: 14px 11px;
+    padding: 6px 20px;
 }
 
 .toc-section-title, .chapter-title{
@@ -154,8 +154,8 @@
     margin: 10px 0 10px 60px;
 }
 .toc-chapter {
-    padding: 23px 34px 20px;
-    display: flex; flex-direction: column; gap: 10px;
+    padding: 14px 24px;
+    display: flex; flex-direction: column; gap: 6px;
 }
 
 .chapter-meta {
