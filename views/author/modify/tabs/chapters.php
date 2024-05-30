@@ -62,6 +62,8 @@ $formatter = new Formatter();
         <? endif;
     endforeach; ?>
     </div>
+<? else : ?>
+    <div class="tip-color center-container">Тут пока что ничего нет. Добавьте новую часть и она появится здесь</div>
 <? endif; ?>
 
 

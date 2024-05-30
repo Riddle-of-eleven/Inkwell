@@ -3,10 +3,6 @@ $('.step').click(function () {
     loadStepByName($(this).data('step'));
 });
 
-let allow_main,
-    allow_fandom,
-    allow_access;
-
 let delete_confirm = $('#delete-book-confirm')[0];
 
 // проверка на возможность добавления

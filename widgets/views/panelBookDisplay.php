@@ -16,8 +16,8 @@ use yii\helpers\VarDumper;
 <div class="block book-preview">
     <div class="book-preview-sidebar">
         <div class="side-buttons">
-            <?= Html::a(edit_icon, Url::toRoute(['author/modify/book', 'book' => $book->id]), ['class' => 'ui button very-small-button']) ?>
-            <?= Html::a(new_chapter_icon, Url::to(['author/create-book/create-chapter', 'id' => $book->id]), ['class' => 'ui button very-small-button']) ?>
+            <?= Html::a(edit_icon, Url::toRoute(['author/modify/define-modify', 'book' => $book->id]), ['class' => 'ui button very-small-button']) ?>
+            <?= Html::a(new_chapter_icon, Url::to(['author/modify/add-chapter']), ['class' => 'ui button very-small-button']) ?>
             <div class="ui button very-small-button"><?= link_deployed_code_icon ?></div>
             <div class="ui button very-small-button"><?= branch_icon ?></div>
         </div>
@@ -61,7 +61,7 @@ use yii\helpers\VarDumper;
 
             <div class="book-preview-info-cover">
                 <div class="book-preview-info">
-                    <?= Html::a($book->title, Url::toRoute(['author/modify/book', 'book' => $book->id]), ['class' => 'book-preview-title header1']) ?>
+                    <?= Html::a($book->title, Url::toRoute(['author/modify/define-modify', 'book' => $book->id]), ['class' => 'book-preview-title header1']) ?>
                     <div class="info-pairs">
                         <div class="info-pair"><div class="info-key">Количество частей:</div>16</div>
                         <div class="info-pair"><div class="info-key">Последнее обновление:</div>11 апреля 2024</div>

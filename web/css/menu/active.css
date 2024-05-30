@@ -39,7 +39,7 @@ body {
 }
 
 
-.side-menu summary:hover, .side-menu a:not(.button):hover {
+.side-menu summary:hover, .side-menu a:not(.button):not(.small-profile-picture):hover {
     padding: 6px 6px 6px 10px; margin: -6px -6px -6px -10px;
     border-radius: 10px;
     background-color: var(--color-dark-fill);

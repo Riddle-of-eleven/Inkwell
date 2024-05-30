@@ -5,17 +5,18 @@ namespace app\controllers\author;
 use app\models\_ContentData;
 use app\models\Tables\Book;
 use app\models\Tables\Chapter;
+use yii\helpers\Url;
 use Yii;
 use yii\web\Controller;
 
 class ModifyController extends Controller
 {
-    public function actionBook($book) {
+    public function actionBook() {
         $session = Yii::$app->session;
         $tab = $session->has('modify.book.tab') ? $session->get('modify.book.tab') : 'main';
+        $book = $session->has('modify.book') ? $session->get('modify.book') : null;
 
         if (!$book) return $this->goHome();
-        $session->set('modify.book', $book);
         $this_book = Book::findOne($book);
 
         return $this->render('book', [
@@ -23,6 +24,13 @@ class ModifyController extends Controller
             'book' => $this_book
         ]);
     }
+    public function actionDefineModify($book) {
+        $session = Yii::$app->session;
+        if (!$book) return $this->goHome();
+        $session->set('modify.book', $book);
+        return $this->redirect(Url::to(['author/modify/book']));
+    }
+
 
     public function actionLoadMain() {
         $session = Yii::$app->session;
@@ -57,6 +65,12 @@ class ModifyController extends Controller
 
 
     public function actionAddChapter() {
-        return $this->render('add-chapter');
+        $session = Yii::$app->session;
+        $book = $session->has('modify.book') ? $session->get('modify.book') : null;
+        if (!$book) return $this->goHome();
+        $this_book = Book::findOne($book);
+        return $this->render('add-chapter', [
+            'book' => $this_book,
+        ]);
     }
 }

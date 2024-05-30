@@ -12,36 +12,69 @@ use app\models\Tables\User;
 use app\models\Tables\ViewHistory;
 use Yii;
 use yii\web\Controller;
+use app\models\Tables\Book;
 
 class ReaderPanelController extends Controller
 {
     public function actionLibrary()
     {
         if (Yii::$app->user->isGuest) return $this->goHome();
+        $user = Yii::$app->user->identity;
 
-        $user = Yii::$app->user->identity->id;
-        $likes = Like::find()->where(['user_id' => $user])->all();
-        $reads = Read::find()->where(['user_id' => $user])->all();
-        $reads_later = ReadLater::find()->where(['user_id' => $user])->all();
-        $favorites = FavoriteBook::find()->where(['user_id' => $user])->all();
+        /*$likes = Book::find()->innerJoinWith('likes')->where(['like.user_id' => $user->id])->all();
+        $reads = Book::find()->innerJoinWith('likes')->where(['like.user_id' => $user->id])->all();
+        $laters = Book::find()->innerJoinWith('likes')->where(['like.user_id' => $user->id])->all();
+        $favorites = Book::find()->innerJoinWith('likes')->where(['like.user_id' => $user->id])->all();*/
 
-        $liked_books = []; $read_books = []; $read_later_books = []; $favorite_books = [];
+        $session = Yii::$app->session;
+        $tab = $session->has('reader.library.tab') ? $session->get('reader.library.tab') : 'likes';
 
-        if ($likes)
-            foreach ($likes as $like) $liked_books[$like->book_id] = new _BookData($like->book_id);
-        if ($reads)
-            foreach ($reads as $read) $read_books[$read->book_id] = new _BookData($read->book_id);
-        if ($reads_later)
-            foreach ($reads_later as $read_later) $read_later_books[$read_later->book_id] = new _BookData($read_later->book_id);
-        if ($favorites)
-            foreach ($favorites as $favorite) $favorite_books[$favorite->book_id] = new _BookData($favorite->book_id);
-
-
-        return $this->render('library', [
-            'liked_books' => $liked_books,
-            'read_books' => $read_books,
-            'read_later_books' => $read_later_books,
-            'favorite_books' => $favorite_books,
+        return $this->render('library/library', [
+            /*'likes' => $likes,
+            'reads' => $reads,
+            'laters' => $laters,
+            'favorites' => $favorites,*/
+            'tab' => $tab
+        ]);
+    }
+    public function actionLoadLikes() {
+        $user = Yii::$app->user->identity;
+        $session = Yii::$app->session;
+        $session->set('reader.library.tab', 'likes');
+        $books = Book::find()->innerJoinWith('likes')->where(['like.user_id' => $user->id])->all();
+        return $this->renderAjax('library/view', [
+            'books' => $books,
+            'interaction' => 'like',
+        ]);
+    }
+    public function actionLoadFavorites() {
+        $user = Yii::$app->user->identity;
+        $session = Yii::$app->session;
+        $session->set('reader.library.tab', 'favorites');
+        $books = Book::find()->innerJoinWith('favoriteBooks f')->where(['f.user_id' => $user->id])->all();
+        return $this->renderAjax('library/view', [
+            'books' => $books,
+            'interaction' => 'favorite',
+        ]);
+    }
+    public function actionLoadReads() {
+        $user = Yii::$app->user->identity;
+        $session = Yii::$app->session;
+        $session->set('reader.library.tab', 'reads');
+        $books = Book::find()->innerJoinWith('reads')->where(['read.user_id' => $user->id])->all();
+        return $this->renderAjax('library/view', [
+            'books' => $books,
+            'interaction' => 'read',
+        ]);
+    }
+    public function actionLoadLaters() {
+        $user = Yii::$app->user->identity;
+        $session = Yii::$app->session;
+        $session->set('reader.library.tab', 'laters');
+        $books = Book::find()->innerJoinWith('readLaters r')->where(['r.user_id' => $user->id])->all();
+        return $this->renderAjax('library/view', [
+            'books' => $books,
+            'interaction' => 'later',
         ]);
     }
 

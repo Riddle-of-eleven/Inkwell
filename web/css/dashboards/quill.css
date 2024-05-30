@@ -1,0 +1,47 @@
+#toolbar-container, #editor {
+    background-color: var(--color-foreground);
+    border: var(--border-width) solid var(--color-outline);
+    padding: 10px 20px;
+}
+
+#toolbar-container {
+    border-top-left-radius: var(--border-radius-block);
+    border-top-right-radius: var(--border-radius-block);
+    border-bottom-color: var(--color-border);
+
+    display: flex; gap: 20px; align-items: center;
+}
+#editor {
+    border-bottom-left-radius: var(--border-radius-block);
+    border-bottom-right-radius: var(--border-radius-block);
+    border-top: none;
+
+    height: 600px;
+}
+
+
+#create-chapter-type {
+    display: flex; flex-direction: column; gap: 6px;
+}
+
+
+.toolbar-item {
+    display: flex; gap: 10px; align-items: center;
+}
+.toolbar-title {
+    font-weight: 500;
+}
+
+/* родные стили Quill */
+.ql-editor, .ql-blank {
+    padding: 0;
+}
+.ql-editor::before, .blank::before {
+    font-style: normal !important;
+    color: var(--color-tip) !important;
+    left: 60px !important;
+}
+.ql-editor p {
+    text-indent: 40px;
+    margin-bottom: 0.4em;
+}
