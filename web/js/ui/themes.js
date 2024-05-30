@@ -3,7 +3,7 @@ $('.change-theme').click(function () {
 
     $.ajax({
         type: 'post',
-        url: 'index.php?r=main/get-themes',
+        url: 'http://inkwell/web/main/get-themes',
         success: function (response) {
             if (response.success) {
                 let content = '';
@@ -31,7 +31,7 @@ $('#close-theme-change').click(function () {
 $('.themes-container').on('click', '.theme-item', function () {
     $.ajax({
         type: 'post',
-        url: 'index.php?r=main/change-theme',
+        url: 'http://inkwell/web/main/change-theme',
         data: {theme: $(this).attr('theme')},
         success: function (response) {
             if (response.old_theme)

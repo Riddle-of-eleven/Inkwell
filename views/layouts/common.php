@@ -19,6 +19,11 @@ else $this->registerCssFile('@web/css/themes/' . $theme . '.css');
 $is_open = $session->get('is_open');
 if ($is_open == 'open') $this->registerCssFile('@web/css/menu/active.css');
 
+$author_open = $session->has('details.author') ? 'open' : '';
+$reader_open = $session->has('details.reader') ? 'open' : '';
+$moderator_open = $session->has('details.moderator') ? 'open' : '';
+$admin_open = $session->has('details.admin') ? 'open' : '';
+
 AppAsset::register($this);
 
 $this->registerCsrfMetaTags();
@@ -64,10 +69,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <?= keyboard_double_arrow_left_icon ?>
         </div>
 
-        <a class="small-profile-picture" href="index.php?r=main/author&id=<?=Yii::$app->user->identity->id?>">
-            <? echo !Yii::$app->user->identity->avatar ? blank_avatar : Html::img('@web/images/avatar/uploads/' . Yii::$app->user->identity->avatar . '.png') ?>
-            <span class="menu-item hidden"><?= Yii::$app->user->identity->login ?></span>
-        </a>
+        <? $avatar = Yii::$app->user->identity->avatar ? Html::img('@web/images/avatar/uploads/' . Yii::$app->user->identity->avatar . '.png') : 'blank_avatar';
+        echo Html::a(
+            $avatar . '<span class="menu-item hidden">' . Yii::$app->user->identity->login . '</span>',
+            Url::to(['main/author', 'id' => Yii::$app->user->identity->id]),
+            ['class' => 'small-profile-picture']
+        );?>
 
         <div class="side-buttons icon-accent">
             <?=Html::a(new_book_icon . '<span class="menu-item hidden">Новая книга</span>', Url::to(['author/create/new-book']))?>
@@ -101,7 +108,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     </div>
                 </div>
             </div>
-            <details class="hidden">
+            <details class="hidden" id="author-details" <?=$author_open?>>
                 <summary>
                     <?=history_edu_icon?>
                     <span class="menu-item hidden">Кабинет автора</span>
@@ -133,7 +140,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     </div>
                 </div>
             </div>
-            <details class="hidden">
+            <details class="hidden" id="reader-details" <?=$reader_open?>>
                 <summary>
                     <?=two_pager_icon?>
                     <span class="menu-item hidden">Кабинет читателя</span>
@@ -176,7 +183,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                         </div>
                     </div>
                 </div>
-                <details class="hidden">
+                <details class="hidden" id="moderator-details" <?=$moderator_open?>>
                     <summary>
                         <?= shield_person_icon ?>
                         <span class="menu-item hidden">Кабинет модератора</span>
@@ -204,7 +211,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                         </div>
                     </div>
                 </div>
-                <details class="hidden">
+                <details class="hidden" id="admin-details" <?=$admin_open?>>
                     <summary>
                         <?= passkey_icon ?>
                         <span class="menu-item hidden">Кабинет администратора</span>

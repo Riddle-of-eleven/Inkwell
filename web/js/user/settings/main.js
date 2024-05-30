@@ -53,7 +53,7 @@ $(document).on('click', '#button-crop', function() {
             let form_data = new FormData();
             form_data.append('cropped_image', blob);
             $.ajax({
-                url: 'index.php?r=user/settings/set-avatar',
+                url: 'http://inkwell/web/user/settings/set-avatar',
                 type: 'POST',
                 data: form_data,
                 processData: false,
@@ -75,7 +75,7 @@ $(document).on('click', '#button-crop', function() {
 });
 
 $(document).on('click', '#button-restore', function () {
-    $.ajax('index.php?r=user/settings/delete-avatar');
+    $.ajax('http://inkwell/web/user/settings/delete-avatar');
     $('.avatar-preview').addClass('hidden');
     if (cropper) cropper.destroy();
     $('#image-preview').empty();

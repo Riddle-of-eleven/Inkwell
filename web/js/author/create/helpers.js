@@ -1,7 +1,7 @@
 // загружает в секцию контента текущий шаг
 function loadStepByName(url) {
     $.ajax({
-        url: 'index.php?r=author/create/load-step-' + url,
+        url: 'load-step-' + url,
         type: 'post',
         success: function (response) {
             $(`.step-content`).html(response);
@@ -12,45 +12,6 @@ function loadStepByName(url) {
     });
 }
 
-// проверяет, можно ли публиковать книгу
-function checkAllowMain() {
-    let allow = true, error = [];
-    if ($(title).val() === '') {
-        allow = false;
-        error.push(title);
-    }
-    if ($(description).val() === '') {
-        allow = false;
-        error.push(description);
-    }
-    if (!$('[name=relation]:checked').val()) {
-        allow = false;
-        error.push(relation);
-    }
-    if (!$('[name=rating]:checked').val()) {
-        allow = false;
-        error.push(rating);
-    }
-    if (!$('[name=plan_size]:checked').val()) {
-        allow = false;
-        error.push(plan_size);
-    }
-
-    return {allow: allow, error: error};
-}
-function checkAllowFandom() {
-    let allow = true, error = [];
-    if (!$('[name=book_type]:checked').val()) {
-        allow = false;
-        error.push(book_type);
-    }
-    else if ($('[name=book_type]:checked').val() === 2) {
-        console.log($('.metadata-fandom-selected'))
-    }
-    return {allow: allow, error: error};
-}
-
-
 
 // создание выпадающего списка (element – это input, callback – функция генерации правильного содержимого)
 function createDropdown(element, callback, type = null) {
@@ -59,7 +20,7 @@ function createDropdown(element, callback, type = null) {
     //console.log(meta_type)
     $.ajax({
         type: 'post',
-        url: 'index.php?r=author/create/find-meta',
+        url: 'http://inkwell/web/author/create/find-meta',
         data: {
             input: element.val(),
             meta_type: meta_type,
@@ -191,7 +152,7 @@ function removeSelectedUnit(button, remove_depend = false, next = null, is_array
     if (remove_depend) {
         $.ajax({
             type: 'post',
-            url: 'index.php?r=author/create/remove-fandom-depend',
+            url: 'http://inkwell/web/author/create/remove-fandom-depend',
             data: {fandom_id: remove_depend},
             success: function (response) {
                 //console.log(response.characters)
@@ -254,7 +215,7 @@ function addSelectedFandomUnit(unit, callback) {
 
         $.ajax({
             type: 'post',
-            url: 'index.php?r=author/create/find-meta',
+            url: 'http://inkwell/web/author/create/find-meta',
             data: {meta_type: 'origins', fandom_id: id},
             success: function (response) {
                 //console.log(response)
@@ -298,7 +259,7 @@ function addSelectedFandomUnit(unit, callback) {
 function addNewPairingItem(place) {
     $.ajax({
         type: 'post',
-        url: 'index.php?r=author/create/manage-pairing',
+        url: 'http://inkwell/web/author/create/manage-pairing',
         data: {action: 'create'},
         success: function (response) {
             //console.log(response);
@@ -359,7 +320,7 @@ function findClosest(element, id) {
 // сохраняет вводимые данные в сессию
 function saveData(data, session_key, is_array = false, callback = null) {
     $.ajax({
-        url: 'index.php?r=author/create/save-data',
+        url: 'http://inkwell/web/author/create/save-data',
         type: 'post',
         data: {data: data, session_key: session_key, is_array: is_array},
         success: function () {

@@ -9,7 +9,7 @@ let delete_confirm = $('#delete-book-confirm')[0];
 $(document).on('load click change input', function () {
     $.ajax({
         type: 'post',
-        url: 'index.php?r=author/create/check-allow',
+        url: 'http://inkwell/web/author/create/check-allow',
         success: function (response) {
             //console.log(response)
             if (response.allow) $('#save-new-book').removeClass('disabled-button');
@@ -23,7 +23,7 @@ $(document).on('load click change input', function () {
 
 // добавление книги
 $('#save-new-book').click(function () {
-    $.ajax('index.php?r=author/create/save-book');
+    $.ajax('http://inkwell/web/author/create/save-book');
 });
 
 // удаление всего добавленного
@@ -37,7 +37,7 @@ $('#reject-delete').click(function () {
     delete_confirm.close();
 });
 $('#accept-delete').click(function () {
-    $.ajax('index.php?r=author/create/delete-all');
+    $.ajax('http://inkwell/web/author/create/delete-all');
 });
 
 
@@ -145,7 +145,7 @@ content.on('change', book_type + ' input[type=radio]', function () {
         $('.book-type-depend').addClass('hidden');
         $.ajax({ // стирает все сведения о фэндоме
             type: 'post',
-            url: 'index.php?r=author/create/unset-fandom'
+            url: 'http://inkwell/web/uthor/create/unset-fandom'
         });
     }
     else $('.book-type-depend').removeClass('hidden');
@@ -206,7 +206,7 @@ content.on('click', '.pairing-item .dropdown-item', function () {
 
     // отдельный аякс типа saveData, только для пейринга
     $.ajax({
-        url: 'index.php?r=author/create/save-pairing',
+        url: 'http://inkwell/web/author/create/save-pairing',
         type: 'post',
         data: {data_type: 'characters', id: id, pairing: pairing},
         success: function () {
@@ -227,7 +227,7 @@ content.on('change', '.pairing-item select[name=relationship]', function () {
     let id = $(this).val();
     let pairing = $(this).closest('.pairing-item').attr('meta');
     $.ajax({
-        url: 'index.php?r=author/create/save-pairing',
+        url: 'http://inkwell/web/author/create/save-pairing',
         type: 'post',
         data: {data_type: 'relationship', id: id, pairing: pairing},
         /*success: function (response) {
@@ -245,7 +245,7 @@ content.on('click', '.pairing-item .cancel-icon', function () {
     let unit = $(this).closest('.metadata-item-selected-unit');
 
     $.ajax({
-        url: 'index.php?r=author/create/delete-pairing',
+        url: 'http://inkwell/web/author/create/delete-pairing',
         type: 'post',
         data: {remove: 'character', pairing_id: pairing_id, character_id: character_id},
         success: function () {
@@ -263,7 +263,7 @@ content.on('click', '.pairing-item .delete-button', function() {
     let pairing_id = $(this).closest('.pairing-item').attr('meta');
     let item = $(this).closest('.pairing-item');
     $.ajax({
-        url: 'index.php?r=author/create/delete-pairing',
+        url: 'http://inkwell/web/author/create/delete-pairing',
         type: 'post',
         data: {remove: 'pairing', pairing_id: pairing_id},
         success: function () {

@@ -214,6 +214,12 @@ class MainController extends Controller
             return ['is_open' => true];
         }
     }
+
+    public function actionRememberDetails($name) {
+        $session = Yii::$app->session;
+        if ($session->has("details.$name")) $session->remove("details.$name");
+        else $session->set("details.$name", true);
+    }
 }
 
 

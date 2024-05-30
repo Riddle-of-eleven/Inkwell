@@ -1,7 +1,6 @@
 #toolbar-container, #editor {
     background-color: var(--color-foreground);
     border: var(--border-width) solid var(--color-outline);
-    padding: 10px 20px;
 }
 
 #toolbar-container {
@@ -10,6 +9,7 @@
     border-bottom-color: var(--color-border);
 
     display: flex; gap: 20px; align-items: center;
+    padding: 10px 20px;
 }
 #editor {
     border-bottom-left-radius: var(--border-radius-block);
@@ -17,6 +17,7 @@
     border-top: none;
 
     height: 600px;
+    padding: 20px;
 }
 
 
@@ -32,7 +33,8 @@
     font-weight: 500;
 }
 
-/* родные стили Quill */
+
+/* родные элементы Quill */
 .ql-editor, .ql-blank {
     padding: 0;
 }
@@ -44,4 +46,17 @@
 .ql-editor p {
     text-indent: 40px;
     margin-bottom: 0.4em;
+}
+
+
+/* */
+.ql-snow.ql-toolbar button:hover, .ql-snow .ql-toolbar button:hover,
+.ql-snow.ql-toolbar button:focus, .ql-snow .ql-toolbar button:focus,
+.ql-snow.ql-toolbar button.ql-active, .ql-snow .ql-toolbar button.ql-active,
+.ql-snow.ql-toolbar .ql-picker-label:hover, .ql-snow .ql-toolbar .ql-picker-label:hover,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active, .ql-snow .ql-toolbar
+.ql-picker-label.ql-active, .ql-snow.ql-toolbar .ql-picker-item:hover,
+.ql-snow .ql-toolbar .ql-picker-item:hover, .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected {
+    color: var(--color-accent) !important;
 }

@@ -6,7 +6,7 @@ $(document).ready(function() {
         let button = $(this);
         $.ajax({
             type: 'post',
-            url: 'index.php?r=interaction/like',
+            url: 'http://inkwell/web/interaction/like',
             data: { book_id: book_id },
             success: function(response) {
                 if (response.success) {
@@ -26,7 +26,7 @@ $(document).ready(function() {
         let button = $(this);
         $.ajax({
             type: 'post',
-            url: 'index.php?r=interaction/read',
+            url: 'http://inkwell/web/interaction/read',
             data: { book_id: book_id },
             success: function (response) {
                 if (response.success) {
@@ -49,7 +49,7 @@ $(document).ready(function() {
         let button = $(this);
         $.ajax({
             type: 'post',
-            url: 'index.php?r=interaction/read-later',
+            url: 'http://inkwell/web/interaction/read-later',
             data: { book_id: book_id },
             success: function (response) {
                 if (response.success) {
@@ -72,7 +72,7 @@ $(document).ready(function() {
         let button = $(this);
         $.ajax({
             type: 'post',
-            url: 'index.php?r=interaction/favorite-book',
+            url: 'http://inkwell/web/interaction/favorite-book',
             data: { book_id: book_id },
             success: function (response) {
                 if (response.success) {
@@ -94,7 +94,7 @@ $(document).ready(function() {
         let button = $(this);
         $.ajax({
             type: 'post',
-            url: 'index.php?r=interaction/follow-author',
+            url: 'http://inkwell/web/interaction/follow-author',
             data: { author_id: author_id },
             success: function (response) {
                 if (response.success) {
@@ -114,7 +114,7 @@ $(document).ready(function() {
     $('#download-interaction').click(function () {
         $.ajax({
             type: 'post',
-            url: 'index.php?r=interaction/download-book',
+            url: 'http://inkwell/web/interaction/download-book',
             data: {book_id: book_id},
             success: function (response) {
                 if (response.file) {

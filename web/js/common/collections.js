@@ -8,7 +8,7 @@ open.click(function () {
     $('#regular-modal').removeClass('hidden');
     $.ajax({
         type: 'post',
-        url: 'index.php?r=interaction/get-collections',
+        url: 'http://inkwell/web/interaction/get-collections',
         success: function(response) {
             if (response.data) {
                 let content = '';
@@ -31,7 +31,7 @@ close.click(() => { modal[0].close(); });
 $('.collections-container').on('click', '.collection-item', function() {
     $.ajax({
         type: 'post',
-        url: 'index.php?r=interaction/add-to-collection',
+        url: 'http://inkwell/web/interaction/add-to-collection',
         data: {
             book_id: (new URL(document.location)).searchParams.get("id"),
             collection_id: $(this).attr('id')
@@ -57,7 +57,7 @@ $('.collection-create').click(function(e) {
     e.preventDefault();
     $.ajax({
         type: 'post',
-        url: 'index.php?r=interaction/create-collection-and-add',
+        url: 'http://inkwell/web/interaction/create-collection-and-add',
         data: {book_id: (new URL(document.location)).searchParams.get("id") },
         success: function(response) {
             $('#regular-modal').addClass('hidden');

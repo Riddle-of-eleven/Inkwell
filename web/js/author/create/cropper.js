@@ -51,7 +51,7 @@ crop_button.on('click', function() {
             let form_data = new FormData();
             form_data.append('cropped_image', blob);
             $.ajax({
-                url: 'index.php?r=author/create/upload-cover',
+                url: 'http://inkwell/web/author/create/upload-cover',
                 type: 'POST',
                 data: form_data,
                 processData: false,
@@ -76,7 +76,7 @@ restore_button.on('click', function () {
     if (cropper) cropper.destroy();
     image_preview.empty();
     crop_button.removeClass('hidden');
-    $.ajax('index.php?r=author/create/remove-cover');
+    $.ajax('http://inkwell/web/author/create/remove-cover');
 });
 
 
