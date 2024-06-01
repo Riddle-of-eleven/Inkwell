@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\_BookData;
 use app\models\_ContentData;
+use app\models\Forms\FormMainSearch;
 use app\models\Tables\Book;
 use app\models\Tables\Chapter;
 use app\models\Tables\Fandom;
@@ -178,6 +179,22 @@ class MainController extends Controller
             'fandoms' => $fandoms,
             'pages' => $pages,
         ]);
+    }
+
+
+
+    // хедер
+    public function actionMainSearch() {
+        $model = new FormMainSearch();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $books_result = Book::find()->where(['like', 'title', $model->query])->all();
+            $authors_result = User::find()->where(['like', 'title', $model->query])->all();
+
+            return $this->render('main-search', [
+                'books' => $books_result,
+                'authors' => $authors_result,
+            ]);
+        }
     }
 
 

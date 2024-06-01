@@ -7,6 +7,7 @@ use app\assets\AppAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
+use yii\widgets\ActiveForm;
 
 $session = Yii::$app->session;
 $theme = $session->get('theme');
@@ -252,10 +253,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <header>
     <div class="left-header">
         <?= Html::a('<div class="main-logo">Ink.<span style="color: var(--color-accent)">well</span></div>', Url::to(['site/index']), ['class' => 'no-underline']); ?>
-        <div class="ui search-field">
+
+
+        <label class="ui search-field">
             <?= search_icon ?>
-            <input type="text" placeholder="Ищите книги, фэндомы, авторов...">
-        </div>
+            <input type="text" placeholder="Ищите книги, фэндомы, авторов..." id="main-search">
+        </label>
     </div>
     <div class="right-header">
         <a href="" class="ui button icon-button"><?= mystery_icon ?> Поиск по вкусу </a>
