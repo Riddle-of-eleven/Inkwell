@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    # Если запрос не является фактическим файлом или директорией
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # Перенаправление всех запросов на index.php
+    RewriteRule . index.php [L]
+</IfModule>
