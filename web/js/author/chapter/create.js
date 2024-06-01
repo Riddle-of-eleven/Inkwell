@@ -1,58 +1,61 @@
-const quill = new Quill('#editor', {
-    modules: {
-        toolbar: '#toolbar-container'
-    },
-    theme: 'snow',
-    placeholder: 'Введите текст главы сюда...'
+$('#create-chapter-type input[type=radio]').on('change', function() {
+    let value = $(this).val();
+    saveChapterData(value, 'type');
+    if (value === 'chapter') $('#chapter-depend').removeClass('hidden');
+    else $('#chapter-depend').addClass('hidden');
 });
-quill.on('text-change', function(delta, oldDelta, source) {
-    // выравнивание по умолчанию по левому краю
-    if (source === 'user') quill.format('align', 'left');
+
+$('#create-chapter-title').on('click input', function () {
+    saveChapterData($(this).val(), 'title');
+});
+
+$('#editor').on('click input', '.ql-editor', function () {
+    saveChapterData($(this).html(), 'text');
 });
 
 
+const chapter_position = $('#create-chapter-chapter_position'),
+    section_position = $('#create-chapter-section_position');
 
-// обработка загрузки файла
-const label = $('.upload-container'),
-    input = $('#create-chapter-file');
-label.on('dragover', function (e) {
-    e.preventDefault(); e.stopPropagation();
-    $(this).addClass('dragover')
+// изменение положения относительно раздела
+section_position.on('change', function() {
+    saveChapterData($(this).val(), 'section_position');
 });
-label.on('dragleave', function (e) {
-    e.preventDefault(); e.stopPropagation();
-    $(this).removeClass('dragover');
-});
-label.on('drop', function (e) {
-    e.preventDefault(); e.stopPropagation();
-    label.removeClass('dragover');
-    let files = e.originalEvent.dataTransfer.files;
-    if (files.length > 0) {
-        input[0].files = files;
-        input.trigger('change');
-    }
+chapter_position.on('change', function () {
+    saveChapterData($(this).val(), 'chapter_position');
 });
 
 
-input.on('change', function(e) {
-    let file = e.target.files[0];
-    if (file) {
-        let data = new FormData();
-        data.append('file', file);
-        $.ajax({
-            url: 'process-file',
-            type: 'post',
-            data: data,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                var delta = quill.clipboard.convert({ text: response });
-                quill.updateContents(delta);
-                //if (response) quill.clipboard.dangerouslyPasteHTML(response);
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-    }
-});
+function saveChapterData(data, session_key) {
+    $.ajax({
+        url: 'http://inkwell/web/author/modify/save-chapter-data',
+        type: 'post',
+        data: {data: data, session_key: session_key},
+        success: function (response) {
+            //console.log(response);
+            if (response) if (response.chapters) updateChapters(chapter_position, response.chapters);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+
+function setCaret(node) {
+    let range = document.createRange();
+    range.selectNodeContents(node);
+    range.collapse(false);
+
+    let selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+}
+
+function updateChapters(select, chapters) {
+    let to_add = '<option value="0">В начале</option>';
+    $.each(chapters, function (key, value) {
+        //console.log(value)
+        to_add += `<option value="${value.id}">После "${value.title}"</option>`;
+    });
+    select.html(to_add);
+}
