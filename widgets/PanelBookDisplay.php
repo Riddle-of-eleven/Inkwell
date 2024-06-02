@@ -9,7 +9,7 @@ class PanelBookDisplay extends Widget
     public $book;
     public function run()
     {
-        return $this->render('panelBookDisplay', [
+        return $this->render('panel-book-display', [
             'book' => $this->book,
         ]);
     }

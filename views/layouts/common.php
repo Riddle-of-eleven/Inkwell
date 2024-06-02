@@ -254,21 +254,29 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     <div class="left-header">
         <?= Html::a('<div class="main-logo">Ink.<span style="color: var(--color-accent)">well</span></div>', Url::to(['site/index']), ['class' => 'no-underline']); ?>
 
-
-        <label class="ui search-field">
-            <?= search_icon ?>
-            <input type="text" placeholder="Ищите книги, фэндомы, авторов..." id="main-search">
-        </label>
+        <?= Html::beginForm(Url::to(['main/main-search']), 'get', ['id' => 'main-search-form']) ?>
+            <label class="ui search-field">
+                <?= search_icon ?>
+                <?= Html::textInput('query', null, [
+                    'placeholder' => 'Ищите книги, фэндомы, авторов...',
+                    'id' => 'main-search',
+                ]) ?>
+            </label>
+        <?= Html::endForm() ?>
     </div>
     <div class="right-header">
-        <a href="" class="ui button icon-button"><?= mystery_icon ?> Поиск по вкусу </a>
+        <?= Html::a(mystery_icon . 'Поиск по вкусу', Url::to(['main/search']), ['class' => 'ui button icon-button']) ?>
         <?= Html::a(shuffle_icon . 'Случайная книга', Url::to(['main/rand-book']), ['class' => 'ui button icon-button']) ?>
 
         <div class="main-menu-container">
             <div href="" class="ui button small-button" onclick="toggle_menu()"><?= menu_icon ?></div>
             <div class="main-menu-content block hidden">
+                <?= Html::a(book_2_icon . 'Все книги', Url::to(['main/books'])) ?>
                 <?= Html::a(emoji_objects_icon . 'Ориджиналы', Url::to(['main/originals'])) ?>
                 <?= Html::a(menu_book_icon . 'Фанфики', Url::to(['main/fanfics'])) ?>
+
+                <div class="line"></div>
+
                 <?= Html::a(cognition_icon . 'Авторы', Url::to(['main/authors'])) ?>
                 <?= Html::a(shelves_icon . 'Фэндомы', Url::to(['main/fandoms'])) ?>
                 <a href=""><?= list_alt_icon ?> Подборки </a>

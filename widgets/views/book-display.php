@@ -185,7 +185,9 @@ if ($words >= 1000) {
             <div class="book-size">
                 <div class="tip-key">Размер:</div>
                 <div class="tip-value">
-                    <div class="size-value"><?=$book->realSize->title?></div>
+                    <? if ($book->realSize) : ?>
+                        <div class="size-value"><?=$book->realSize->title?></div>
+                    <? endif; ?>
                     <div class="vertical-line"></div>
                     <div class="size-value"><?=$chapters . ' ' . $chapters_name?></div>
                     <div class="vertical-line"></div>

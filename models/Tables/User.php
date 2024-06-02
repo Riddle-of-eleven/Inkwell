@@ -45,8 +45,8 @@ use yii\web\IdentityInterface;
  * @property Fandom[] $fandoms
  * @property FavoriteBook[] $favoriteBooks
  * @property FavoriteFandom[] $favoriteFandoms
- * @property Followers[] $followers
- * @property Followers[] $followers0
+ * @property Followers[] $followers // те, кто подписан на пользователя
+ * @property Followers[] $followers0 // те, на кого подписан пользователь
  * @property Like[] $likes
  * @property Origin[] $origins
  * @property Read[] $reads

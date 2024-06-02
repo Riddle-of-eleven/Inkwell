@@ -1,16 +1,24 @@
 <?php
-$this->title = Yii::$app->name.' – все книги';
+$this->title = 'Все книги';
 
 
-/* @var $book */
+/* @var $books Book[] */
 
 
+use app\models\Tables\Book;
 use app\widgets\BookDisplay;
 use yii\helpers\VarDumper;
 
+?>
 
-echo BookDisplay::widget(['data' => $book]);
 
+<div class="header1">Все книги</div>
+
+<? if ($books) :
+    foreach ($books as $book) {
+        echo BookDisplay::widget(['book' => $book]);
+    }
+endif;
 
 /*foreach ($genres as $genre) {
     echo $genre->title . ', ';

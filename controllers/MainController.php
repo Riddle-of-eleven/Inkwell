@@ -7,19 +7,27 @@ use app\models\_ContentData;
 use app\models\Forms\FormMainSearch;
 use app\models\Tables\Book;
 use app\models\Tables\Chapter;
+use app\models\Tables\Completeness;
 use app\models\Tables\Fandom;
 use app\models\Tables\FavoriteBook;
 use app\models\Tables\Followers;
+use app\models\Tables\GenreType;
 use app\models\Tables\Like;
+use app\models\Tables\Rating;
 use app\models\Tables\Read;
 use app\models\Tables\ReadLater;
+use app\models\Tables\Relation;
+use app\models\Tables\Size;
+use app\models\Tables\TagType;
 use app\models\Tables\Theme;
+use app\models\Tables\Type;
 use app\models\Tables\User;
 use app\models\Tables\ViewHistory;
 use Yii;
 use yii\data\Pagination;
 use yii\db\Expression;
 use yii\helpers\Url;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -28,18 +36,10 @@ use yii\web\Response;
 class MainController extends Controller
 {
     public function actionBooks() {
+        $books = Book::find()->where(['<>', 'is_draft', 1])->all();
 
-//        $book = Book::findOne(1);
-//        $genres = $book->genres;
-//        $tags = $book->tags;
-
-        /*$books = Book::find()->all();
-        foreach ($books as $book) {
-            VarDumper::dump($book->tags, 10, true);
-        }*/
-        $book = new _BookData(2);
         return $this->render('books', [
-            'book' => $book,
+            'books' => $books,
         ]);
     }
 
@@ -183,18 +183,79 @@ class MainController extends Controller
 
 
 
-    // хедер
+    // поиск
     public function actionMainSearch() {
-        $model = new FormMainSearch();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $books_result = Book::find()->where(['like', 'title', $model->query])->all();
-            $authors_result = User::find()->where(['like', 'title', $model->query])->all();
+        $search = Yii::$app->request->get('query');
+        if ($search) {
+            $books_result = Book::find()->where(['like', 'title', $search])->andWhere(['<>', 'is_draft', 1])->all();
+            $authors_result = User::find()->where(['like', 'login', $search])->all();
 
             return $this->render('main-search', [
                 'books' => $books_result,
                 'authors' => $authors_result,
             ]);
         }
+        return $this->goBack();
+    }
+    public function actionSearch() {
+        $relations = Relation::find()->all();
+        $ratings = Rating::find()->all();
+        $sizes = Size::find()->all();
+        $statuses = Completeness::find()->all();
+        $types = Type::find()->all();
+
+        $genre_types = GenreType::find()->all();
+        $tag_types = TagType::find()->where(['<>', 'id', 6])->all(); // исключает фэндомные теги
+
+        $request = Yii::$app->request;
+        $books = null;
+        if (Yii::$app->request->get()) {
+            $type = $request->get('type');
+            $relation = $request->get('relation');
+            $rating = $request->get('rating');
+            $size = $request->get('size');
+            $status = $request->get('status');
+            $sort = $request->get('sort');
+
+            $query = Book::find()
+                ->where(['<>', 'is_draft', 1])
+                ->andFilterWhere(['type_id' => $type])
+                ->andFilterWhere(['relation_id' => $relation])
+                ->andFilterWhere(['rating_id' => $rating])
+                ->andFilterWhere(['plan_size_id' => $size])
+                ->andFilterWhere(['completeness_id' => $status]);
+
+            if ($sort == 'likes')
+                $query->select(['book.*', 'COUNT(like.id) AS count'])
+                    ->leftJoin('like', 'book.id = like.book_id')
+                    ->groupBy('book.id')
+                    ->orderBy(['count' => SORT_DESC]);
+            else if ($sort == 'date')
+                $query->orderBy(['created_at' => SORT_DESC]);
+            else if ($sort == 'chapter')
+                $query->select(['book.*', 'COUNT(chapter.id) AS count'])
+                    ->leftJoin('chapter', 'book.id = like.book_id')
+                    ->groupBy('book.id')
+                    ->orderBy(['count' => SORT_DESC]);
+
+            $books = $query->all();
+
+            /*VarDumper::dump($type, 10, true);
+            VarDumper::dump($books, 10, true);*/
+        }
+
+        return $this->render('search', [
+            'relations' => $relations,
+            'ratings' => $ratings,
+            'sizes' => $sizes,
+            'statuses' => $statuses,
+            'types' => $types,
+
+            'genre_types' => $genre_types,
+            'tag_types' => $tag_types,
+
+            'books' => $books,
+        ]);
     }
 
 

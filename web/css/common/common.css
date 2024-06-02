@@ -172,3 +172,29 @@
 .toc-action-buttons {
     display: flex; gap: 6px;
 }
+
+
+
+/* всё для перечисления пользователей */
+.user-list {
+    gap: 10px;
+}
+.user-block {
+    padding: 14px 20px;
+    display: flex; align-items: center; gap: 30px; justify-content: space-between;
+}
+.user-block-main {
+    display: flex; align-items: center; gap: 20px;
+}
+.user-block .small-profile-picture {
+    margin: 0;
+}
+.user-actions {
+    display: flex; align-items: center; gap: 30px;
+}
+.user-statistics {
+    display: flex; align-items: center; gap: 10px;
+}
+.user-statistics * {
+    color: var(--color-tip);
+}

@@ -49332,3 +49332,2921 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1717277245.7593
     'REQUEST_TIME' => 1717277245
 ]
+2024-06-01 21:55:23 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "site/site/main-search". in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php:561
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#2 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-01 21:55:23 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '0'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/index'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51543'
+    'REDIRECT_URL' => '/web/site/site/main-search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/site/site/main-search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717278923.2048
+    'REQUEST_TIME' => 1717278923
+]
+2024-06-01 21:58:25 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "site/site/main-search". in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php:561
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#2 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-01 21:58:25 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    'main-search' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '12'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/index'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51578'
+    'REDIRECT_URL' => '/web/site/site/main-search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/site/site/main-search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279105.0708
+    'REQUEST_TIME' => 1717279105
+]
+2024-06-01 21:58:34 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "site/site/main-search". in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php:561
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#2 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-01 21:58:34 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    'main-search' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '12'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/index'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51578'
+    'REDIRECT_URL' => '/web/site/site/main-search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/site/site/main-search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279114.8698
+    'REQUEST_TIME' => 1717279114
+]
+2024-06-01 21:58:36 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "site/site/main-search". in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php:561
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#2 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-01 21:58:36 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    'main-search' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '12'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/index'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51611'
+    'REDIRECT_URL' => '/web/site/site/main-search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/site/site/main-search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279116.0328
+    'REQUEST_TIME' => 1717279116
+]
+2024-06-01 21:58:47 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "site/site/main-search". in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php:561
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#2 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-01 21:58:47 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    'main-search' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '12'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/index'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51609'
+    'REDIRECT_URL' => '/web/site/site/main-search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/site/site/main-search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279127.2948
+    'REQUEST_TIME' => 1717279127
+]
+2024-06-01 21:59:03 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "site/site/main-search". in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php:561
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#2 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-01 21:59:03 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    'main-search' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '12'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/index'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51579'
+    'REDIRECT_URL' => '/web/site/site/main-search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/site/site/main-search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279143.7578
+    'REQUEST_TIME' => 1717279143
+]
+2024-06-01 21:59:06 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: site/main-search in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php:149
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#3 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-01 21:59:06 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    'main-search' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '12'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/index'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51579'
+    'REDIRECT_URL' => '/web/site/main-search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/site/main-search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279146.1288
+    'REQUEST_TIME' => 1717279146
+]
+2024-06-01 21:59:50 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: site/main-search in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php:149
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#3 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-01 21:59:50 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    'main-search' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '12'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/index'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51609'
+    'REDIRECT_URL' => '/web/site/main-search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/site/main-search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279190.1228
+    'REQUEST_TIME' => 1717279190
+]
+2024-06-01 21:59:51 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: site/main-search> in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php:149
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#3 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-01 21:59:51 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    'main-search' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '12'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/main-search'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51611'
+    'REDIRECT_URL' => '/web/site/main-search>'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/site/main-search%3E'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279191.1028
+    'REQUEST_TIME' => 1717279191
+]
+2024-06-01 21:59:57 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: site/main-search> in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php:149
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#3 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-01 21:59:57 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    'main-search' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '12'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/main-search'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51584'
+    'REDIRECT_URL' => '/web/site/main-search>'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/site/main-search%3E'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279197.3918
+    'REQUEST_TIME' => 1717279197
+]
+2024-06-01 21:59:58 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: site/main-search in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php:149
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#3 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-01 21:59:58 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    'main-search' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '12'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/main-search%3E'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51610'
+    'REDIRECT_URL' => '/web/site/main-search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/site/main-search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279198.6318
+    'REQUEST_TIME' => 1717279198
+]
+2024-06-01 22:00:57 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: site/main-search in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php:149
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#3 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-01 22:00:57 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    'main-search' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '12'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/main-search%3E'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51610'
+    'REDIRECT_URL' => '/web/site/main-search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/site/main-search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279257.0943
+    'REQUEST_TIME' => 1717279257
+]
+2024-06-01 22:00:59 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: site/main-search in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php:149
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#3 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-01 22:00:59 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    'main-search' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '12'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/main-search%3E'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51611'
+    'REDIRECT_URL' => '/web/site/main-search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/site/main-search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279259.2573
+    'REQUEST_TIME' => 1717279259
+]
+2024-06-01 22:01:16 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request: site/main-search in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php:149
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#3 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#4 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-01 22:01:16 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    'main-search' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '12'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/main-search%3E'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51611'
+    'REDIRECT_URL' => '/web/site/main-search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/site/main-search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279276.0283
+    'REQUEST_TIME' => 1717279276
+]
+2024-06-01 22:01:17 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\web\HttpException:400] yii\web\BadRequestHttpException: Не удалось проверить переданные данные. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Controller.php:221
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(176): yii\web\Controller->beforeAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#4 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#5 {main}
+2024-06-01 22:01:17 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    'main-search' => ''
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '12'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/main-search'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51609'
+    'REDIRECT_URL' => '/web/main/main-search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/main/main-search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279277.8653
+    'REQUEST_TIME' => 1717279277
+]
+2024-06-01 22:09:00 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'title' in 'where clause' in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php:1320
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(1320): PDOStatement->execute()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(1186): yii\db\Command->internalExecute()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(417): yii\db\Command->queryInternal()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Query.php(249): yii\db\Command->queryAll()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\ActiveQuery.php(133): yii\db\Query->all()
+#5 C:\OSPanel\domains\Inkwell\controllers\MainController.php(192): yii\db\ActiveQuery->all()
+#6 [internal function]: app\controllers\MainController->actionMainSearch()
+#7 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#12 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#13 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'title' in 'where clause'
+The SQL being executed was: SELECT * FROM `user` WHERE `title` LIKE '%в%' in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Schema.php:676
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(1325): yii\db\Schema->convertException()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(1186): yii\db\Command->internalExecute()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(417): yii\db\Command->queryInternal()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Query.php(249): yii\db\Command->queryAll()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\ActiveQuery.php(133): yii\db\Query->all()
+#5 C:\OSPanel\domains\Inkwell\controllers\MainController.php(192): yii\db\ActiveQuery->all()
+#6 [internal function]: app\controllers\MainController->actionMainSearch()
+#7 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#12 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#13 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'title' in 'where clause'
+)
+
+2024-06-01 22:09:00 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = [
+    '_csrf' => 'ExcgTkAuHv8Ib0xJJ3E41rTNwVDjGMHCgasO1y1qfNBnIWMMLExosDpfO2RrM2mahf-YJrN1h7Xp3FygZCIWqg=='
+    'main-search' => 'в'
+]
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '117'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/site/index'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51717'
+    'REDIRECT_URL' => '/web/main/main-search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/main/main-search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717279740.3009
+    'REQUEST_TIME' => 1717279740
+]
+2024-06-01 22:15:14 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Setting unknown property: app\widgets\BookDisplay::data in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Component.php:209
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\BaseYii.php(558): yii\base\Component->__set()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\BaseObject.php(107): yii\BaseYii::configure()
+#2 [internal function]: yii\base\BaseObject->__construct()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\di\Container.php(419): ReflectionClass->newInstanceArgs()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\di\Container.php(170): yii\di\Container->build()
+#5 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\BaseYii.php(365): yii\di\Container->get()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(143): yii\BaseYii::createObject()
+#7 C:\OSPanel\domains\Inkwell\views\main\books.php(12): yii\base\Widget::widget()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#12 C:\OSPanel\domains\Inkwell\controllers\MainController.php(43): yii\base\Controller->render()
+#13 [internal function]: app\controllers\MainController->actionBooks()
+#14 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#15 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#16 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#17 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#18 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#19 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#20 {main}
+2024-06-01 22:15:14 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51802'
+    'REDIRECT_URL' => '/web/main/books'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/main/books'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717280114.2439
+    'REQUEST_TIME' => 1717280114
+]
+2024-06-01 22:15:19 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Setting unknown property: app\widgets\BookDisplay::data in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Component.php:209
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\BaseYii.php(558): yii\base\Component->__set()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\BaseObject.php(107): yii\BaseYii::configure()
+#2 [internal function]: yii\base\BaseObject->__construct()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\di\Container.php(419): ReflectionClass->newInstanceArgs()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\di\Container.php(170): yii\di\Container->build()
+#5 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\BaseYii.php(365): yii\di\Container->get()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(143): yii\BaseYii::createObject()
+#7 C:\OSPanel\domains\Inkwell\views\main\books.php(12): yii\base\Widget::widget()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#12 C:\OSPanel\domains\Inkwell\controllers\MainController.php(43): yii\base\Controller->render()
+#13 [internal function]: app\controllers\MainController->actionBooks()
+#14 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#15 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#16 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#17 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#18 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#19 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#20 {main}
+2024-06-01 22:15:19 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51809'
+    'REDIRECT_URL' => '/web/main/books'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/main/books'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717280119.0899
+    'REQUEST_TIME' => 1717280119
+]
+2024-06-01 22:15:24 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\base\InvalidConfigException] yii\base\InvalidConfigException: The table does not exist: {{%book_data}} in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\ActiveRecord.php:442
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\ActiveRecord.php(473): yii\db\ActiveRecord::getTableSchema()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\BaseActiveRecord.php(498): yii\db\ActiveRecord->attributes()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\BaseActiveRecord.php(289): yii\db\BaseActiveRecord->hasAttribute()
+#3 C:\OSPanel\domains\Inkwell\widgets\views\bookDisplay.php(15): yii\db\BaseActiveRecord->__get()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#5 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#7 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(249): yii\base\View->render()
+#8 C:\OSPanel\domains\Inkwell\widgets\BookDisplay.php(13): yii\base\Widget->render()
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(146): app\widgets\BookDisplay->run()
+#10 C:\OSPanel\domains\Inkwell\views\main\books.php(12): yii\base\Widget::widget()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#12 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#13 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#14 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#15 C:\OSPanel\domains\Inkwell\controllers\MainController.php(43): yii\base\Controller->render()
+#16 [internal function]: app\controllers\MainController->actionBooks()
+#17 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#18 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#19 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#20 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#21 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#22 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#23 {main}
+2024-06-01 22:15:24 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51853'
+    'REDIRECT_URL' => '/web/main/books'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/main/books'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717280124.4499
+    'REQUEST_TIME' => 1717280124
+]
+2024-06-01 22:17:38 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\base\ErrorException:2] yii\base\ErrorException: Attempt to read property "title" on null in C:\OSPanel\domains\Inkwell\widgets\views\bookDisplay.php:188
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\widgets\views\bookDisplay.php(188): yii\base\ErrorHandler->handleError()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(249): yii\base\View->render()
+#5 C:\OSPanel\domains\Inkwell\widgets\BookDisplay.php(13): yii\base\Widget->render()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(146): app\widgets\BookDisplay->run()
+#7 C:\OSPanel\domains\Inkwell\views\main\books.php(19): yii\base\Widget::widget()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#12 C:\OSPanel\domains\Inkwell\controllers\MainController.php(35): yii\base\Controller->render()
+#13 [internal function]: app\controllers\MainController->actionBooks()
+#14 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#15 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#16 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#17 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#18 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#19 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#20 {main}
+2024-06-01 22:17:38 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '51883'
+    'REDIRECT_URL' => '/web/main/books'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/main/books'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717280258.241
+    'REQUEST_TIME' => 1717280258
+]
+2024-06-01 22:31:09 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][Error] Error: Class "BookDisplay" not found in C:\OSPanel\domains\Inkwell\views\main\main-search.php:24
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#4 C:\OSPanel\domains\Inkwell\controllers\MainController.php(188): yii\base\Controller->render()
+#5 [internal function]: app\controllers\MainController->actionMainSearch()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#7 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#11 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#12 {main}
+2024-06-01 22:31:09 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = [
+    'query' => 'и'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/main/books'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '52007'
+    'REDIRECT_URL' => '/web/main/main-search'
+    'REDIRECT_QUERY_STRING' => 'query=%D0%B8'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'query=%D0%B8'
+    'REQUEST_URI' => '/web/main/main-search?query=%D0%B8'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717281069.3931
+    'REQUEST_TIME' => 1717281069
+]
+2024-06-01 23:31:22 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][ParseError] ParseError: syntax error, unexpected end of file, expecting "elseif" or "else" or "endif" in C:\OSPanel\domains\Inkwell\widgets\views\author-display.php:44
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(249): yii\base\View->render()
+#3 C:\OSPanel\domains\Inkwell\widgets\AuthorDisplay.php(12): yii\base\Widget->render()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(146): app\widgets\AuthorDisplay->run()
+#5 C:\OSPanel\domains\Inkwell\views\main\main-search.php(38): yii\base\Widget::widget()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#7 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#10 C:\OSPanel\domains\Inkwell\controllers\MainController.php(188): yii\base\Controller->render()
+#11 [internal function]: app\controllers\MainController->actionMainSearch()
+#12 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#13 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#14 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#15 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#16 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#17 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#18 {main}
+2024-06-01 23:31:22 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = [
+    'query' => 'с'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/main/author?id=12'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '54477'
+    'REDIRECT_URL' => '/web/main/main-search'
+    'REDIRECT_QUERY_STRING' => 'query=%D1%81'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'query=%D1%81'
+    'REQUEST_URI' => '/web/main/main-search?query=%D1%81'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717284682.6821
+    'REQUEST_TIME' => 1717284682
+]
+2024-06-02 00:29:28 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\db\Exception] PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause' in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php:1320
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(1320): PDOStatement->execute()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(1186): yii\db\Command->internalExecute()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(431): yii\db\Command->queryInternal()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Query.php(287): yii\db\Command->queryOne()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\ActiveQuery.php(304): yii\db\Query->one()
+#5 C:\OSPanel\domains\Inkwell\widgets\views\author-display.php(39): yii\db\ActiveQuery->one()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#7 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(249): yii\base\View->render()
+#10 C:\OSPanel\domains\Inkwell\widgets\AuthorDisplay.php(12): yii\base\Widget->render()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(146): app\widgets\AuthorDisplay->run()
+#12 C:\OSPanel\domains\Inkwell\views\main\main-search.php(38): yii\base\Widget::widget()
+#13 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#14 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#15 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#16 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#17 C:\OSPanel\domains\Inkwell\controllers\MainController.php(188): yii\base\Controller->render()
+#18 [internal function]: app\controllers\MainController->actionMainSearch()
+#19 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#20 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#21 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#22 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#23 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#24 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#25 {main}
+
+Next yii\db\Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user_id' in 'where clause'
+The SQL being executed was: SELECT * FROM `user` WHERE (`user_id`=1) AND (`follower_id`=1) in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Schema.php:676
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(1325): yii\db\Schema->convertException()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(1186): yii\db\Command->internalExecute()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Command.php(431): yii\db\Command->queryInternal()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\Query.php(287): yii\db\Command->queryOne()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\db\ActiveQuery.php(304): yii\db\Query->one()
+#5 C:\OSPanel\domains\Inkwell\widgets\views\author-display.php(39): yii\db\ActiveQuery->one()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#7 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(249): yii\base\View->render()
+#10 C:\OSPanel\domains\Inkwell\widgets\AuthorDisplay.php(12): yii\base\Widget->render()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(146): app\widgets\AuthorDisplay->run()
+#12 C:\OSPanel\domains\Inkwell\views\main\main-search.php(38): yii\base\Widget::widget()
+#13 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#14 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#15 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#16 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#17 C:\OSPanel\domains\Inkwell\controllers\MainController.php(188): yii\base\Controller->render()
+#18 [internal function]: app\controllers\MainController->actionMainSearch()
+#19 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#20 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#21 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#22 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#23 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#24 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#25 {main}
+Additional Information:
+Array
+(
+    [0] => 42S22
+    [1] => 1054
+    [2] => Unknown column 'user_id' in 'where clause'
+)
+
+2024-06-02 00:29:28 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = [
+    'query' => 'с'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/main/author?id=12'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '56406'
+    'REDIRECT_URL' => '/web/main/main-search'
+    'REDIRECT_QUERY_STRING' => 'query=%D1%81'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'query=%D1%81'
+    'REQUEST_URI' => '/web/main/main-search?query=%D1%81'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717288168.6204
+    'REQUEST_TIME' => 1717288168
+]
+2024-06-02 01:18:43 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\base\ErrorException:2] yii\base\ErrorException: Undefined array key 0 in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\helpers\BaseUrl.php:99
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\helpers\BaseUrl.php(99): yii\base\ErrorHandler->handleError()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\helpers\BaseUrl.php(214): yii\helpers\BaseUrl::toRoute()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\helpers\BaseHtml.php(339): yii\helpers\BaseUrl::to()
+#3 C:\OSPanel\domains\Inkwell\views\main\search.php(36): yii\helpers\BaseHtml::beginForm()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#5 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#7 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#8 C:\OSPanel\domains\Inkwell\controllers\MainController.php(218): yii\base\Controller->render()
+#9 [internal function]: app\controllers\MainController->actionSearch()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#12 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#13 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#14 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#15 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#16 {main}
+2024-06-02 01:18:43 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '58205'
+    'REDIRECT_URL' => '/web/main/search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/main/search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717291123.3343
+    'REQUEST_TIME' => 1717291123
+]
+2024-06-02 01:19:13 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\base\ErrorException:2] yii\base\ErrorException: Undefined array key 0 in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\helpers\BaseUrl.php:99
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\helpers\BaseUrl.php(99): yii\base\ErrorHandler->handleError()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\helpers\BaseUrl.php(214): yii\helpers\BaseUrl::toRoute()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\helpers\BaseHtml.php(339): yii\helpers\BaseUrl::to()
+#3 C:\OSPanel\domains\Inkwell\views\main\search.php(37): yii\helpers\BaseHtml::beginForm()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#5 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#7 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#8 C:\OSPanel\domains\Inkwell\controllers\MainController.php(218): yii\base\Controller->render()
+#9 [internal function]: app\controllers\MainController->actionSearch()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#12 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#13 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#14 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#15 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#16 {main}
+2024-06-02 01:19:13 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '58204'
+    'REDIRECT_URL' => '/web/main/search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/main/search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717291153.5513
+    'REQUEST_TIME' => 1717291153
+]
+2024-06-02 01:19:15 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\base\ErrorException:2] yii\base\ErrorException: Undefined array key 0 in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\helpers\BaseUrl.php:99
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\helpers\BaseUrl.php(99): yii\base\ErrorHandler->handleError()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\helpers\BaseUrl.php(214): yii\helpers\BaseUrl::toRoute()
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\helpers\BaseHtml.php(339): yii\helpers\BaseUrl::to()
+#3 C:\OSPanel\domains\Inkwell\views\main\search.php(37): yii\helpers\BaseHtml::beginForm()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#5 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#7 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#8 C:\OSPanel\domains\Inkwell\controllers\MainController.php(218): yii\base\Controller->render()
+#9 [internal function]: app\controllers\MainController->actionSearch()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#12 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#13 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#14 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#15 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#16 {main}
+2024-06-02 01:19:15 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '58403'
+    'REDIRECT_URL' => '/web/main/search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/main/search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717291155.1033
+    'REQUEST_TIME' => 1717291155
+]
+2024-06-02 01:48:15 [127.0.0.1][1][-][error][yii\base\ErrorException:2] yii\base\ErrorException: Attempt to read property "title" on null in C:\OSPanel\domains\Inkwell\widgets\views\book-display.php:188
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\widgets\views\book-display.php(188): yii\base\ErrorHandler->handleError()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(249): yii\base\View->render()
+#5 C:\OSPanel\domains\Inkwell\widgets\BookDisplay.php(12): yii\base\Widget->render()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(146): app\widgets\BookDisplay->run()
+#7 C:\OSPanel\domains\Inkwell\views\main\search.php(186): yii\base\Widget::widget()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#12 C:\OSPanel\domains\Inkwell\controllers\MainController.php(256): yii\base\Controller->render()
+#13 [internal function]: app\controllers\MainController->actionSearch()
+#14 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#15 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#16 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#17 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#18 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#19 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#20 {main}
+2024-06-02 01:48:15 [127.0.0.1][1][-][info][application] $_GET = [
+    'type' => '2'
+    'relation' => '2'
+    'rating' => '3'
+    'size' => '2'
+    'status' => '2'
+    'sort' => 'likes'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/main/search?type=1&relation=3&rating=3&size=2&status=2&sort=readers&type=2&relation=2&sort=likes'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '59464'
+    'REDIRECT_URL' => '/web/main/search'
+    'REDIRECT_QUERY_STRING' => 'type=1&relation=3&rating=3&size=2&status=2&sort=readers&type=2&relation=2&sort=likes&type=2&sort=likes'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'type=1&relation=3&rating=3&size=2&status=2&sort=readers&type=2&relation=2&sort=likes&type=2&sort=likes'
+    'REQUEST_URI' => '/web/main/search?type=1&relation=3&rating=3&size=2&status=2&sort=readers&type=2&relation=2&sort=likes&type=2&sort=likes'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717292895.5807
+    'REQUEST_TIME' => 1717292895
+]
+2024-06-02 01:48:27 [127.0.0.1][1][-][error][yii\base\ErrorException:2] yii\base\ErrorException: Attempt to read property "title" on null in C:\OSPanel\domains\Inkwell\widgets\views\book-display.php:188
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\widgets\views\book-display.php(188): yii\base\ErrorHandler->handleError()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(249): yii\base\View->render()
+#5 C:\OSPanel\domains\Inkwell\widgets\BookDisplay.php(12): yii\base\Widget->render()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(146): app\widgets\BookDisplay->run()
+#7 C:\OSPanel\domains\Inkwell\views\main\search.php(186): yii\base\Widget::widget()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#12 C:\OSPanel\domains\Inkwell\controllers\MainController.php(256): yii\base\Controller->render()
+#13 [internal function]: app\controllers\MainController->actionSearch()
+#14 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#15 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#16 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#17 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#18 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#19 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#20 {main}
+2024-06-02 01:48:27 [127.0.0.1][1][-][info][application] $_GET = [
+    'type' => '2'
+    'relation' => '2'
+    'rating' => '3'
+    'size' => '2'
+    'status' => '2'
+    'sort' => 'likes'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/main/search?type=1&relation=3&rating=3&size=2&status=2&sort=readers&type=2&relation=2&sort=likes'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '59464'
+    'REDIRECT_URL' => '/web/main/search'
+    'REDIRECT_QUERY_STRING' => 'type=1&relation=3&rating=3&size=2&status=2&sort=readers&type=2&relation=2&sort=likes&type=2&sort=likes'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'type=1&relation=3&rating=3&size=2&status=2&sort=readers&type=2&relation=2&sort=likes&type=2&sort=likes'
+    'REQUEST_URI' => '/web/main/search?type=1&relation=3&rating=3&size=2&status=2&sort=readers&type=2&relation=2&sort=likes&type=2&sort=likes'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717292907.7267
+    'REQUEST_TIME' => 1717292907
+]
+2024-06-02 01:48:36 [127.0.0.1][1][-][error][yii\base\ErrorException:2] yii\base\ErrorException: Attempt to read property "title" on null in C:\OSPanel\domains\Inkwell\widgets\views\book-display.php:188
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\widgets\views\book-display.php(188): yii\base\ErrorHandler->handleError()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(249): yii\base\View->render()
+#5 C:\OSPanel\domains\Inkwell\widgets\BookDisplay.php(12): yii\base\Widget->render()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(146): app\widgets\BookDisplay->run()
+#7 C:\OSPanel\domains\Inkwell\views\main\search.php(186): yii\base\Widget::widget()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#12 C:\OSPanel\domains\Inkwell\controllers\MainController.php(256): yii\base\Controller->render()
+#13 [internal function]: app\controllers\MainController->actionSearch()
+#14 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#15 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#16 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#17 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#18 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#19 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#20 {main}
+2024-06-02 01:48:36 [127.0.0.1][1][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '59464'
+    'REDIRECT_URL' => '/web/main/search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/main/search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717292916.2747
+    'REQUEST_TIME' => 1717292916
+]
+2024-06-02 01:49:20 [127.0.0.1][1][-][error][yii\web\HeadersAlreadySentException] yii\web\HeadersAlreadySentException: Headers already sent in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\helpers\BaseVarDumper.php on line 38. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Response.php:369
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Response.php(342): yii\web\Response->sendHeaders()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(390): yii\web\Response->send()
+#2 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#3 {main}
+2024-06-02 01:49:20 [127.0.0.1][1][-][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '59464'
+    'REDIRECT_URL' => '/web/main/search'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/main/search'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717292960.1517
+    'REQUEST_TIME' => 1717292960
+]
+2024-06-02 01:50:04 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][error][yii\base\ErrorException:2] yii\base\ErrorException: Attempt to read property "title" on null in C:\OSPanel\domains\Inkwell\widgets\views\book-display.php:188
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\widgets\views\book-display.php(188): yii\base\ErrorHandler->handleError()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#2 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#3 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#4 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(249): yii\base\View->render()
+#5 C:\OSPanel\domains\Inkwell\widgets\BookDisplay.php(12): yii\base\Widget->render()
+#6 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Widget.php(146): app\widgets\BookDisplay->run()
+#7 C:\OSPanel\domains\Inkwell\views\main\search.php(186): yii\base\Widget::widget()
+#8 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(347): require('C:\\OSPanel\\doma...')
+#9 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(257): yii\base\View->renderPhpFile()
+#10 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\View.php(156): yii\base\View->renderFile()
+#11 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(407): yii\base\View->render()
+#12 C:\OSPanel\domains\Inkwell\controllers\MainController.php(257): yii\base\Controller->render()
+#13 [internal function]: app\controllers\MainController->actionSearch()
+#14 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\InlineAction.php(57): call_user_func_array()
+#15 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Controller.php(178): yii\base\InlineAction->runWithParams()
+#16 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php(552): yii\base\Controller->runAction()
+#17 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#18 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#19 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#20 {main}
+2024-06-02 01:50:04 [127.0.0.1][1][vdo9o1g0hdrp9ivu9er13d48uln3mvn3][info][application] $_GET = [
+    'type' => '1'
+    'sort' => 'likes'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'vdo9o1g0hdrp9ivu9er13d48uln3mvn3'
+    '_csrf' => '1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'is_open' => 'open'
+    'author-panel.book-dashboard.tab' => 'draft'
+    'settings.show.tab' => 'user-settings'
+    'create.allow' => false
+    'modify.book.tab' => 'chapters'
+    'modify.book' => '18'
+    'step' => 'main'
+    'create.cover' => ''
+    'reader.library.tab' => 'likes'
+    'create.title' => ''
+    'modify.create-chapter.title' => 'Прочь'
+    'modify.create-chapter.type' => 'chapter'
+    'modify.create-chapter.text' => '<p>Прочь, уходи, не смотри мне в глаза</p><p>Свет позади, нет дороги назад</p><p>Да, это месть, это страшная месть</p><p>Я – тот, кто есть, да, я тот, кто я есть</p>'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_REFERER' => 'http://inkwell/web/main/search'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=vdo9o1g0hdrp9ivu9er13d48uln3mvn3; _csrf=1d2f7aa0ff0fedbc9ecde24c9819ed192f35abb40baf4d96461539df8107854ca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22t6CBlbvO20w-LBQL12YvPmFwhwRwIHjz%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '59649'
+    'REDIRECT_URL' => '/web/main/search'
+    'REDIRECT_QUERY_STRING' => 'type=1&sort=likes'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'type=1&sort=likes'
+    'REQUEST_URI' => '/web/main/search?type=1&sort=likes'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717293004.3627
+    'REQUEST_TIME' => 1717293004
+]

@@ -125,8 +125,10 @@ section, .active-tab section, .book-type-depend, section > form {
 
 .line {
     width: 100% !important; max-width: none !important;
-    height: 1px !important; max-height: 1px;
-    background-color: var(--color-line);
+    /*height: var(--border-width) !important; max-height: var(--border-width);
+    background-color: var(--color-line);*/
+    border-top: var(--border-width) solid var(--color-lighter-line);
+    box-sizing: border-box;
 }
 .inner-line {
     width: 100%;
