@@ -32,10 +32,10 @@ JS);
     </div>
     <div class="dashboard-actions">
         <div class="dashboard-main-actions">
-            <div class="ui button icon-button"><?= save_icon ?>Сохранить изменения</div>
+            <!--<div class="ui button icon-button"><?= save_icon ?>Сохранить изменения</div>-->
             <div class="vertical-line"></div>
             <?=Html::a(new_chapter_icon . 'Добавить часть', Url::to(['author/modify/add-chapter']), ['class' => 'ui button icon-button'])?>
-            <div class="ui button icon-button"><?= file_open_icon ?>Посмотреть книгу</div>
+            <?=Html::a(file_open_icon . 'Посмотреть книгу', Url::to(['main/book', 'id' => $book->id]), ['class' => 'ui button icon-button'])?>
         </div>
         <?= Html::a(new_book_icon . 'Удалить книгу', Url::to(['']), ['class' => 'ui button icon-button danger-accent-button']) ?>
     </div>

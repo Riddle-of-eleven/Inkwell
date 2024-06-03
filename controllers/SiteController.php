@@ -71,7 +71,7 @@ class SiteController extends Controller
     {
         $books_query = Book::find()->where(['<>', 'is_draft', '1'])->orderBy(['id' => SORT_DESC]);
         $count = clone $books_query;
-        $pages = new Pagination(['totalCount' => $count->count(), 'pageSize' => 2]);
+        $pages = new Pagination(['totalCount' => $count->count(), 'pageSize' => 10]);
         $books = $books_query->offset($pages->offset)
             ->limit($pages->limit)
             ->all();

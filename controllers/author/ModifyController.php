@@ -78,14 +78,41 @@ class ModifyController extends Controller
         $public_editing = PublicEditing::find()->all();
         $statuses = Completeness::find()->all();
 
+        $this_public_editing = $book->public_editing_id;
+        $this_status = $book->completeness_id;
+
         return $this->renderAjax('tabs/access', [
             'book' => $book,
             'public_editing' => $public_editing,
             'statuses' => $statuses,
+
+            'this_public_editing' => $this_public_editing,
+            'this_status' => $this_status,
         ]);
     }
 
 
+    public function actionSetAccess() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $session = Yii::$app->session;
+        $user = Yii::$app->user->identity;
+
+        $draft = Yii::$app->request->post('draft');
+        $status = Yii::$app->request->post('status');
+        $editing = Yii::$app->request->post('editing');
+        $book = Book::findOne($session->get('modify.book'));
+
+        if ($book)
+            if ($book->user_id == $user->id) {
+                if ($draft == 1 || $draft == 0) $book->is_draft = $draft;
+                if ($status) $book->completeness_id = $status;
+                if ($editing) $book->public_editing_id = $editing;
+
+                if ($book->save()) return ['success' => true];
+                else return ['success' => false];
+            }
+        return ['success' => false];
+    }
 
     public function actionAddChapter() {
         $session = Yii::$app->session;

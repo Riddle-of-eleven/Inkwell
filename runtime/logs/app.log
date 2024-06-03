@@ -55243,3 +55243,87 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1717374987.7693
     'REQUEST_TIME' => 1717374987
 ]
+2024-06-03 01:33:01 [127.0.0.1][1][u44oarkvf69b530v5ten629h1lfb5nml][error][yii\web\HttpException:404] yii\base\InvalidRouteException: Unable to resolve the request "uthor/create/unset-fandom". in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Module.php:561
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php(103): yii\base\Module->runAction()
+#1 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#2 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Страница не найдена. in C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\web\Application.php:115
+Stack trace:
+#0 C:\OSPanel\domains\Inkwell\vendor\yiisoft\yii2\base\Application.php(384): yii\web\Application->handleRequest()
+#1 C:\OSPanel\domains\Inkwell\web\index.php(17): yii\base\Application->run()
+#2 {main}
+2024-06-03 01:33:01 [127.0.0.1][1][u44oarkvf69b530v5ten629h1lfb5nml][info][application] $_GET = []
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'PHPSESSID' => 'u44oarkvf69b530v5ten629h1lfb5nml'
+    '_csrf' => 'afee67e7ca6791cb2c7cba35dfbbe9a0eae543db56b4b978cadf00db8324c72ba:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"gZCf9XLMAaf4wAwld8-bmSJHSmWJljn7\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'theme' => 'sepia'
+    '__id' => 1
+    '__authKey' => 'some key'
+    'step' => 'fandom'
+    'create.title' => 'Марс – бог войны'
+    'create.description' => 'Полыхнувшая ярким светом обычно тусклая точка, навеки затерявшаяся на небосводе...'
+    'create.relation' => '1'
+    'create.rating' => '3'
+    'create.plan_size' => '2'
+    'create.genres' => [
+        0 => '10'
+        1 => '2'
+    ]
+    'create.book_type' => '1'
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'inkwell'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '0'
+    'HTTP_ACCEPT' => '*/*'
+    'HTTP_X_CSRF_TOKEN' => 'l_AJbxhNfp3BPOF90egjKj_XymD3Nb6j-0IuYFAWOonwqkoJIRUy0IBdh0mmqVRGW-_nAppm9OuoL3kqPHxUvg=='
+    'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
+    'HTTP_ORIGIN' => 'http://inkwell'
+    'HTTP_REFERER' => 'http://inkwell/web/author/create/new-book'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+    'HTTP_COOKIE' => 'PHPSESSID=u44oarkvf69b530v5ten629h1lfb5nml; _csrf=afee67e7ca6791cb2c7cba35dfbbe9a0eae543db56b4b978cadf00db8324c72ba%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22gZCf9XLMAaf4wAwld8-bmSJHSmWJljn7%22%3B%7D'
+    'PATH' => 'c:\\ospanel\\modules\\php\\PHP_8.1\\ext;c:\\ospanel\\modules\\php\\PHP_8.1\\pear;c:\\ospanel\\modules\\php\\PHP_8.1\\pear\\bin;c:\\ospanel\\modules\\php\\PHP_8.1;c:\\ospanel\\modules\\wget\\bin;c:\\ospanel\\modules\\database\\MySQL-8.0-Win10\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1\\bin;c:\\ospanel\\modules\\http\\Apache_2.4-PHP_8.0-8.1;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\system32\\Wbem;C:\\Windows\\SysWOW64'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => ''
+    'SERVER_SOFTWARE' => 'Apache'
+    'SERVER_NAME' => 'inkwell'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'C:/OSPanel/domains/Inkwell'
+    'SERVER_ADMIN' => '[no address given]'
+    'SCRIPT_FILENAME' => 'C:/OSPanel/domains/Inkwell/web/index.php'
+    'REMOTE_PORT' => '52939'
+    'REDIRECT_URL' => '/web/uthor/create/unset-fandom'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/web/uthor/create/unset-fandom'
+    'SCRIPT_NAME' => '/web/index.php'
+    'PHP_SELF' => '/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1717378381.16
+    'REQUEST_TIME' => 1717378381
+]
