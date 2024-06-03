@@ -19,13 +19,13 @@
         --color-selection: rgba(213, 213, 234, 0.1);
 
         /* проверить на светлой теме */
-        --color-success: #CDFB4A;
+        /*--color-success: #CDFB4A;
         --color-error: #E25C4A;
-        --color-warning: #FFD339;
+        --color-warning: #FFD339;*/
 
-        --color-success30: #52602C;
-        --color-error30: #59312C;
-        --color-warning30: #615427;
+        --color-success: #52602C;
+        --color-error: #59312C;
+        --color-warning: #615427;
 
         /* прозрачные цвета */
         --color-accent5: rgba(251, 120, 74, 0.05);

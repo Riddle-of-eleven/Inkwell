@@ -1,10 +1,12 @@
 <?php
 $this->title = 'Подписки';
 
-/* @var $follows */
+/* @var $follows User[] */
 
+use app\models\Tables\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\widgets\AuthorDisplay;
 
 $this->registerCssFile("@web/css/parts/user/author.css");
 
@@ -15,12 +17,15 @@ $this->registerCssFile("@web/css/parts/user/author.css");
     <div class="tip-color">Здесь показаны все авторы, на которых вы подписались</div>
 </div>
 
-<? if ($follows)
-    foreach ($follows as $follow) { ?>
-    <div class="followed-author block">
-        <div>
-            <div class="small-profile-picture"><?= !$follow->avatar ? blank_avatar : Html::img('@web/images/avatar/uploads/' . $follow->avatar . '.png') ?></div>
-            <?= Html::a($follow->login, Url::to(['main/author', 'id' => $follow->id]), ['class' => 'profile-name header3']) ?>
-        </div>
-    </div>
-<? }?>
+
+<section class="user-list">
+    <? if ($follows)
+        foreach ($follows as $follow) {
+            echo AuthorDisplay::widget(['author' => $follow]);
+        }
+    else echo '<div class="center-container tip-color">Ничего не найдено</div>';
+
+    //echo LinkPager::widget(['pagination' => $pages]);
+    ?>
+
+</section>

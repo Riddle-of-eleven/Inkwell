@@ -42,3 +42,11 @@
 .author-about .about-title:not(:first-of-type) {
     margin-top: 10px;
 }
+
+.modal .metadata-item {
+    width: 100%;
+}
+.danger-accent *, .danger-accent, .danger-accent :before {
+    color: var(--color-danger-accent);
+    border-color: var(--color-danger-accent) !important;
+}

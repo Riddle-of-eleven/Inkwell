@@ -1,7 +1,7 @@
 $(document).ready(function() {
     let book_id = (new URL(document.location)).searchParams.get("id");
 
-    // лайк
+    // добавление оценки "Нравится"
     $('#like-interaction').click(function() {
         let button = $(this);
         $.ajax({
@@ -21,7 +21,7 @@ $(document).ready(function() {
         });
     });
 
-    // прочитано
+    // добавление в прочитанное
     $('#read-interaction').click(function() {
         let button = $(this);
         $.ajax({
@@ -44,7 +44,7 @@ $(document).ready(function() {
         });
     });
 
-    // прочитать позже
+    // добавление в "Прочитать позже"
     $('#read-later-interaction').click(function(){
         let button = $(this);
         $.ajax({
@@ -67,7 +67,7 @@ $(document).ready(function() {
         });
     });
 
-    // избранное
+    // добавление в избранное
     $('#favorite-book-interaction').click(function() {
         let button = $(this);
         $.ajax({
@@ -111,18 +111,113 @@ $(document).ready(function() {
 
 
     // скачивание книги
-    $('#download-interaction').click(function () {
+    $('.download-interaction').click(function () {
+        let format = $(this).attr('data-format');
         $.ajax({
             type: 'post',
             url: 'http://inkwell/web/interaction/download-book',
-            data: {book_id: book_id},
+            data: {book_id: book_id, format: format},
             success: function (response) {
-                if (response.file) {
+                //console.log(response);
+                /*if (response.file) {
                     let link= document.createElement('a');
-                    link.href = response.file;
+                    link.href = 'http://inkwell/web/' + response.file;
                     link.click();
+                }*/
+                if (response.file) {
+                    let link = document.createElement('a');
+                    link.href = 'http://inkwell/web/' + response.file;
+                    link.download = response.file.split('/').pop(); // Извлекаем имя файла из URL
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
                 }
             }
         });
     });
+
+
+    // жалоба на книгу
+    let complaint_dialog = $('#complaint-dialog'),
+        close = complaint_dialog.find('.close-button');
+    $('#complaint-interaction').click(() => { complaint_dialog[0].showModal(); });
+    close.click(() => { complaint_dialog[0].close(); });
+    $('#make-complaint').on('click', function () {
+        let reason = $('#complaint-dialog input[type="radio"]:checked').val();
+        complaint_dialog[0].close();
+        $.ajax({
+            url: 'http://inkwell/web/main/make-complaint',
+            type: 'post',
+            data: {reason: reason, book: book_id},
+            success: function (resonse) {
+                if (resonse.success) showMessage('Жалоба отправлена, она будет рассмотрена в ближайшее время. Благодарим за содействие', 'success');
+                else showMessage('Что-то пошло не так', 'warning');
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+
+
+    // награждение за грамотность
+    $('#award-interaction').click(function() {
+        let button = $(this);
+        $.ajax({
+            type: 'post',
+            url: 'http://inkwell/web/interaction/award',
+            data: { book_id: book_id },
+            success: function(response) {
+                if (response.success) {
+                    markButton(response.is_awarded, button, 'filled-button');
+                    if (response.is_awarded) {
+                        button.find('.button-text').text('Награждено');
+                        $('.is_awarded').removeClass('hidden');
+                    }
+                    else {
+                        button.find('.button-text').text('Наградить');
+                        $('.is_awarded').addClass('hidden');
+                    }
+                } else {
+                    // Обработка ошибки
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+
+
+    // блокировка пользователя
+    const block_dialog = $('#block-dialog'),
+        block_close = block_dialog.find('.close-button');
+    $('#block-interaction').click(() => { block_dialog[0].showModal(); });
+    block_close.click(() => { block_dialog[0].close(); });
+
+    const ban = $('#ban-user');
+
+    $('#block-dialog input[type=radio]').on('change', function () {
+        if ($('input[name=time]:checked').length && $('input[name=reason]:checked').length) ban.removeClass('disabled-button');
+        else ban.addClass('disabled-button');
+    });
+
+    ban.click(function() {
+        let time = $('input[name=time]:checked').val();
+        let reason = $('input[name=reason]:checked').val();
+        console.log(book_id, time, reason)
+        $.ajax({
+            url: 'http://inkwell/web/interaction/ban-user',
+            type: 'post',
+            data: {user: book_id, time: time, reason: reason},
+            success: function (response) {
+                console.log(response);
+                if (response.success && response.is_banned) location.reload();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    });
+
 });

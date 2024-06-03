@@ -13,6 +13,13 @@ $this->title = 'Поиск по вкусу';
 
 /* @var Book[]|null $books */
 
+/* @var int $chosen_relation */
+/* @var int $chosen_rating */
+/* @var int $chosen_size */
+/* @var int $chosen_status */
+/* @var int $chosen_type */
+/* @var string $chosen_sort */
+
 
 use app\models\Tables\Book;
 use app\models\Tables\Completeness;
@@ -31,6 +38,9 @@ use app\widgets\BookDisplay;
 
 \app\assets\BookCreateAsset::register($this);
 
+$sort_likes_selected = $chosen_sort == 'likes' ? 'selected' : '';
+$sort_date_selected = $chosen_sort == 'date' ? 'selected' : '';
+$sort_chapter_selected = $chosen_sort == 'chapter' ? 'selected' : '';
 
 ?>
 
@@ -43,9 +53,10 @@ use app\widgets\BookDisplay;
     <div class="metadata-item direct-to-session">
         <div class="header3">Тип книги</div>
         <div class="input-block-list" id="sort-type">
-            <? foreach ($types as $type) : ?>
+            <? foreach ($types as $type) :
+                $checked = $type->id == $chosen_type ? 'checked' : ''; ?>
                 <label class="ui choice-input-block">
-                    <input type='radio' name='type' value='<?=$type->id?>'>
+                    <input type='radio' name='type' value='<?=$type->id?>' <?=$checked?>>
                     <span>
                         <div class="title-description">
                             <?=$type->title?>
@@ -63,14 +74,13 @@ use app\widgets\BookDisplay;
         <div class="metadata-item">
             <div class="header3 metadata-item-title">Категория</div>
             <div class="input-block-list" id="search-relation">
-                <? foreach ($relations as $relation) {
-                    //$relation_checked = $relation->id == $create_relation ? 'checked' : '';
-                    ?>
+                <? foreach ($relations as $relation) :
+                    $checked = $relation->id == $chosen_relation ? 'checked' : ''; ?>
                     <label class="ui choice-input-block">
-                        <input type="radio" name="relation" value="<?=$relation->id?>">
+                        <input type="radio" name="relation" value="<?=$relation->id?>" <?=$checked?>>
                         <span><?=$relation->title?></span>
                     </label>
-                <?}?>
+                <? endforeach; ?>
             </div>
             <div class="input-error"></div>
         </div>
@@ -79,14 +89,13 @@ use app\widgets\BookDisplay;
         <div class="metadata-item">
             <div class="header3 metadata-item-title">Рейтинг</div>
             <div class="input-block-list" id="search-rating">
-                <? foreach ($ratings as $rating) {
-                    //$rating_checked = $rating->id == $create_rating ? 'checked' : '';
-                    ?>
+                <? foreach ($ratings as $rating) :
+                    $checked = $rating->id == $chosen_rating ? 'checked' : ''; ?>
                     <label class="ui choice-input-block">
-                        <input type="radio" name="rating" value="<?=$rating->id?>">
+                        <input type="radio" name="rating" value="<?=$rating->id?>" <?=$checked?>>
                         <span><?=$rating->title?></span>
                     </label>
-                <?}?>
+                <? endforeach; ?>
             </div>
             <div class="input-error"></div>
         </div>
@@ -95,14 +104,13 @@ use app\widgets\BookDisplay;
         <div class="metadata-item">
             <div class="header3 metadata-item-title">Планируемый размер</div>
             <div class="input-block-list" id="search-size">
-                <? foreach ($sizes as $size) {
-                    //$plan_size_checked = $plan_size->id == $create_plan_size ? 'checked' : '';
-                    ?>
+                <? foreach ($sizes as $size) :
+                    $checked = $size->id == $chosen_size ? 'checked' : ''; ?>
                     <label class="ui choice-input-block">
-                        <input type="radio" name="size" value="<?=$size->id?>">
+                        <input type="radio" name="size" value="<?=$size->id?>" <?=$checked?>>
                         <span><?=$size->title?></span>
                     </label>
-                <?}?>
+                <? endforeach; ?>
             </div>
             <div class="input-error"></div>
         </div>
@@ -111,14 +119,13 @@ use app\widgets\BookDisplay;
         <div class="metadata-item">
             <div class="header3 metadata-item-title">Статус завершённости</div>
             <div class="input-block-list" id="search-status">
-                <? foreach ($statuses as $status) {
-                    //$plan_size_checked = $plan_size->id == $create_plan_size ? 'checked' : '';
-                    ?>
+                <? foreach ($statuses as $status) :
+                    $checked = $status->id == $chosen_status ? 'checked' : ''; ?>
                     <label class="ui choice-input-block">
-                        <input type="radio" name="status" value="<?=$status->id?>">
+                        <input type="radio" name="status" value="<?=$status->id?>" <?=$checked?>>
                         <span><?=$status->title?></span>
                     </label>
-                <?}?>
+                <? endforeach; ?>
             </div>
             <div class="input-error"></div>
         </div>
@@ -162,9 +169,9 @@ use app\widgets\BookDisplay;
         <div class="header3 metadata-item-title">Сортировать результаты</div>
         <div class="ui field" id="search-sort">
             <select name="sort" id="search-sort">
-                <option value="likes">По оценкам читателей</option>
-                <option value="date">По дате публикации</option>
-                <option value="chapter">По количеству глав</option>
+                <option value="likes" <?=$sort_likes_selected?>>По оценкам читателей</option>
+                <option value="date" <?=$sort_date_selected?>>По дате публикации</option>
+                <option value="chapter" <?=$sort_chapter_selected?>>По количеству глав</option>
             </select>
         </div>
         <div class="input-error"></div>
@@ -181,7 +188,14 @@ use app\widgets\BookDisplay;
 
 <div class="header2">Результаты поиска</div>
 
-<? if ($books)
-    foreach ($books as $book) {
-        echo BookDisplay::widget(['book' => $book]);
-    }
+<? if ($chosen_type || $chosen_sort || $chosen_status || $chosen_size || $chosen_rating || $chosen_relation) :
+    if ($books) :
+        foreach ($books as $book) {
+            echo BookDisplay::widget(['book' => $book]);
+        }
+    else : ?>
+        <div class="center-container tip-color">Ничего не найдено</div>
+    <? endif;
+    else : ?>
+        <div class="center-container tip-color">Выберите интересующий параметр и нажмите "Показать результаты", чтобы найти книги по вкусу</div>
+<? endif;

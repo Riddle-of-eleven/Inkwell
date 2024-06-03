@@ -15,7 +15,7 @@
 .book-preview-sidebar > .line {
     width: calc(100% + 12px + 12px) !important;
     margin-left: -12px; margin-right: -12px;
-    background-color: var(--color-border);
+    border-color: var(--color-border);
 }
 
 .book-preview-content {
@@ -34,7 +34,7 @@
     width: calc(100% + 50px + 35px) !important;
     margin-left: -35px;
     margin-right: -50px;
-    background-color: var(--color-border);
+    border-color: var(--color-border);
 }
 
 

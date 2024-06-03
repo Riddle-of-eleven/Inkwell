@@ -11,3 +11,81 @@
     font-weight: 200 1000;
     font-style: italic;
 }
+
+
+/* ШРИФТЫ ДЛЯ ЧИТАЛКИ */
+
+/* anonymous */
+@font-face {
+    font-family: 'Anonymous';
+    src: url("reader/Anonymous/Anonymous_Pro.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Anonymous';
+    src: url("reader/Anonymous/Anonymous_Pro_B.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Anonymous';
+    src: url("reader/Anonymous/Anonymous_Pro_BI.ttf") format("truetype");
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Anonymous';
+    src: url("reader/Anonymous/Anonymous_Pro_I.ttf") format("truetype");
+    font-weight: 200;
+    font-style: italic;
+}
+
+/* comfortaa */
+@font-face {
+    font-family: "Comfortaa";
+    src: url("reader/Comfortaa/Comfortaa-VariableFont_wght.ttf") format("truetype-variations");
+    font-weight: 100 500;
+    font-style: normal;
+}
+
+/* cormorant */
+@font-face {
+    font-family: "Cormorant";
+    src: url("reader/Cormorant/Cormorant-VariableFont_wght.ttf") format("truetype-variations");
+    font-weight: 100 7000;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Cormorant";
+    src: url("reader/Cormorant/Cormorant-Italic-VariableFont_wght.ttf") format("truetype-variations");
+    font-weight: 100 700;
+    font-style: italic;
+}
+
+/* roboto */
+@font-face {
+    font-family: 'Roboto';
+    src: url("reader/Roboto/Roboto-Regular.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url("reader/Roboto/Roboto-Bold.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url("reader/Roboto/Roboto-BoldItalic.ttf") format("truetype");
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url("reader/Roboto/Roboto-Italic.ttf") format("truetype");
+    font-weight: 200;
+    font-style: italic;
+}

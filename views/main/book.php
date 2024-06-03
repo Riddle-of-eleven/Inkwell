@@ -1,14 +1,21 @@
 <?php
-/* @var \app\models\Tables\Book $book */
-/* @var \app\models\_ContentData $content */
+/* @var Book $book */
+/* @var _ContentData $content */
 /* @var $like */
 /* @var $read */
 /* @var $read_later */
 /* @var $favorite */
+/* @var $awarded */
+
 /* @var $model */
+
+/* @var ComplaintReason[] $complaint_reasons */
 
 $this->title = $book->title;
 
+use app\models\_ContentData;
+use app\models\Tables\Book;
+use app\models\Tables\ComplaintReason;
 use yii\helpers\Html;
 use yii\helpers\VarDumper;
 use yii\helpers\Url;
@@ -17,6 +24,7 @@ use yii\web\View;
 use yii\widgets\ActiveForm;
 
 $this->registerCssFile("@web/css/parts/book/book.css");
+$this->registerCssFile("@web/css/dashboards/steps.css");
 $this->registerJsFile('@web/js/ajax/interaction.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerJsFile('@web/js/common/collections.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
@@ -51,16 +59,75 @@ if (!Yii::$app->user->isGuest) {
 
     $favorite_class = $favorite ? 'filled-button' : '';
     $favorite_text = $favorite ? 'В избранном' : 'Добавить в избранное';
+
+    $awarded_class = $awarded ? 'filled-button' : '';
+    $awarded_text = $awarded ? 'Награждено' : 'Наградить';
+    $awarded_block = $awarded ? '' : 'hidden';
 }
 
 
+// размер и то, что его касается
+$chapters = count($book->chapters);
+$remainder = $chapters % 10;
+if ($remainder == 1) $chapters_name = 'часть';
+else if ($remainder >= 2 && $remainder <= 4) $chapters_name = 'части';
+else if ($remainder >= 5) $chapters_name = 'частей';
+else if ($remainder == 0) $chapters_name = 'частей';
+
+$symbols = 0;
+if ($chapters) {
+    foreach ($book->chapters as $chapter) {
+        if ($chapter->content) $symbols += mb_strlen($chapter->content);
+    }
+}
+$remainder = $symbols % 10;
+if ($remainder == 1) $symbols_name = 'знак';
+else if ($remainder >= 2 && $remainder <= 4) $symbols_name = 'знака';
+else if ($remainder >= 5) $symbols_name = 'знаков';
+else if ($remainder == 0) $symbols_name = 'знаков';
+$symbols_word = '';
+if ($symbols >= 1000) {
+    $symbols = round($symbols / 1000);
+    $symbols_word = 'тыс.';
+    $symbols_name = 'знаков';
+}
+
+
+$words = 0;
+if ($chapters) {
+    foreach ($book->chapters as $chapter) {
+        if ($chapter->content) $words += count(explode(' ', $chapter->content));
+    }
+}
+$remainder = $words % 10;
+if ($remainder == 1) $words_name = 'слово';
+else if ($remainder >= 2 && $remainder <= 4) $words_name = 'слова';
+else if ($remainder >= 5) $words_name = 'слов';
+else if ($remainder == 0) $words_name = 'слов';
+$words_word = '';
+if ($words >= 1000) {
+    $words = round($words / 1000);
+    $words_word = 'тыс.';
+    $words_name = 'слов';
+}
+
+
+// статистика по взаимодействиям
+$likes = count($book->likes);
+$views = count($book->viewHistories);
+$collections = count($book->bookCollections);
+
+
+// пейринги
+$pairings = $book->pairings;
+
 ?>
 
-
+<!-- СОЗДАНИЕ ПОДБОРОК -->
 <dialog class="to-collection block modal">
     <div class="close-button"><?=close_icon?></div>
     <div class="modal-container" id="regular-modal">
-        <div class="header3">Добавить в существующую подборку</div>
+        <div class="header2">Добавить в существующую подборку</div>
         <div class="collections-container"></div>
         <div class="line-centered-text">
             <div class="line"></div>
@@ -70,14 +137,41 @@ if (!Yii::$app->user->isGuest) {
         <button class="ui button icon-button collection-create"><?=list_alt_add_icon?>Создать новую подборку</button>
     </div>
 
-    <div class="modal-container" id="add-modal">
+    <div class="modal-container" id="add-modal"></div>
+</dialog>
+
+
+<!-- ЖАЛОБА НА КНИГУ -->
+<dialog class="block modal" id="complaint-dialog" data-book="<?=$book->id?>">
+    <div class="close-button"><?=close_icon?></div>
+    <div class="modal-container" id="regular-modal">
+        <div class="header2">Пожаловаться на книгу</div>
+        <!--<div class="head-article">Выберите причину, по которой вы хотите пожаловаться на книгу</div>-->
+        <div class="metadata-item">
+            <div class="header3">Причина блокировки</div>
+            <? if ($complaint_reasons)
+                foreach ($complaint_reasons as $complaint_reason) : ?>
+                    <label class="ui choice-input-block">
+                        <input type="radio" name="complaint" value="<?=$complaint_reason->id?>">
+                        <span>
+                            <div class="title-description">
+                                <?=$complaint_reason->title?>
+                                <div class="tip"><?=$complaint_reason->description?></div>
+                            </div>
+                        </span>
+                    </label>
+                <? endforeach; ?>
+        </div>
+        <div class="ui button icon-button danger-accent-button" id="make-complaint"><?=flag_icon?>Пожаловаться</div>
     </div>
 </dialog>
 
 
 <div class="book-header">
     <div class="book-card">
-
+        <div class="block statistics is_awarded <?=$awarded_block?>">
+            Книга награждена за грамотность!
+        </div>
         <div class="block main-info">
             <div class="info-header">
                 <div class="creators">
@@ -142,10 +236,21 @@ if (!Yii::$app->user->isGuest) {
                 <? endif; ?>
 
                 <!-- ПЕЙРИНГИ -->
-                <div class="info-pair">
-                    <div class="info-key">Пейринг:</div>
-                    <div class="info-value">Ада / Михаил</div>
-                </div>
+                <? if ($book->pairings) :
+                    foreach ($book->pairings as $pairing) : ?>
+                        <div class="info-pair">
+                            <div class="info-key">Пейринг:</div>
+                            <div class="info-value">
+                                <? $first = true;
+                                foreach ($pairing->pairingCharacters as $pairingCharacter) :
+                                    if ($first) $first= false;
+                                    else echo ' / ';
+                                    echo $pairingCharacter->character->full_name;
+                                endforeach; ?>
+                            </div>
+                        </div>
+                    <? endforeach;
+                endif; ?>
             </div>
             <div class="small-inner-line"></div>
             <div class="info-pairs">
@@ -221,13 +326,15 @@ if (!Yii::$app->user->isGuest) {
                 <div class="book-size">
                     <div class="tip-key">Размер:</div>
                     <div class="tip-value">
-                        <div class="size-value">Миди</div>
+                        <? if ($book->realSize) : ?>
+                            <div class="size-value"><?=$book->realSize->title?></div>
+                        <? endif; ?>
                         <div class="vertical-line"></div>
-                        <div class="size-value">3 части</div>
+                        <div class="size-value"><?=$chapters . ' ' . $chapters_name?></div>
                         <div class="vertical-line"></div>
-                        <div class="size-value">24 страницы</div>
+                        <div class="size-value"><?=$words . ' ' . $words_word . ' ' . $words_name?></div>
                         <div class="vertical-line"></div>
-                        <div class="size-value">43 тыс. знаков</div>
+                        <div class="size-value"><?=$symbols . ' ' . $symbols_word . ' ' . $symbols_name?></div>
                     </div>
                 </div>
                 <div class="book-date">
@@ -240,17 +347,9 @@ if (!Yii::$app->user->isGuest) {
         </div>
 
         <div class="block statistics">
-            <div class="stats-pair">
-                <?= visibility_icon ?>
-                <div>Просмотры</div>
-                <div>261</div>
-            </div>
-            <div class="stats-pair">
-                <?= favorite_icon ?>
-                <div>Лайки</div>
-                <div>19</div>
-            </div>
-            <div class="stats-pair">
+            <div class="stats-pair"><?= visibility_icon ?><div>Просмотры</div><div><?=$views?></div></div>
+            <div class="stats-pair"><?= favorite_icon ?><div>Лайки</div><div><?=$likes?></div></div>
+            <!--<div class="stats-pair">
                 <?= chat_bubble_icon ?>
                 <div>Комментарии</div>
                 <div>4</div>
@@ -259,12 +358,8 @@ if (!Yii::$app->user->isGuest) {
                 <?= chat_icon ?>
                 <div>Рецензии</div>
                 <div>1</div>
-            </div>
-            <div class="stats-pair">
-                <?= list_alt_icon ?>
-                <div>Подборки</div>
-                <div>45</div>
-            </div>
+            </div>-->
+            <div class="stats-pair"><?= list_alt_icon ?><div>Подборки</div><div><?=$collections?></div></div>
         </div>
 
     </div>
@@ -278,6 +373,13 @@ if (!Yii::$app->user->isGuest) {
 
         <? if (!Yii::$app->user->isGuest) : ?>
         <div class="block book-actions">
+            <? if (Yii::$app->user->identity->is_moderator) : ?>
+                <div>
+                    <div class="ui button button-left-align <?=$awarded_class?>" id="award-interaction"><?=trophy_icon?><?=$awarded_text?></div>
+                </div>
+                <div class="inner-line"></div>
+            <? endif; ?>
+
             <div>
                 <button class="ui button button-left-align <?=@$like_class?>" id="like-interaction"><?= favorite_icon ?>Нравится</button>
                 <button class="ui button button-left-align <?=@$read_class?> <?=@$read_disabled_class?>" id="read-interaction" <?=$read_disabled?>><?= priority_icon ?>Прочитано</button>
@@ -288,29 +390,43 @@ if (!Yii::$app->user->isGuest) {
             <div class="inner-line"></div>
 
             <div>
-                <button class="ui button button-left-align" id="download-interaction"><?= download_icon ?><div class="button-text">Скачать работу</div></button>
+                <!--<button class="ui button button-left-align" id="download-interaction"><?=download_icon?><div class="button-text">Скачать работу</div></button>-->
+                <details>
+                    <summary class="ui button button-left-align"><?=download_icon?>Скачать работу</summary>
+                    <div class="hidden-download">
+                        <div class="ui button button-left-align download-interaction" data-format="epub"><?=epub_icon?>В формате EPUB</div>
+                        <div class="ui button button-left-align download-interaction" data-format="fb2"><?=fb2_icon?>В формате FB2</div>
+                    </div>
+                </details>
 
-                <button class="ui button button-left-align" id="collection-interaction"><?= list_alt_icon ?>Добавить в подборку</button>
+
+                <button class="ui button button-left-align" id="collection-interaction"><?=list_alt_icon?>Добавить в подборку</button>
                 <!--<div class="tip">Работа уже добавлена в 3 подборки.</div>-->
             </div>
 
             <div class="inner-line"></div>
 
             <div>
-                <a href="" class="ui button button-left-align danger-button"><?= visibility_off_icon ?>Скрыть из ленты</a>
-                <a href="" class="ui button button-left-align danger-button"><?= flag_icon ?>Пожаловаться</a>
+                <!--<a href="" class="ui button button-left-align danger-button"><?=visibility_off_icon?>Скрыть из ленты</a>-->
+                <div class="ui button button-left-align danger-button" id="complaint-interaction"><?=flag_icon?>Пожаловаться</div>
             </div>
         </div>
         <? else : ?>
         <div class="block book-actions">
             <div>
-                <a href="" class="ui button button-left-align"><?=download_icon?>Скачать работу</a>
+                <details>
+                    <summary class="ui button button-left-align"><?=download_icon?>Скачать работу</summary>
+                    <div class="hidden-download">
+                        <div class="ui button button-left-align download-interaction" data-format="epub"><?=epub_icon?>В формате EPUB</div>
+                        <div class="ui button button-left-align download-interaction" data-format="fb2"><?=fb2_icon?>В формате FB2</div>
+                    </div>
+                </details>
             </div>
 
             <div class="inner-line"></div>
 
             <div>
-                <a href="" class="ui button button-left-align danger-button"><?=flag_icon?>Пожаловаться</a>
+                <div class="ui button button-left-align danger-button" id="complaint-interaction"><?= flag_icon ?>Пожаловаться</div>
             </div>
         </div>
         <? endif; ?>
@@ -339,10 +455,10 @@ if (!Yii::$app->user->isGuest) {
                 <div class="block toc-chapter">
                     <div class="chapter-title"><?= $o->title ?></div>
                     <div class="chapter-meta">
-                        <div class="chapter-stats">
+                        <!--<div class="chapter-stats">
                             <div class="stats-pair"><?= visibility_icon ?><div>Просмотры</div><div>261</div></div>
                             <div class="stats-pair"><?= chat_bubble_icon ?><div>Комментарии</div><div>1</div></div>
-                        </div>
+                        </div>-->
                         <div class="chapter-date">
                             <div class="stats-pair"><div>Дата публикации:</div><div><?= $formatter->asDate($o->created_at, 'd MMMM yyyy'); ?></div></div>
                         </div>
@@ -357,10 +473,10 @@ if (!Yii::$app->user->isGuest) {
             <div class="block toc-chapter">
                 <div class="chapter-title"><?= $r->title ?></div>
                 <div class="chapter-meta">
-                    <div class="chapter-stats">
+                    <!--<div class="chapter-stats">
                         <div class="stats-pair"><?= visibility_icon ?><div>Просмотры</div><div>261</div></div>
                         <div class="stats-pair"><?= chat_bubble_icon ?><div>Комментарии</div><div>1</div></div>
-                    </div>
+                    </div>-->
                     <div class="chapter-date">
                         <div class="stats-pair"><div>Дата публикации:</div><div><?= $formatter->asDate($r->created_at, 'd MMMM yyyy'); ?></div></div>
                     </div>

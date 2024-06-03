@@ -5,6 +5,7 @@
 /* @var $roots Chapter[] */
 /* @var $leaves Chapter[] */
 
+use yii\web\View;
 use app\models\Tables\Book;
 use app\models\Tables\Chapter;
 use yii\helpers\Html;

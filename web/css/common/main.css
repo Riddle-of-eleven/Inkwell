@@ -137,12 +137,14 @@ section, .active-tab section, .book-type-depend, section > form {
 }
 .small-inner-line {
     width: 100%;
-    height: var(--border-width);
-    background-color: var(--color-border);
+    /*height: var(--border-width);
+    background-color: var(--color-border);*/
+    border-top: var(--border-width) solid var(--color-border);
 }
 .vertical-line {
-    width: var(--border-width) !important;
-    background-color: var(--color-border);
+    /*width: var(--border-width) !important;
+    background-color: var(--color-border);*/
+    border-left: var(--border-width) solid var(--color-border);
 }
 body > .line, body > .inner-line {
     background-color: var(--color-lighter-line);

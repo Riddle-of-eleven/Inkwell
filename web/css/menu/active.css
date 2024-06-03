@@ -6,35 +6,35 @@ body {
     width: calc(100% - var(--menu-width)) !important;
 }
 
-.active {
+.side-menu.active {
     width: var(--menu-width) !important;
 }
-.active .hidden {
+.side-menu.active .hidden {
     display: block !important;
 }
-.active .to-hide {
+.side-menu.active .to-hide {
     display: none;
 }
-.active .sub-side-menu {
+.side-menu.active .sub-side-menu {
     align-items: start;
 }
-.active.side-menu {
+.side-menu.active {
     padding: 25px 30px;
     overflow-y: scroll;
 }
-.active.side-menu .line {
+.side-menu.active .line {
     width: calc(100% + 30px + 30px) !important;
     margin-left: -30px; margin-right: -30px;
 }
-.active .small-profile-picture {
+.side-menu.active .small-profile-picture {
     margin-left: 35px;
     margin-top: -2px;
 }
-.active .side-buttons > * {
+.side-menu.active .side-buttons > * {
     justify-content: left;
 }
 
-.guest-menu, .active.guest-menu {
+.guest-menu, .side-menu.active.guest-menu {
     padding-top: 100px !important;
 }
 

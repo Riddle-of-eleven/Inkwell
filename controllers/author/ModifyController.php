@@ -5,6 +5,8 @@ namespace app\controllers\author;
 use app\models\_ContentData;
 use app\models\Tables\Book;
 use app\models\Tables\Chapter;
+use app\models\Tables\Completeness;
+use app\models\Tables\PublicEditing;
 use SimpleXMLElement;
 use yii\db\Expression;
 use yii\helpers\Url;
@@ -68,6 +70,21 @@ class ModifyController extends Controller
         ]);
     }
 
+    public function actionLoadAccess() {
+        $session = Yii::$app->session;
+        $session->set('modify.book.tab', 'access');
+
+        $book = Book::findOne($session->get('modify.book'));
+        $public_editing = PublicEditing::find()->all();
+        $statuses = Completeness::find()->all();
+
+        return $this->renderAjax('tabs/access', [
+            'book' => $book,
+            'public_editing' => $public_editing,
+            'statuses' => $statuses,
+        ]);
+    }
+
 
 
     public function actionAddChapter() {
@@ -90,6 +107,7 @@ class ModifyController extends Controller
 
         if (!$sections) $session->remove('modify.create-chapter.section_position');
         if (!$chapters) $session->remove('modify.create-chapter.chapter_position');
+
 
         return $this->render('add-chapter', [
             'book' => $this_book,
@@ -134,8 +152,16 @@ class ModifyController extends Controller
             $chapter->previous_id = $chapter_position;
             $chapter->content = $text;
 
-            if ($chapter->save()) return $this->redirect(Url::to(['author/modify/book']));
+            if ($chapter->save()) {
+                $session->remove('modify.create-chapter.title');
+                $session->remove('modify.create-chapter.type');
+                $session->remove('modify.create-chapter.text');
+                $session->remove('modify.create-chapter.section_position');
+                $session->remove('modify.create-chapter.chapter_position');
+                return $this->redirect(Url::to(['author/modify/book']));
+            }
         }
+        return $this->goBack();
     }
 
 
@@ -247,7 +273,7 @@ class ModifyController extends Controller
             }
 
             $this->deleteFolder('uploaded_files/' . $directory);
-            return $entries;
+            return implode($entries);
         }
     }
     public function processDOCX($fileName) {
@@ -278,7 +304,7 @@ class ModifyController extends Controller
                 }
             }
             $this->deleteFolder('uploaded_files/' . $directory);
-            return $entries;
+            return implode($entries);
         }
     }
 

@@ -79,7 +79,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
         <div class="side-buttons icon-accent">
             <?=Html::a(new_book_icon . '<span class="menu-item hidden">Новая книга</span>', Url::to(['author/create/new-book']))?>
-            <a href=""><?= new_project_icon ?><span class="menu-item hidden">Новый проект</span></a>
+            <!--<a href=""><?= new_project_icon ?><span class="menu-item hidden">Новый проект</span></a>-->
         </div>
 
         <div class="line"></div>
@@ -234,11 +234,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <?= Html::a(tune_icon . '<span class="menu-item hidden">Настройки</span>', Url::to(['user/settings/show'])) ?>
         </div>
 
-        <div class="line"></div>
+        <!--<div class="line"></div>
 
         <div class="side-buttons">
             <a href=""><?= assignment_icon ?><span class="menu-item hidden">Мои обращения</span></a>
-        </div>
+        </div>-->
     </div>
 
     <div class="sub-side-menu">

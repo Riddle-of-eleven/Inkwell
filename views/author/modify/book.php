@@ -43,11 +43,12 @@ JS);
 
 
 <div class="tab-header">
-    <div class="tab" data-tab="main"><?= description_icon ?>Общая информация</div>
-    <div class="tab" data-tab="chapters"><?= library_books_icon ?>Части</div>
-    <div class="tab" data-tab="access"><?= group_icon ?>Доступ</div>
-    <div class="tab" data-tab="statistics"><?= bar_chart_icon ?>Статистика</div>
-    <!--<div class="tab" data-tab="5"><?= branch_icon ?>Версии и изменения</div>
+
+    <div class="tab" data-tab="main"><?=description_icon?>Общая информация</div>
+    <div class="tab" data-tab="chapters"><?=library_books_icon?>Части</div>
+    <div class="tab" data-tab="access"><?=eye_tracking_icon?>Доступ, видимость и статус</div>
+    <!--<div class="tab" data-tab="statistics"><?= bar_chart_icon ?>Статистика</div>
+    <div class="tab" data-tab="5"><?= branch_icon ?>Версии и изменения</div>
     <div class="tab" data-tab="6"><?= deployed_code_icon ?>Проект</div>-->
 </div>
 

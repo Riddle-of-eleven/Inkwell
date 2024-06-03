@@ -5,13 +5,18 @@ namespace app\controllers;
 use app\models\_BookData;
 use app\models\_ContentData;
 use app\models\Forms\FormCreateCollection;
+use app\models\Tables\Award;
+use app\models\Tables\Book;
 use app\models\Tables\BookCollection;
+use app\models\Tables\Chapter;
 use app\models\Tables\Collection;
 use app\models\Tables\FavoriteBook;
 use app\models\Tables\Followers;
 use app\models\Tables\Like;
 use app\models\Tables\Read;
 use app\models\Tables\ReadLater;
+use app\models\Tables\User;
+use DOMDocument;
 use TPEpubCreator;
 use Yii;
 use yii\db\Expression;
@@ -126,6 +131,28 @@ class InteractionController extends Controller
         return ['success' => false];
     }
 
+    public function actionAward() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!Yii::$app->user->isGuest && Yii::$app->user->identity->is_moderator) {
+            $book = Yii::$app->request->post('book_id');
+            $user = Yii::$app->user->identity->id;
+
+            $awarded = Award::find()->select('id')->where(['book_id' => $book])->andWhere(['moderator_id' => $user])->one();
+            if ($awarded) {
+                $awarded->delete();
+                return ['success' => true, 'is_awarded' => false];
+            }
+            else {
+                $new_awarded = new Award();
+                $new_awarded->book_id = $book;
+                $new_awarded->moderator_id = $user;
+                $new_awarded->awarded_at = new Expression('NOW()');
+                if ($new_awarded->save()) return ['success' => true, 'is_awarded' => true];
+                else return ['success' => false, 'is_awarded' => false];
+            }
+        }
+    }
+
     public function actionFollowAuthor() {
         Yii::$app->response->format = Response::FORMAT_JSON;
         if (!Yii::$app->user->isGuest) {
@@ -147,6 +174,38 @@ class InteractionController extends Controller
             }
         }
         return ['success' => false];
+    }
+
+
+    public function actionBanUser() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!Yii::$app->user->isGuest)
+            if (Yii::$app->user->identity->is_moderator == 1) {
+                $moderator = Yii::$app->user;
+                $user_id = Yii::$app->request->post('user');
+                $time = Yii::$app->request->post('time');
+                $reason = Yii::$app->request->post('reason');
+
+                $user = User::findOne($user_id);
+                $user->is_banned = 1;
+
+                if ($time != 5) {
+                    $until = '3 days';
+                    if ($time == 2) $until = '1 week';
+                    else if ($time == 3) $until = '1 month';
+                    else if ($time == 4) $until = '1 year';
+                    $user->banned_until = date('Y-m-d H:i:s', strtotime("+$until"));
+                }
+
+                $user->ban_reason_id = $reason;
+                $user->ban_moderator_id = $moderator->identity->id;
+
+                //return $user->banned_until;
+
+                if ($user->save()) return ['success' => true, 'is_banned' => true];
+                else return ['success' => true, 'is_banned' => false];
+            }
+        else return ['success' => false, 'is_banned' => false];
     }
 
 
@@ -252,65 +311,128 @@ class InteractionController extends Controller
     public function actionDownloadBook() {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $id = Yii::$app->request->post('book_id');
-        //$id = Yii::$app->request->get('id');
-        $book = new _BookData($id);
-        $content = new _ContentData($id);
+        $format = Yii::$app->request->post('format');
+        $book = Book::findOne($id);
 
-        $epub = new TPEpubCreator();
-        $epub->epub_file = $book->title.'.epub';
-        $epub->title = $book->title;
-        $epub->creator = $book->author->login;
-        $epub->language = 'ru';
-        $epub->rights = 'Public Domain';
+        if ($format == 'epub') {
+            $epub = new TPEpubCreator();
+            $epub->epub_file = $book->title.'.epub';
+            $epub->title = $book->title;
+            $epub->creator = $book->user->login;
+            $epub->language = 'ru';
+            $epub->rights = 'Public Domain';
 
-        $begin = "<h1>$book->title</h1>"; $first = true;
-        foreach ($content->root as $root) {
-            if ($root->is_section) {
-                if (array_key_exists($root->id, $content->offspring)) {
-                    foreach ($content->offspring[$root->id] as $offspring) {
-                        if ($first) {
-                            $first = false;
-                            $begin .= "<h3>$offspring->title</h3>";
+            $content = "<h1>$book->title</h1>";
+            $content .= "<p>Автор: " . $book->user->login . "</p>";
+            $content .= "<p>Загружено с <a href='https://inkwell/web/'>Inkwell</a></p>";
 
-                            $explodes = explode('<tab>', $offspring->content);
-                            $implode = '';
-                            foreach ($explodes as $explode) $implode .= "<p>$explode</p>";
-                            $text = $begin . $implode;
+            $epub->AddPage($content, false, 'Титульная страница');
+
+            $roots = Chapter::find()->where(['book_id' => $id])->andWhere(['parent_id' => null])->andWhere(['is_draft' => 0])->all();
+            foreach ($roots as $root) {
+                $content = '';
+                if ($root->is_section == 1) {
+                    $content .= "<h2>$root->title</h2>";
+                    $first = Chapter::find()->where(['parent_id' => $root->id])->andWhere(['previous_id' => null])->one();
+                    if ($first) {
+                        $content .= "<h3>$first->title</h3>$first->content";
+                        $epub->AddPage($content, false, $first->title);
+                        $content = '';
+
+                        $next = true;
+                        $previous = $first->id;
+                        while ($next) {
+                            $element = Chapter::find()->where(['previous_id' => $previous])->one();
+                            if ($element) {
+                                $content .= "<h3>$element->title</h3>$element->content";
+                                $epub->AddPage($content, false, $element->title);
+                                $content = '';
+                                $previous = $element->id;
+                                $next = true;
+                            } else $next = false;
                         }
-                        else{
-                            $title ="<h3>$offspring->title</h3>";
-                            $explodes = explode('<tab>', $offspring->content);
-                            $implode = '';
-                            foreach ($explodes as $explode) $implode .= "<p>$explode</p>";
-                            $text = $title . $implode;
-                        }
-                        $epub->AddPage($text, false, $offspring->title);
                     }
                 }
+                else {
+                    $content .= "<h3>$root->title</h3>$root->content";
+                    $epub->AddPage($content, false, $root->title);
+                }
             }
-            else {
-                if ($first) {
-                    $first = false;
-                    $begin .= "<h3>$root->title</h3>";
 
-                    $explodes = explode('<tab>', $root->content);
-                    $implode = '';
-                    foreach ($explodes as $explode) $implode .= "<p>$explode</p>";
-                    $text = $begin . $implode;
+            $epub->CreateEPUB();
+            return ['file' => $epub->epub_file];
+        }
+        else if ($format == 'fb2') {
+            $dom = new DOMDocument('1.0', 'UTF-8');
+            $dom->formatOutput = true;
+
+            $fb2 = $dom->createElement('FictionBook');
+            $fb2->setAttribute('xmlns', 'http://www.gribuser.ru/xml/fictionbook/2.0');
+            $fb2->setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+
+            $description = $dom->createElement('description');
+
+            $titleInfo = $dom->createElement('title-info');
+            $titleInfo->appendChild($dom->createElement('book-title', $book->title)); // название
+            $titleInfo->appendChild($dom->createElement('author', $book->user->login)); // автор
+
+            $description->appendChild($titleInfo);
+            $fb2->appendChild($description);
+
+            $body = $dom->createElement('body');
+
+            $roots = Chapter::find()->where(['book_id' => $id])->andWhere(['parent_id' => null])->andWhere(['is_draft' => 0])->all();
+            foreach ($roots as $root) {
+                $content = '';
+                if ($root->is_section == 1) {
+                    //$content .= "<h2>$root->title</h2>";
+                    $first = Chapter::find()->where(['parent_id' => $root->id])->andWhere(['previous_id' => null])->one();
+                    if ($first) {
+                        $this->appendToSection($first->content, $first->title, $dom, $body);
+                        $next = true;
+                        $previous = $first->id;
+                        while ($next) {
+                            $element = Chapter::find()->where(['previous_id' => $previous])->one();
+                            if ($element) {
+                                $this->appendToSection($element->content, $element->title, $dom, $body);
+                                $content = '';
+                                $previous = $element->id;
+                                $next = true;
+                            } else $next = false;
+                        }
+                    }
                 }
                 else {
-                    $title = "<h3>$root->title</h3>";
-                    $explodes = explode('<tab>', $root->content);
-                    $implode = '';
-                    foreach ($explodes as $explode) $implode .= "<p>$explode</p>";
-                    $text = $title . $implode;
+                    $this->appendToSection($root->content, $root->title, $dom, $body);
                 }
-                $epub->AddPage($text, false, $root->title);
             }
+
+            $fb2->appendChild($body);
+            $dom->appendChild($fb2);
+            $dom->save('generated_files/' . $book->title . '.fb2');
+            return ['file' => 'generated_files/' . $book->title . '.fb2'];
+        }
+    }
+
+    public function appendToSection($content, $name, $dom, $body) {
+        $section = $dom->createElement('section');
+        $title = $dom->createElement('title');
+        $title->appendChild($dom->createElement('p', $name));
+        $section->appendChild($title);
+
+        // создание временного DOM
+        $tempDom = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $tempDom->loadHTML('<?xml encoding="UTF-8">' . $content);
+        libxml_clear_errors();
+
+        // импорт в основной DOM
+        $html = $tempDom->getElementsByTagName('body')->item(0);
+        foreach ($html->childNodes as $child) {
+            $importedNode = $dom->importNode($child, true);
+            $section->appendChild($importedNode);
         }
 
-        $epub->CreateEPUB();
-        return ['file' => $epub->epub_file];
-        //return Yii::$app->response->sendFile($epub->epub_file)->send();
+        $body->appendChild($section);
     }
 }

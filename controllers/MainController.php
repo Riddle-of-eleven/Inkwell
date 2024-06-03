@@ -5,8 +5,12 @@ namespace app\controllers;
 use app\models\_BookData;
 use app\models\_ContentData;
 use app\models\Forms\FormMainSearch;
+use app\models\Tables\Award;
+use app\models\Tables\BanReason;
 use app\models\Tables\Book;
 use app\models\Tables\Chapter;
+use app\models\Tables\Complaint;
+use app\models\Tables\ComplaintReason;
 use app\models\Tables\Completeness;
 use app\models\Tables\Fandom;
 use app\models\Tables\FavoriteBook;
@@ -57,7 +61,7 @@ class MainController extends Controller
         //$book = new _BookData($id);
         $content = new _ContentData($id);
 
-        $like = false; $read = false; $read_later = false; $favorite = false;
+        $like = false; $read = false; $read_later = false; $favorite = false; $awarded = false;
         if (!Yii::$app->user->isGuest) {
             $user = Yii::$app->user->identity->id;
             $like = Like::find()->select(['id', 'liked_at'])->where(['book_id' => $id])->andWhere(['user_id' => $user])->one();
@@ -65,6 +69,7 @@ class MainController extends Controller
             $read_later = ReadLater::find()->select(['id', 'added_at'])->where(['book_id' => $id])->andWhere(['user_id' => $user])->one();
             $favorite = FavoriteBook::find()->select('id')->where(['book_id' => $id])->andWhere(['user_id' => $user])->one();
 
+            $awarded = Award::find()->select('id')->where(['book_id' => $id])->andWhere(['moderator_id' => $user])->one();
 
             $view = new ViewHistory();
             $view->user_id = $user;
@@ -75,6 +80,8 @@ class MainController extends Controller
             $view->save();
         }
 
+        $complaint_reasons = ComplaintReason::find()->all();
+
         return $this->render('book', [
             'book' => $book,
             'content' => $content,
@@ -82,7 +89,22 @@ class MainController extends Controller
             'read' => $read,
             'read_later' => $read_later,
             'favorite' => $favorite,
+            'awarded' => $awarded,
+
+            'complaint_reasons' => $complaint_reasons,
         ]);
+    }
+    public function actionMakeComplaint() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $reason = Yii::$app->request->post('reason');
+        $book = Yii::$app->request->post('book');
+        if ($reason) {
+            $complaint = new Complaint();
+            $complaint->book_id = $book;
+            if (!Yii::$app->user->isGuest) $complaint->user_id = Yii::$app->user->identity->id;
+            if ($complaint->save()) return ['success' => true];
+        }
+        return ['success' => false];
     }
 
     public function actionReadBook() {
@@ -95,12 +117,30 @@ class MainController extends Controller
 
         $book = Book::find()->where(['id' => $id])->one();
 
+        $session = Yii::$app->session;
+        $font = $session->get('reader.font') ?? null;
+
         return $this->render('read-book', [
             'chapters' => $chapters,
             'pages' => $pages,
             'book' => $book,
+
+            'font' => $font
         ]);
     }
+
+    public function actionChangeFont() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $session = Yii::$app->session;
+        $font = Yii::$app->request->post('font');
+        if ($font) {
+            $old_font = $session->get('reader.font') ?? 'nunito';
+            $session->set('reader.font', $font);
+            return ['old_font' => $old_font, 'new_font' => $font];
+        }
+        return false;
+    }
+
 
     public function actionAuthor() {
         $id = Yii::$app->request->get('id');
@@ -117,10 +157,14 @@ class MainController extends Controller
             $follow = Followers::find()->select(['id', 'followed_at'])->where(['user_id' => $id])->andWhere(['follower_id' => Yii::$app->user->identity->id])->one();
         }
 
+        $ban_reasons = BanReason::find()->all();
+
         return $this->render('author', [
             'user' => $user,
             'books' => $books,
             'follow' => $follow,
+
+            'ban_reasons' => $ban_reasons,
         ]);
     }
 
@@ -209,6 +253,14 @@ class MainController extends Controller
 
         $request = Yii::$app->request;
         $books = null;
+
+        $type = null;
+        $relation = null;
+        $rating = null;
+        $size = null;
+        $status = null;
+        $sort = null;
+
         if (Yii::$app->request->get()) {
             $type = $request->get('type');
             $relation = $request->get('relation');
@@ -218,7 +270,7 @@ class MainController extends Controller
             $sort = $request->get('sort');
 
             $query = Book::find()
-                ->where(['<>', 'is_draft', 1])
+                ->where(['<>', 'book.is_draft', 1])
                 ->andFilterWhere(['type_id' => $type])
                 ->andFilterWhere(['relation_id' => $relation])
                 ->andFilterWhere(['rating_id' => $rating])
@@ -231,10 +283,10 @@ class MainController extends Controller
                     ->groupBy('book.id')
                     ->orderBy(['count' => SORT_DESC]);
             else if ($sort == 'date')
-                $query->orderBy(['created_at' => SORT_DESC]);
+                $query->orderBy(['created_at' => SORT_ASC]);
             else if ($sort == 'chapter')
                 $query->select(['book.*', 'COUNT(chapter.id) AS count'])
-                    ->leftJoin('chapter', 'book.id = like.book_id')
+                    ->leftJoin('chapter', 'book.id = chapter.book_id')
                     ->groupBy('book.id')
                     ->orderBy(['count' => SORT_DESC]);
 
@@ -255,6 +307,13 @@ class MainController extends Controller
             'tag_types' => $tag_types,
 
             'books' => $books,
+
+            'chosen_relation' => $relation,
+            'chosen_rating' => $rating,
+            'chosen_size' => $size,
+            'chosen_status' => $status,
+            'chosen_type' => $type,
+            'chosen_sort' => $sort
         ]);
     }
 

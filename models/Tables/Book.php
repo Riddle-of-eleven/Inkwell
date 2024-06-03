@@ -31,6 +31,7 @@ use Yii;
  *
  * @property AccessLevel $accessLevel
  * @property AccessToBook[] $accessToBooks
+ * @property Award[] $awards
  * @property BookCharacter[] $bookCharacters
  * @property BookCollection[] $bookCollections
  * @property BookFandom[] $bookFandoms
@@ -39,6 +40,7 @@ use Yii;
  * @property BookTag[] $bookTags
  * @property Chapter[] $chapters
  * @property Comment[] $comments
+ * @property Complaint[] $complaints
  * @property Completeness $completeness
  * @property Download[] $downloads
  * @property FavoriteBook[] $favoriteBooks
@@ -145,6 +147,16 @@ class Book extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Awards]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAwards()
+    {
+        return $this->hasMany(Award::class, ['book_id' => 'id']);
+    }
+
+    /**
      * Gets query for [[BookCharacters]].
      *
      * @return \yii\db\ActiveQuery
@@ -222,6 +234,16 @@ class Book extends \yii\db\ActiveRecord
     public function getComments()
     {
         return $this->hasMany(Comment::class, ['book_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Complaints]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComplaints()
+    {
+        return $this->hasMany(Complaint::class, ['book_id' => 'id']);
     }
 
     /**
@@ -405,6 +427,8 @@ class Book extends \yii\db\ActiveRecord
     }
 
 
+
+
     public function getCollections()
     {
         return $this->hasMany(Collection::class, ['id' => 'collection_id'])
@@ -440,43 +464,3 @@ class Book extends \yii\db\ActiveRecord
             ->viaTable('book_character', ['book_id' => 'id']);
     }
 }
-
-
-/*
-
-public function getCollections()
-{
-    return $this->hasMany(Collection::class, ['id' => 'collection_id'])
-        ->viaTable('book_collection', ['book_id' => 'id']);
-}
-
-public function getFandoms()
-{
-    return $this->hasMany(Fandom::class, ['id' => 'fandom_id'])
-        ->viaTable('book_fandom', ['book_id' => 'id']);
-}
-
-public function getGenres()
-{
-    return $this->hasMany(Genre::class, ['id' => 'genre_id'])
-        ->viaTable('book_genre', ['book_id' => 'id']);
-}
-
-public function getOrigins()
-{
-    return $this->hasMany(Origin::class, ['id' => 'origin_id'])
-        ->viaTable('book_origin', ['book_id' => 'id']);
-}
-
-public function getTags()
-{
-    return $this->hasMany(Tag::class, ['id' => 'tag_id'])
-        ->viaTable('book_tag', ['book_id' => 'id']);
-}
-public function getCharacters()
-{
-    return $this->hasMany(Character::class, ['id' => 'character_id'])
-        ->viaTable('book_character', ['book_id' => 'id']);
-}
-
-*/

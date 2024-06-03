@@ -51,8 +51,55 @@
 .reader-content {
     min-height: 400px;
     display: flex; flex-direction: column; gap: 40px;
-    padding: 40px 60px;
+    padding: 40px 100px;
 }
 .reader-book-header {
     display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+
+.reader-book-text p {
+    text-indent: 40px;
+    margin-bottom: 0.8em;
+    /*font-size: 16px;*/
+    line-height: 1.5em;
+}
+
+.reader-book-text p.ql-align-center {
+    text-align: center;
+}
+.reader-book-text p.ql-align-right {
+    text-align: right;
+}
+
+
+.reader-parameters {
+    width: 100%;
+    display: flex; gap: 10px; justify-content: space-between;
+    flex-wrap: wrap;
+}
+.font-block {
+    width: 150px;
+    padding: 10px;
+    display: flex; flex-direction: column; gap: 6px; align-items: center;
+    cursor: pointer;
+}
+.font-preview {
+    font-size: 20px;
+}
+
+.font-anonymous .font-preview {
+    font-family: 'Anonymous', monospace !important;
+    font-weight: 200;
+}
+.font-comfortaa .font-preview {
+    font-family: 'Comfortaa', sans-serif !important;
+    font-weight: 200;
+}
+.font-cormorant .font-preview {
+    font-family: 'Cormorant', serif !important;
+    font-weight: 400;
+}
+.font-roboto .font-preview {
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 200 !important;
 }

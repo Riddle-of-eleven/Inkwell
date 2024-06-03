@@ -177,10 +177,14 @@ textarea {
 }
 
 .icon-button {
-    flex-direction: row;
+    flex-direction: row; align-items: center;
     padding: 7px 20px 6px 14px;
     gap: 7px;
     width: fit-content;
+}
+.icon-button span, .icon-button a {
+    display: flex; flex-direction: row;
+    gap: 7px;
 }
 
 .small-button {
@@ -500,7 +504,7 @@ dialog::backdrop {
     display: flex; gap: 20px;
     align-items: center;
 }
-.pagination .prev, .pagination .next {
+.pagination .prev:not(.ui), .pagination .next:not(.ui) {
     width: 30px; height: 30px;
     background-color: var(--color-foreground);
     border: var(--border-width) solid var(--color-outline);

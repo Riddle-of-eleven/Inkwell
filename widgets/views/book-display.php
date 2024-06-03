@@ -102,7 +102,7 @@ if ($words >= 1000) {
                 <div class="info-pairs">
                     <div class="info-pair">
                         <div class="info-key">Фэндом:</div>
-                        <? if (isset($book->fandoms)) :
+                        <? if ($book->fandoms) :
                             foreach ($book->fandoms as $fandom) {
                                 echo '<div class="info-value">' . $fandom->title . '</div>';
                             }
@@ -110,7 +110,7 @@ if ($words >= 1000) {
                                 echo '<div class="info-value">Ориджинал</div>';
                         endif; ?>
                     </div>
-                    <? if (isset($book->origins)) : ?>
+                    <? if ($book->origins) : ?>
                         <div class="info-pair">
                             <div class="info-key">Первоисточник:</div>
                                 <? foreach ($book->origins as $origin) {
@@ -131,10 +131,21 @@ if ($words >= 1000) {
                             </div>
                         </div>
                     <? endif; ?>
-                    <!--<div class="info-pair">
-                        <div class="info-key">Пейринг:</div>
-                        <div class="info-value">Ада / Михаил</div>
-                    </div>-->
+                    <? if ($book->pairings) :
+                        foreach ($book->pairings as $pairing) : ?>
+                            <div class="info-pair">
+                                <div class="info-key">Пейринг:</div>
+                                <div class="info-value">
+                                    <? $first = true;
+                                    foreach ($pairing->pairingCharacters as $pairingCharacter) :
+                                        if ($first) $first= false;
+                                        else echo ' / ';
+                                        echo $pairingCharacter->character->full_name;
+                                    endforeach; ?>
+                                </div>
+                            </div>
+                        <? endforeach;
+                    endif; ?>
                 </div>
                 <div class="small-inner-line"></div>
                 <div class="info-pairs">

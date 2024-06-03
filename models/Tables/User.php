@@ -2,6 +2,7 @@
 
 namespace app\models\Tables;
 
+use Yii;
 use yii\web\IdentityInterface;
 
 /**
@@ -15,6 +16,8 @@ use yii\web\IdentityInterface;
  * @property string|null $avatar
  * @property string|null $registered_at
  * @property int|null $is_banned
+ * @property int|null $ban_reason_id
+ * @property int|null $ban_moderator_id
  * @property string|null $banned_until
  * @property string|null $about
  * @property string|null $contact
@@ -28,15 +31,14 @@ use yii\web\IdentityInterface;
  * @property AccessToBook[] $accessToBooks
  * @property AccessToBook[] $accessToBooks0
  * @property AccessToBook[] $accessToBooks1
- * @property AccessToBook[] $accessToBooks2
- * @property AccessToBook[] $accessToBooks3
- * @property AccessToBook[] $accessToBooks4
- * @property AccessToBook[] $accessToBooks5
  * @property ActivityRate[] $activityRates
+ * @property Award[] $awards
+ * @property BanReason $banReason
  * @property Blacklist[] $blacklists
  * @property Blacklist[] $blacklists0
  * @property Book[] $books
  * @property Book[] $books0
+ * @property Collection[] $collections
  * @property Comment[] $comments
  * @property Complaint[] $complaints
  * @property Complaint[] $complaints0
@@ -47,16 +49,20 @@ use yii\web\IdentityInterface;
  * @property FavoriteFandom[] $favoriteFandoms
  * @property Followers[] $followers // те, кто подписан на пользователя
  * @property Followers[] $followers0 // те, на кого подписан пользователь
+ * @property Genre[] $genres
  * @property Like[] $likes
  * @property Origin[] $origins
+ * @property ReadLater[] $readLaters
  * @property Read[] $reads
  * @property RecycleBin[] $recycleBins
  * @property Review[] $reviews
  * @property TagRequest[] $tagRequests
  * @property TagRequest[] $tagRequests0
+ * @property Tag[] $tags
  * @property UserAccess[] $userAccesses
  * @property UserAccess[] $userAccesses0
  * @property UserAchievements[] $userAchievements
+ * @property User[] $users
  * @property ViewHistory[] $viewHistories
  * @property Visits[] $visits
  * @property Visits[] $visits0
@@ -79,18 +85,19 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['registered_at', 'banned_until'], 'safe'],
-            [['is_banned', 'is_publisher', 'is_admin', 'is_moderator'], 'integer'],
-            [['login'], 'string', 'max' => 200],
-            [['password'], 'string', 'max' => 100],
+            [['is_banned', 'ban_reason_id', 'ban_moderator_id', 'is_publisher', 'is_admin', 'is_moderator'], 'integer'],
+            [['login', 'password'], 'string', 'max' => 200],
             [['salt'], 'string', 'max' => 100],
             [['email'], 'string', 'max' => 340],
             [['avatar'], 'string', 'max' => 400],
-            [['about'], 'string', 'max' => 800],
-            [['contact'], 'string', 'max' => 500],
+            [['about'], 'string', 'max' => 2500],
+            [['contact'], 'string', 'max' => 1500],
             [['url'], 'string', 'max' => 60],
             [['official_website'], 'string', 'max' => 255],
 
-            ['login', 'unique', 'targetClass' => User::class,  'message' => 'Этот логин уже занят'],
+            ['login', 'unique', 'targetClass' => User::class, 'message' => 'Этот логин уже занят'],
+            [['ban_reason_id'], 'exist', 'skipOnError' => true, 'targetClass' => BanReason::class, 'targetAttribute' => ['ban_reason_id' => 'id']],
+            [['ban_moderator_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['ban_moderator_id' => 'id']],
         ];
     }
 
@@ -151,7 +158,25 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
 
+    /**
+     * Gets query for [[BanModerator]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBanModerator()
+    {
+        return $this->hasOne(User::class, ['id' => 'ban_moderator_id']);
+    }
 
+    /**
+     * Gets query for [[Users]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(User::class, ['ban_moderator_id' => 'id']);
+    }
 
     /**
      * Gets query for [[AccessLevels]].
@@ -170,7 +195,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getAccessToBooks()
     {
-        return $this->hasMany(AccessToBook::class, ['user_id' => 'id']);
+        return $this->hasMany(AccessToBook::class, ['coauthor_id' => 'id']);
     }
 
     /**
@@ -180,7 +205,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getAccessToBooks0()
     {
-        return $this->hasMany(AccessToBook::class, ['co_author_1_id' => 'id']);
+        return $this->hasMany(AccessToBook::class, ['beta_id' => 'id']);
     }
 
     /**
@@ -190,47 +215,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getAccessToBooks1()
     {
-        return $this->hasMany(AccessToBook::class, ['co_author_2_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[AccessToBooks2]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAccessToBooks2()
-    {
-        return $this->hasMany(AccessToBook::class, ['beta_1_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[AccessToBooks3]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAccessToBooks3()
-    {
-        return $this->hasMany(AccessToBook::class, ['beta_2_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[AccessToBooks4]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAccessToBooks4()
-    {
-        return $this->hasMany(AccessToBook::class, ['gamma_1_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[AccessToBooks5]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAccessToBooks5()
-    {
-        return $this->hasMany(AccessToBook::class, ['gamma_2_id' => 'id']);
+        return $this->hasMany(AccessToBook::class, ['gamma_id' => 'id']);
     }
 
     /**
@@ -242,6 +227,28 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(ActivityRate::class, ['user_id' => 'id']);
     }
+
+    /**
+     * Gets query for [[Awards]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAwards()
+    {
+        return $this->hasMany(Award::class, ['moderator_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[BanReason]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBanReason()
+    {
+        return $this->hasOne(BanReason::class, ['id' => 'ban_reason_id']);
+    }
+
+    /**
 
     /**
      * Gets query for [[Blacklists]].
@@ -281,6 +288,16 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function getBooks0()
     {
         return $this->hasMany(Book::class, ['publisher_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Collections]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCollections()
+    {
+        return $this->hasMany(Collection::class, ['user_id' => 'id']);
     }
 
     /**
@@ -384,6 +401,16 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     /**
+     * Gets query for [[Genres]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getGenres()
+    {
+        return $this->hasMany(Genre::class, ['moderator_id' => 'id']);
+    }
+
+    /**
      * Gets query for [[Likes]].
      *
      * @return \yii\db\ActiveQuery
@@ -401,6 +428,16 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function getOrigins()
     {
         return $this->hasMany(Origin::class, ['this_creator_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[ReadLaters]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReadLaters()
+    {
+        return $this->hasMany(ReadLater::class, ['user_id' => 'id']);
     }
 
     /**
@@ -451,6 +488,16 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function getTagRequests0()
     {
         return $this->hasMany(TagRequest::class, ['approving_moderator_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Tags]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTags()
+    {
+        return $this->hasMany(Tag::class, ['moderator_id' => 'id']);
     }
 
     /**
