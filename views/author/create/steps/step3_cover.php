@@ -33,7 +33,7 @@ $crop_hidden = $create_cover ? 'hidden' : '';
     <div class="cover-preview <?=$preview_hidden?>">
         <div class="header3 metadata-item-title">Предпросмотр обложки</div>
         <div id="image-preview">
-            <? if($create_cover) echo Html::img('@web/' . $create_cover, ['class' => 'crop-result block']); ?>
+            <? if($create_cover) echo Html::img('@web/images/covers/uploads/' . $create_cover, ['class' => 'crop-result block']); ?>
         </div>
         <div class="cover-buttons">
             <div class="ui button icon-button danger-accent-button" id="button-restore"><?=hide_image_icon?>Удалить обложку</div>

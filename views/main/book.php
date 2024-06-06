@@ -59,12 +59,11 @@ if (!Yii::$app->user->isGuest) {
 
     $favorite_class = $favorite ? 'filled-button' : '';
     $favorite_text = $favorite ? 'В избранном' : 'Добавить в избранное';
-
-    $awarded_class = $awarded ? 'filled-button' : '';
-    $awarded_text = $awarded ? 'Награждено' : 'Наградить';
-    $awarded_block = $awarded ? '' : 'hidden';
 }
 
+$awarded_class = $awarded ? 'filled-button' : '';
+$awarded_text = $awarded ? 'Награждено' : 'Наградить';
+$awarded_block = $awarded ? '' : 'hidden';
 
 // размер и то, что его касается
 $chapters = count($book->chapters);
@@ -202,6 +201,11 @@ $pairings = $book->pairings;
                                 echo $fandom->title;
                             } ?>
                         </div>
+                    </div>
+                <? else: ?>
+                    <div class="info-pair">
+                        <div class="info-key">Фэндом:</div>
+                        <div class="info-value">Ориджинал</div>
                     </div>
                 <? endif; ?>
 

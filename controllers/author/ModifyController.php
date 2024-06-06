@@ -108,10 +108,10 @@ class ModifyController extends Controller
                 if ($status) $book->completeness_id = $status;
                 if ($editing) $book->public_editing_id = $editing;
 
-                if ($book->save()) return ['success' => true];
-                else return ['success' => false];
+                if ($book->save()) return ['success' => true, 'is_draft' => $book->is_draft];
+                else return ['success' => false, 'is_draft' => $book->is_draft];
             }
-        return ['success' => false];
+        return ['success' => false, 'is_draft' => $book->is_draft];
     }
 
     public function actionAddChapter() {

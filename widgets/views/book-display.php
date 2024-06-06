@@ -149,7 +149,7 @@ if ($words >= 1000) {
                 </div>
                 <div class="small-inner-line"></div>
                 <div class="info-pairs">
-                    <? if (isset($book->genres)) : ?>
+                    <? if ($book->genres) : ?>
                         <div class="info-pair">
                             <div class="info-key">Жанры:</div>
                             <div class="info-value">
@@ -162,7 +162,7 @@ if ($words >= 1000) {
                             </div>
                         </div>
                     <? endif; ?>
-                    <? if (isset($book->tags)) : ?>
+                    <? if ($book->tags) : ?>
                         <div class="info-pair">
                             <div class="info-key">Теги:</div>
                             <div class="info-value">

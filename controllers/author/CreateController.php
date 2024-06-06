@@ -179,9 +179,10 @@ class CreateController extends Controller
         $session = Yii::$app->session;
         $image = UploadedFile::getInstanceByName('cropped_image');
         if ($image) {
-            $path = 'images/covers/uploads/' . uniqid() . '.png';
+            $name = uniqid() . '.png';
+            $path = 'images/covers/uploads/' . $name;
             if ($image->saveAs($path)) {
-                $session->set('create.cover', $path);
+                $session->set('create.cover', $name);
                 return ['url' => $path];
             }
         }
@@ -191,7 +192,7 @@ class CreateController extends Controller
         $session = Yii::$app->session;
         $cover = $session->get('create.cover');
         if ($cover)
-            if (file_exists($cover)) unlink($cover); // удаляет файл с сервера, если таковой существует
+            if (file_exists($cover)) unlink('images/covers*uploads/' . $cover); // удаляет файл с сервера, если таковой существует
         $session->set('create.cover', '');
     }
 

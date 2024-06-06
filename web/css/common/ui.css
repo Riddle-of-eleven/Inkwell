@@ -255,6 +255,10 @@ textarea {
 .disabled-button svg {
     fill: var(--color-tip);
 }
+a.disabled-button {
+    pointer-events: none;
+    cursor: not-allowed !important;
+}
 
 
 
