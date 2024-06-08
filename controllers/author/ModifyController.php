@@ -7,6 +7,7 @@ use app\models\Tables\Book;
 use app\models\Tables\Chapter;
 use app\models\Tables\Completeness;
 use app\models\Tables\PublicEditing;
+use app\models\Tables\RecycleBin;
 use SimpleXMLElement;
 use yii\db\Expression;
 use yii\helpers\Url;
@@ -45,9 +46,23 @@ class ModifyController extends Controller
         $session->set('modify.book.tab', 'main');
 
         $book = Book::findOne($session->get('modify.book'));
+        $modify_title = $book->title;
+        $modify_description = $book->description;
+        $modify_remark = $book->remark;
+        $modify_disclaimer = $book->disclaimer;
+        $modify_dedication = $book->dedication;
+
+
 
         return $this->renderAjax('tabs/main', [
             'book' => $book,
+
+            // данные для изменения
+            'modify_title' => $modify_title,
+            'modify_description' => $modify_description,
+            'modify_remark' => $modify_remark,
+            'modify_disclaimer' => $modify_disclaimer,
+            'modify_dedication' => $modify_dedication,
         ]);
     }
 
@@ -89,6 +104,24 @@ class ModifyController extends Controller
             'this_public_editing' => $this_public_editing,
             'this_status' => $this_status,
         ]);
+    }
+
+
+    public function actionDeleteBook() {
+        $session = Yii::$app->session;
+        $book = Book::findOne($session->get('modify.book'));
+        $user = Yii::$app->user->identity;
+
+        if ($book)
+            if ($book->user_id == $user->id) {
+                //if ($book->delete()) return $this->redirect(Url::to(['author/author-panel/books-dashboard']));
+                $recycle = new RecycleBin();
+                $recycle->book_id = $book->id;
+                $recycle->user_id = $user->id;
+                $recycle->deleted_at = new Expression('NOW()');
+                $recycle->days_stored = 30;
+                if ($recycle->save()) return $this->redirect(Url::to(['author/author-panel/books-dashboard']));
+            }
     }
 
 

@@ -1,5 +1,5 @@
 <?php
-$this->title = Yii::$app->name.' – книга';
+$this->title = ' – книга';
 
 use yii\helpers\Html;
 use yii\helpers\Url;

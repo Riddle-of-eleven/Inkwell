@@ -105,7 +105,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                         <a><?=deployed_code_icon?>Проекты</a>
                         <a><?=bar_chart_icon?>Аналитика</a>
                         <a><?=error_icon?>Сообщения об ошибках</a>
-                        <a><?=delete_icon?>Корзина</a>
+                        <?= Html::a(delete_icon . 'Корзина', Url::to(['author/author-panel/recycle-bin'])) ?>
                     </div>
                 </div>
             </div>
@@ -121,7 +121,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     <a href=""><?= deployed_code_icon ?><span class="menu-item hidden">Проекты</span></a>
                     <a href=""><?= bar_chart_icon ?><span class="menu-item hidden">Аналитика</span></a>
                     <a href=""><?= error_icon ?><span class="menu-item hidden">Сообщения об ошибках</span></a>
-                    <a href=""><?= delete_icon ?><span class="menu-item hidden">Корзина</span></a>
+                    <?= Html::a(delete_icon . '<span class="menu-item hidden">Корзина</span>', Url::to(['author/author-panel/recycle-bin'])) ?>
                 </div>
             </details>
 

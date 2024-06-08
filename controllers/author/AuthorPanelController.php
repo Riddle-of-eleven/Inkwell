@@ -6,6 +6,7 @@ use app\models\Tables\Book;
 use app\models\Tables\Fandom;
 use Yii;
 use yii\helpers\Url;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 
 class AuthorPanelController extends Controller
@@ -16,10 +17,13 @@ class AuthorPanelController extends Controller
         $tab = $session->has('author-panel.book-dashboard.tab') ? $session->get('author-panel.book-dashboard.tab') : 'progress';
 
         $user = Yii::$app->user->identity->id;
-        $progress = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 1])->andWhere(['<>', 'is_draft', 1]);
+        $progress = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 1])->andWhere(['<>', 'is_draft', 1])->all();
+            //->innerJoinWith('recycleBins as bin')->where(['<>', 'bin.user_id', $user])->all();
         $complete = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 2])->andWhere(['<>', 'is_draft', 1]);
         $frozen = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 3])->andWhere(['<>', 'is_draft', 1]);
         $draft = Book::find()->where(['user_id' => $user])->andWhere(['is_draft' => 1]);
+
+        //VarDumper::dump($progress, 10, true); die;
 
         /*$books_progress = $progress->all();
         $books_complete = $complete->all();
@@ -111,6 +115,19 @@ class AuthorPanelController extends Controller
 
         return $this->render('change-fandom',[
             'fandom' => $fandom,
+        ]);
+    }
+
+
+    public function actionRecycleBin() {
+        if (Yii::$app->user->isGuest) return $this->goHome();
+        $user = Yii::$app->user->identity;
+
+        $recycles = Book::find()->innerJoinWith('recycleBins as bin')->where(['bin.user_id' => $user->id])->all();
+
+
+        return $this->render('recycle-bin', [
+            'recycles' => $recycles,
         ]);
     }
 }

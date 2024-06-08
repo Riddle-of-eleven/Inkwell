@@ -21,10 +21,36 @@ $this->registerJs(<<<JS
     $('.tab').click(function () {
         loadTab('author/modify', $(this).data('tab'), $('.tab-contents'));
     });
+    
+    const confirm = $('#delete-book-confirm')[0];
+    $('#delete-existing-book').click(function () {
+        confirm.showModal();
+    });
+    $('.close-button').click(function () {
+        confirm.close();
+    });
+    $('#reject-delete').click(function () {
+        confirm.close();
+    });
+    $('#accept-delete').click(function () {
+        $.ajax('http://inkwell/web/author/modify/delete-book');
+    });
 JS);
 
 
 ?>
+
+<dialog class="block modal" id="delete-book-confirm">
+    <div class="close-button"><?=close_icon?></div>
+    <div class="modal-container" id="delete-modal">
+        <div class="header3">Вы точно хотите удалить книгу?</div>
+        <div class="tip-color">Это действие переместит книгу "<?=$book->title?>" в корзину, где она будет храниться 30 дней, после чего будет удалена навсегда без возможности восстановления.</div>
+        <div class="modal-buttons">
+            <div class="ui button button-center-align" id="reject-delete">Нет, оставьте</div>
+            <div class="ui button button-center-align danger-accent-button" id="accept-delete">Да, удалите</div>
+        </div>
+    </div>
+</dialog>
 
 <div class="dashboard-header functional-header">
     <div>
@@ -42,7 +68,7 @@ JS);
                 'id' => 'preview-book'
             ])?>
         </div>
-        <?= Html::a(new_book_icon . 'Удалить книгу', Url::to(['']), ['class' => 'ui button icon-button danger-accent-button']) ?>
+        <?= Html::button(new_book_icon . 'Удалить книгу', ['class' => 'ui button icon-button danger-accent-button', 'id' => 'delete-existing-book']) ?>
     </div>
 </div>
 

@@ -132,8 +132,9 @@ section, .active-tab section, .book-type-depend, section > form {
 }
 .inner-line {
     width: 100%;
-    height: var(--border-width);
-    background-color: var(--color-border);
+    /*height: var(--border-width);
+    background-color: var(--color-border);*/
+    border-top: var(--border-width) solid var(--color-lighter-line);
 }
 .small-inner-line {
     width: 100%;

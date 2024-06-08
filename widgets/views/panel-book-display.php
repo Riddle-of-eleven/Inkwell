@@ -7,6 +7,7 @@ use app\models\Tables\Book;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\VarDumper;
+use yii\i18n\Formatter;
 
 
 //VarDumper::dump($book->accessToBooks[0]->, 10, true);
@@ -18,8 +19,8 @@ use yii\helpers\VarDumper;
         <div class="side-buttons">
             <?= Html::a(edit_icon, Url::toRoute(['author/modify/define-modify', 'book' => $book->id]), ['class' => 'ui button very-small-button']) ?>
             <?= Html::a(new_chapter_icon, Url::to(['author/modify/add-chapter']), ['class' => 'ui button very-small-button']) ?>
-            <div class="ui button very-small-button"><?= link_deployed_code_icon ?></div>
-            <div class="ui button very-small-button"><?= branch_icon ?></div>
+            <!--<div class="ui button very-small-button"><?= link_deployed_code_icon ?></div>
+            <div class="ui button very-small-button"><?= branch_icon ?></div>-->
         </div>
         <div class="line"></div>
         <div class="side-buttons">
@@ -63,8 +64,12 @@ use yii\helpers\VarDumper;
                 <div class="book-preview-info">
                     <?= Html::a($book->title, Url::toRoute(['author/modify/define-modify', 'book' => $book->id]), ['class' => 'book-preview-title header1']) ?>
                     <div class="info-pairs">
-                        <div class="info-pair"><div class="info-key">Количество частей:</div>16</div>
-                        <div class="info-pair"><div class="info-key">Последнее обновление:</div>11 апреля 2024</div>
+                        <div class="info-pair"><div class="info-key">Количество частей:</div><?=count($book->chapters)?></div>
+                        <div class="info-pair"><div class="info-key">Дата создания:</div>
+                            <?  $formatter = new Formatter();
+                            echo $formatter->asDate($book->created_at, 'd MMMM yyyy');
+                            ?>
+                        </div>
                     </div>
                 </div>
                 <div class="book-preview-cover">
@@ -81,9 +86,12 @@ use yii\helpers\VarDumper;
         </div>
 
         <div class="book-preview-actions">
-            <a href="" class="ui button icon-button"><?= expand_more_icon ?>Показать части</a>
-            <a href="" class="ui button icon-button"><?= bar_chart_icon ?>Смотреть статистику</a>
-            <a href="" class="ui button icon-button"><?= file_open_icon ?>Посмотреть книгу</a>
+            <? $preview_class = $book->is_draft == 1 ? ' disabled-button' : '' ?>
+            <?=Html::a(file_open_icon . 'Посмотреть книгу', Url::to(['main/book', 'id' => $book->id]), [
+                'class' => 'ui button icon-button' . $preview_class,
+                'id' => 'preview-book'
+            ])?>
+            <a href="" class="ui button icon-button"><?= file_open_icon ?>Статистика</a>
         </div>
 
     </div>
