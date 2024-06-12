@@ -14,5 +14,7 @@ use app\widgets\BookDisplay;
     Здесь вы видите все фанфики – фанатские работы, созданные по мотивам уже существующих произведений.
 </div>
 
+<div class="inner-line"></div>
+
 <? foreach ($fanfics as $original) echo BookDisplay::widget(['book' => $original]);
 echo LinkPager::widget(['pagination' => $pages]);

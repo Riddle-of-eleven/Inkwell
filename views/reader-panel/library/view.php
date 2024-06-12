@@ -7,6 +7,7 @@ use app\widgets\BookDisplay;
 use yii\helpers\VarDumper;
 
 //VarDumper::dump($books, 10, true);
+$this->registerCssFile("@web/css/parts/user/author.css");
 
 
 $replacement = '';
@@ -19,4 +20,4 @@ if ($books)
     foreach ($books as $book) {
         echo BookDisplay::widget(['book' => $book]);
     }
-else echo "<div class='center-container tip-color'>$replacement</div>";
+else echo "<div class='block author-about'><div class='tip-color'>$replacement</div></div>";

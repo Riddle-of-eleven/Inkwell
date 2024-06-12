@@ -11,6 +11,7 @@ use yii\helpers\VarDumper;
 use app\models\Tables\Book;
 
 $this->registerCssFile("@web/css/parts/user/reader-panel.css");
+$this->registerCssFile("@web/css/parts/user/author.css");
 
 $formatter = new Formatter();
 ?>
@@ -43,4 +44,5 @@ $formatter = new Formatter();
 
             </div>
         </details>
-    <? }?>
+    <? }
+    else echo '<div class="block author-about"><div class="tip-color">Вы не просматривали книг.</div></div>';

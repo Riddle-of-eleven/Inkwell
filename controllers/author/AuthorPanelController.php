@@ -17,7 +17,7 @@ class AuthorPanelController extends Controller
         $tab = $session->has('author-panel.book-dashboard.tab') ? $session->get('author-panel.book-dashboard.tab') : 'progress';
 
         $user = Yii::$app->user->identity->id;
-        $progress = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 1])->andWhere(['<>', 'is_draft', 1])->all();
+        $progress = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 1])->andWhere(['<>', 'is_draft', 1]);
             //->innerJoinWith('recycleBins as bin')->where(['<>', 'bin.user_id', $user])->all();
         $complete = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 2])->andWhere(['<>', 'is_draft', 1]);
         $frozen = Book::find()->where(['user_id' => $user])->andWhere(['completeness_id' => 3])->andWhere(['<>', 'is_draft', 1]);

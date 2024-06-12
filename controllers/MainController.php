@@ -4,11 +4,14 @@ namespace app\controllers;
 
 use app\models\_BookData;
 use app\models\_ContentData;
+use app\models\Forms\FormComment;
 use app\models\Forms\FormMainSearch;
 use app\models\Tables\Award;
 use app\models\Tables\BanReason;
 use app\models\Tables\Book;
 use app\models\Tables\Chapter;
+use app\models\Tables\Collection;
+use app\models\Tables\Comment;
 use app\models\Tables\Complaint;
 use app\models\Tables\ComplaintReason;
 use app\models\Tables\Completeness;
@@ -21,6 +24,7 @@ use app\models\Tables\Rating;
 use app\models\Tables\Read;
 use app\models\Tables\ReadLater;
 use app\models\Tables\Relation;
+use app\models\Tables\Review;
 use app\models\Tables\Size;
 use app\models\Tables\TagType;
 use app\models\Tables\Theme;
@@ -82,6 +86,8 @@ class MainController extends Controller
 
         $complaint_reasons = ComplaintReason::find()->all();
 
+        $reviews = Review::find()->where(['book_id' => $id])->all();
+
         return $this->render('book', [
             'book' => $book,
             'content' => $content,
@@ -92,6 +98,7 @@ class MainController extends Controller
             'awarded' => $awarded,
 
             'complaint_reasons' => $complaint_reasons,
+            'reviews' => $reviews
         ]);
     }
     public function actionMakeComplaint() {
@@ -120,12 +127,44 @@ class MainController extends Controller
         $session = Yii::$app->session;
         $font = $session->get('reader.font') ?? null;
 
+        $model = new FormComment();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            //VarDumper::dump($model, 10, true); die;
+            if ($model->comment_type == 1) {
+                $comment = new Comment();
+                $comment->text = $model->comment;
+                $comment->book_id = $id;
+                $comment->user_id = Yii::$app->user->identity->id;
+                $comment->chapter_id = $chapters[0]->id;
+                $comment->created_at = new Expression('NOW()');
+
+                $comment->save();
+            }
+            else {
+                $review = new Review();
+                $review->text = $model->comment;
+                $review->user_id = Yii::$app->user->identity->id;
+                $review->book_id = $id;
+                $review->created_at = new Expression('NOW()');
+
+                $review->save();
+            }
+
+            return $this->redirect(Url::to(['main/read-book', 'id' => $id]));
+        }
+
+        $comments = Comment::find()->where(['chapter_id' => $chapters[0]->id])->all();
+
+
         return $this->render('read-book', [
             'chapters' => $chapters,
             'pages' => $pages,
             'book' => $book,
+            'comments' => $comments,
 
-            'font' => $font
+            'font' => $font,
+
+            'model' => $model,
         ]);
     }
 
@@ -201,7 +240,7 @@ class MainController extends Controller
             $authors_query->where(['is_draft' => 0]);
         }])->groupBy('user.id');;
         $count = clone $authors_query;
-        $pages = new Pagination(['totalCount' => $count->count(), 'pageSize' => 2]);
+        $pages = new Pagination(['totalCount' => $count->count(), 'pageSize' => 10]);
         $authors = $authors_query->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
@@ -214,13 +253,25 @@ class MainController extends Controller
     public function actionFandoms() {
         $fandoms_query = Fandom::find();
         $count = clone $fandoms_query;
-        $pages = new Pagination(['totalCount' => $count->count(), 'pageSize' => 2]);
+        $pages = new Pagination(['totalCount' => $count->count(), 'pageSize' => 10]);
         $fandoms = $fandoms_query->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
 
         return $this->render('fandoms', [
             'fandoms' => $fandoms,
+            'pages' => $pages,
+        ]);
+    }
+
+    public function actionCollections() {
+        $collections_query = Collection::find()->where(['is_private' => 0]);
+        $count = clone $collections_query;
+        $pages = new Pagination(['totalCount' => $count->count(), 'pageSize' => 10]);
+        $collections = $collections_query->offset($pages->offset)->limit($pages->limit)->all();
+
+        return $this->render('collections', [
+            'collections' => $collections,
             'pages' => $pages,
         ]);
     }

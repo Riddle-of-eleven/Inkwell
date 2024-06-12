@@ -17,6 +17,8 @@ use app\widgets\AuthorDisplay;
     Здесь перечислены все авторы
 </div>
 
+<div class="inner-line"></div>
+
 
 <section class="user-list">
     <? if ($authors)

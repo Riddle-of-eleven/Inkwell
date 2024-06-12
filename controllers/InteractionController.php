@@ -153,6 +153,35 @@ class InteractionController extends Controller
         }
     }
 
+    public function actionPublish() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (!Yii::$app->user->isGuest && Yii::$app->user->identity->is_publisher) {
+            $id = Yii::$app->request->post('book_id');
+            if ($id) {
+                $publisher = User::findOne(Yii::$app->user->identity->id);
+                $book = Book::findOne($id);
+                if ($book->publisher_id == $publisher->id || $book->publisher_id == null) {
+                    if ($book->is_published == 1) {
+                        $book->is_published = 0;
+                        $book->publisher_id = null;
+                    } else {
+                        $book->is_published = 1;
+                        $book->publisher_id = $publisher->id;
+                    }
+                    if ($book->save()) return [
+                        'success' => true,
+                        'is_published' => $book->is_published,
+                        'publisher_name' => $publisher->login,
+                        'publisher_id' => $publisher->id
+                    ];
+                }
+                else return ['success' => false, 'is_published' => $book->is_published];
+            }
+            else return ['success' => false, 'is_published' => false];
+        }
+        else return ['success' => false, 'is_published' => false];
+    }
+
     public function actionFollowAuthor() {
         Yii::$app->response->format = Response::FORMAT_JSON;
         if (!Yii::$app->user->isGuest) {

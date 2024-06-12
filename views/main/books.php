@@ -13,6 +13,11 @@ use yii\helpers\VarDumper;
 
 
 <div class="header1">Все книги</div>
+<div class="head-article">
+    Здесь собраны все книги, написанные пользователями Inkwell.
+</div>
+
+<div class="inner-line"></div>
 
 <? if ($books) :
     foreach ($books as $book) {

@@ -70,7 +70,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <?= keyboard_double_arrow_left_icon ?>
         </div>
 
-        <? $avatar = Yii::$app->user->identity->avatar ? Html::img('@web/images/avatar/uploads/' . Yii::$app->user->identity->avatar . '.png') : 'blank_avatar';
+        <? $avatar = Yii::$app->user->identity->avatar ? Html::img('@web/images/avatar/uploads/' . Yii::$app->user->identity->avatar . '.png') : blank_avatar;
         echo Html::a(
             $avatar . '<span class="menu-item hidden">' . Yii::$app->user->identity->login . '</span>',
             Url::to(['main/author', 'id' => Yii::$app->user->identity->id]),
@@ -180,7 +180,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                             <?= Html::a(lock_open_icon . 'Панель действий', Url::to([''])) ?>
                             <?= Html::a(tag_icon . 'Жанры и теги', Url::to(['moderator/moderator-panel/tags-dashboard'])) ?>
                             <a href=""><?= flag_icon ?>Жалобы и обращения</a>
-                            <a href=""><?= block_icon ?>Блокировка пользователей</a>
+                            <?= Html::a(block_icon . 'Блокировка пользователей', Url::to(['moderator/manage/block'])) ?>
                         </div>
                     </div>
                 </div>
@@ -194,7 +194,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                         <?= Html::a(lock_open_icon . '<span class="menu-item hidden">Панель действий</span>', Url::to([''])) ?>
                         <?= Html::a(tag_icon . '<span class="menu-item hidden">Жанры и теги</span>', Url::to(['moderator/moderator-panel/tags-dashboard'])) ?>
                         <a href=""><?= flag_icon ?><span class="menu-item hidden">Жалобы и обращения</span></a>
-                        <a href=""><?= block_icon ?><span class="menu-item hidden">Блокировка пользователей</span></a>
+                        <?= Html::a(block_icon . '<span class="menu-item hidden">Блокировка пользователей</span>', Url::to(['moderator/manage/block'])) ?>
                     </div>
                 </details>
             <? endif; ?>
@@ -207,8 +207,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     <div class="closed-menu-tooltip block hidden">
                         <div class="menu-tooltip-header"><?=passkey_icon?>Кабинет администратора</div>
                         <div class="menu-tooltip-content">
-                            <a href=""><?= apartment_icon ?>Издательства</a>
-                            <a href=""><?= shield_person_icon ?>Модераторы</a>
+                            <?= Html::a(shield_person_icon . 'Модераторы', Url::to(['admin/manage/moderators'])) ?>
+                            <?= Html::a(apartment_icon . 'Издательства', Url::to(['admin/manage/publishers'])) ?>
                         </div>
                     </div>
                 </div>
@@ -219,8 +219,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                         <div class="expand-icon"><?= expand_more_icon ?></div>
                     </summary>
                     <div class="side-buttons">
-                        <a href=""><?= apartment_icon ?><span class="menu-item hidden">Издательства</span></a>
-                        <a href=""><?= shield_person_icon ?><span class="menu-item hidden">Модераторы</span></a>
+                        <?= Html::a(shield_person_icon . '<span class="menu-item hidden">Модераторы</span>', Url::to(['admin/manage/moderators'])) ?>
+                        <?= Html::a(apartment_icon . '<span class="menu-item hidden">Издательства</span>', Url::to(['admin/manage/publishers'])) ?>
                     </div>
                 </details>
             <? endif; ?>
@@ -279,7 +279,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
                 <?= Html::a(cognition_icon . 'Авторы', Url::to(['main/authors'])) ?>
                 <?= Html::a(shelves_icon . 'Фэндомы', Url::to(['main/fandoms'])) ?>
-                <a href=""><?= list_alt_icon ?> Подборки </a>
+                <?= Html::a(list_alt_icon . 'Подборки', Url::to(['main/collections'])) ?>
 
                 <div class="line"></div>
 

@@ -188,6 +188,39 @@ $(document).ready(function() {
         });
     });
 
+    // публикация издательством
+    $('#publish-interaction').click(function() {
+        let button = $(this),
+            is_published = $('.is_published');
+        $.ajax({
+            type: 'post',
+            url: 'http://inkwell/web/interaction/publish',
+            data: { book_id: book_id },
+            success: function(response) {
+                console.log(response)
+                if (response.success) {
+                    markButton(response.is_published, button, 'filled-button');
+                    if (response.is_published) {
+                        button.find('.button-text').text('Опубликовано');
+
+                        is_published.html(`<div>Книга имеет печатную публикацию от издательства
+                            <a class="highlight-link" href="/web/main/author?id=${response.publisher_id}">${response.publisher_name}</a>!</div>`);
+                        is_published.removeClass('hidden');
+                    }
+                    else {
+                        button.find('.button-text').text('Отметить публикацию');
+                        is_published.addClass('hidden');
+                    }
+                } else {
+                    // Обработка ошибки
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+
 
     // блокировка пользователя
     const block_dialog = $('#block-dialog'),

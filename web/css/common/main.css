@@ -109,6 +109,11 @@ section, .active-tab section, .book-type-depend, section > form {
 }
 
 
+.standard-gap {
+    display: flex; gap: 6px;
+    align-items: center;
+}
+
 .icon {
     fill: var(--color-graphics);
 }
@@ -308,4 +313,32 @@ details > summary {
 
 .modify-toc {
     display: flex; flex-direction: column; gap: 10px;
+}
+
+.comment-form {
+    padding: 14px 20px;
+    display: flex; justify-content: space-between; gap: 20px;
+    align-items: start;
+}
+.comment-form textarea {
+    width: 100%;
+}
+.add-comment {
+    width: 100%;
+    display: flex; flex-direction: column; gap: 20px;
+}
+.comment-type {
+    display: flex; flex-direction: column; gap: 8px;
+}
+
+.comment-item {
+    padding: 20px 20px 30px;
+    display: flex; justify-content: space-between; gap: 20px; align-items: start;
+}
+.comment-body {
+    width: 100%;
+    display: flex; flex-direction: column; gap: 20px;
+}
+.comment-head {
+    display: flex; flex-direction: column; gap: 4px;
 }

@@ -23,7 +23,7 @@ $this->registerCssFile("@web/css/parts/user/author.css");
         foreach ($follows as $follow) {
             echo AuthorDisplay::widget(['author' => $follow]);
         }
-    else echo '<div class="center-container tip-color">Ничего не найдено</div>';
+    else echo '<div class="block author-about"><div class="tip-color">Ничего не найдено</div></div>';
 
     //echo LinkPager::widget(['pagination' => $pages]);
     ?>

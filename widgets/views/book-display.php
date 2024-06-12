@@ -61,17 +61,18 @@ if ($words >= 1000) {
 
 <div class="block book-preview">
     <div class="book-preview-sidebar">
-        <div class="side-buttons">
-            <div class="ui button very-small-button"><?= favorite_icon ?></div>
-            <div class="ui button very-small-button"><?= priority_icon ?></div>
-            <div class="ui button very-small-button"><?= hourglass_icon ?></div>
-            <div class="ui button very-small-button"><?= list_alt_icon ?></div>
-        </div>
-        <div class="line"></div>
-        <div class="side-buttons">
-            <div class="ui button very-small-button danger-button"><?= visibility_off_icon ?></div>
-            <div class="ui button very-small-button danger-button"><?= flag_icon ?></div>
-        </div>
+        <? if (Yii::$app->user->isGuest) echo '<div class="side-buttons"><div class="ui button very-small-button danger-button">' . flag_icon .'</div></div>';
+        else { ?>
+            <div class="side-buttons">
+                <div class="ui button very-small-button"><?=favorite_icon?></div>
+                <div class="ui button very-small-button"><?=priority_icon?></div>
+                <div class="ui button very-small-button"><?=hourglass_icon?></div>
+            </div>
+            <div class="line"></div>
+            <div class="side-buttons">
+                <div class="ui button very-small-button danger-button"><?=flag_icon?></div>
+            </div>
+        <? } ?>
     </div>
     <div class="vertical-line"></div>
     <div class="book-preview-content">

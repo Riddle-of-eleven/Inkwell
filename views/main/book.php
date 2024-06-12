@@ -10,12 +10,14 @@
 /* @var $model */
 
 /* @var ComplaintReason[] $complaint_reasons */
+/* @var Review[] $reviews */
 
 $this->title = $book->title;
 
 use app\models\_ContentData;
 use app\models\Tables\Book;
 use app\models\Tables\ComplaintReason;
+use app\models\Tables\Review;
 use yii\helpers\Html;
 use yii\helpers\VarDumper;
 use yii\helpers\Url;
@@ -64,6 +66,10 @@ if (!Yii::$app->user->isGuest) {
 $awarded_class = $awarded ? 'filled-button' : '';
 $awarded_text = $awarded ? 'Награждено' : 'Наградить';
 $awarded_block = $awarded ? '' : 'hidden';
+
+$published_class = $book->is_published == 1 && $book->publisher_id == Yii::$app->user->identity->id ? 'filled-button' : '';
+$published_text = $book->is_published == 1 ? 'Опубликовано' : 'Отметить публикацию';
+$published_block = $book->is_published == 1 ? '' : 'hidden';
 
 // размер и то, что его касается
 $chapters = count($book->chapters);
@@ -115,6 +121,8 @@ if ($words >= 1000) {
 $likes = count($book->likes);
 $views = count($book->viewHistories);
 $collections = count($book->bookCollections);
+$comments = count($book->comments);
+$reviews_count = count($book->reviews);
 
 
 // пейринги
@@ -170,6 +178,9 @@ $pairings = $book->pairings;
     <div class="book-card">
         <div class="block statistics is_awarded <?=$awarded_block?>">
             Книга награждена за грамотность!
+        </div>
+        <div class="block statistics is_published <?=$published_block?>">
+            <div><? if ($book->is_published) echo "Книга имеет печатную публикацию от издательства " . Html::a($book->publisher->login, Url::to(['main/author', 'id' => $book->publisher->id]), ['class' => 'highlight-link']) . "!"; ?></div>
         </div>
         <div class="block main-info">
             <div class="info-header">
@@ -353,16 +364,8 @@ $pairings = $book->pairings;
         <div class="block statistics">
             <div class="stats-pair"><?= visibility_icon ?><div>Просмотры</div><div><?=$views?></div></div>
             <div class="stats-pair"><?= favorite_icon ?><div>Лайки</div><div><?=$likes?></div></div>
-            <!--<div class="stats-pair">
-                <?= chat_bubble_icon ?>
-                <div>Комментарии</div>
-                <div>4</div>
-            </div>
-            <div class="stats-pair">
-                <?= chat_icon ?>
-                <div>Рецензии</div>
-                <div>1</div>
-            </div>-->
+            <div class="stats-pair"><?= chat_bubble_icon ?><div>Комментарии</div><div><?=$comments?></div></div>
+            <div class="stats-pair"><?= chat_icon ?><div>Рецензии</div><div><?=$reviews_count?></div></div>
             <div class="stats-pair"><?= list_alt_icon ?><div>Подборки</div><div><?=$collections?></div></div>
         </div>
 
@@ -377,9 +380,16 @@ $pairings = $book->pairings;
 
         <? if (!Yii::$app->user->isGuest) : ?>
         <div class="block book-actions">
+            <? if (Yii::$app->user->identity->is_publisher) : ?>
+                <div>
+                    <button class="ui button button-left-align <?=$published_class?>" id="publish-interaction"><?=print_icon?><div class="button-text"><?=$published_text?></div></button>
+                </div>
+                <div class="inner-line"></div>
+            <? endif; ?>
+
             <? if (Yii::$app->user->identity->is_moderator) : ?>
                 <div>
-                    <div class="ui button button-left-align <?=$awarded_class?>" id="award-interaction"><?=trophy_icon?><?=$awarded_text?></div>
+                    <button class="ui button button-left-align <?=$awarded_class?>" id="award-interaction"><?=trophy_icon?><?=$awarded_text?></button>
                 </div>
                 <div class="inner-line"></div>
             <? endif; ?>
@@ -490,3 +500,27 @@ $pairings = $book->pairings;
     } ?>
 
 </div>
+
+
+<div class="inner-line"></div>
+
+<div class="header2">Рецензии</div>
+<? if ($reviews) :
+    foreach ($reviews as $review) : ?>
+        <div class="block comment-item">
+            <? $avatar = $review->user->avatar ? Html::img('@web/images/avatar/uploads/' . $review->user->avatar . '.png') : blank_avatar; ?>
+            <div class="small-profile-picture"><?=$avatar?></div>
+
+            <div class="comment-body">
+                <div class="comment-head">
+                    <div class="header3"><?=$review->user->login?></div>
+                    <div class="tip"><?=$formatter->asDatetime($review->created_at, "d MMMM yyyy, HH:mm");?></div>
+                </div>
+
+                <?=$review->text?>
+            </div>
+        </div>
+    <? endforeach;
+endif;
+
+?>

@@ -14,6 +14,8 @@ use app\widgets\BookDisplay;
     На этой странице отображаются ориджиналы – оригинальные истории, от начала и до конца придуманные авторами Inkwell.
 </div>
 
+<div class="inner-line"></div>
+
 <? foreach ($originals as $original) echo BookDisplay::widget(['book' => $original]);
 
 LinkPager::widget([

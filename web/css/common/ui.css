@@ -271,6 +271,9 @@ a.disabled-button {
 .filled-button svg {
     fill: var(--color-accent);
 }
+.filled-button div {
+    color: var(--color-accent);
+}
 
 .inactive-button {
     background-color: var(--color-inactive-background);

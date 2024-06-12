@@ -16,6 +16,8 @@ use yii\helpers\Url;
     Истории, по которым вы можете написать свои
 </div>
 
+<div class="inner-line"></div>
+
 <?php
 
 if ($fandoms) :

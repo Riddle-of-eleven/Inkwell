@@ -148,19 +148,34 @@ if (!Yii::$app->user->isGuest) {
                     <div class="about-text"><?=Html::a($user->official_website, Url::to($user->official_website), ['class' => 'highlight-link'])?></div>
                 <? endif; ?>
             <? else: ?>
-                <div class="tip-color">Автор предпочёл не рассказывать о себе.</div>
+                <div class="tip-color">Пользователь предпочёл не рассказывать о себе.</div>
             <? endif; ?>
         </div>
     </section>
 
     <section class="tags-tab tab-content" data-tab="2">
-        <? if ($books) {
-            foreach ($books as $book) {
-                echo BookDisplay::widget(['book' => $book]);
-           }
-        } ?>
+        <? if ($books) : foreach ($books as $book) echo BookDisplay::widget(['book' => $book]);
+        else : ?>
+            <div class="block author-about">
+                <div class="tip-color">Пользователь не опубликовал ни одной книги</div>
+            </div>
+        <? endif; ?>
     </section>
 
+    <section class="tags-tab tab-content" data-tab="3">
+        <? if ($user->collections) :
+            foreach ($user->collections as $collection) : ?>
+                <div class="block user-block">
+                    <div><?=$collection->title?></div>
+                    <div class="tip-color"><?=count($collection->books)?></div>
+                </div>
+            <? endforeach;
+            else: ?>
+                <div class="block author-about">
+                    <div class="tip-color">Пользователь не создал ни одной подборки</div>
+                </div>
+            <? endif; ?>
+    </section>
 </div>
 
 <? endif;
