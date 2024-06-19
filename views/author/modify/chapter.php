@@ -26,6 +26,7 @@ use yii\helpers\Url;
 
 $this->registerJsFile('@web/js/author/chapter/create.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerJsFile('@web/js/author/chapter/quill.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+$this->registerJsFile('@web/js/author/chapter/websocket_quill.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 $this->registerCssFile('@web/css/dashboards/steps.css');
 
 // убирает лишние переносы строк
