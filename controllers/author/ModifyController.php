@@ -223,6 +223,51 @@ class ModifyController extends Controller
         }
         return $this->goBack();
     }
+    public function actionChapter() {
+        $session = Yii::$app->session;
+        $id = $session->get('modify.chapter');
+        if ($id) {
+            $chapter = Chapter::findOne($id);
+            $book = $chapter->book;
+
+            // субъективные данные
+            $title = $chapter->title;
+            $type = $chapter->is_section == 1 ? 'section' : 'chapter';
+            $text = $chapter->content;
+            $section_position = $chapter->parent_id;
+            $chapter_position = $chapter->previous_id;
+
+            // объективные данные
+            $sections = Chapter::find()->where(['book_id' => $book->id])->andWhere(['is_section' => 1])->all();
+            $chapters = Chapter::find()->where(['book_id' => $book->id])->andWhere(['parent_id' => $section_position != '0' ? $chapter_position : null])->all();
+
+            return $this->render('chapter', [
+                'book' => $book,
+                'chapter_title' => $title,
+                'chapter_type' => $type,
+                'chapter_text' => $text,
+
+                'chapter_section_position' => $section_position,
+                'chapter_chapter_position' => $chapter_position,
+
+                'sections' => $sections,
+                'chapters' => $chapters,
+            ]);
+        }
+        else return $this->goHome();
+    }
+    public function actionOpenChapter($id) {
+        $user = Yii::$app->user->identity;
+        if (!$id) return $this->goHome();
+        if ($user) {
+            $chapter = Chapter::findOne($id);
+            if ($chapter && $chapter->book->user_id == $user->id) {
+                $session = Yii::$app->session;
+                $session->set('modify.chapter', $id);
+                return $this->redirect(Url::to('chapter'));
+            }
+        }
+    }
 
 
     public function actionSaveChapterData() {

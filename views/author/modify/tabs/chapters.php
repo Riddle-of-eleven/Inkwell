@@ -41,7 +41,7 @@ $formatter = new Formatter();
                 <div class="toc-chapters">
                     <? foreach ($leaves[$root->id] as $leaf) : ?>
                         <div class="block toc-chapter" data-id="<?=$leaf->id?>">
-                            <div class="chapter-title"><?= $leaf->title ?></div>
+                            <div class="chapter-title"><?=Html::a($leaf->title, Url::to(['author/modify/open-chapter', 'id' => $leaf->id]))?></div>
                             <div class="chapter-meta">
                                 <div class="chapter-date">
                                     <div class="stats-pair"><div>Дата публикации:</div><div><?= $formatter->asDate($leaf->created_at, 'd MMMM yyyy'); ?></div></div>
@@ -53,7 +53,7 @@ $formatter = new Formatter();
             </details>
         <? else : ?>
             <div class="block toc-chapter" data-id="<?=$root->id?>">
-                <div class="chapter-title"><?= $root->title ?></div>
+                <div class="chapter-title"><?=Html::a($root->title, Url::to(['author/modify/open-chapter', 'id' => $root->id]))?></div>
                 <div class="chapter-meta">
                     <div class="chapter-date">
                         <div class="stats-pair"><div>Дата публикации:</div><div><?= $formatter->asDate($root->created_at, 'd MMMM yyyy'); ?></div></div>

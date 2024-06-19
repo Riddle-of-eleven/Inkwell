@@ -21,7 +21,8 @@
       "ext-simplexml": "*",
         "ext-zip": "*",
       "ext-dom": "*",
-        "ext-libxml": "*"
+        "ext-libxml": "*",
+        "workerman/workerman": "^4.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
