@@ -30,7 +30,7 @@ $this->registerJsFile('@web/js/author/chapter/websocket_quill.js', ['depends' =>
 $this->registerCssFile('@web/css/dashboards/steps.css');
 
 // убирает лишние переносы строк
-$chapter_text = str_replace(array("\r", "\n", "\r\n", "\t"), '', $chapter_text);
+if ($chapter_text) $chapter_text = str_replace(array("\r", "\n", "\r\n", "\t"), '', $chapter_text);
 
 $this->registerJs(<<<js
     $('#modify-chapter-title').val('$chapter_title');

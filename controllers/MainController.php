@@ -236,9 +236,10 @@ class MainController extends Controller
         ]);
     }
     public function actionAuthors() {
-        $authors_query = User::find()->joinWith(['books'=> function ($authors_query) {
+        /*$authors_query = User::find()->joinWith(['books'=> function ($authors_query) {
             $authors_query->where(['is_draft' => 0]);
-        }])->groupBy('user.id');;
+        }])->groupBy('user.id');*/
+        $authors_query = User::find();
         $count = clone $authors_query;
         $pages = new Pagination(['totalCount' => $count->count(), 'pageSize' => 10]);
         $authors = $authors_query->offset($pages->offset)

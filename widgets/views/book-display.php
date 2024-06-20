@@ -3,12 +3,18 @@
 /* @var $this yii\web\View */
 /* @var $book Book */
 
+$this->registerJsFile('@web/js/ajax/interaction.js', ['depends' => [\yii\web\JqueryAsset::class]]);
+
 use app\models\_BookData;
 use app\models\Tables\Book;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\VarDumper;
 use yii\i18n\Formatter;
+use app\models\Tables\Like;
+use app\models\Tables\Read;
+use app\models\Tables\ReadLater;
+use app\models\Tables\FavoriteBook;
 
 $book_cover_hidden = $book->cover != '' ? '' : 'hidden';
 
@@ -56,22 +62,48 @@ if ($words >= 1000) {
     $words_name = 'слов';
 }
 
+
+// взаимодействия
+if (!Yii::$app->user->isGuest) {
+    $like_class = Like::find()->where(['book_id' => $book->id])->andWhere(['user_id' => Yii::$app->user->identity->id])->all() ? 'filled-button' : '';
+    $read_class = Read::find()->where(['book_id' => $book->id])->andWhere(['user_id' => Yii::$app->user->identity->id])->all() ? 'filled-button' : '';
+    $read_later_class = ReadLater::find()->where(['book_id' => $book->id])->andWhere(['user_id' => Yii::$app->user->identity->id])->all() ? 'filled-button' : '';
+    $favorite_class = FavoriteBook::find()->where(['book_id' => $book->id])->andWhere(['user_id' => Yii::$app->user->identity->id])->all() ? 'filled-button' : '';
+
+    if ($read_class != '') {
+        $read_later_disabled = 'disabled';
+        $read_later_disabled_class = 'inactive-button';
+    } else {
+        $read_later_disabled = '';
+        $read_later_disabled_class = '';
+    }
+
+    if ($read_later_class != '') {
+        $read_disabled = 'disabled';
+        $read_disabled_class = 'inactive-button';
+    } else {
+        $read_disabled = '';
+        $read_disabled_class = '';
+    }
+}
+
 ?>
 
 
-<div class="block book-preview">
+<div class="block book-preview" data-book="<?=$book->id?>">
     <div class="book-preview-sidebar">
         <? if (Yii::$app->user->isGuest) echo '<div class="side-buttons"><div class="ui button very-small-button danger-button">' . flag_icon .'</div></div>';
         else { ?>
             <div class="side-buttons">
-                <div class="ui button very-small-button"><?=favorite_icon?></div>
-                <div class="ui button very-small-button"><?=priority_icon?></div>
-                <div class="ui button very-small-button"><?=hourglass_icon?></div>
+                <div class="ui button very-small-button like-interaction <?=$like_class?>"><?=favorite_icon?></div>
+                <button class="ui button very-small-button read-interaction <?=$read_class?> <?=$read_disabled_class?>" <?=$read_disabled?>><?=priority_icon?></button>
+                <button class="ui button very-small-button read-later-interaction <?=$read_later_class?> <?=$read_later_disabled_class?>" <?=$read_later_disabled?>><?=hourglass_icon?></button>
+                <button class="ui button very-small-button favorite-book-interaction <?=$favorite_class?>"><?=bookmarks_icon?></button>
             </div>
-            <div class="line"></div>
+            <!--<div class="line"></div>
             <div class="side-buttons">
                 <div class="ui button very-small-button danger-button"><?=flag_icon?></div>
-            </div>
+            </div>-->
         <? } ?>
     </div>
     <div class="vertical-line"></div>

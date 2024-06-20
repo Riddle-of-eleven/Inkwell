@@ -2,7 +2,9 @@ $(document).ready(function() {
     let book_id = (new URL(document.location)).searchParams.get("id");
 
     // добавление оценки "Нравится"
-    $('#like-interaction').click(function() {
+    $('#like-interaction, .like-interaction').click(function() {
+        if (!(new URL(document.location)).searchParams.get("id")) book_id = $(this).closest('.book-preview').attr('data-book');
+        console.log(book_id)
         let button = $(this);
         $.ajax({
             type: 'post',
@@ -22,7 +24,8 @@ $(document).ready(function() {
     });
 
     // добавление в прочитанное
-    $('#read-interaction').click(function() {
+    $('#read-interaction, .read-interaction').click(function() {
+        if (!(new URL(document.location)).searchParams.get("id")) book_id = $(this).closest('.book-preview').attr('data-book');
         let button = $(this);
         $.ajax({
             type: 'post',
@@ -31,6 +34,8 @@ $(document).ready(function() {
             success: function (response) {
                 if (response.success) {
                     let read_later = $('#read-later-interaction');
+                    if (!read_later.length) read_later = button.siblings('.read-later-interaction');
+
                     markButton(response.is_read, button, 'filled-button');
                     markButton(response.is_read, read_later, 'inactive-button');
 
@@ -45,7 +50,8 @@ $(document).ready(function() {
     });
 
     // добавление в "Прочитать позже"
-    $('#read-later-interaction').click(function(){
+    $('#read-later-interaction, .read-later-interaction').click(function(){
+        if (!(new URL(document.location)).searchParams.get("id")) book_id = $(this).closest('.book-preview').attr('data-book');
         let button = $(this);
         $.ajax({
             type: 'post',
@@ -54,6 +60,7 @@ $(document).ready(function() {
             success: function (response) {
                 if (response.success) {
                     let read = $('#read-interaction');
+                    if (!read.length) read = button.siblings('.read-interaction');
                     markButton(response.is_read_later, button, 'filled-button');
                     markButton(response.is_read_later, read, 'inactive-button');
 
@@ -68,7 +75,8 @@ $(document).ready(function() {
     });
 
     // добавление в избранное
-    $('#favorite-book-interaction').click(function() {
+    $('#favorite-book-interaction, favorite-book-interaction').click(function() {
+        if (!(new URL(document.location)).searchParams.get("id")) book_id = $(this).closest('.book-preview').attr('data-book');
         let button = $(this);
         $.ajax({
             type: 'post',
@@ -77,8 +85,10 @@ $(document).ready(function() {
             success: function (response) {
                 if (response.success) {
                     markButton(response.is_favorite, button, 'filled-button');
-                    if (response.is_favorite) button.find('.button-text').text('В избранном');
-                    else button.find('.button-text').text('Добавить в избранное');
+                    if (!(new URL(document.location)).searchParams.get("id")) {
+                        if (response.is_favorite) button.find('.button-text').text('В избранном');
+                        else button.find('.button-text').text('Добавить в избранное');
+                    }
                 }
             },
             error: function(error) {

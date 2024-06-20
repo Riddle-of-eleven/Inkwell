@@ -7,6 +7,7 @@ function markButton(condition, _object, _class) {
 function loadTab(route, action, place) {
     $.ajax({
         url: `http://inkwell/web/${route}/load-${action}`,
+        //url: `http://192.168.100.49/web/${route}/load-${action}`,
         type: 'post',
         success: function (response) {
             place.html(response);

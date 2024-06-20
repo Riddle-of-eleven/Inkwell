@@ -9,7 +9,6 @@ use yii\helpers\Url;
 use yii\helpers\VarDumper;
 use yii\i18n\Formatter;
 
-
 //VarDumper::dump($book->accessToBooks[0]->, 10, true);
 ?>
 
@@ -77,11 +76,11 @@ use yii\i18n\Formatter;
             </div>
 
             <div class="publication-stats">
-                <div class="publication-stat"><?= visibility_icon ?> Просмотры <div>261</div></div>
-                <div class="publication-stat"><?= favorite_icon ?> Лайки <div>19</div></div>
-                <div class="publication-stat"><?= chat_bubble_icon ?> Комментарии <div>4</div></div>
-                <div class="publication-stat"><?= chat_icon ?> Рецензии <div>1</div></div>
-                <div class="publication-stat"><?= list_alt_icon ?> Подборки <div>45</div></div>
+                <div class="publication-stat"><?= visibility_icon ?> Просмотры <div><?=count($book->viewHistories)?></div></div>
+                <div class="publication-stat"><?= favorite_icon ?> Лайки <div><?=count($book->likes)?></div></div>
+                <div class="publication-stat"><?= chat_bubble_icon ?> Комментарии <div><?=count($book->comments)?></div></div>
+                <div class="publication-stat"><?= chat_icon ?> Рецензии <div><?=count($book->reviews)?></div></div>
+                <div class="publication-stat"><?= list_alt_icon ?> Подборки <div><?=count($book->bookCollections)?></div></div>
             </div>
         </div>
 
@@ -91,7 +90,7 @@ use yii\i18n\Formatter;
                 'class' => 'ui button icon-button' . $preview_class,
                 'id' => 'preview-book'
             ])?>
-            <a href="" class="ui button icon-button"><?= file_open_icon ?>Статистика</a>
+            <!--<a href="" class="ui button icon-button"><?= file_open_icon ?>Статистика</a>-->
         </div>
 
     </div>

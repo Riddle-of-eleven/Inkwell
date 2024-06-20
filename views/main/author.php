@@ -25,7 +25,6 @@ if (!Yii::$app->user->isGuest) {
     $follow_text = $follow ? 'Отписаться' : 'Подписаться';
 }
 
-
 ?>
 
 
@@ -33,7 +32,7 @@ if (!Yii::$app->user->isGuest) {
     <div class='center-container header2' style="margin-top: 200px">Этот пользователь заблокирован</div>
 <? else : ?>
 
-<? if (Yii::$app->user->identity->is_moderator) : ?>
+<? if (!Yii::$app->user->isGuest) if (Yii::$app->user->identity->is_moderator) : ?>
 <dialog class="block modal" id="block-dialog">
     <div class="close-button"><?=close_icon?></div>
     <div class="modal-container" id="regular-modal">
@@ -102,7 +101,7 @@ if (!Yii::$app->user->isGuest) {
         </div>
     </div>
 
-    <? if (!Yii::$app->user->isGuest && Yii::$app->user->identity != $user->id) :?>
+    <? if (!Yii::$app->user->isGuest && Yii::$app->user->identity->id != $user->id) :?>
     <div class="author-actions">
         <div class="">
             <button class="ui button button-left-align <?=@$follow_class?>" id="follow-interaction"><?=favorite_icon?><div class="button-text"><?=$follow_text?></div></button>

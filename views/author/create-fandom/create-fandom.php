@@ -32,11 +32,22 @@ css);
 ]) ?>
 
     <div class="header3">Название фэндома</div>
-<?= $f->field($model, 'title', [
+<? /*$f->field($model, 'title', [
     'options' => ['class' => 'ui field field-with-hint'],
     'inputOptions' => ['class' => ''],
     'template' => "{input}\n{hint}{error}",
-])->textInput(['autofocus' => true, 'placeholder' => 'Как называется ваш фэндом?'])->label(false);?>
+])->textInput(['autofocus' => true, 'placeholder' => 'Как называется ваш фэндом?'])->label(false);*/ ?>
+
+    <div class="field-item">
+        <?= $f->field($model, 'title', [
+            'options' => ['class' => 'ui field'],
+            'inputOptions' => ['class' => ''],
+            'template' => "{input}",
+        ])->textInput(['autofocus' => true, 'placeholder' => 'Как называется ваш фэндом?', 'maxlength' => '50'])->label(false); ?>
+        <?= $f->field($model, 'title', [
+            'options' => ['class' => 'under-field'],
+            'template' => "{hint}{error}"]); ?>
+    </div>
 
     <div class="header3">Описание</div>
 <?= $f->field($model, 'description')->textarea(['rows' => '6', 'placeholder' => 'Вкратце расскажите о вашем фэндоме']) ?>

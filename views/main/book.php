@@ -67,9 +67,9 @@ $awarded_class = $awarded ? 'filled-button' : '';
 $awarded_text = $awarded ? 'Награждено' : 'Наградить';
 $awarded_block = $awarded ? '' : 'hidden';
 
-$published_class = $book->is_published == 1 && $book->publisher_id == Yii::$app->user->identity->id ? 'filled-button' : '';
+/*$published_class = $book->is_published == 1 && $book->publisher_id == Yii::$app->user->identity->id ? 'filled-button' : '';
 $published_text = $book->is_published == 1 ? 'Опубликовано' : 'Отметить публикацию';
-$published_block = $book->is_published == 1 ? '' : 'hidden';
+$published_block = $book->is_published == 1 ? '' : 'hidden';*/
 
 // размер и то, что его касается
 $chapters = count($book->chapters);
@@ -178,9 +178,6 @@ $pairings = $book->pairings;
     <div class="book-card">
         <div class="block statistics is_awarded <?=$awarded_block?>">
             Книга награждена за грамотность!
-        </div>
-        <div class="block statistics is_published <?=$published_block?>">
-            <div><? if ($book->is_published) echo "Книга имеет печатную публикацию от издательства " . Html::a($book->publisher->login, Url::to(['main/author', 'id' => $book->publisher->id]), ['class' => 'highlight-link']) . "!"; ?></div>
         </div>
         <div class="block main-info">
             <div class="info-header">
@@ -521,6 +518,10 @@ $pairings = $book->pairings;
             </div>
         </div>
     <? endforeach;
-endif;
+    else: ?>
+        <div class="block author-about">
+            <div class="tip-color">У этой книги нет рецензий.</div>
+        </div>
+<? endif;
 
 ?>

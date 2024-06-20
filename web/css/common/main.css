@@ -79,6 +79,10 @@ section, .active-tab section, .book-type-depend, section > form {
     outline: none;
 }
 
+:disabled, button:disabled {
+    cursor: not-allowed !important;
+}
+
 
 
 .no-underline {
@@ -341,4 +345,11 @@ details > summary {
 }
 .comment-head {
     display: flex; flex-direction: column; gap: 4px;
+}
+
+
+
+.author-about {
+    display: flex; flex-direction: column; gap: 18px;
+    padding: 22px 40px 26px 30px;
 }
