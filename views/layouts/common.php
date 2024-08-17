@@ -34,6 +34,15 @@ $this->registerMetaTag(['name' => 'description', 'content' => $this->params['met
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
 
+$division_titles = [
+    'author' => 'Автор',
+    'reader' => 'Читатель',
+    'assistant' => 'Помощник',
+
+    'moderator' => 'Модератор',
+    'admin' => 'Администратор',
+];
+
 ?>
 
 <?php $this->beginPage() ?>
@@ -79,7 +88,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
         <div class="side-buttons icon-accent">
             <?=Html::a(new_book_icon . '<span class="menu-item hidden">Новая книга</span>', Url::to(['author/create/new-book']))?>
-            <!--<a href=""><?= new_project_icon ?><span class="menu-item hidden">Новый проект</span></a>-->
+            <a href=""><?= new_project_icon ?><span class="menu-item hidden">Новый проект</span></a>
         </div>
 
         <div class="line"></div>
@@ -93,12 +102,15 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         <div class="line"></div>
 
         <div class="side-buttons">
+            <div class="tip-color hidden">Пользователь</div>
+
             <!-- КАБИНЕТ АВТОРА -->
+            <? $division_title = $division_titles['author']; ?>
             <div class="to-hide extendable-menu-item" id="extendable-author">
                 <?=history_edu_icon?>
                 <div class="vertical-expand-line"></div>
                 <div class="closed-menu-tooltip block hidden">
-                    <div class="menu-tooltip-header"><?=history_edu_icon?>Кабинет автора</div>
+                    <div class="menu-tooltip-header"><?=history_edu_icon?> <?=$division_title?></div>
                     <div class="menu-tooltip-content">
                         <?= Html::a(book_2_icon . 'Книги', Url::to(['author/author-panel/books-dashboard'])) ?>
                         <?= Html::a(shelves_icon . 'Фэндомы', Url::to(['author/author-panel/fandoms-dashboard'])) ?>
@@ -112,26 +124,27 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <details class="hidden" id="author-details" <?=$author_open?>>
                 <summary>
                     <?=history_edu_icon?>
-                    <span class="menu-item hidden">Кабинет автора</span>
-                    <div class="expand-icon"><?= expand_more_icon ?></div>
+                    <span class="menu-item hidden"><?=$division_title?></span>
+                    <div class="expand-icon"><?=expand_more_icon?></div>
                 </summary>
                 <div class="side-buttons">
                     <?= Html::a(book_2_icon . '<span class="menu-item hidden">Книги</span>', Url::to(['author/author-panel/books-dashboard'])) ?>
                     <?= Html::a(shelves_icon . '<span class="menu-item hidden">Фэндомы</span>', Url::to(['author/author-panel/fandoms-dashboard'])) ?>
-                    <a href=""><?= deployed_code_icon ?><span class="menu-item hidden">Проекты</span></a>
-                    <a href=""><?= bar_chart_icon ?><span class="menu-item hidden">Аналитика</span></a>
-                    <a href=""><?= error_icon ?><span class="menu-item hidden">Сообщения об ошибках</span></a>
+                    <a href=""><?=deployed_code_icon?><span class="menu-item hidden">Проекты</span></a>
+                    <a href=""><?=bar_chart_icon?><span class="menu-item hidden">Аналитика</span></a>
+                    <a href=""><?=error_icon?><span class="menu-item hidden">Сообщения об ошибках</span></a>
                     <?= Html::a(delete_icon . '<span class="menu-item hidden">Корзина</span>', Url::to(['author/author-panel/recycle-bin'])) ?>
                 </div>
             </details>
 
 
             <!-- КАБИНЕТ ЧИТАТЕЛЯ -->
+            <? $division_title = $division_titles['reader'] ?>
             <div class="to-hide extendable-menu-item" id="extendable-reader">
                 <?=two_pager_icon?>
                 <div class="vertical-expand-line"></div>
                 <div class="closed-menu-tooltip block hidden">
-                    <div class="menu-tooltip-header"><?=two_pager_icon?>Кабинет читателя</div>
+                    <div class="menu-tooltip-header"><?=two_pager_icon?><?=$division_title?></div>
                     <div class="menu-tooltip-content">
                         <?= Html::a(bookmark_icon . 'Библиотека', Url::to(['reader-panel/library'])) ?>
                         <a href=""><?= list_alt_icon ?>Подборки</a>
@@ -144,7 +157,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <details class="hidden" id="reader-details" <?=$reader_open?>>
                 <summary>
                     <?=two_pager_icon?>
-                    <span class="menu-item hidden">Кабинет читателя</span>
+                    <span class="menu-item hidden"><?=$division_title?></span>
                     <div class="expand-icon"><?=expand_more_icon?></div>
                 </summary>
                 <div class="side-buttons">
@@ -156,26 +169,50 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 </div>
             </details>
 
-            <!--<div class="to-hide"><?= ink_highlighter_icon ?><span class="menu-item hidden">Кабинет помощника</span></div>
-            <details class="hidden">
+
+            <!-- КАБИНЕТ ПОМОЩНИКА -->
+            <? $division_title = $division_titles['assistant'] ?>
+            <div class="to-hide extendable-menu-item" id="extendable-assistant">
+                <?=two_pager_icon?>
+                <div class="vertical-expand-line"></div>
+                <div class="closed-menu-tooltip block hidden">
+                    <div class="menu-tooltip-header"><?=ink_highlighter_icon?><?=$division_title?></div>
+                    <div class="menu-tooltip-content">
+                        <?= Html::a(bookmark_icon . 'Библиотека', Url::to(['reader-panel/library'])) ?>
+                        <a href=""><?= list_alt_icon ?>Подборки</a>
+                        <!--<a href=""><?= chat_icon ?><span class="menu-item hidden">Комментарии и рецензии</span></a>-->
+                        <?= Html::a(switch_account_icon . 'Подписки на авторов', Url::to(['reader-panel/followed-authors'])) ?>
+                        <?= Html::a(device_reset_icon . 'История просмотра', Url::to(['reader-panel/view-history'])) ?>
+                    </div>
+                </div>
+            </div>
+            <details class="hidden" id="reader-details" <?=$reader_open?>>
                 <summary>
-                    <?= ink_highlighter_icon ?>
-                    <span class="menu-item hidden">Кабинет помощника</span>
-                    <div class="expand-icon"><?= expand_more_icon ?></div>
+                    <?=ink_highlighter_icon?>
+                    <span class="menu-item hidden"><?=$division_title?></span>
+                    <div class="expand-icon"><?=expand_more_icon?></div>
                 </summary>
                 <div class="side-buttons">
-                    <a href=""><?= book_2_icon ?><span class="menu-item hidden">Редактируемые книги</span></a>
-                    <a href=""><?= group_icon ?><span class="menu-item hidden">Книги в соавторстве</span></a>
+                    <a href=""><?=book_2_icon?><span class="menu-item hidden">Редактируемые книги</span></a>
+                    <a href=""><?=list_alt_icon?><span class="menu-item hidden">Анкета помощника</span></a>
                 </div>
-            </details>-->
+            </details>
+
+
+            <div class="line to-hide"></div>
+
+
+            <div class="tip-color hidden">Администратор</div>
+
 
             <? if (Yii::$app->user->identity->is_moderator == 1) : ?>
                 <!-- КАБИНЕТ МОДЕРАТОРА -->
+                <? $division_title = $division_titles['moderator'] ?>
                 <div class="to-hide extendable-menu-item" id="extendable-moderator">
                     <?=shield_person_icon?>
                     <div class="vertical-expand-line"></div>
                     <div class="closed-menu-tooltip block hidden">
-                        <div class="menu-tooltip-header"><?=shield_person_icon?>Кабинет модератора</div>
+                        <div class="menu-tooltip-header"><?=shield_person_icon?><?=$division_title?></div>
                         <div class="menu-tooltip-content">
                             <?= Html::a(lock_open_icon . 'Панель действий', Url::to([''])) ?>
                             <?= Html::a(tag_icon . 'Жанры и теги', Url::to(['moderator/moderator-panel/tags-dashboard'])) ?>
@@ -187,7 +224,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 <details class="hidden" id="moderator-details" <?=$moderator_open?>>
                     <summary>
                         <?= shield_person_icon ?>
-                        <span class="menu-item hidden">Кабинет модератора</span>
+                        <span class="menu-item hidden"><?=$division_title?></span>
                         <div class="expand-icon"><?= expand_more_icon ?></div>
                     </summary>
                     <div class="side-buttons">
@@ -201,11 +238,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
             <? if (Yii::$app->user->identity->is_admin == 1) : ?>
                 <!-- КАБИНЕТ АДМИНИСТРАТОРА -->
+                <? $division_title = $division_titles['admin'] ?>
                 <div class="to-hide extendable-menu-item" id="extendable-admin">
                     <?=passkey_icon?>
                     <div class="vertical-expand-line"></div>
                     <div class="closed-menu-tooltip block hidden">
-                        <div class="menu-tooltip-header"><?=passkey_icon?>Кабинет администратора</div>
+                        <div class="menu-tooltip-header"><?=passkey_icon?><?=$division_title?></div>
                         <div class="menu-tooltip-content">
                             <?= Html::a(shield_person_icon . 'Модераторы', Url::to(['admin/manage/moderators'])) ?>
                             <?= Html::a(apartment_icon . 'Издательства', Url::to(['admin/manage/publishers'])) ?>
@@ -215,7 +253,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 <details class="hidden" id="admin-details" <?=$admin_open?>>
                     <summary>
                         <?= passkey_icon ?>
-                        <span class="menu-item hidden">Кабинет администратора</span>
+                        <span class="menu-item hidden"><?=$division_title?></span>
                         <div class="expand-icon"><?= expand_more_icon ?></div>
                     </summary>
                     <div class="side-buttons">
@@ -234,11 +272,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <?= Html::a(tune_icon . '<span class="menu-item hidden">Настройки</span>', Url::to(['user/settings/show'])) ?>
         </div>
 
-        <!--<div class="line"></div>
+        <div class="line"></div>
 
         <div class="side-buttons">
-            <a href=""><?= assignment_icon ?><span class="menu-item hidden">Мои обращения</span></a>
-        </div>-->
+            <a href=""><?=flag_icon?><span class="menu-item hidden">Мои обращения</span></a>
+        </div>
     </div>
 
     <div class="sub-side-menu">
